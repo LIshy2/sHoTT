@@ -1,0 +1,2051 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../05-segal-types.rzk/">
+      
+      
+        <link rel="next" href="../07-discrete.rzk/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>2-Category of Segal Types - Simplicial HoTT</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/rzk-render.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-2-category-of-segal-types" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Simplicial HoTT" class="md-header__button md-logo" aria-label="Simplicial HoTT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Simplicial HoTT
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2-Category of Segal Types
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/LIshy2/sHoTT" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LIshy2/sHoTT
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Simplicial HoTT" class="md-nav__button md-logo" aria-label="Simplicial HoTT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Simplicial HoTT
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/LIshy2/sHoTT" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LIshy2/sHoTT
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../STYLEGUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Code style
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CONTRIBUTORS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    HoTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            HoTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/00-common.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/01-paths.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/02-homotopies.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homotopies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/03-equivalences.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Equivalences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/04-half-adjoint-equivalences.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Half Adjoint Equivalences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/05-sigma.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sigma types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/06-contractible.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contractible
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/07-fibers.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fibers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/08-families-of-maps.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Families of maps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/09-propositions.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Propositions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/10-trivial-fibrations.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trivial fibrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/11-homotopy-pullbacks.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homotopy pullbacks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Simplicial HoTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Simplicial HoTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-simplicial-type-theory.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simplicial Type Theory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-extension-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extension Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-right-orthogonal.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Right Orthogonal Fibrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-segal-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Segal Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2-Category of Segal Types
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    2-Category of Segal Types
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natural transformations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Natural transformations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#natural-transformation-extensionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natural transformation extensionality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naturality-square" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naturality square
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vertical-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vertical composition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functoriality-of-evaluation-at-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functoriality of evaluation at components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#horizontal-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Horizontal composition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whiskering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Whiskering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gray-interchanger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gray interchanger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#equivalences-are-fully-faithful" class="md-nav__link">
+    <span class="md-ellipsis">
+      Equivalences are fully faithful
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-discrete.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Discrete Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-covariant.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Covariant Families
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-yoneda.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Yoneda Lemma
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-rezk-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rezk Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-adjunctions.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adjunctions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-inner.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inner Families
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-cocartesian.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cocartesian Families
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-limits.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Limits and Colimits
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Triangulated Type Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Triangulated Type Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../triangulated/01-modalities.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modalities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../triangulated/02-axioms.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Axioms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../triangulated/03-diruniv.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directed Univalence in S
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natural transformations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Natural transformations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#natural-transformation-extensionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natural transformation extensionality
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#naturality-square" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naturality square
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vertical-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vertical composition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functoriality-of-evaluation-at-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functoriality of evaluation at components
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#horizontal-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Horizontal composition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whiskering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Whiskering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gray-interchanger" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gray interchanger
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#equivalences-are-fully-faithful" class="md-nav__link">
+    <span class="md-ellipsis">
+      Equivalences are fully faithful
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/LIshy2/sHoTT/edit/main/src/simplicial-hott/06-2cat-of-segal-types.rzk.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="the-2-category-of-segal-types">The 2-category of Segal types<a class="headerlink" href="#the-2-category-of-segal-types" title="Permanent link">&para;</a></h1>
+<p>These formalisations correspond to Section 6 of the RS17 paper.</p>
+<p>This is a literate <code>rzk</code> file:</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
+</span></code></pre></div>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>02-simplicial-type-theory.rzk.md</code> — We rely on definitions of simplices and
+  their subshapes.</li>
+<li><code>03-extension-types.rzk.md</code> — We use extension extensionality.</li>
+<li><code>05-segal-types.rzk.md</code> - We use the notion of hom types.</li>
+</ul>
+<p>Some of the definitions in this file rely on function extensionality and
+extension extensionality:</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#assume</span><span class="p"> </span>funext<span class="err"> : FunExt</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kr">#assume</span><span class="p"> </span>extext<span class="err"> : ExtExt</span>
+</span></code></pre></div>
+<h2 id="functors">Functors<a class="headerlink" href="#functors" title="Permanent link">&para;</a></h2>
+<p>Functions between types induce an action on hom types, preserving sources and
+targets. The action is called <code class="language-rzk highlight"><span class="err">ap-hom</span></code> to avoid conflicting with
+<code class="language-rzk highlight"><span class="err">ap</span></code>.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Section 6.1</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap-hom" id="define:ap-hom" style="visibility: visible; position: relative; color: inherit">ap-hom</a></span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  </span><span class="p">( </span>F <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  </span><span class="p">( </span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> hom A x y)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">  : hom B (F x) (F y)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">  := </span><span class="p">\ </span>t <span class="err">→ F (f t)</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap-hom2" id="define:ap-hom2" style="visibility: visible; position: relative; color: inherit">ap-hom2</a></span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="err">  </span><span class="p">( </span>F <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="err">  </span><span class="p">( </span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> hom A x y)</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="err">  </span><span class="p">( </span>g <span class="p">:</span><span class="err"> hom A y z)</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="err">  </span><span class="p">( </span>h <span class="p">:</span><span class="err"> hom A x z)</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="err">  </span><span class="p">( </span>α <span class="p">:</span><span class="err"> hom2 A x y z f g h)</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="err">  : hom2 B (F x) (F y) (F z)</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="err">    ( ap-hom A B F x y f) (ap-hom A B F y z g) (ap-hom A B F x z h)</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="err">  := </span><span class="p">\ </span>t <span class="err">→ F (α t)</span>
+</span></code></pre></div>
+<p>Functions between types automatically preserve identity arrows. Preservation of
+identities follows from extension extensionality because these arrows are
+pointwise equal.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.1.a</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:functors-pres-id" id="define:functors-pres-id" style="visibility: visible; position: relative; color: inherit">functors-pres-id</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>extext<span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  </span><span class="p">( </span>F <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">  </span><span class="p">( </span>x <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">  : ( ap-hom A B F x x (id-hom A x)) = (id-hom B (F x))</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">  :=</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">    naiveextext-extext</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">      ( extext)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="err">      ( </span><span class="kt">2</span><span class="err">)</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="err">      ( Δ¹)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="err">      ( ∂Δ¹)</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="err">      ( </span><span class="p">\ </span>t <span class="err">→ B)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="err">      ( </span><span class="p">\ </span>t <span class="err">→ </span><span class="s">recOR</span><span class="err"> (t </span><span class="sx">≡</span><span class="err"> </span><span class="m">0₂</span><span class="err"> ↦ F x , t </span><span class="sx">≡</span><span class="err"> </span><span class="m">1₂</span><span class="err"> ↦ F x))</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="err">      ( ap-hom A B F x x (id-hom A x))</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="err">      ( id-hom B (F x))</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="err">      ( </span><span class="p">\ </span>t <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span></code></pre></div>
+<p>Preservation of composition requires the Segal hypothesis.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.1.b</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:functors-pres-comp" id="define:functors-pres-comp" style="visibility: visible; position: relative; color: inherit">functors-pres-comp</a></span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  </span><span class="p">( </span>is-segal-A <span class="p">:</span><span class="err"> is-segal A)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">  </span><span class="p">( </span>is-segal-B <span class="p">:</span><span class="err"> is-segal B)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="err">  </span><span class="p">( </span>F <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">  </span><span class="p">( </span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> hom A x y)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="err">  </span><span class="p">( </span>g <span class="p">:</span><span class="err"> hom A y z)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">  :</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="err">    ( comp-is-segal B is-segal-B</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="err">      ( F x) (F y) (F z)</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="err">      ( ap-hom A B F x y f)</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="err">      ( ap-hom A B F y z g))</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="err">  = ( ap-hom A B F x z (comp-is-segal A is-segal-A x y z f g))</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="err">  :=</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="err">    uniqueness-comp-is-segal B is-segal-B</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="err">      ( F x) (F y) (F z)</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="err">      ( ap-hom A B F x y f)</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="err">      ( ap-hom A B F y z g)</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="err">      ( ap-hom A B F x z (comp-is-segal A is-segal-A x y z f g))</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="err">      ( ap-hom2 A B F x y z f g</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="err">        ( comp-is-segal A is-segal-A x y z f g)</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="err">        ( witness-comp-is-segal A is-segal-A x y z f g))</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rev-functors-pres-comp" id="define:rev-functors-pres-comp" style="visibility: visible; position: relative; color: inherit">rev-functors-pres-comp</a></span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="err">  </span><span class="p">( </span>is-segal-A <span class="p">:</span><span class="err"> is-segal A)</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="err">  </span><span class="p">( </span>is-segal-B <span class="p">:</span><span class="err"> is-segal B)</span>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="err">  </span><span class="p">( </span>F <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="err">  </span><span class="p">( </span>x y z <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> hom A x y)</span>
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a><span class="err">  </span><span class="p">( </span>g <span class="p">:</span><span class="err"> hom A y z)</span>
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a><span class="err">  :</span>
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a><span class="err">    ( ap-hom A B F x z (comp-is-segal A is-segal-A x y z f g))</span>
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a><span class="err">  = ( comp-is-segal B is-segal-B</span>
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a><span class="err">      ( F x) (F y) (F z)</span>
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a><span class="err">      ( ap-hom A B F x y f)</span>
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a><span class="err">      ( ap-hom A B F y z g))</span>
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a><span class="err">  :=</span>
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a><span class="err">    rev (hom B (F x) (F z))</span>
+</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a><span class="err">    ( comp-is-segal B is-segal-B</span>
+</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a><span class="err">      ( F x) (F y) (F z)</span>
+</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a><span class="err">      ( ap-hom A B F x y f)</span>
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a><span class="err">      ( ap-hom A B F y z g))</span>
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a><span class="err">    ( ap-hom A B F x z (comp-is-segal A is-segal-A x y z f g))</span>
+</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a><span class="err">    ( functors-pres-comp A B is-segal-A is-segal-B F x y z f g)</span>
+</span></code></pre></div>
+<p>The action on morphisms commutes with transport.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap-hom-naturality" id="define:ap-hom-naturality" style="visibility: visible; position: relative; color: inherit">ap-hom-naturality</a></span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">  </span><span class="p">( </span>h k <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="err">  </span><span class="p">( </span>p <span class="p">:</span><span class="err"> f = g)</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">  </span><span class="p">( </span>q <span class="p">:</span><span class="err"> h = k)</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="err">  </span><span class="p">( </span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="err">  : comp</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="err">    ( hom B (f x) (f y))</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="err">    ( hom B (g x) (g y))</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="err">    ( hom C (k (g x)) (k (g y)))</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="err">    ( ap-hom B C k (g x) (g y))</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="err">    ( transport (A → B) (</span><span class="p">\ </span>f&#39; <span class="err">→ hom B (f&#39; x) (f&#39; y)) f g p)</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="err">  = comp</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="err">    ( hom B (f x) (f y)) (hom C (h (f x)) (h (f y))) (hom C (k (g x)) (k (g y)))</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="err">    ( transport (A → C) (</span><span class="p">\ </span>f&#39; <span class="err">→ hom C (f&#39; x) (f&#39; y))</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="err">      ( comp A B C h f)</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="err">      ( comp A B C k g)</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="err">      ( comp-homotopic-maps A B C f g h k p q))</span>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="err">    ( ap-hom B C h (f x) (f y))</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="err">  :=</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="err">  ind-path (A → B) f</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="err">  ( </span><span class="p">\ </span>g&#39; p&#39; <span class="err">→</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="err">    comp (hom B (f x) (f y)) (hom B (g&#39; x) (g&#39; y)) (hom C (k (g&#39; x)) (k (g&#39; y)))</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="err">    ( ap-hom B C k (g&#39; x) (g&#39; y))</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="err">    ( transport (A → B) (</span><span class="p">\ </span>f&#39; <span class="err">→ hom B (f&#39; x) (f&#39; y)) f g&#39; p&#39;)</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="err">  = comp</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="err">    ( hom B (f x) (f y))(hom C (h (f x)) (h (f y)))(hom C (k (g&#39; x)) (k (g&#39; y)))</span>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="err">    ( transport (A → C) (</span><span class="p">\ </span>f&#39; <span class="err">→ hom C (f&#39; x) (f&#39; y))</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="err">      ( comp A B C h f)</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="err">      ( comp A B C k g&#39;)</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="err">      ( comp-homotopic-maps A B C f g&#39; h k p&#39; q))</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="err">    ( ap-hom B C h (f x) (f y)))</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="err">  ( ind-path (B → C) h</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="err">    ( </span><span class="p">\ </span>k&#39; q&#39; <span class="err">→</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="err">      comp (hom B (f x) (f y)) (hom B (f x) (f y)) (hom C (k&#39; (f x)) (k&#39; (f y)))</span>
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="err">      ( ap-hom B C k&#39; (f x) (f y))</span>
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a><span class="err">      ( transport (A → B) (</span><span class="p">\ </span>f&#39; <span class="err">→ hom B (f&#39; x) (f&#39; y)) f f </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>
+</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="err">    = comp</span>
+</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="err">      ( hom B (f x) (f y))</span>
+</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="err">      ( hom C (h (f x)) (h (f y)))</span>
+</span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a><span class="err">      ( hom C (k&#39; (f x)) (k&#39; (f y)))</span>
+</span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a><span class="err">      ( transport (A → C) (</span><span class="p">\ </span>f&#39; <span class="err">→ hom C (f&#39; x) (f&#39; y))</span>
+</span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a><span class="err">        ( comp A B C h f)</span>
+</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a><span class="err">        ( comp A B C k&#39; f)</span>
+</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a><span class="err">        ( comp-homotopic-maps A B C f f h k&#39; </span><span class="s">refl</span><span class="err"> q&#39;))</span>
+</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a><span class="err">      ( ap-hom B C h (f x) (f y)))</span>
+</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a><span class="err">    ( </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a><span class="err">    ( k)</span>
+</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a><span class="err">    ( q))</span>
+</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a><span class="err">  ( g)</span>
+</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a><span class="err">  ( p)</span>
+</span></code></pre></div>
+<h2 id="natural-transformations">Natural transformations<a class="headerlink" href="#natural-transformations" title="Permanent link">&para;</a></h2>
+<p>Given two simplicial maps <code class="language-rzk highlight"><span class="err">f g : </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → B x</span></code> , a <strong>natural
+transformation</strong> from <code class="language-rzk highlight"><span class="err">f</span></code> to <code class="language-rzk highlight"><span class="err">g</span></code> is an arrow
+<code class="language-rzk highlight"><span class="err">η : hom </span><span class="p">(</span>(x <span class="p">:</span><span class="err"> A) → B x) f g</span></code> between them.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Definition 6.2</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:nat-trans" id="define:nat-trans" style="visibility: visible; position: relative; color: inherit">nat-trans</a></span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="err">  : U</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="err">  := hom </span><span class="p">(</span>(x <span class="p">:</span><span class="err"> A) → (B x)) f g</span>
+</span></code></pre></div>
+<p>Equivalently , natural transformations can be determined by their <strong>components</strong>
+, i.e. as a family of arrows <code class="language-rzk highlight"><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → hom (B x) (f x) (g x)</span></code>.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:nat-trans-components" id="define:nat-trans-components" style="visibility: visible; position: relative; color: inherit">nat-trans-components</a></span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="err">  : U</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="err">  := </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → hom (B x) (f x) (g x)</span>
+</span></code></pre></div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ev-components-nat-trans" id="define:ev-components-nat-trans" style="visibility: visible; position: relative; color: inherit">ev-components-nat-trans</a></span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans A B f g)</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="err">  : nat-trans-components A B f g</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="err">  := </span><span class="p">\ </span>x t <span class="err">→ η t x</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:nat-trans-nat-trans-components" id="define:nat-trans-nat-trans-components" style="visibility: visible; position: relative; color: inherit">nat-trans-nat-trans-components</a></span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans-components A B f g)</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="err">  : nat-trans A B f g</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="err">  := </span><span class="p">\ </span>t x <span class="err">→ η x t</span>
+</span></code></pre></div>
+<div class="language-rzk highlight"><span class="filename">A version of ev-components-nat-trans for extension types</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ev-components-nat-trans-extension-type" id="define:ev-components-nat-trans-extension-type" style="visibility: visible; position: relative; color: inherit">ev-components-nat-trans-extension-type</a></span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="err">  </span><span class="p">( </span>I <span class="p">:</span><span class="err"> CUBE)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="err">  </span><span class="p">( </span>ψ <span class="p">:</span><span class="err"> I → TOPE)</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> ψ → U)</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>s <span class="p">:</span><span class="err"> ψ) → A s)</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="err">  </span><span class="p">( </span>α <span class="p">:</span><span class="err"> hom </span><span class="p">(</span>(s <span class="p">:</span><span class="err"> ψ) → A s) f g)</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="err">  : </span><span class="p">( </span>s <span class="p">:</span><span class="err"> ψ) → hom (A s) (f s) (g s)</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="err">  := </span><span class="p">\ </span>s t <span class="err">→ α t s</span>
+</span></code></pre></div>
+<h3 id="natural-transformation-extensionality">Natural transformation extensionality<a class="headerlink" href="#natural-transformation-extensionality" title="Permanent link">&para;</a></h3>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.3</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-ev-components-nat-trans" id="define:is-equiv-ev-components-nat-trans" style="visibility: visible; position: relative; color: inherit">is-equiv-ev-components-nat-trans</a></span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="err">  : is-equiv</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="err">      ( nat-trans A B f g)</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="err">      ( nat-trans-components A B f g)</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="err">      ( ev-components-nat-trans A B f g)</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="err">  :=</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="err">    ( ( </span><span class="p">\ </span>η t x <span class="err">→ η x t , </span><span class="p">\ </span>_ <span class="err">→ </span><span class="s">refl</span><span class="err">)</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="err">    , ( </span><span class="p">\ </span>η t x <span class="err">→ η x t , </span><span class="p">\ </span>_ <span class="err">→ </span><span class="s">refl</span><span class="err">))</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-components-nat-trans" id="define:equiv-components-nat-trans" style="visibility: visible; position: relative; color: inherit">equiv-components-nat-trans</a></span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="err">  : Equiv (nat-trans A B f g) (nat-trans-components A B f g)</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="err">  :=</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="err">    ( ev-components-nat-trans A B f g</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="err">    , is-equiv-ev-components-nat-trans A B f g)</span>
+</span></code></pre></div>
+<h3 id="naturality-square">Naturality square<a class="headerlink" href="#naturality-square" title="Permanent link">&para;</a></h3>
+<p>Natural transformations are automatically natural when the codomain is a Segal
+type.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.6</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nd">#section</span><span class="n"> comp-eq-square-is-segal</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kr">#variable</span><span class="p"> </span>A<span class="err"> : U</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kr">#variable</span><span class="p"> </span>is-segal-A<span class="err"> : is-segal A</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="kr">#variable</span><span class="p"> </span>α<span class="err"> : (Δ¹×Δ¹) → A</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α00" id="define:α00" style="visibility: visible; position: relative; color: inherit">α00</a></span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="err">  : A</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="err">  := α (</span><span class="m">0₂</span><span class="err"> , </span><span class="m">0₂</span><span class="err">)</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α01" id="define:α01" style="visibility: visible; position: relative; color: inherit">α01</a></span>
+</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="err">  : A</span>
+</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="err">  := α (</span><span class="m">0₂</span><span class="err"> , </span><span class="m">1₂</span><span class="err">)</span>
+</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α10" id="define:α10" style="visibility: visible; position: relative; color: inherit">α10</a></span>
+</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="err">  : A</span>
+</span><span id="__span-11-15"><a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="err">  := α (</span><span class="m">1₂</span><span class="err"> , </span><span class="m">0₂</span><span class="err">)</span>
+</span><span id="__span-11-16"><a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α11" id="define:α11" style="visibility: visible; position: relative; color: inherit">α11</a></span>
+</span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="err">  : A</span>
+</span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="err">  := α (</span><span class="m">1₂</span><span class="err"> , </span><span class="m">1₂</span><span class="err">)</span>
+</span><span id="__span-11-19"><a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>
+</span><span id="__span-11-20"><a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α0*" id="define:α0*" style="visibility: visible; position: relative; color: inherit">α0*</a></span>
+</span><span id="__span-11-21"><a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="err">  : Δ¹ → A</span>
+</span><span id="__span-11-22"><a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="err">  := </span><span class="p">\ </span>t <span class="err">→ α (</span><span class="m">0₂</span><span class="err"> , t)</span>
+</span><span id="__span-11-23"><a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α1*" id="define:α1*" style="visibility: visible; position: relative; color: inherit">α1*</a></span>
+</span><span id="__span-11-24"><a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="err">  : Δ¹ → A</span>
+</span><span id="__span-11-25"><a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="err">  := </span><span class="p">\ </span>t <span class="err">→ α (</span><span class="m">1₂</span><span class="err"> , t)</span>
+</span><span id="__span-11-26"><a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α*0" id="define:α*0" style="visibility: visible; position: relative; color: inherit">α*0</a></span>
+</span><span id="__span-11-27"><a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="err">  : Δ¹ → A</span>
+</span><span id="__span-11-28"><a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="err">  := </span><span class="p">\ </span>s <span class="err">→ α (s , </span><span class="m">0₂</span><span class="err">)</span>
+</span><span id="__span-11-29"><a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α*1" id="define:α*1" style="visibility: visible; position: relative; color: inherit">α*1</a></span>
+</span><span id="__span-11-30"><a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a><span class="err">  : Δ¹ → A</span>
+</span><span id="__span-11-31"><a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="err">  := </span><span class="p">\ </span>s <span class="err">→ α (s , </span><span class="m">1₂</span><span class="err">)</span>
+</span><span id="__span-11-32"><a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:α-diag" id="define:α-diag" style="visibility: visible; position: relative; color: inherit">α-diag</a></span>
+</span><span id="__span-11-33"><a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="err">  : Δ¹ → A</span>
+</span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="err">  := </span><span class="p">\ </span>s <span class="err">→ α (s , s)</span>
+</span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>
+</span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:lhs" id="define:lhs" style="visibility: visible; position: relative; color: inherit">lhs</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>α<span class="p">)</span>
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="err">  : Δ¹ → A</span>
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="err">  := comp-is-segal A is-segal-A α00 α01 α11 α0* α*1</span>
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rhs" id="define:rhs" style="visibility: visible; position: relative; color: inherit">rhs</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>α<span class="p">)</span>
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="err">  : Δ¹ → A</span>
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a><span class="err">  := comp-is-segal A is-segal-A α00 α10 α11 α*0 α1*</span>
+</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>
+</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:lower-triangle-square" id="define:lower-triangle-square" style="visibility: visible; position: relative; color: inherit">lower-triangle-square</a></span>
+</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a><span class="err">  : hom2 A α00 α01 α11 α0* α*1 α-diag</span>
+</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a><span class="err">  := \ (s , t) → α (t , s)</span>
+</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>
+</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:upper-triangle-square" id="define:upper-triangle-square" style="visibility: visible; position: relative; color: inherit">upper-triangle-square</a></span>
+</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a><span class="err">  : hom2 A α00 α10 α11 α*0 α1* α-diag</span>
+</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a><span class="err">  := \ (s , t) → α (s , t)</span>
+</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>
+</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:comp-eq-square-is-segal" id="define:comp-eq-square-is-segal" style="visibility: visible; position: relative; color: inherit">comp-eq-square-is-segal</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>α<span class="p">)</span>
+</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a><span class="err">  : comp-is-segal A is-segal-A α00 α01 α11 α0* α*1</span>
+</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a><span class="err">  = comp-is-segal A is-segal-A α00 α10 α11 α*0 α1*</span>
+</span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a><span class="err">  :=</span>
+</span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a><span class="err">    zig-zag-concat (hom A α00 α11) lhs α-diag rhs</span>
+</span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a><span class="err">    ( uniqueness-comp-is-segal A is-segal-A α00 α01 α11 α0* α*1 α-diag</span>
+</span><span id="__span-11-57"><a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a><span class="err">      ( lower-triangle-square))</span>
+</span><span id="__span-11-58"><a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a><span class="err">    ( uniqueness-comp-is-segal A is-segal-A α00 α10 α11 α*0 α1* α-diag</span>
+</span><span id="__span-11-59"><a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a><span class="err">      ( upper-triangle-square))</span>
+</span><span id="__span-11-60"><a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>
+</span><span id="__span-11-61"><a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>
+</span><span id="__span-11-62"><a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a><span class="nd">#end</span><span class="n"> comp-eq-square-is-segal</span>
+</span></code></pre></div>
+<p>We now extract a naturality square from a natural transformation whose codomain
+is a Segal type.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.6</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:naturality-nat-trans-is-segal" id="define:naturality-nat-trans-is-segal" style="visibility: visible; position: relative; color: inherit">naturality-nat-trans-is-segal</a></span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="err">  </span><span class="p">( </span>is-segal-B <span class="p">:</span><span class="err"> is-segal B)</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="err">  </span><span class="p">( </span>α <span class="p">:</span><span class="err"> nat-trans A (</span><span class="p">\ </span>_ <span class="err">→ B) f g)</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="err">  </span><span class="p">( </span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="err">  </span><span class="p">( </span>k <span class="p">:</span><span class="err"> hom A x y)</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="err">  : comp-is-segal B is-segal-B (f x) (f y) (g y)</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="err">    ( ap-hom A B f x y k)</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="err">    ( </span><span class="p">\ </span>s <span class="err">→ α s y)</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="err">  = comp-is-segal B is-segal-B (f x) (g x) (g y)</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="err">    ( </span><span class="p">\ </span>s <span class="err">→ α s x)</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="err">    ( ap-hom A B g x y k)</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="err">  := comp-eq-square-is-segal B is-segal-B (\ (s , t) → α s (k t))</span>
+</span></code></pre></div>
+<h3 id="vertical-composition">Vertical composition<a class="headerlink" href="#vertical-composition" title="Permanent link">&para;</a></h3>
+<p>We can define vertical composition for natural transformations in families of
+Segal types.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:vertical-comp-nat-trans-components" id="define:vertical-comp-nat-trans-components" style="visibility: visible; position: relative; color: inherit">vertical-comp-nat-trans-components</a></span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="err">  </span><span class="p">( </span>is-segal-B <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → is-segal (B x))</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="err">  </span><span class="p">( </span>f g h <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans-components A B f g)</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="err">  </span><span class="p">( </span>η&#39; <span class="p">:</span><span class="err"> nat-trans-components A B g h)</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="err">  : nat-trans-components A B f h</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="err">  := </span><span class="p">\ </span>x <span class="err">→ comp-is-segal (B x) (is-segal-B x) (f x) (g x) (h x) (η x) (η&#39; x)</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:vertical-comp-nat-trans" id="define:vertical-comp-nat-trans" style="visibility: visible; position: relative; color: inherit">vertical-comp-nat-trans</a></span>
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="err">  </span><span class="p">( </span>is-segal-B <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → is-segal (B x))</span>
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a><span class="err">  </span><span class="p">( </span>f g h <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans A B f g)</span>
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a><span class="err">  </span><span class="p">( </span>η&#39; <span class="p">:</span><span class="err"> nat-trans A B g h)</span>
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a><span class="err">  : nat-trans A B f h</span>
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a><span class="err">  :=</span>
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a><span class="err">    </span><span class="p">\ </span>t x <span class="err">→</span>
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a><span class="err">    vertical-comp-nat-trans-components A B is-segal-B f g h</span>
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="err">      ( </span><span class="p">\ </span>x&#39; t&#39; <span class="err">→ η t&#39; x&#39;)</span>
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a><span class="err">      ( </span><span class="p">\ </span>x&#39; t&#39; <span class="err">→ η&#39; t&#39; x&#39;)</span>
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a><span class="err">      ( x)</span>
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a><span class="err">      ( t)</span>
+</span></code></pre></div>
+<h3 id="functoriality-of-evaluation-at-components">Functoriality of evaluation at components<a class="headerlink" href="#functoriality-of-evaluation-at-components" title="Permanent link">&para;</a></h3>
+<p>The components of the identity natural transformation are identity arrows.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.5(ii)</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:id-arr-components-id-nat-trans" id="define:id-arr-components-id-nat-trans" style="visibility: visible; position: relative; color: inherit">id-arr-components-id-nat-trans</a></span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="err">  </span><span class="p">( </span>a <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="err">  : </span><span class="p">( </span>ev-components-nat-trans A B f f (id-hom ((x <span class="p">:</span><span class="err"> A) → B x) f)) a</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="err">  = id-hom (B a) (f a)</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="err">  := </span><span class="s">refl</span>
+</span></code></pre></div>
+<p>When the fibers of a family of types <code class="language-rzk highlight"><span class="err">B : A → U</span></code> are Segal types, the
+components of the natural transformation defined by composing in the Segal type
+<code class="language-rzk highlight"><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → B x</span></code> agree with the components defined by vertical composition.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.5(i)</span><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:comp-components-comp-nat-trans-is-segal" id="define:comp-components-comp-nat-trans-is-segal" style="visibility: visible; position: relative; color: inherit">comp-components-comp-nat-trans-is-segal</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> A → U)</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="err">  </span><span class="p">( </span>is-segal-B <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → is-segal (B x))</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="err">  </span><span class="p">( </span>f g h <span class="p">:</span><span class="err"> </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A) → (B x))</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="err">  </span><span class="p">( </span>α <span class="p">:</span><span class="err"> nat-trans A B f g)</span>
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="err">  </span><span class="p">( </span>β <span class="p">:</span><span class="err"> nat-trans A B g h)</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="err">  </span><span class="p">( </span>a <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="err">  : ( comp-is-segal (B a) (is-segal-B a) (f a) (g a) (h a)</span>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="err">      ( ev-components-nat-trans A B f g α a)</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="err">      ( ev-components-nat-trans A B g h β a))</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="err">  = </span><span class="p">( </span>ev-components-nat-trans A B f h
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>      ( comp-is-segal
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>        ( ( x <span class="p">:</span><span class="err"> A) → B x) (is-segal-function-type (funext) (A) (B) (is-segal-B))</span>
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="err">        ( f) (g) (h) (α) (β))) a</span>
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="err">  :=</span>
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="err">    functors-pres-comp</span>
+</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="err">    </span><span class="p">( </span>( x <span class="p">:</span><span class="err"> A) → (B x)) (B a)</span>
+</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="err">    ( is-segal-function-type (funext) (A) (B) (is-segal-B)) (is-segal-B a)</span>
+</span><span id="__span-15-20"><a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="err">    ( </span><span class="p">\ </span>s <span class="err">→ s a) (f) (g) (h) (α) (β)</span>
+</span></code></pre></div>
+<p>The same statements hold for extension types.</p>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.5(ii), extension type case</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:id-arr-components-id-nat-trans-extension-type" id="define:id-arr-components-id-nat-trans-extension-type" style="visibility: visible; position: relative; color: inherit">id-arr-components-id-nat-trans-extension-type</a></span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="err">  </span><span class="p">( </span>I <span class="p">:</span><span class="err"> CUBE)</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="err">  </span><span class="p">( </span>ψ <span class="p">:</span><span class="err"> I → TOPE)</span>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> ψ → U)</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> </span><span class="p">(</span>s <span class="p">:</span><span class="err"> ψ) → A s)</span>
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="err">  </span><span class="p">( </span>s <span class="p">:</span><span class="err"> ψ)</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="err">  : </span><span class="p">( </span>ev-components-nat-trans-extension-type I ψ A f f
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>      ( id-hom ((s <span class="p">:</span><span class="err"> ψ) → A s) f)) s</span>
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="err">  = id-hom (A s) (f s)</span>
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="err">  := </span><span class="s">refl</span>
+</span></code></pre></div>
+<div class="language-rzk highlight"><span class="filename">RS17, Proposition 6.5(i), extension type case</span><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:comp-components-comp-nat-trans-is-segal-extension-type" id="define:comp-components-comp-nat-trans-is-segal-extension-type" style="visibility: visible; position: relative; color: inherit">comp-components-comp-nat-trans-is-segal-extension-type</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>extext<span class="p">)</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="err">  </span><span class="p">( </span>I <span class="p">:</span><span class="err"> CUBE)</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="err">  </span><span class="p">( </span>ψ <span class="p">:</span><span class="err"> I → TOPE)</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="err">  </span><span class="p">( </span>A <span class="p">:</span><span class="err"> ψ → U)</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="err">  </span><span class="p">( </span>is-segal-A <span class="p">:</span><span class="err"> </span><span class="p">(</span>s <span class="p">:</span><span class="err"> ψ) → is-segal (A s))</span>
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="err">  </span><span class="p">( </span>f g h <span class="p">:</span><span class="err"> </span><span class="p">(</span>s <span class="p">:</span><span class="err"> ψ) → A s)</span>
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="err">  </span><span class="p">( </span>α <span class="p">:</span><span class="err"> hom </span><span class="p">(</span>(s <span class="p">:</span><span class="err"> ψ) → A s) f g)</span>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="err">  </span><span class="p">( </span>β <span class="p">:</span><span class="err"> hom </span><span class="p">(</span>(s <span class="p">:</span><span class="err"> ψ) → A s) g h)</span>
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="err">  </span><span class="p">( </span>s <span class="p">:</span><span class="err"> ψ)</span>
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="err">  : ( comp-is-segal (A s) (is-segal-A s) (f s) (g s) (h s)</span>
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="err">      ( ev-components-nat-trans-extension-type I ψ A f g α s)</span>
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="err">      ( ev-components-nat-trans-extension-type I ψ A g h β s))</span>
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="err">  = </span><span class="p">( </span>ev-components-nat-trans-extension-type I ψ A f h
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>      ( comp-is-segal
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>        ( ( s&#39; <span class="p">:</span><span class="err"> ψ) → A s&#39;)</span>
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="err">        ( is-segal-extension-type extext I ψ A is-segal-A)</span>
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="err">        ( f) (g) (h) (α) (β)) s)</span>
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="err">  :=</span>
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="err">    functors-pres-comp</span>
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="err">    </span><span class="p">( </span>( s&#39; <span class="p">:</span><span class="err"> ψ) → A s&#39;) (A s)</span>
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="err">    ( is-segal-extension-type extext I ψ A is-segal-A) (is-segal-A s)</span>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="err">    ( </span><span class="p">\ </span>σ <span class="err">→ σ s) (f) (g) (h) (α) (β)</span>
+</span></code></pre></div>
+<h3 id="horizontal-composition">Horizontal composition<a class="headerlink" href="#horizontal-composition" title="Permanent link">&para;</a></h3>
+<p>Horizontal composition of natural transformations makes sense over any type. In
+particular , contrary to what is written in [RS17] we do not need <code class="language-rzk highlight"><span class="err">C</span></code> to
+be Segal.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:horizontal-comp-nat-trans" id="define:horizontal-comp-nat-trans" style="visibility: visible; position: relative; color: inherit">horizontal-comp-nat-trans</a></span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="err">  </span><span class="p">( </span>f&#39; g&#39; <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans A (</span><span class="p">\ </span>_ <span class="err">→ B) f g)</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="err">  </span><span class="p">( </span>η&#39; <span class="p">:</span><span class="err"> nat-trans B (</span><span class="p">\ </span>_ <span class="err">→ C) f&#39; g&#39;)</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="err">  : nat-trans A (</span><span class="p">\ </span>_ <span class="err">→ C) (</span><span class="p">\ </span>x <span class="err">→ f&#39; (f x)) (</span><span class="p">\ </span>x <span class="err">→ g&#39; (g x))</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="err">  := </span><span class="p">\ </span>t x <span class="err">→ η&#39; t (η t x)</span>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:horizontal-comp-nat-trans-components" id="define:horizontal-comp-nat-trans-components" style="visibility: visible; position: relative; color: inherit">horizontal-comp-nat-trans-components</a></span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="err">  </span><span class="p">( </span>f&#39; g&#39; <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans-components A (</span><span class="p">\ </span>_ <span class="err">→ B) f g)</span>
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="err">  </span><span class="p">( </span>η&#39; <span class="p">:</span><span class="err"> nat-trans-components B (</span><span class="p">\ </span>_ <span class="err">→ C) f&#39; g&#39;)</span>
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="err">  : nat-trans-components A (</span><span class="p">\ </span>_ <span class="err">→ C) (</span><span class="p">\ </span>x <span class="err">→ f&#39; (f x)) (</span><span class="p">\ </span>x <span class="err">→ g&#39; (g x))</span>
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="err">  := </span><span class="p">\ </span>x t <span class="err">→ η&#39; (η x t) t</span>
+</span></code></pre></div>
+<h3 id="whiskering">Whiskering<a class="headerlink" href="#whiskering" title="Permanent link">&para;</a></h3>
+<p>Whiskering is a special case of horizontal composition when one of the natural
+transformations is the identity.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:postwhisker-nat-trans" id="define:postwhisker-nat-trans" style="visibility: visible; position: relative; color: inherit">postwhisker-nat-trans</a></span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="err">  </span><span class="p">( </span>B C D <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="err">  </span><span class="p">( </span>h <span class="p">:</span><span class="err"> C → D)</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans B (</span><span class="p">\ </span>_ <span class="err">→ C) f g)</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="err">  : nat-trans B (</span><span class="p">\ </span>_ <span class="err">→ D) (comp B C D h f) (comp B C D h g)</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="err">  := horizontal-comp-nat-trans B C D f g h h η (id-hom (C → D) h)</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:prewhisker-nat-trans" id="define:prewhisker-nat-trans" style="visibility: visible; position: relative; color: inherit">prewhisker-nat-trans</a></span>
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="err">  </span><span class="p">( </span>k <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-19-12"><a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-19-13"><a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans B (</span><span class="p">\ </span>_ <span class="err">→ C) f g)</span>
+</span><span id="__span-19-14"><a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="err">  : nat-trans A (</span><span class="p">\ </span>_ <span class="err">→ C) (comp A B C f k) (comp A B C g k)</span>
+</span><span id="__span-19-15"><a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="err">  := horizontal-comp-nat-trans A B C k k f g (id-hom (A → B) k) η</span>
+</span><span id="__span-19-16"><a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>
+</span><span id="__span-19-17"><a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:whisker-nat-trans" id="define:whisker-nat-trans" style="visibility: visible; position: relative; color: inherit">whisker-nat-trans</a></span>
+</span><span id="__span-19-18"><a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="err">  </span><span class="p">( </span>A B C D <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-19-19"><a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="err">  </span><span class="p">( </span>k <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-19-20"><a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-19-21"><a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="err">  </span><span class="p">( </span>h <span class="p">:</span><span class="err"> C → D)</span>
+</span><span id="__span-19-22"><a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans B (</span><span class="p">\ </span>_ <span class="err">→ C) f g)</span>
+</span><span id="__span-19-23"><a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="err">  : nat-trans A (</span><span class="p">\ </span>_ <span class="err">→ D)</span>
+</span><span id="__span-19-24"><a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="err">    ( triple-comp A B C D h f k)</span>
+</span><span id="__span-19-25"><a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="err">    ( triple-comp A B C D h g k)</span>
+</span><span id="__span-19-26"><a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="err">  :=</span>
+</span><span id="__span-19-27"><a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="err">    postwhisker-nat-trans A C D (comp A B C f k) (comp A B C g k) h</span>
+</span><span id="__span-19-28"><a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="err">    ( prewhisker-nat-trans A B C k f g η)</span>
+</span></code></pre></div>
+<h2 id="gray-interchanger">Gray interchanger<a class="headerlink" href="#gray-interchanger" title="Permanent link">&para;</a></h2>
+<p>The horizontal composition operation also defines coherence data in the form of
+the "Gray interchanger" built from two commutative triangles.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:gray-interchanger-horizontal-comp-nat-trans" id="define:gray-interchanger-horizontal-comp-nat-trans" style="visibility: visible; position: relative; color: inherit">gray-interchanger-horizontal-comp-nat-trans</a></span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="err">  </span><span class="p">( </span>f&#39; g&#39; <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans A (</span><span class="p">\ </span>_ <span class="err">→ B) f g)</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="err">  </span><span class="p">( </span>η&#39; <span class="p">:</span><span class="err"> nat-trans B (</span><span class="p">\ </span>_ <span class="err">→ C) f&#39; g&#39;)</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="err">  : Δ¹×Δ¹ → (A → C)</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="err">  := \ (t , s) a → η&#39; s (η t a)</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:left-gray-interchanger-horizontal-comp-nat-trans" id="define:left-gray-interchanger-horizontal-comp-nat-trans" style="visibility: visible; position: relative; color: inherit">left-gray-interchanger-horizontal-comp-nat-trans</a></span>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="err">  </span><span class="p">( </span>f&#39; g&#39; <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans A (</span><span class="p">\ </span>_ <span class="err">→ B) f g)</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="err">  </span><span class="p">( </span>η&#39; <span class="p">:</span><span class="err"> nat-trans B (</span><span class="p">\ </span>_ <span class="err">→ C) f&#39; g&#39;)</span>
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="err">  : hom2 (A → C) (comp A B C f&#39; f) (comp A B C f&#39; g) (comp A B C g&#39; g)</span>
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="err">    ( postwhisker-nat-trans A B C f g f&#39; η)</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="err">    ( prewhisker-nat-trans A B C g f&#39; g&#39; η&#39;)</span>
+</span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="err">    ( horizontal-comp-nat-trans A B C f g f&#39; g&#39; η η&#39;)</span>
+</span><span id="__span-20-20"><a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a><span class="err">  := \ (t , s) a → η&#39; s (η t a)</span>
+</span><span id="__span-20-21"><a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a>
+</span><span id="__span-20-22"><a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:right-gray-interchanger-horizontal-comp-nat-trans" id="define:right-gray-interchanger-horizontal-comp-nat-trans" style="visibility: visible; position: relative; color: inherit">right-gray-interchanger-horizontal-comp-nat-trans</a></span>
+</span><span id="__span-20-23"><a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-20-24"><a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a><span class="err">  </span><span class="p">( </span>f g <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-20-25"><a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a><span class="err">  </span><span class="p">( </span>f&#39; g&#39; <span class="p">:</span><span class="err"> B → C)</span>
+</span><span id="__span-20-26"><a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a><span class="err">  </span><span class="p">( </span>η <span class="p">:</span><span class="err"> nat-trans A (</span><span class="p">\ </span>_ <span class="err">→ B) f g)</span>
+</span><span id="__span-20-27"><a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a><span class="err">  </span><span class="p">( </span>η&#39; <span class="p">:</span><span class="err"> nat-trans B (</span><span class="p">\ </span>_ <span class="err">→ C) f&#39; g&#39;)</span>
+</span><span id="__span-20-28"><a id="__codelineno-20-28" name="__codelineno-20-28" href="#__codelineno-20-28"></a><span class="err">  : hom2 (A → C) (comp A B C f&#39; f) (comp A B C g&#39; f) (comp A B C g&#39; g)</span>
+</span><span id="__span-20-29"><a id="__codelineno-20-29" name="__codelineno-20-29" href="#__codelineno-20-29"></a><span class="err">    ( prewhisker-nat-trans A B C f f&#39; g&#39; η&#39;)</span>
+</span><span id="__span-20-30"><a id="__codelineno-20-30" name="__codelineno-20-30" href="#__codelineno-20-30"></a><span class="err">    ( postwhisker-nat-trans A B C f g g&#39; η)</span>
+</span><span id="__span-20-31"><a id="__codelineno-20-31" name="__codelineno-20-31" href="#__codelineno-20-31"></a><span class="err">    ( horizontal-comp-nat-trans A B C f g f&#39; g&#39; η η&#39;)</span>
+</span><span id="__span-20-32"><a id="__codelineno-20-32" name="__codelineno-20-32" href="#__codelineno-20-32"></a><span class="err">  := \ (t , s) a → η&#39; t (η s a)</span>
+</span></code></pre></div>
+<h2 id="equivalences-are-fully-faithful">Equivalences are fully faithful<a class="headerlink" href="#equivalences-are-fully-faithful" title="Permanent link">&para;</a></h2>
+<p>Since <code class="language-rzk highlight"><span class="err">hom</span></code> is defined as an extension type, <code class="language-rzk highlight"><span class="err">ap-hom</span></code> correspond to
+postcomposition. Hence, we can use <code class="language-rzk highlight"><span class="err">is-equiv-extensions-is-equiv</span></code> to show
+that <code class="language-rzk highlight"><span class="err">ap-hom</span></code> is an equivalence when f is an equivalence.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-ap-hom-is-equiv" id="define:is-equiv-ap-hom-is-equiv" style="visibility: visible; position: relative; color: inherit">is-equiv-ap-hom-is-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>extext<span class="p">)</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="err">  </span><span class="p">( </span>is-equiv-f <span class="p">:</span><span class="err"> is-equiv A B f)</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="err">  </span><span class="p">( </span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="err">  : is-equiv (hom A x y) (hom B (f x) (f y)) (ap-hom A B f x y)</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="err">  :=</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="err">    is-equiv-extensions-is-equiv extext </span><span class="kt">2</span><span class="err"> Δ¹ ∂Δ¹</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ A) (</span><span class="p">\ </span>_ <span class="err">→ B)</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ f)</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="err">    ( </span><span class="p">\ </span>t <span class="err">→ </span><span class="s">recOR</span><span class="err"> (t </span><span class="sx">≡</span><span class="err"> </span><span class="m">0₂</span><span class="err"> ↦ x , t </span><span class="sx">≡</span><span class="err"> </span><span class="m">1₂</span><span class="err"> ↦ y))</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ is-equiv-f)</span>
+</span></code></pre></div>
+<p>More precicely:</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:fiber-ap-hom" id="define:fiber-ap-hom" style="visibility: visible; position: relative; color: inherit">fiber-ap-hom</a></span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="err">  </span><span class="p">( </span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="err">  </span><span class="p">( </span>β <span class="p">:</span><span class="err"> hom B (f x) (f y))</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="err">  : U</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="err">  :=</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="err">    fib (hom A x y) (hom B (f x) (f y)) (ap-hom A B f x y) (β)</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-contr-fiber-ap-hom-is-equiv" id="define:is-contr-fiber-ap-hom-is-equiv" style="visibility: visible; position: relative; color: inherit">is-contr-fiber-ap-hom-is-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>extext<span class="p">)</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="err">  </span><span class="p">( </span>is-equiv-f <span class="p">:</span><span class="err"> is-equiv A B f)</span>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="err">  </span><span class="p">( </span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="err">  </span><span class="p">( </span>β <span class="p">:</span><span class="err"> hom B (f x) (f y))</span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="err">  : is-contr (fiber-ap-hom A B x y f β)</span>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="err">  :=</span>
+</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="err">    is-contr-fiber-postcomp-Π-ext-is-equiv-fam extext </span><span class="kt">2</span><span class="err"> Δ¹ ∂Δ¹</span>
+</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ A) (</span><span class="p">\ </span>_ <span class="err">→ B)</span>
+</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ f)</span>
+</span><span id="__span-22-21"><a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="err">    ( </span><span class="p">\ </span>t <span class="err">→ </span><span class="s">recOR</span><span class="err"> (t </span><span class="sx">≡</span><span class="err"> </span><span class="m">0₂</span><span class="err"> ↦ x , t </span><span class="sx">≡</span><span class="err"> </span><span class="m">1₂</span><span class="err"> ↦ y))</span>
+</span><span id="__span-22-22"><a id="__codelineno-22-22" name="__codelineno-22-22" href="#__codelineno-22-22"></a><span class="err">    ( β)</span>
+</span><span id="__span-22-23"><a id="__codelineno-22-23" name="__codelineno-22-23" href="#__codelineno-22-23"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ is-equiv-f)</span>
+</span></code></pre></div>
+<p>We can also define a retraction of <code class="language-rzk highlight"><span class="err">ap-hom</span></code> directly.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:has-retraction-ap-hom-retraction" id="define:has-retraction-ap-hom-retraction" style="visibility: visible; position: relative; color: inherit">has-retraction-ap-hom-retraction</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>extext<span class="p">)</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="err">  </span><span class="p">( </span>A B <span class="p">:</span><span class="err"> U)</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="err">  </span><span class="p">( </span>has-retraction-f <span class="p">:</span><span class="err"> has-retraction A B f)</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="err">  </span><span class="p">( </span>x y <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="err">  : has-retraction (hom A x y) (hom B (f x) (f y)) (ap-hom A B f x y)</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="err">  :=</span>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="err">    has-retraction-extensions-has-retraction extext </span><span class="kt">2</span><span class="err"> Δ¹ ∂Δ¹</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ A) (</span><span class="p">\ </span>_ <span class="err">→ B)</span>
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ f)</span>
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="err">    ( </span><span class="p">\ </span>_ <span class="err">→ has-retraction-f)</span>
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="err">    ( </span><span class="p">\ </span>t <span class="err">→ </span><span class="s">recOR</span><span class="err"> (t </span><span class="sx">≡</span><span class="err"> </span><span class="m">0₂</span><span class="err"> ↦ x , t </span><span class="sx">≡</span><span class="err"> </span><span class="m">1₂</span><span class="err"> ↦ y))</span>
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../05-segal-types.rzk/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Segal Types">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Segal Types
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../07-discrete.rzk/" class="md-footer__link md-footer__link--next" aria-label="Next: Discrete Types">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Discrete Types
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+        <script src="../../javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
