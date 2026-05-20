@@ -1079,15 +1079,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#type-aliases" class="md-nav__link">
-    <span class="md-ellipsis">
-      Type aliases
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#opposite-modality" class="md-nav__link">
     <span class="md-ellipsis">
       Opposite modality
@@ -1100,6 +1091,15 @@
   <a href="#sharp-modality" class="md-nav__link">
     <span class="md-ellipsis">
       Sharp modality
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-modal-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Useful modal aliases
     </span>
   </a>
   
@@ -1199,15 +1199,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#type-aliases" class="md-nav__link">
-    <span class="md-ellipsis">
-      Type aliases
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#opposite-modality" class="md-nav__link">
     <span class="md-ellipsis">
       Opposite modality
@@ -1220,6 +1211,15 @@
   <a href="#sharp-modality" class="md-nav__link">
     <span class="md-ellipsis">
       Sharp modality
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#useful-modal-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Useful modal aliases
     </span>
   </a>
   
@@ -1266,74 +1266,66 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="err">  : &lt;| ♭ | &lt;| ♭ | A |&gt; |&gt;</span>
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="err">  :=</span>
 </span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="err">  mod ♭ (mod ♭ (x))</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
-</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:b-extract-eq" id="define:b-extract-eq" style="visibility: visible; position: relative; color: inherit">b-extract-eq</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> ♭ U) </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> &lt;| ♭ | A |&gt;)</span>
-</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="err">  </span><span class="p">( </span>p <span class="p">:</span><span class="err"> x = y)</span>
-</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="err">  : b-extract (mod ♭ A) x = b-extract (mod ♭ A) y</span>
-</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="err">  := ap &lt;| ♭ | A |&gt; A x y (b-extract (mod ♭ A)) p</span>
-</span></code></pre></div>
-<h2 id="type-aliases">Type aliases<a class="headerlink" href="#type-aliases" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:U-b" id="define:U-b" style="visibility: visible; position: relative; color: inherit">U-b</a></span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  : &lt;| ♭ | U |&gt;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  := mod ♭ U</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:prop" id="define:prop" style="visibility: visible; position: relative; color: inherit">prop</a></span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">  : U</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">  := </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) , is-prop A</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:prop-b" id="define:prop-b" style="visibility: visible; position: relative; color: inherit">prop-b</a></span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="err">  : &lt;| ♭ | U |&gt;</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="err">  := mod ♭ prop</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:univ-family-prop" id="define:univ-family-prop" style="visibility: visible; position: relative; color: inherit">univ-family-prop</a></span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="err">  : U</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="err">  := </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> prop) , (</span><span class="s">first</span><span class="err"> A)</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:univ-family-prop-b" id="define:univ-family-prop-b" style="visibility: visible; position: relative; color: inherit">univ-family-prop-b</a></span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="err">  : &lt;| ♭ | U |&gt;</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="err">  := mod ♭ univ-family-prop</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Unit-b" id="define:Unit-b" style="visibility: visible; position: relative; color: inherit">Unit-b</a></span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="err">  : &lt;| ♭ | U |&gt;</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="err">  := mod ♭ Unit</span>
 </span></code></pre></div>
 <h2 id="opposite-modality">Opposite modality<a class="headerlink" href="#opposite-modality" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-map" id="define:op-map" style="visibility: visible; position: relative; color: inherit">op-map</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ᵒᵖ U) </span><span class="p">(</span>f <span class="p">:</span><span class="err"> ᵒᵖ A → B)</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  : &lt;| ᵒᵖ | A |&gt; → &lt;| ᵒᵖ | B |&gt;</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  :=</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">  \ </span><span class="p">(</span>x <span class="p">:</span><span class="err"> ᵒᵖ A) → mod ᵒᵖ (f x)</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:double-op" id="define:double-op" style="visibility: visible; position: relative; color: inherit">double-op</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) </span><span class="p">(</span>x <span class="p">:</span><span class="err"> &lt;| ᵒᵖ | &lt;| ᵒᵖ | A |&gt; |&gt;)</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">  : A</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">  :=</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="err">  let mod ᵒᵖ x_1 := x in</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="err">  let mod ᵒᵖ / ᵒᵖ x_2 := x_1 in</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="err">  x_2</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:hom-to-op-hom" id="define:hom-to-op-hom" style="visibility: visible; position: relative; color: inherit">hom-to-op-hom</a></span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="err">  </span><span class="p">( </span>B <span class="p">:</span><span class="err"> ᵒᵖ U)</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="err">  </span><span class="p">( </span>x <span class="p">:</span><span class="err"> ᵒᵖ B)</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="err">  </span><span class="p">( </span>y <span class="p">:</span><span class="err"> ᵒᵖ B)</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="err">  </span><span class="p">( </span>h <span class="p">:</span><span class="err"> ᵒᵖ </span><span class="p">(</span>t <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err">) → B [ t </span><span class="sx">≡</span><span class="err"> </span><span class="m">0₂</span><span class="err"> ↦ x , t </span><span class="sx">≡</span><span class="err"> </span><span class="m">1₂</span><span class="err"> ↦ y ])</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="err">  : </span><span class="p">( </span>( t <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err">) → &lt;| ᵒᵖ | B |&gt; [ t </span><span class="sx">≡</span><span class="err"> </span><span class="m">0₂</span><span class="err"> ↦ mod ᵒᵖ y , t </span><span class="sx">≡</span><span class="err"> </span><span class="m">1₂</span><span class="err"> ↦ mod ᵒᵖ x ])</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="err">  := </span><span class="p">\ </span>t <span class="err">→ let mod ᵒᵖ s := flip t in mod ᵒᵖ (h s)</span>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-map" id="define:op-map" style="visibility: visible; position: relative; color: inherit">op-map</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ᵒᵖ U) </span><span class="p">(</span>f <span class="p">:</span><span class="err"> ᵒᵖ A → B)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  : &lt;| ᵒᵖ | A |&gt; → &lt;| ᵒᵖ | B |&gt;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  :=</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  \ </span><span class="p">(</span>x <span class="p">:</span><span class="err"> ᵒᵖ A) → mod ᵒᵖ (f x)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:double-op" id="define:double-op" style="visibility: visible; position: relative; color: inherit">double-op</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) </span><span class="p">(</span>x <span class="p">:</span><span class="err"> &lt;| ᵒᵖ | &lt;| ᵒᵖ | A |&gt; |&gt;)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">  : A</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="err">  :=</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">  let mod ᵒᵖ x_1 := x in</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="err">  let mod ᵒᵖ / ᵒᵖ x_2 := x_1 in</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="err">  x_2</span>
 </span></code></pre></div>
 <h2 id="sharp-modality">Sharp modality<a class="headerlink" href="#sharp-modality" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:sharp-pure" id="define:sharp-pure" style="visibility: visible; position: relative; color: inherit">sharp-pure</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A)</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  : &lt;| ♯ | A |&gt;</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  := mod ♯ x</span>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:sharp-pure" id="define:sharp-pure" style="visibility: visible; position: relative; color: inherit">sharp-pure</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) </span><span class="p">(</span>x <span class="p">:</span><span class="err"> A)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  : &lt;| ♯ | A |&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  := mod ♯ x</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:sharp-map" id="define:sharp-map" style="visibility: visible; position: relative; color: inherit">sharp-map</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U) </span><span class="p">(</span>f <span class="p">:</span><span class="err"> A → B)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">  : &lt;| ♯ | A |&gt; → &lt;| ♯ | B |&gt;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">  :=</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">  \ </span><span class="p">(</span>x <span class="p">:</span><span class="err"> ♯ A) → mod ♯ (f x)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:sharp-join" id="define:sharp-join" style="visibility: visible; position: relative; color: inherit">sharp-join</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) </span><span class="p">(</span>a <span class="p">:</span><span class="err"> &lt;| ♯ | &lt;| ♯ | A |&gt; |&gt;)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="err">  : &lt;| ♯ | A |&gt;</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="err">  :=</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="err">  let mod ♯ x_1 := a in</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="err">  let mod ♯ / ♯ x_2 := x_1 in</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="err">  mod ♯ (x_2)</span>
+</span></code></pre></div>
+<h2 id="useful-modal-aliases">Useful modal aliases<a class="headerlink" href="#useful-modal-aliases" title="Permanent link">&para;</a></h2>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:U-b" id="define:U-b" style="visibility: visible; position: relative; color: inherit">U-b</a></span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  : &lt;| ♭ | U |&gt;</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  := mod ♭ U</span>
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:sharp-map" id="define:sharp-map" style="visibility: visible; position: relative; color: inherit">sharp-map</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> U) </span><span class="p">(</span>f <span class="p">:</span><span class="err"> A → B)</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">  : &lt;| ♯ | A |&gt; → &lt;| ♯ | B |&gt;</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">  :=</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="err">  \ </span><span class="p">(</span>x <span class="p">:</span><span class="err"> ♯ A) → mod ♯ (f x)</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:sharp-join" id="define:sharp-join" style="visibility: visible; position: relative; color: inherit">sharp-join</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) </span><span class="p">(</span>a <span class="p">:</span><span class="err"> &lt;| ♯ | &lt;| ♯ | A |&gt; |&gt;)</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="err">  : &lt;| ♯ | A |&gt;</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="err">  :=</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="err">  let mod ♯ x_1 := a in</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="err">  let mod ♯ / ♯ x_2 := x_1 in</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="err">  mod ♯ (x_2)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:prop" id="define:prop" style="visibility: visible; position: relative; color: inherit">prop</a></span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">  : U</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">  := </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) , is-prop A</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:prop-b" id="define:prop-b" style="visibility: visible; position: relative; color: inherit">prop-b</a></span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="err">  : &lt;| ♭ | U |&gt;</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="err">  := mod ♭ prop</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:univ-family-prop" id="define:univ-family-prop" style="visibility: visible; position: relative; color: inherit">univ-family-prop</a></span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="err">  : U</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="err">  := </span><span class="kt">Σ</span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> prop) , (</span><span class="s">first</span><span class="err"> A)</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:univ-family-prop-b" id="define:univ-family-prop-b" style="visibility: visible; position: relative; color: inherit">univ-family-prop-b</a></span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="err">  : &lt;| ♭ | U |&gt;</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="err">  := mod ♭ univ-family-prop</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Unit-b" id="define:Unit-b" style="visibility: visible; position: relative; color: inherit">Unit-b</a></span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="err">  : &lt;| ♭ | U |&gt;</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="err">  := mod ♭ Unit</span>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:b-extract-eq" id="define:b-extract-eq" style="visibility: visible; position: relative; color: inherit">b-extract-eq</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> ♭ U) </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> &lt;| ♭ | A |&gt;)</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="err">  </span><span class="p">( </span>p <span class="p">:</span><span class="err"> x = y)</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="err">  : b-extract (mod ♭ A) x = b-extract (mod ♭ A) y</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="err">  := ap &lt;| ♭ | A |&gt; A x y (b-extract (mod ♭ A)) p</span>
 </span></code></pre></div>
 
 

@@ -1100,36 +1100,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arrow-and-right-adjoint" class="md-nav__link">
+  <a href="#right-adjoint" class="md-nav__link">
     <span class="md-ellipsis">
-      Arrow and right adjoint
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transpose-adjunction" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transpose adjunction
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#functoriality-of-rar" class="md-nav__link">
-    <span class="md-ellipsis">
-      Functoriality of rar
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transpose-naturality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transpose naturality
+      Right adjoint
     </span>
   </a>
   
@@ -1217,36 +1190,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arrow-and-right-adjoint" class="md-nav__link">
+  <a href="#right-adjoint" class="md-nav__link">
     <span class="md-ellipsis">
-      Arrow and right adjoint
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transpose-adjunction" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transpose adjunction
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#functoriality-of-rar" class="md-nav__link">
-    <span class="md-ellipsis">
-      Functoriality of rar
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transpose-naturality" class="md-nav__link">
-    <span class="md-ellipsis">
-      Transpose naturality
+      Right adjoint
     </span>
   </a>
   
@@ -1292,7 +1238,7 @@
 <ul>
 <li><code>01-modalities.rzk.md</code> — Modality operations and type aliases.</li>
 </ul>
-<h2 id="arrow-and-right-adjoint">Arrow and right adjoint<a class="headerlink" href="#arrow-and-right-adjoint" title="Permanent link">&para;</a></h2>
+<h2 id="right-adjoint">Right adjoint<a class="headerlink" href="#right-adjoint" title="Permanent link">&para;</a></h2>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ar" id="define:ar" style="visibility: visible; position: relative; color: inherit">ar</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U)</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="err">  : U</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="err">  := </span><span class="kt">2</span><span class="err"> → A</span>
@@ -1309,97 +1255,94 @@
 </span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="err">  </span><span class="s">recOR</span><span class="err">(</span>
 </span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="err">    ( i </span><span class="sx">≡</span><span class="err"> </span><span class="m">0₂</span><span class="err">) ↦ x</span>
 </span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="err">  , ( i </span><span class="sx">≡</span><span class="err"> </span><span class="m">1₂</span><span class="err">) ↦ y)</span>
-</span></code></pre></div>
-<h2 id="transpose-adjunction">Transpose adjunction<a class="headerlink" href="#transpose-adjunction" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-ar" id="define:transpose-ar" style="visibility: visible; position: relative; color: inherit">transpose-ar</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  : &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt; → &lt;| ♭ | (ar B) → A |&gt;</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  :=</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">  \ </span><span class="p">(</span>f <span class="p">:</span><span class="err"> ♭ B → (b-extract U-b (rar (mod ♭ A)))) →</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="err">    mod ♭ </span><span class="p">(</span>\ (g <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → B) → (let mod ♭ eta := ar-rar-counit in eta) (mod ♭ A) (</span><span class="p">\ </span>i <span class="err">→ f (g i)))</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:untranspose-ar" id="define:untranspose-ar" style="visibility: visible; position: relative; color: inherit">untranspose-ar</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="err">  : &lt;| ♭ | (ar B) → A |&gt; → &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt;</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:transpose-untranspose-ar" id="define:transpose-untranspose-ar" style="visibility: visible; position: relative; color: inherit">transpose-untranspose-ar</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> &lt;| ♭ | (ar B) → A |&gt;)</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="err">  : transpose-ar (mod ♭ A) (mod ♭ B) (untranspose-ar (mod ♭ A) (mod ♭ B) f) = f</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:untranspose-transpose-ar" id="define:untranspose-transpose-ar" style="visibility: visible; position: relative; color: inherit">untranspose-transpose-ar</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt;)</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="err">  : untranspose-ar (mod ♭ A) (mod ♭ B) (transpose-ar (mod ♭ A) (mod ♭ B) f) = f</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-ar-is-equiv" id="define:transpose-ar-is-equiv" style="visibility: visible; position: relative; color: inherit">transpose-ar-is-equiv</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="err">  : is-equiv</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="err">    &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt;</span>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="err">    &lt;| ♭ | (ar B) → A |&gt;</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="err">    ( transpose-ar (mod ♭ A) (mod ♭ B))</span>
-</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="err">  :=</span>
-</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="err">  ( ( untranspose-ar (mod ♭ A) (mod ♭ B)</span>
-</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="err">    , untranspose-transpose-ar (mod ♭ A) (mod ♭ B))</span>
-</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="err">  , ( untranspose-ar (mod ♭ A) (mod ♭ B)</span>
-</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="err">    , transpose-untranspose-ar (mod ♭ A) (mod ♭ B)))</span>
-</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
-</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-ar-equiv" id="define:transpose-ar-equiv" style="visibility: visible; position: relative; color: inherit">transpose-ar-equiv</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
-</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="err">  : Equiv</span>
-</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="err">    &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt;</span>
-</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="err">    &lt;| ♭ | (ar B) → A |&gt;</span>
-</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="err">  :=</span>
-</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="err">  ( transpose-ar (mod ♭ A) (mod ♭ B)</span>
-</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="err">  , transpose-ar-is-equiv (mod ♭ A) (mod ♭ B))</span>
-</span></code></pre></div>
-<h2 id="functoriality-of-rar">Functoriality of rar<a class="headerlink" href="#functoriality-of-rar" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rar-functorial-pure" id="define:rar-functorial-pure" style="visibility: visible; position: relative; color: inherit">rar-functorial-pure</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> ♭ U) </span><span class="p">(</span>a <span class="p">:</span><span class="err"> ♭ A)</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">  : b-extract U-b (rar (mod ♭ A))</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">  :=</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="err">    let mod ♭ tr := (untranspose-ar (mod ♭ A) Unit-b) (mod ♭ (</span><span class="p">\ </span>_ <span class="err">→ a)) in</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">    tr </span><span class="s">unit</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rar-functorial-fmap" id="define:rar-functorial-fmap" style="visibility: visible; position: relative; color: inherit">rar-functorial-fmap</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U) </span><span class="p">(</span>f <span class="p">:</span><span class="err"> ♭ A → B)</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">  : &lt;| ♭ | b-extract U-b (rar (mod ♭ A)) → b-extract U-b (rar (mod ♭ B)) |&gt;</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="err">  :=</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="err">  (untranspose-ar (mod ♭ B) (rar (mod ♭ A)))</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="err">    </span><span class="p">(</span>mod ♭ (\ (p <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → b-extract U-b (rar (mod ♭ A))) → let mod ♭ eta := ar-rar-counit in f (eta (mod ♭ A) p)))</span>
-</span></code></pre></div>
-<h2 id="transpose-naturality">Transpose naturality<a class="headerlink" href="#transpose-naturality" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-ar-natural" id="define:transpose-ar-natural" style="visibility: visible; position: relative; color: inherit">transpose-ar-natural</a></span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> ♭ U)</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="err">  </span><span class="p">( </span>h <span class="p">:</span><span class="err"> ♭ C → B)</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> ♭ B → b-extract U-b (rar (mod ♭ A)))</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="err">  : (transpose-ar (mod ♭ A) (mod ♭ C)) (mod ♭ (</span><span class="p">\ </span>x <span class="err">→ f (h x)))</span>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="err">    = </span><span class="p">( </span>mod ♭ (\ (p <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → C) →</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="err">        ( let mod ♭ tr := (transpose-ar (mod ♭ A) (mod ♭ B)) (mod ♭ f) in tr)</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="err">        ( </span><span class="p">\ </span>i <span class="err">→ h (p i))))</span>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="err">  := </span><span class="s">refl</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-untranspose-ar-precompose" id="define:transpose-untranspose-ar-precompose" style="visibility: visible; position: relative; color: inherit">transpose-untranspose-ar-precompose</a></span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> ♭ U)</span>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="err">  </span><span class="p">( </span>h <span class="p">:</span><span class="err"> ♭ C → B)</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> &lt;| ♭ | (ar B) → A |&gt;)</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="err">  :</span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="err">    let mod ♭ sec := (untranspose-ar (mod ♭ A) (mod ♭ B)) f in</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="err">    (transpose-ar (mod ♭ A) (mod ♭ C))</span>
-</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="err">      </span><span class="p">( </span>mod ♭ (\ (x <span class="p">:</span><span class="err"> C) → (sec) (h x)))</span>
-</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="err">    = (let mod ♭ f&#39; := f in mod ♭ </span><span class="p">(</span>\ (p <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → C) →</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="err">        (f&#39;) (</span><span class="p">\ </span>i <span class="err">→ h (p i))))</span>
-</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="err">  := ap</span>
-</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="err">      &lt;| ♭ | (ar B) → A |&gt;</span>
-</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="err">      &lt;| ♭ | (ar C) → A |&gt;</span>
-</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="err">      ( (transpose-ar (mod ♭ A) (mod ♭ B))</span>
-</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="err">        ( (untranspose-ar (mod ♭ A) (mod ♭ B)) f))</span>
-</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="err">      ( f)</span>
-</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="err">      ( </span><span class="p">\ </span>g <span class="err">→ let mod ♭ g&#39; := g in mod ♭ </span><span class="p">(</span>\ (p <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → C) → g&#39; (</span><span class="p">\ </span>i <span class="err">→ h (p i))))</span>
-</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="err">      ( transpose-untranspose-ar (mod ♭ A) (mod ♭ B) f)</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-ar" id="define:transpose-ar" style="visibility: visible; position: relative; color: inherit">transpose-ar</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="err">  : &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt; → &lt;| ♭ | (ar B) → A |&gt;</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="err">  :=</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="err">  \ </span><span class="p">(</span>f <span class="p">:</span><span class="err"> ♭ B → (b-extract U-b (rar (mod ♭ A)))) →</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="err">    mod ♭ </span><span class="p">(</span>\ (g <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → B) → (let mod ♭ eta := ar-rar-counit in eta) (mod ♭ A) (</span><span class="p">\ </span>i <span class="err">→ f (g i)))</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:untranspose-ar" id="define:untranspose-ar" style="visibility: visible; position: relative; color: inherit">untranspose-ar</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="err">  : &lt;| ♭ | (ar B) → A |&gt; → &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt;</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:transpose-untranspose-ar" id="define:transpose-untranspose-ar" style="visibility: visible; position: relative; color: inherit">transpose-untranspose-ar</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
+</span><span id="__span-1-28"><a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> &lt;| ♭ | (ar B) → A |&gt;)</span>
+</span><span id="__span-1-29"><a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="err">  : transpose-ar (mod ♭ A) (mod ♭ B) (untranspose-ar (mod ♭ A) (mod ♭ B) f) = f</span>
+</span><span id="__span-1-30"><a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>
+</span><span id="__span-1-31"><a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:untranspose-transpose-ar" id="define:untranspose-transpose-ar" style="visibility: visible; position: relative; color: inherit">untranspose-transpose-ar</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
+</span><span id="__span-1-32"><a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt;)</span>
+</span><span id="__span-1-33"><a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="err">  : untranspose-ar (mod ♭ A) (mod ♭ B) (transpose-ar (mod ♭ A) (mod ♭ B) f) = f</span>
+</span><span id="__span-1-34"><a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
+</span><span id="__span-1-35"><a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-ar-is-equiv" id="define:transpose-ar-is-equiv" style="visibility: visible; position: relative; color: inherit">transpose-ar-is-equiv</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
+</span><span id="__span-1-36"><a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="err">  : is-equiv</span>
+</span><span id="__span-1-37"><a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="err">    &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt;</span>
+</span><span id="__span-1-38"><a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="err">    &lt;| ♭ | (ar B) → A |&gt;</span>
+</span><span id="__span-1-39"><a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="err">    ( transpose-ar (mod ♭ A) (mod ♭ B))</span>
+</span><span id="__span-1-40"><a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="err">  :=</span>
+</span><span id="__span-1-41"><a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="err">  ( ( untranspose-ar (mod ♭ A) (mod ♭ B)</span>
+</span><span id="__span-1-42"><a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="err">    , untranspose-transpose-ar (mod ♭ A) (mod ♭ B))</span>
+</span><span id="__span-1-43"><a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="err">  , ( untranspose-ar (mod ♭ A) (mod ♭ B)</span>
+</span><span id="__span-1-44"><a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="err">    , transpose-untranspose-ar (mod ♭ A) (mod ♭ B)))</span>
+</span><span id="__span-1-45"><a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>
+</span><span id="__span-1-46"><a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-ar-equiv" id="define:transpose-ar-equiv" style="visibility: visible; position: relative; color: inherit">transpose-ar-equiv</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U)</span>
+</span><span id="__span-1-47"><a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a><span class="err">  : Equiv</span>
+</span><span id="__span-1-48"><a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="err">    &lt;| ♭ | B → (b-extract U-b (rar (mod ♭ A))) |&gt;</span>
+</span><span id="__span-1-49"><a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="err">    &lt;| ♭ | (ar B) → A |&gt;</span>
+</span><span id="__span-1-50"><a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="err">  :=</span>
+</span><span id="__span-1-51"><a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="err">  ( transpose-ar (mod ♭ A) (mod ♭ B)</span>
+</span><span id="__span-1-52"><a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="err">  , transpose-ar-is-equiv (mod ♭ A) (mod ♭ B))</span>
+</span><span id="__span-1-53"><a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>
+</span><span id="__span-1-54"><a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rar-functorial-pure" id="define:rar-functorial-pure" style="visibility: visible; position: relative; color: inherit">rar-functorial-pure</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> ♭ U) </span><span class="p">(</span>a <span class="p">:</span><span class="err"> ♭ A)</span>
+</span><span id="__span-1-55"><a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="err">  : b-extract U-b (rar (mod ♭ A))</span>
+</span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a><span class="err">  :=</span>
+</span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a><span class="err">    let mod ♭ tr := (untranspose-ar (mod ♭ A) Unit-b) (mod ♭ (</span><span class="p">\ </span>_ <span class="err">→ a)) in</span>
+</span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a><span class="err">    tr </span><span class="s">unit</span>
+</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>
+</span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rar-functorial-fmap" id="define:rar-functorial-fmap" style="visibility: visible; position: relative; color: inherit">rar-functorial-fmap</a></span><span class="err"> </span><span class="p">(</span>A B <span class="p">:</span><span class="err"> ♭ U) </span><span class="p">(</span>f <span class="p">:</span><span class="err"> ♭ A → B)</span>
+</span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a><span class="err">  : &lt;| ♭ | b-extract U-b (rar (mod ♭ A)) → b-extract U-b (rar (mod ♭ B)) |&gt;</span>
+</span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a><span class="err">  :=</span>
+</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a><span class="err">  (untranspose-ar (mod ♭ B) (rar (mod ♭ A)))</span>
+</span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a><span class="err">    </span><span class="p">(</span>mod ♭ (\ (p <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → b-extract U-b (rar (mod ♭ A))) → let mod ♭ eta := ar-rar-counit in f (eta (mod ♭ A) p)))</span>
+</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>
+</span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-ar-natural" id="define:transpose-ar-natural" style="visibility: visible; position: relative; color: inherit">transpose-ar-natural</a></span>
+</span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> ♭ U)</span>
+</span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a><span class="err">  </span><span class="p">( </span>h <span class="p">:</span><span class="err"> ♭ C → B)</span>
+</span><span id="__span-1-69"><a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> ♭ B → b-extract U-b (rar (mod ♭ A)))</span>
+</span><span id="__span-1-70"><a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a><span class="err">  : (transpose-ar (mod ♭ A) (mod ♭ C)) (mod ♭ (</span><span class="p">\ </span>x <span class="err">→ f (h x)))</span>
+</span><span id="__span-1-71"><a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a><span class="err">    = </span><span class="p">( </span>mod ♭ (\ (p <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → C) →</span>
+</span><span id="__span-1-72"><a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a><span class="err">        ( let mod ♭ tr := (transpose-ar (mod ♭ A) (mod ♭ B)) (mod ♭ f) in tr)</span>
+</span><span id="__span-1-73"><a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a><span class="err">        ( </span><span class="p">\ </span>i <span class="err">→ h (p i))))</span>
+</span><span id="__span-1-74"><a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a><span class="err">  := </span><span class="s">refl</span>
+</span><span id="__span-1-75"><a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>
+</span><span id="__span-1-76"><a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transpose-untranspose-ar-precompose" id="define:transpose-untranspose-ar-precompose" style="visibility: visible; position: relative; color: inherit">transpose-untranspose-ar-precompose</a></span>
+</span><span id="__span-1-77"><a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a><span class="err">  </span><span class="p">( </span>A B C <span class="p">:</span><span class="err"> ♭ U)</span>
+</span><span id="__span-1-78"><a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a><span class="err">  </span><span class="p">( </span>h <span class="p">:</span><span class="err"> ♭ C → B)</span>
+</span><span id="__span-1-79"><a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a><span class="err">  </span><span class="p">( </span>f <span class="p">:</span><span class="err"> &lt;| ♭ | (ar B) → A |&gt;)</span>
+</span><span id="__span-1-80"><a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a><span class="err">  :</span>
+</span><span id="__span-1-81"><a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a><span class="err">    let mod ♭ sec := (untranspose-ar (mod ♭ A) (mod ♭ B)) f in</span>
+</span><span id="__span-1-82"><a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a><span class="err">    (transpose-ar (mod ♭ A) (mod ♭ C))</span>
+</span><span id="__span-1-83"><a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a><span class="err">      </span><span class="p">( </span>mod ♭ (\ (x <span class="p">:</span><span class="err"> C) → (sec) (h x)))</span>
+</span><span id="__span-1-84"><a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a><span class="err">    = (let mod ♭ f&#39; := f in mod ♭ </span><span class="p">(</span>\ (p <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → C) →</span>
+</span><span id="__span-1-85"><a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a><span class="err">        (f&#39;) (</span><span class="p">\ </span>i <span class="err">→ h (p i))))</span>
+</span><span id="__span-1-86"><a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a><span class="err">  := ap</span>
+</span><span id="__span-1-87"><a id="__codelineno-1-87" name="__codelineno-1-87" href="#__codelineno-1-87"></a><span class="err">      &lt;| ♭ | (ar B) → A |&gt;</span>
+</span><span id="__span-1-88"><a id="__codelineno-1-88" name="__codelineno-1-88" href="#__codelineno-1-88"></a><span class="err">      &lt;| ♭ | (ar C) → A |&gt;</span>
+</span><span id="__span-1-89"><a id="__codelineno-1-89" name="__codelineno-1-89" href="#__codelineno-1-89"></a><span class="err">      ( (transpose-ar (mod ♭ A) (mod ♭ B))</span>
+</span><span id="__span-1-90"><a id="__codelineno-1-90" name="__codelineno-1-90" href="#__codelineno-1-90"></a><span class="err">        ( (untranspose-ar (mod ♭ A) (mod ♭ B)) f))</span>
+</span><span id="__span-1-91"><a id="__codelineno-1-91" name="__codelineno-1-91" href="#__codelineno-1-91"></a><span class="err">      ( f)</span>
+</span><span id="__span-1-92"><a id="__codelineno-1-92" name="__codelineno-1-92" href="#__codelineno-1-92"></a><span class="err">      ( </span><span class="p">\ </span>g <span class="err">→ let mod ♭ g&#39; := g in mod ♭ </span><span class="p">(</span>\ (p <span class="p">:</span><span class="err"> </span><span class="kt">2</span><span class="err"> → C) → g&#39; (</span><span class="p">\ </span>i <span class="err">→ h (p i))))</span>
+</span><span id="__span-1-93"><a id="__codelineno-1-93" name="__codelineno-1-93" href="#__codelineno-1-93"></a><span class="err">      ( transpose-untranspose-ar (mod ♭ A) (mod ♭ B) f)</span>
 </span></code></pre></div>
 <h2 id="univalence-and-crisp-induction">Univalence and crisp induction<a class="headerlink" href="#univalence-and-crisp-induction" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:UA" id="define:UA" style="visibility: visible; position: relative; color: inherit">UA</a></span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">  : U</span>
-</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="err">  := </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) → </span><span class="p">(</span>B <span class="p">:</span><span class="err"> U) → Equiv (Equiv A B) (A = B)</span>
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:crisp-induction-flat" id="define:crisp-induction-flat" style="visibility: visible; position: relative; color: inherit">crisp-induction-flat</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> ♭ U) </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> ♭ A)</span>
-</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">  : &lt;| ♭ | x = y |&gt; → (mod ♭ x) = (mod ♭ y)</span>
-</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:crisp-induction-flat-rev" id="define:crisp-induction-flat-rev" style="visibility: visible; position: relative; color: inherit">crisp-induction-flat-rev</a></span>
-</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="err">  : </span><span class="p">(</span>A <span class="p">:</span><span class="err"> ♭ U) → </span><span class="p">(</span>x <span class="p">:</span><span class="err"> ♭ A) → </span><span class="p">(</span>y <span class="p">:</span><span class="err"> ♭ A) → ((mod ♭ x) = (mod ♭ y)) → &lt;| ♭ | x = y |&gt;</span>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:UA" id="define:UA" style="visibility: visible; position: relative; color: inherit">UA</a></span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">  : U</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="err">  := </span><span class="p">(</span>A <span class="p">:</span><span class="err"> U) → </span><span class="p">(</span>B <span class="p">:</span><span class="err"> U) → Equiv (Equiv A B) (A = B)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:crisp-induction-flat" id="define:crisp-induction-flat" style="visibility: visible; position: relative; color: inherit">crisp-induction-flat</a></span><span class="err"> </span><span class="p">(</span>A <span class="p">:</span><span class="err"> ♭ U) </span><span class="p">(</span>x y <span class="p">:</span><span class="err"> ♭ A)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">  : &lt;| ♭ | x = y |&gt; → (mod ♭ x) = (mod ♭ y)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:crisp-induction-flat-rev" id="define:crisp-induction-flat-rev" style="visibility: visible; position: relative; color: inherit">crisp-induction-flat-rev</a></span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">  : </span><span class="p">(</span>A <span class="p">:</span><span class="err"> ♭ U) → </span><span class="p">(</span>x <span class="p">:</span><span class="err"> ♭ A) → </span><span class="p">(</span>y <span class="p">:</span><span class="err"> ♭ A) → ((mod ♭ x) = (mod ♭ y)) → &lt;| ♭ | x = y |&gt;</span>
 </span></code></pre></div>
 
 
