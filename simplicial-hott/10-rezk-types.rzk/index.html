@@ -1169,7 +1169,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../triangulated/01-modalities.rzk/" class="md-nav__link">
+      <a href="../../triangulated/01-modalities.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1190,7 +1190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../triangulated/02-axioms.rzk/" class="md-nav__link">
+      <a href="../../triangulated/02-axioms.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2738,11 +2738,11 @@ equivalence with no extra data, and then define some helpers.</p>
 </span><span id="__span-24-23"><a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a>  : <span class="p">( </span>x <span class="p">:</span> A) → (hom A a&#39; x) → (hom A a x)
 </span><span id="__span-24-24"><a id="__codelineno-24-24" name="__codelineno-24-24" href="#__codelineno-24-24"></a>  := <span class="p">\ </span>x → <span class="s">first</span> (inverse-representable-equiv x)
 </span><span id="__span-24-25"><a id="__codelineno-24-25" name="__codelineno-24-25" href="#__codelineno-24-25"></a>
-</span><span id="__span-24-26"><a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:arr-map-representable-equiv" id="define:arr-map-representable-equiv" style="visibility: visible; position: relative; color: inherit">arr-map-representable-equiv</a></span>
+</span><span id="__span-24-26"><a id="__codelineno-24-26" name="__codelineno-24-26" href="#__codelineno-24-26"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:arr-map-representable-equiv" id="define:arr-map-representable-equiv" style="visibility: visible; position: relative; color: inherit">arr-map-representable-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>ψ<span class="p">)</span>
 </span><span id="__span-24-27"><a id="__codelineno-24-27" name="__codelineno-24-27" href="#__codelineno-24-27"></a>  : hom A a&#39; a
 </span><span id="__span-24-28"><a id="__codelineno-24-28" name="__codelineno-24-28" href="#__codelineno-24-28"></a>  := evid A a (hom A a&#39;) (map-representable-equiv)
 </span><span id="__span-24-29"><a id="__codelineno-24-29" name="__codelineno-24-29" href="#__codelineno-24-29"></a>
-</span><span id="__span-24-30"><a id="__codelineno-24-30" name="__codelineno-24-30" href="#__codelineno-24-30"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:arr-inv-map-representable-equiv" id="define:arr-inv-map-representable-equiv" style="visibility: visible; position: relative; color: inherit">arr-inv-map-representable-equiv</a></span>
+</span><span id="__span-24-30"><a id="__codelineno-24-30" name="__codelineno-24-30" href="#__codelineno-24-30"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:arr-inv-map-representable-equiv" id="define:arr-inv-map-representable-equiv" style="visibility: visible; position: relative; color: inherit">arr-inv-map-representable-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>ψ<span class="p">)</span>
 </span><span id="__span-24-31"><a id="__codelineno-24-31" name="__codelineno-24-31" href="#__codelineno-24-31"></a>  : hom A a a&#39;
 </span><span id="__span-24-32"><a id="__codelineno-24-32" name="__codelineno-24-32" href="#__codelineno-24-32"></a>  := evid A a&#39; (hom A a) (inv-map-representable-equiv)
 </span></code></pre></div>
@@ -2862,7 +2862,7 @@ equivalence with no extra data, and then define some helpers.</p>
 </span><span id="__span-26-96"><a id="__codelineno-26-96" name="__codelineno-26-96" href="#__codelineno-26-96"></a>        ( a)
 </span><span id="__span-26-97"><a id="__codelineno-26-97" name="__codelineno-26-97" href="#__codelineno-26-97"></a>        ( id-hom A a)))
 </span><span id="__span-26-98"><a id="__codelineno-26-98" name="__codelineno-26-98" href="#__codelineno-26-98"></a>
-</span><span id="__span-26-99"><a id="__codelineno-26-99" name="__codelineno-26-99" href="#__codelineno-26-99"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:compute-htpy-inv-map-fib-equiv-map-fib-equiv-id" id="define:compute-htpy-inv-map-fib-equiv-map-fib-equiv-id" style="visibility: visible; position: relative; color: inherit">compute-htpy-inv-map-fib-equiv-map-fib-equiv-id</a></span>
+</span><span id="__span-26-99"><a id="__codelineno-26-99" name="__codelineno-26-99" href="#__codelineno-26-99"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:compute-htpy-inv-map-fib-equiv-map-fib-equiv-id" id="define:compute-htpy-inv-map-fib-equiv-map-fib-equiv-id" style="visibility: visible; position: relative; color: inherit">compute-htpy-inv-map-fib-equiv-map-fib-equiv-id</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>ψ a&#39;<span class="p">)</span>
 </span><span id="__span-26-100"><a id="__codelineno-26-100" name="__codelineno-26-100" href="#__codelineno-26-100"></a>  : inv-map-representable-equiv a (map-representable-equiv a (id-hom A a))
 </span><span id="__span-26-101"><a id="__codelineno-26-101" name="__codelineno-26-101" href="#__codelineno-26-101"></a>  =_{ hom A a a}
 </span><span id="__span-26-102"><a id="__codelineno-26-102" name="__codelineno-26-102" href="#__codelineno-26-102"></a>    id-hom A a
