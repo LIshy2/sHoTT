@@ -1662,6 +1662,149 @@ a universe with directed univalence.</p>
 </span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>    , crisp-induction-flat-section A x y)
 </span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>  , ( crisp-induction-flat-rev A x y
 </span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>    , crisp-induction-flat-retraction A x y))
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:flat-equiv" id="define:flat-equiv" style="visibility: visible; position: relative; color: inherit">flat-equiv</a></span> (A B :♭ <span class="kt">U</span>) (e :♭ Equiv A B)
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>  : Equiv (<span class="nd">♭</span> A) (<span class="nd">♭</span> B)
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>  :=
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>    ( b-map A B (<span class="s">first</span> e)
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>    , ( ( b-map B A (<span class="s">first</span> (<span class="s">first</span> (<span class="s">second</span> e)))
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>        , <span class="p">\ </span>x →
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>            flat-convoy A
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>              (<span class="p">\ </span>z → b-map B A (<span class="s">first</span> (<span class="s">first</span> (<span class="s">second</span> e))) (b-map A B (<span class="s">first</span> e) z) = z) x
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>              (\ (a :_b A) → <span class="p">\ </span>_ →
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>                crisp-induction-flat A
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>                  ( <span class="s">first</span> (<span class="s">first</span> (<span class="s">second</span> e)) (<span class="s">first</span> e a))
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a>                  a
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a>                  ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (<span class="s">second</span> (<span class="s">first</span> (<span class="s">second</span> e)) a))))
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>      , ( b-map B A (<span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> e)))
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a>        , <span class="p">\ </span>y →
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a>            flat-convoy B
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a>              (<span class="p">\ </span>z → b-map A B (<span class="s">first</span> e) (b-map B A (<span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> e))) z) = z) y
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a>              (\ (b :_b B) → <span class="p">\ </span>_ →
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a>                crisp-induction-flat B
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a>                  ( <span class="s">first</span> e (<span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> e)) b))
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>                  b
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a>                  ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (<span class="s">second</span> (<span class="s">second</span> (<span class="s">second</span> e)) b))))))
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-b-map-via-splits" id="define:is-equiv-b-map-via-splits" style="visibility: visible; position: relative; color: inherit">is-equiv-b-map-via-splits</a></span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>  ( A&#39; A :♭ <span class="kt">U</span>)
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>  ( f :_b A&#39; → A)
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a>  <span class="p">( </span>eA&#39; <span class="p">:</span> Equiv (<span class="nd">♭</span> A&#39;) B&#39;)
+</span><span id="__span-10-54"><a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a>  <span class="p">( </span>eA <span class="p">:</span> Equiv (<span class="nd">♭</span> A) B)
+</span><span id="__span-10-55"><a id="__codelineno-10-55" name="__codelineno-10-55" href="#__codelineno-10-55"></a>  <span class="p">( </span>eB <span class="p">:</span> Equiv B&#39; B)
+</span><span id="__span-10-56"><a id="__codelineno-10-56" name="__codelineno-10-56" href="#__codelineno-10-56"></a>  <span class="p">( </span>η <span class="p">:</span> (a :_b A&#39;) →
+</span><span id="__span-10-57"><a id="__codelineno-10-57" name="__codelineno-10-57" href="#__codelineno-10-57"></a>      <span class="s">first</span> eB (<span class="s">first</span> eA&#39; (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> a))
+</span><span id="__span-10-58"><a id="__codelineno-10-58" name="__codelineno-10-58" href="#__codelineno-10-58"></a>      = <span class="s">first</span> eA (b-map A&#39; A f (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> a)))
+</span><span id="__span-10-59"><a id="__codelineno-10-59" name="__codelineno-10-59" href="#__codelineno-10-59"></a>  : is-equiv (<span class="nd">♭</span> A&#39;) (<span class="nd">♭</span> A) (b-map A&#39; A f)
+</span><span id="__span-10-60"><a id="__codelineno-10-60" name="__codelineno-10-60" href="#__codelineno-10-60"></a>  :=
+</span><span id="__span-10-61"><a id="__codelineno-10-61" name="__codelineno-10-61" href="#__codelineno-10-61"></a>    is-equiv-Equiv-is-equiv
+</span><span id="__span-10-62"><a id="__codelineno-10-62" name="__codelineno-10-62" href="#__codelineno-10-62"></a>      ( <span class="nd">♭</span> A&#39;) ( <span class="nd">♭</span> A) ( b-map A&#39; A f)
+</span><span id="__span-10-63"><a id="__codelineno-10-63" name="__codelineno-10-63" href="#__codelineno-10-63"></a>      ( B&#39;) ( B) ( <span class="s">first</span> eB)
+</span><span id="__span-10-64"><a id="__codelineno-10-64" name="__codelineno-10-64" href="#__codelineno-10-64"></a>      ( ( ( <span class="s">first</span> eA&#39; , <span class="s">first</span> eA)
+</span><span id="__span-10-65"><a id="__codelineno-10-65" name="__codelineno-10-65" href="#__codelineno-10-65"></a>        , <span class="p">\ </span>w →
+</span><span id="__span-10-66"><a id="__codelineno-10-66" name="__codelineno-10-66" href="#__codelineno-10-66"></a>            flat-convoy A&#39;
+</span><span id="__span-10-67"><a id="__codelineno-10-67" name="__codelineno-10-67" href="#__codelineno-10-67"></a>              ( <span class="p">\ </span>z →
+</span><span id="__span-10-68"><a id="__codelineno-10-68" name="__codelineno-10-68" href="#__codelineno-10-68"></a>                  <span class="s">first</span> eB (<span class="s">first</span> eA&#39; z)
+</span><span id="__span-10-69"><a id="__codelineno-10-69" name="__codelineno-10-69" href="#__codelineno-10-69"></a>                  = <span class="s">first</span> eA (b-map A&#39; A f z))
+</span><span id="__span-10-70"><a id="__codelineno-10-70" name="__codelineno-10-70" href="#__codelineno-10-70"></a>              w
+</span><span id="__span-10-71"><a id="__codelineno-10-71" name="__codelineno-10-71" href="#__codelineno-10-71"></a>              ( \ (a :_b A&#39;) → <span class="p">\ </span>_ → η a))
+</span><span id="__span-10-72"><a id="__codelineno-10-72" name="__codelineno-10-72" href="#__codelineno-10-72"></a>      , ( <span class="s">second</span> eA&#39; , <span class="s">second</span> eA))
+</span><span id="__span-10-73"><a id="__codelineno-10-73" name="__codelineno-10-73" href="#__codelineno-10-73"></a>      ( <span class="s">second</span> eB)
+</span><span id="__span-10-74"><a id="__codelineno-10-74" name="__codelineno-10-74" href="#__codelineno-10-74"></a>
+</span><span id="__span-10-75"><a id="__codelineno-10-75" name="__codelineno-10-75" href="#__codelineno-10-75"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:total-equiv-flat-family" id="define:total-equiv-flat-family" style="visibility: visible; position: relative; color: inherit">total-equiv-flat-family</a></span>
+</span><span id="__span-10-76"><a id="__codelineno-10-76" name="__codelineno-10-76" href="#__codelineno-10-76"></a>  ( A :♭ <span class="kt">U</span>)
+</span><span id="__span-10-77"><a id="__codelineno-10-77" name="__codelineno-10-77" href="#__codelineno-10-77"></a>  <span class="p">( </span>P Q <span class="p">:</span> <span class="nd">♭</span> A → <span class="kt">U</span>)
+</span><span id="__span-10-78"><a id="__codelineno-10-78" name="__codelineno-10-78" href="#__codelineno-10-78"></a>  <span class="p">( </span>e <span class="p">:</span> (a :_b A) → Equiv (P (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> a)) (Q (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> a)))
+</span><span id="__span-10-79"><a id="__codelineno-10-79" name="__codelineno-10-79" href="#__codelineno-10-79"></a>  : Equiv <span class="p">(</span>Σ (x <span class="p">:</span> <span class="nd">♭</span> A) , P x) <span class="p">(</span>Σ (x <span class="p">:</span> <span class="nd">♭</span> A) , Q x)
+</span><span id="__span-10-80"><a id="__codelineno-10-80" name="__codelineno-10-80" href="#__codelineno-10-80"></a>  :=
+</span><span id="__span-10-81"><a id="__codelineno-10-81" name="__codelineno-10-81" href="#__codelineno-10-81"></a>    total-equiv-family-of-equiv
+</span><span id="__span-10-82"><a id="__codelineno-10-82" name="__codelineno-10-82" href="#__codelineno-10-82"></a>      ( <span class="nd">♭</span> A)
+</span><span id="__span-10-83"><a id="__codelineno-10-83" name="__codelineno-10-83" href="#__codelineno-10-83"></a>      ( P)
+</span><span id="__span-10-84"><a id="__codelineno-10-84" name="__codelineno-10-84" href="#__codelineno-10-84"></a>      ( Q)
+</span><span id="__span-10-85"><a id="__codelineno-10-85" name="__codelineno-10-85" href="#__codelineno-10-85"></a>      ( <span class="p">\ </span>x →
+</span><span id="__span-10-86"><a id="__codelineno-10-86" name="__codelineno-10-86" href="#__codelineno-10-86"></a>          flat-convoy A
+</span><span id="__span-10-87"><a id="__codelineno-10-87" name="__codelineno-10-87" href="#__codelineno-10-87"></a>            ( <span class="p">\ </span>x&#39; → Equiv (P x&#39;) (Q x&#39;))
+</span><span id="__span-10-88"><a id="__codelineno-10-88" name="__codelineno-10-88" href="#__codelineno-10-88"></a>            x
+</span><span id="__span-10-89"><a id="__codelineno-10-89" name="__codelineno-10-89" href="#__codelineno-10-89"></a>            ( \ (a :_b A) → <span class="p">\ </span>_ → e a))
+</span><span id="__span-10-90"><a id="__codelineno-10-90" name="__codelineno-10-90" href="#__codelineno-10-90"></a>
+</span><span id="__span-10-91"><a id="__codelineno-10-91" name="__codelineno-10-91" href="#__codelineno-10-91"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:total-equiv-flat-family2" id="define:total-equiv-flat-family2" style="visibility: visible; position: relative; color: inherit">total-equiv-flat-family2</a></span>
+</span><span id="__span-10-92"><a id="__codelineno-10-92" name="__codelineno-10-92" href="#__codelineno-10-92"></a>  ( A :♭ <span class="kt">U</span>)
+</span><span id="__span-10-93"><a id="__codelineno-10-93" name="__codelineno-10-93" href="#__codelineno-10-93"></a>  ( B :♭ A → <span class="kt">U</span>)
+</span><span id="__span-10-94"><a id="__codelineno-10-94" name="__codelineno-10-94" href="#__codelineno-10-94"></a>  <span class="p">( </span>C C&#39; <span class="p">:</span> (a :_b A) → (b :_b B a) → <span class="kt">U</span>)
+</span><span id="__span-10-95"><a id="__codelineno-10-95" name="__codelineno-10-95" href="#__codelineno-10-95"></a>  <span class="p">( </span>e <span class="p">:</span> (a :_b A) → (b :_b B a) → Equiv (C a b) (C&#39; a b))
+</span><span id="__span-10-96"><a id="__codelineno-10-96" name="__codelineno-10-96" href="#__codelineno-10-96"></a>  : Equiv
+</span><span id="__span-10-97"><a id="__codelineno-10-97" name="__codelineno-10-97" href="#__codelineno-10-97"></a>      <span class="p">( </span>Σ (a <span class="p">:</span> <span class="nd">♭</span> A)
+</span><span id="__span-10-98"><a id="__codelineno-10-98" name="__codelineno-10-98" href="#__codelineno-10-98"></a>      , ( <span class="k">let mod</span> <span class="nd">♭</span> a0 := a <span class="k">in</span>
+</span><span id="__span-10-99"><a id="__codelineno-10-99" name="__codelineno-10-99" href="#__codelineno-10-99"></a>          <span class="kt">Σ</span> <span class="p">(</span>b <span class="p">:</span> <span class="nd">♭</span> (B a0))
+</span><span id="__span-10-100"><a id="__codelineno-10-100" name="__codelineno-10-100" href="#__codelineno-10-100"></a>          , ( <span class="k">let mod</span> <span class="nd">♭</span> b0 := b <span class="k">in</span> C a0 b0)))
+</span><span id="__span-10-101"><a id="__codelineno-10-101" name="__codelineno-10-101" href="#__codelineno-10-101"></a>      <span class="p">( </span>Σ (a <span class="p">:</span> <span class="nd">♭</span> A)
+</span><span id="__span-10-102"><a id="__codelineno-10-102" name="__codelineno-10-102" href="#__codelineno-10-102"></a>      , ( <span class="k">let mod</span> <span class="nd">♭</span> a0 := a <span class="k">in</span>
+</span><span id="__span-10-103"><a id="__codelineno-10-103" name="__codelineno-10-103" href="#__codelineno-10-103"></a>          <span class="kt">Σ</span> <span class="p">(</span>b <span class="p">:</span> <span class="nd">♭</span> (B a0))
+</span><span id="__span-10-104"><a id="__codelineno-10-104" name="__codelineno-10-104" href="#__codelineno-10-104"></a>          , ( <span class="k">let mod</span> <span class="nd">♭</span> b0 := b <span class="k">in</span> C&#39; a0 b0)))
+</span><span id="__span-10-105"><a id="__codelineno-10-105" name="__codelineno-10-105" href="#__codelineno-10-105"></a>  :=
+</span><span id="__span-10-106"><a id="__codelineno-10-106" name="__codelineno-10-106" href="#__codelineno-10-106"></a>    total-equiv-flat-family A
+</span><span id="__span-10-107"><a id="__codelineno-10-107" name="__codelineno-10-107" href="#__codelineno-10-107"></a>      ( <span class="p">\ </span>a →
+</span><span id="__span-10-108"><a id="__codelineno-10-108" name="__codelineno-10-108" href="#__codelineno-10-108"></a>          <span class="k">let mod</span> <span class="nd">♭</span> a0 := a <span class="k">in</span>
+</span><span id="__span-10-109"><a id="__codelineno-10-109" name="__codelineno-10-109" href="#__codelineno-10-109"></a>          <span class="kt">Σ</span> <span class="p">(</span>b <span class="p">:</span> <span class="nd">♭</span> (B a0))
+</span><span id="__span-10-110"><a id="__codelineno-10-110" name="__codelineno-10-110" href="#__codelineno-10-110"></a>          , ( <span class="k">let mod</span> <span class="nd">♭</span> b0 := b <span class="k">in</span> C a0 b0))
+</span><span id="__span-10-111"><a id="__codelineno-10-111" name="__codelineno-10-111" href="#__codelineno-10-111"></a>      ( <span class="p">\ </span>a →
+</span><span id="__span-10-112"><a id="__codelineno-10-112" name="__codelineno-10-112" href="#__codelineno-10-112"></a>          <span class="k">let mod</span> <span class="nd">♭</span> a0 := a <span class="k">in</span>
+</span><span id="__span-10-113"><a id="__codelineno-10-113" name="__codelineno-10-113" href="#__codelineno-10-113"></a>          <span class="kt">Σ</span> <span class="p">(</span>b <span class="p">:</span> <span class="nd">♭</span> (B a0))
+</span><span id="__span-10-114"><a id="__codelineno-10-114" name="__codelineno-10-114" href="#__codelineno-10-114"></a>          , ( <span class="k">let mod</span> <span class="nd">♭</span> b0 := b <span class="k">in</span> C&#39; a0 b0))
+</span><span id="__span-10-115"><a id="__codelineno-10-115" name="__codelineno-10-115" href="#__codelineno-10-115"></a>      ( \ (a0 :_b A) →
+</span><span id="__span-10-116"><a id="__codelineno-10-116" name="__codelineno-10-116" href="#__codelineno-10-116"></a>          total-equiv-flat-family (B a0)
+</span><span id="__span-10-117"><a id="__codelineno-10-117" name="__codelineno-10-117" href="#__codelineno-10-117"></a>            ( <span class="p">\ </span>b → <span class="k">let mod</span> <span class="nd">♭</span> b0 := b <span class="k">in</span> C a0 b0)
+</span><span id="__span-10-118"><a id="__codelineno-10-118" name="__codelineno-10-118" href="#__codelineno-10-118"></a>            ( <span class="p">\ </span>b → <span class="k">let mod</span> <span class="nd">♭</span> b0 := b <span class="k">in</span> C&#39; a0 b0)
+</span><span id="__span-10-119"><a id="__codelineno-10-119" name="__codelineno-10-119" href="#__codelineno-10-119"></a>            ( \ (b0 :_b B a0) → e a0 b0))
+</span><span id="__span-10-120"><a id="__codelineno-10-120" name="__codelineno-10-120" href="#__codelineno-10-120"></a>
+</span><span id="__span-10-121"><a id="__codelineno-10-121" name="__codelineno-10-121" href="#__codelineno-10-121"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:total-equiv-flat-family3" id="define:total-equiv-flat-family3" style="visibility: visible; position: relative; color: inherit">total-equiv-flat-family3</a></span>
+</span><span id="__span-10-122"><a id="__codelineno-10-122" name="__codelineno-10-122" href="#__codelineno-10-122"></a>  ( A :♭ <span class="kt">U</span>)
+</span><span id="__span-10-123"><a id="__codelineno-10-123" name="__codelineno-10-123" href="#__codelineno-10-123"></a>  ( B :♭ A → <span class="kt">U</span>)
+</span><span id="__span-10-124"><a id="__codelineno-10-124" name="__codelineno-10-124" href="#__codelineno-10-124"></a>  ( C :♭ <span class="p">(</span>a <span class="p">:</span> A) → B a → <span class="kt">U</span>)
+</span><span id="__span-10-125"><a id="__codelineno-10-125" name="__codelineno-10-125" href="#__codelineno-10-125"></a>  <span class="p">( </span>D D&#39; <span class="p">:</span> (a :_b A) → (b :_b B a) → (c :_b C a b) → <span class="kt">U</span>)
+</span><span id="__span-10-126"><a id="__codelineno-10-126" name="__codelineno-10-126" href="#__codelineno-10-126"></a>  <span class="p">( </span>e <span class="p">:</span> (a :_b A) → (b :_b B a) → (c :_b C a b) → Equiv (D a b c) (D&#39; a b c))
+</span><span id="__span-10-127"><a id="__codelineno-10-127" name="__codelineno-10-127" href="#__codelineno-10-127"></a>  : Equiv
+</span><span id="__span-10-128"><a id="__codelineno-10-128" name="__codelineno-10-128" href="#__codelineno-10-128"></a>      <span class="p">( </span>Σ (a <span class="p">:</span> <span class="nd">♭</span> A)
+</span><span id="__span-10-129"><a id="__codelineno-10-129" name="__codelineno-10-129" href="#__codelineno-10-129"></a>      , ( <span class="k">let mod</span> <span class="nd">♭</span> a0 := a <span class="k">in</span>
+</span><span id="__span-10-130"><a id="__codelineno-10-130" name="__codelineno-10-130" href="#__codelineno-10-130"></a>          <span class="kt">Σ</span> <span class="p">(</span>b <span class="p">:</span> <span class="nd">♭</span> (B a0))
+</span><span id="__span-10-131"><a id="__codelineno-10-131" name="__codelineno-10-131" href="#__codelineno-10-131"></a>          , ( <span class="k">let mod</span> <span class="nd">♭</span> b0 := b <span class="k">in</span>
+</span><span id="__span-10-132"><a id="__codelineno-10-132" name="__codelineno-10-132" href="#__codelineno-10-132"></a>              <span class="kt">Σ</span> <span class="p">(</span>c <span class="p">:</span> <span class="nd">♭</span> (C a0 b0))
+</span><span id="__span-10-133"><a id="__codelineno-10-133" name="__codelineno-10-133" href="#__codelineno-10-133"></a>              , ( <span class="k">let mod</span> <span class="nd">♭</span> c0 := c <span class="k">in</span> D a0 b0 c0))))
+</span><span id="__span-10-134"><a id="__codelineno-10-134" name="__codelineno-10-134" href="#__codelineno-10-134"></a>      <span class="p">( </span>Σ (a <span class="p">:</span> <span class="nd">♭</span> A)
+</span><span id="__span-10-135"><a id="__codelineno-10-135" name="__codelineno-10-135" href="#__codelineno-10-135"></a>      , ( <span class="k">let mod</span> <span class="nd">♭</span> a0 := a <span class="k">in</span>
+</span><span id="__span-10-136"><a id="__codelineno-10-136" name="__codelineno-10-136" href="#__codelineno-10-136"></a>          <span class="kt">Σ</span> <span class="p">(</span>b <span class="p">:</span> <span class="nd">♭</span> (B a0))
+</span><span id="__span-10-137"><a id="__codelineno-10-137" name="__codelineno-10-137" href="#__codelineno-10-137"></a>          , ( <span class="k">let mod</span> <span class="nd">♭</span> b0 := b <span class="k">in</span>
+</span><span id="__span-10-138"><a id="__codelineno-10-138" name="__codelineno-10-138" href="#__codelineno-10-138"></a>              <span class="kt">Σ</span> <span class="p">(</span>c <span class="p">:</span> <span class="nd">♭</span> (C a0 b0))
+</span><span id="__span-10-139"><a id="__codelineno-10-139" name="__codelineno-10-139" href="#__codelineno-10-139"></a>              , ( <span class="k">let mod</span> <span class="nd">♭</span> c0 := c <span class="k">in</span> D&#39; a0 b0 c0))))
+</span><span id="__span-10-140"><a id="__codelineno-10-140" name="__codelineno-10-140" href="#__codelineno-10-140"></a>  :=
+</span><span id="__span-10-141"><a id="__codelineno-10-141" name="__codelineno-10-141" href="#__codelineno-10-141"></a>    total-equiv-flat-family2 A B
+</span><span id="__span-10-142"><a id="__codelineno-10-142" name="__codelineno-10-142" href="#__codelineno-10-142"></a>      ( \ (a0 :_b A) → \ (b0 :_b B a0) →
+</span><span id="__span-10-143"><a id="__codelineno-10-143" name="__codelineno-10-143" href="#__codelineno-10-143"></a>          <span class="kt">Σ</span> <span class="p">(</span>c <span class="p">:</span> <span class="nd">♭</span> (C a0 b0))
+</span><span id="__span-10-144"><a id="__codelineno-10-144" name="__codelineno-10-144" href="#__codelineno-10-144"></a>          , ( <span class="k">let mod</span> <span class="nd">♭</span> c0 := c <span class="k">in</span> D a0 b0 c0))
+</span><span id="__span-10-145"><a id="__codelineno-10-145" name="__codelineno-10-145" href="#__codelineno-10-145"></a>      ( \ (a0 :_b A) → \ (b0 :_b B a0) →
+</span><span id="__span-10-146"><a id="__codelineno-10-146" name="__codelineno-10-146" href="#__codelineno-10-146"></a>          <span class="kt">Σ</span> <span class="p">(</span>c <span class="p">:</span> <span class="nd">♭</span> (C a0 b0))
+</span><span id="__span-10-147"><a id="__codelineno-10-147" name="__codelineno-10-147" href="#__codelineno-10-147"></a>          , ( <span class="k">let mod</span> <span class="nd">♭</span> c0 := c <span class="k">in</span> D&#39; a0 b0 c0))
+</span><span id="__span-10-148"><a id="__codelineno-10-148" name="__codelineno-10-148" href="#__codelineno-10-148"></a>      ( \ (a0 :_b A) → \ (b0 :_b B a0) →
+</span><span id="__span-10-149"><a id="__codelineno-10-149" name="__codelineno-10-149" href="#__codelineno-10-149"></a>          total-equiv-flat-family (C a0 b0)
+</span><span id="__span-10-150"><a id="__codelineno-10-150" name="__codelineno-10-150" href="#__codelineno-10-150"></a>            ( <span class="p">\ </span>c → <span class="k">let mod</span> <span class="nd">♭</span> c0 := c <span class="k">in</span> D a0 b0 c0)
+</span><span id="__span-10-151"><a id="__codelineno-10-151" name="__codelineno-10-151" href="#__codelineno-10-151"></a>            ( <span class="p">\ </span>c → <span class="k">let mod</span> <span class="nd">♭</span> c0 := c <span class="k">in</span> D&#39; a0 b0 c0)
+</span><span id="__span-10-152"><a id="__codelineno-10-152" name="__codelineno-10-152" href="#__codelineno-10-152"></a>            ( \ (c0 :_b C a0 b0) → e a0 b0 c0))
+</span><span id="__span-10-153"><a id="__codelineno-10-153" name="__codelineno-10-153" href="#__codelineno-10-153"></a>
+</span><span id="__span-10-154"><a id="__codelineno-10-154" name="__codelineno-10-154" href="#__codelineno-10-154"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-prop-flat" id="define:is-prop-flat" style="visibility: visible; position: relative; color: inherit">is-prop-flat</a></span>
+</span><span id="__span-10-155"><a id="__codelineno-10-155" name="__codelineno-10-155" href="#__codelineno-10-155"></a>  ( A :♭ <span class="kt">U</span>)
+</span><span id="__span-10-156"><a id="__codelineno-10-156" name="__codelineno-10-156" href="#__codelineno-10-156"></a>  <span class="p">( </span>p <span class="p">:</span> <span class="nd">♭</span> (is-prop A))
+</span><span id="__span-10-157"><a id="__codelineno-10-157" name="__codelineno-10-157" href="#__codelineno-10-157"></a>  : is-prop (<span class="nd">♭</span> A)
+</span><span id="__span-10-158"><a id="__codelineno-10-158" name="__codelineno-10-158" href="#__codelineno-10-158"></a>  :=
+</span><span id="__span-10-159"><a id="__codelineno-10-159" name="__codelineno-10-159" href="#__codelineno-10-159"></a>    is-prop-all-elements-equal (<span class="nd">♭</span> A)
+</span><span id="__span-10-160"><a id="__codelineno-10-160" name="__codelineno-10-160" href="#__codelineno-10-160"></a>      (<span class="p">\ </span>x y →
+</span><span id="__span-10-161"><a id="__codelineno-10-161" name="__codelineno-10-161" href="#__codelineno-10-161"></a>        flat-convoy A (<span class="p">\ </span>z → z =_{<span class="nd">♭</span> A} y) x
+</span><span id="__span-10-162"><a id="__codelineno-10-162" name="__codelineno-10-162" href="#__codelineno-10-162"></a>          (\ (a :_b A) → <span class="p">\ </span>_ →
+</span><span id="__span-10-163"><a id="__codelineno-10-163" name="__codelineno-10-163" href="#__codelineno-10-163"></a>            flat-convoy A (<span class="p">\ </span>z → <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> a =_{<span class="nd">♭</span> A} z) y
+</span><span id="__span-10-164"><a id="__codelineno-10-164" name="__codelineno-10-164" href="#__codelineno-10-164"></a>              (\ (b :_b A) → <span class="p">\ </span>_ →
+</span><span id="__span-10-165"><a id="__codelineno-10-165" name="__codelineno-10-165" href="#__codelineno-10-165"></a>                <span class="k">let mod</span> <span class="nd">♭</span> p0 := p <span class="k">in</span>
+</span><span id="__span-10-166"><a id="__codelineno-10-166" name="__codelineno-10-166" href="#__codelineno-10-166"></a>                crisp-induction-flat A a b
+</span><span id="__span-10-167"><a id="__codelineno-10-167" name="__codelineno-10-167" href="#__codelineno-10-167"></a>                  ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (all-elements-equal-is-prop A p0 a b)))))
 </span></code></pre></div>
 <h3 id="sharp-modality">Sharp modality<a class="headerlink" href="#sharp-modality" title="Permanent link">&para;</a></h3>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:crisp-induction-sharp" id="define:crisp-induction-sharp" style="visibility: visible; position: relative; color: inherit">crisp-induction-sharp</a></span> (A :♯ <span class="kt">U</span>) (x y :♯ A)
@@ -1714,6 +1857,17 @@ a universe with directed univalence.</p>
 </span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    , crisp-induction-op-section A x y)
 </span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>  , ( crisp-induction-op-rev A x y
 </span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>    , crisp-induction-op-retraction A x y))
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-contr-of-op" id="define:is-contr-of-op" style="visibility: visible; position: relative; color: inherit">is-contr-of-op</a></span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>  ( A :ᵒᵖ <span class="kt">U</span>)
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>  <span class="p">( </span>ic <span class="p">:</span> <span class="nd">ᵒᵖ</span> (is-contr A))
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>  : is-contr (<span class="nd">ᵒᵖ</span> A)
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>  :=
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>    <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> (center , contr) := ic <span class="k">in</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>      ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> center
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>      , <span class="p">\ </span>y →
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a>          <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> y0 := y <span class="k">in</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a>            crisp-induction-op A center y0 (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> (contr y0)))
 </span></code></pre></div>
 <h2 id="axiom-6-interval-detects-discreteness">Axiom 6: Interval detects discreteness<a class="headerlink" href="#axiom-6-interval-detects-discreteness" title="Permanent link">&para;</a></h2>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:I-detects-discreteness" id="define:I-detects-discreteness" style="visibility: visible; position: relative; color: inherit">I-detects-discreteness</a></span>
@@ -1722,22 +1876,86 @@ a universe with directed univalence.</p>
 </span></code></pre></div>
 <h2 id="axiom-7-global-points-of-the-interval">Axiom 7: Global points of the interval<a class="headerlink" href="#axiom-7-global-points-of-the-interval" title="Permanent link">&para;</a></h2>
 <p>The discrete interval is equivalent to Bool.</p>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:discrete-I-elim" id="define:discrete-I-elim" style="visibility: visible; position: relative; color: inherit">discrete-I-elim</a></span> (i :♭ 𝕀) <span class="p">(</span>A <span class="p">:</span> <span class="kt">U</span>) <span class="p">(</span>x y <span class="p">:</span> A)
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  : A
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  :=
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  <span class="s">recOR</span>(
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    ( i <span class="sx">≡</span> 0ᵢ) ↦ x
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>  , ( i <span class="sx">≡</span> 1ᵢ) ↦ y)
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>#data Bool := false | true
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:discrete-I-elim" id="define:discrete-I-elim" style="visibility: visible; position: relative; color: inherit">discrete-I-elim</a></span> (i :♭ 𝕀) <span class="p">(</span>A <span class="p">:</span> 𝕀 → <span class="kt">U</span>) <span class="p">(</span>x <span class="p">:</span> A 0ᵢ) <span class="p">(</span>y <span class="p">:</span> A 1ᵢ)
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  : A i
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>  :=
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>  <span class="s">recOR</span>(
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    ( i <span class="sx">≡</span> 0ᵢ) ↦ x
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>  , ( i <span class="sx">≡</span> 1ᵢ) ↦ y)
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-discrete-I" id="define:is-equiv-discrete-I" style="visibility: visible; position: relative; color: inherit">is-equiv-discrete-I</a></span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>  ( i :♭ 𝕀)
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>  <span class="p">( </span>A B <span class="p">:</span> 𝕀 → <span class="kt">U</span>)
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="p">(</span>j <span class="p">:</span> 𝕀) → A j → B j)
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>  <span class="p">( </span>e0 <span class="p">:</span> is-equiv (A 0ᵢ) (B 0ᵢ) (f 0ᵢ))
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>  <span class="p">( </span>e1 <span class="p">:</span> is-equiv (A 1ᵢ) (B 1ᵢ) (f 1ᵢ))
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>  : is-equiv (A i) (B i) (f i)
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>  :=
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>  discrete-I-elim i
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>    ( <span class="p">\ </span>j → is-equiv (A j) (B j) (f j))
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>    ( e0)
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>    ( e1)
+</span><span id="__span-14-22"><a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>
+</span><span id="__span-14-23"><a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:shape-♭𝕀" id="define:shape-♭𝕀" style="visibility: visible; position: relative; color: inherit">shape-♭𝕀</a></span>
+</span><span id="__span-14-24"><a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>  : <span class="kt">U</span>
+</span><span id="__span-14-25"><a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>  := shape <span class="p">(</span>_ <span class="p">:</span> (<span class="nd">_b</span> 𝕀) | <span class="m">TOP</span>)
+</span><span id="__span-14-26"><a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>
+</span><span id="__span-14-27"><a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:crisp-I-to-Bool" id="define:crisp-I-to-Bool" style="visibility: visible; position: relative; color: inherit">crisp-I-to-Bool</a></span> (i :_b 𝕀)
+</span><span id="__span-14-28"><a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>  : Bool
+</span><span id="__span-14-29"><a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>  := discrete-I-elim i (<span class="p">\ </span>_ → Bool) false true
+</span><span id="__span-14-30"><a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>
+</span><span id="__span-14-31"><a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:shape-♭𝕀-to-Bool" id="define:shape-♭𝕀-to-Bool" style="visibility: visible; position: relative; color: inherit">shape-♭𝕀-to-Bool</a></span>
+</span><span id="__span-14-32"><a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>  : shape-♭𝕀 → Bool
+</span><span id="__span-14-33"><a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>  := <span class="p">\ </span>p → <span class="k">let mod</span> <span class="nd">_b</span> i := unform p <span class="k">in</span> crisp-I-to-Bool i
+</span><span id="__span-14-34"><a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>
+</span><span id="__span-14-35"><a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Bool-to-shape-♭𝕀" id="define:Bool-to-shape-♭𝕀" style="visibility: visible; position: relative; color: inherit">Bool-to-shape-♭𝕀</a></span>
+</span><span id="__span-14-36"><a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a>  : Bool → shape-♭𝕀
+</span><span id="__span-14-37"><a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a>  := <span class="p">\ </span>b → match b (false ⇒ form (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_b</span> 0ᵢ) | true ⇒ form (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_b</span> 1ᵢ))
+</span><span id="__span-14-38"><a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a>
+</span><span id="__span-14-39"><a id="__codelineno-14-39" name="__codelineno-14-39" href="#__codelineno-14-39"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:form-♭𝕀" id="define:form-♭𝕀" style="visibility: visible; position: relative; color: inherit">form-♭𝕀</a></span> (i :_b 𝕀)
+</span><span id="__span-14-40"><a id="__codelineno-14-40" name="__codelineno-14-40" href="#__codelineno-14-40"></a>  : shape-♭𝕀
+</span><span id="__span-14-41"><a id="__codelineno-14-41" name="__codelineno-14-41" href="#__codelineno-14-41"></a>  := form (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_b</span> i)
+</span><span id="__span-14-42"><a id="__codelineno-14-42" name="__codelineno-14-42" href="#__codelineno-14-42"></a>
+</span><span id="__span-14-43"><a id="__codelineno-14-43" name="__codelineno-14-43" href="#__codelineno-14-43"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:retr-shape-♭𝕀-Bool" id="define:retr-shape-♭𝕀-Bool" style="visibility: visible; position: relative; color: inherit">retr-shape-♭𝕀-Bool</a></span> (i :_b 𝕀)
+</span><span id="__span-14-44"><a id="__codelineno-14-44" name="__codelineno-14-44" href="#__codelineno-14-44"></a>  : Bool-to-shape-♭𝕀 (crisp-I-to-Bool i) =_{shape-♭𝕀} form-♭𝕀 i
+</span><span id="__span-14-45"><a id="__codelineno-14-45" name="__codelineno-14-45" href="#__codelineno-14-45"></a>  :=
+</span><span id="__span-14-46"><a id="__codelineno-14-46" name="__codelineno-14-46" href="#__codelineno-14-46"></a>  <span class="s">recOR</span>(
+</span><span id="__span-14-47"><a id="__codelineno-14-47" name="__codelineno-14-47" href="#__codelineno-14-47"></a>    ( i <span class="sx">≡</span> 0ᵢ) ↦ <span class="s">refl</span>
+</span><span id="__span-14-48"><a id="__codelineno-14-48" name="__codelineno-14-48" href="#__codelineno-14-48"></a>  , ( i <span class="sx">≡</span> 1ᵢ) ↦ <span class="s">refl</span>)
+</span><span id="__span-14-49"><a id="__codelineno-14-49" name="__codelineno-14-49" href="#__codelineno-14-49"></a>
+</span><span id="__span-14-50"><a id="__codelineno-14-50" name="__codelineno-14-50" href="#__codelineno-14-50"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-shape-♭𝕀-Bool" id="define:equiv-shape-♭𝕀-Bool" style="visibility: visible; position: relative; color: inherit">equiv-shape-♭𝕀-Bool</a></span>
+</span><span id="__span-14-51"><a id="__codelineno-14-51" name="__codelineno-14-51" href="#__codelineno-14-51"></a>  : Equiv shape-♭𝕀 Bool
+</span><span id="__span-14-52"><a id="__codelineno-14-52" name="__codelineno-14-52" href="#__codelineno-14-52"></a>  :=
+</span><span id="__span-14-53"><a id="__codelineno-14-53" name="__codelineno-14-53" href="#__codelineno-14-53"></a>    equiv-has-inverse
+</span><span id="__span-14-54"><a id="__codelineno-14-54" name="__codelineno-14-54" href="#__codelineno-14-54"></a>      shape-♭𝕀
+</span><span id="__span-14-55"><a id="__codelineno-14-55" name="__codelineno-14-55" href="#__codelineno-14-55"></a>      Bool
+</span><span id="__span-14-56"><a id="__codelineno-14-56" name="__codelineno-14-56" href="#__codelineno-14-56"></a>      shape-♭𝕀-to-Bool
+</span><span id="__span-14-57"><a id="__codelineno-14-57" name="__codelineno-14-57" href="#__codelineno-14-57"></a>      Bool-to-shape-♭𝕀
+</span><span id="__span-14-58"><a id="__codelineno-14-58" name="__codelineno-14-58" href="#__codelineno-14-58"></a>      ( <span class="p">\ </span>p →
+</span><span id="__span-14-59"><a id="__codelineno-14-59" name="__codelineno-14-59" href="#__codelineno-14-59"></a>          <span class="k">let mod</span> <span class="nd">_b</span> i := unform p
+</span><span id="__span-14-60"><a id="__codelineno-14-60" name="__codelineno-14-60" href="#__codelineno-14-60"></a>            into
+</span><span id="__span-14-61"><a id="__codelineno-14-61" name="__codelineno-14-61" href="#__codelineno-14-61"></a>              <span class="p">( </span>\ (i <span class="p">:</span> (<span class="nd">_b</span> 𝕀)) →
+</span><span id="__span-14-62"><a id="__codelineno-14-62" name="__codelineno-14-62" href="#__codelineno-14-62"></a>                  Bool-to-shape-♭𝕀 (shape-♭𝕀-to-Bool (form i)) =_{shape-♭𝕀} form i)
+</span><span id="__span-14-63"><a id="__codelineno-14-63" name="__codelineno-14-63" href="#__codelineno-14-63"></a>          <span class="k">in</span>
+</span><span id="__span-14-64"><a id="__codelineno-14-64" name="__codelineno-14-64" href="#__codelineno-14-64"></a>            retr-shape-♭𝕀-Bool i)
+</span><span id="__span-14-65"><a id="__codelineno-14-65" name="__codelineno-14-65" href="#__codelineno-14-65"></a>      ( <span class="p">\ </span>b → match b (false ⇒ <span class="s">refl</span> | true ⇒ <span class="s">refl</span>))
 </span></code></pre></div>
 <h2 id="axiom-8-cubes-separate">Axiom 8: Cubes separate<a class="headerlink" href="#axiom-8-cubes-separate" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:I-power" id="define:I-power" style="visibility: visible; position: relative; color: inherit">I-power</a></span> <span class="p">(</span>n <span class="p">:</span> nat) <span class="p">(</span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  : <span class="kt">U</span>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:I^n" id="define:I^n" style="visibility: visible; position: relative; color: inherit">I^n</a></span> <span class="p">(</span>n <span class="p">:</span> nat)
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  : <span class="kt">CUBE</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  := match n
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>      (zero ⇒ A
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>      | suc k ih ⇒ 𝕀 → ih)
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>      (zero ⇒ <span class="kt">1</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>      | suc k ih ⇒ 𝕀 × ih)
 </span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:cubes-separate" id="define:cubes-separate" style="visibility: visible; position: relative; color: inherit">cubes-separate</a></span> (A B :♭ <span class="kt">U</span>) (f :♭ A → B)
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>  : iff (is-equiv A B f) <span class="p">(</span>(n <span class="p">:</span> nat) → Equiv (<span class="nd">♭</span> (I-power n A)) (<span class="nd">♭</span> (I-power n B)))
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:zero-vec-I^n" id="define:zero-vec-I^n" style="visibility: visible; position: relative; color: inherit">zero-vec-I^n</a></span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>  <span class="p">( </span>m <span class="p">:</span> nat)
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>  : shape <span class="p">(</span>_ <span class="p">:</span> I^n m | <span class="m">TOP</span>)
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>  := match m (zero ⇒ form <span class="m">*₁</span> | suc k ih ⇒ form (<span class="m">0₂</span> , unform ih))
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:cubes-separate" id="define:cubes-separate" style="visibility: visible; position: relative; color: inherit">cubes-separate</a></span> (A B :♭ <span class="kt">U</span>) (f :♭ A → B)
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>  : iff (is-equiv A B f) ((n :_b nat) → is-equiv (<span class="nd">♭</span> (I^n n → A)) (<span class="nd">♭</span> (I^n n → B)) (b-map (I^n n → A) (I^n n → B) (<span class="p">\ </span>p t → f (p t))))
 </span></code></pre></div>
 <h2 id="extensionalities">Extensionalities<a class="headerlink" href="#extensionalities" title="Permanent link">&para;</a></h2>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:funext" id="define:funext" style="visibility: visible; position: relative; color: inherit">funext</a></span>
