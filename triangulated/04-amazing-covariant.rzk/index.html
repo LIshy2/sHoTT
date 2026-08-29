@@ -1,0 +1,1719 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>4. Amazing covariance - Simplicial HoTT</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/rzk-render.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#4-amazing-covariance" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Simplicial HoTT" class="md-header__button md-logo" aria-label="Simplicial HoTT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Simplicial HoTT
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              4. Amazing covariance
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/LIshy2/sHoTT" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LIshy2/sHoTT
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Simplicial HoTT" class="md-nav__button md-logo" aria-label="Simplicial HoTT" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Simplicial HoTT
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/LIshy2/sHoTT" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LIshy2/sHoTT
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../STYLEGUIDE/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Code style
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CONTRIBUTORS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributors
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    HoTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            HoTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/00-common.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/01-paths.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Paths
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/02-homotopies.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homotopies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/03-equivalences.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Equivalences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/04-half-adjoint-equivalences.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Half Adjoint Equivalences
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/05-sigma.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sigma types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/06-contractible.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contractible
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/07-fibers.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fibers
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/08-families-of-maps.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Families of maps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/09-propositions.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Propositions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/10-trivial-fibrations.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trivial fibrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hott/11-homotopy-pullbacks.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Homotopy pullbacks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Simplicial HoTT
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Simplicial HoTT
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/02-simplicial-type-theory.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simplicial Type Theory
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/03-extension-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extension Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/04-right-orthogonal.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Right Orthogonal Fibrations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/05-segal-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Segal Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/06-2cat-of-segal-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2-Category of Segal Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/07-discrete.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Discrete Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/08-covariant.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Covariant Families
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/09-yoneda.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Yoneda Lemma
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/10-rezk-types.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rezk Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/11-adjunctions.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adjunctions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/12-inner.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Inner Families
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/13-cocartesian.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cocartesian Families
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../simplicial-hott/14-limits.rzk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Limits and Colimits
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Triangulated Type Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Triangulated Type Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-modalities.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modalities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-axioms.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Axioms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-diruniv.rzk.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Directed Univalence in S
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prerequisites
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#covariant-families" class="md-nav__link">
+    <span class="md-ellipsis">
+      Covariant families
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amazing-covariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Amazing covariance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amazing-covariance-machinery" class="md-nav__link">
+    <span class="md-ellipsis">
+      Amazing covariance machinery
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#amazing-covariance-closure-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Amazing covariance closure properties
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extension-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extension theorem
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/LIshy2/sHoTT/edit/main/src/triangulated/04-amazing-covariant.rzk.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="4-amazing-covariance">4. Amazing covariance<a class="headerlink" href="#4-amazing-covariance" title="Permanent link">&para;</a></h1>
+<p>This is a literate <code>rzk</code> file: <code>is-covariant-arrow-II</code>, amazing covariance
+<code>is-a-cov</code>, and the extension theorem <code>is-a-cov-ext</code>. Directed univalence lives in
+<code>05-diruniv.rzk.md</code>; the ordinary (non-amazing) covariance draft in <code>03-cub-covariant.rzk.md</code>.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kr">#assume</span><span class="p"> </span>funext : FunExt
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kr">#assume</span><span class="p"> </span>weakfunext : WeakFunExt
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kr">#assume</span><span class="p"> </span>extext : ExtExt
+</span></code></pre></div>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>hott/01-paths.rzk.md</code> — <code>ap</code>, <code>rev</code>, <code>concat</code>, <code>transport</code>.</li>
+<li><code>hott/03-equivalences.rzk.md</code> — <code>Equiv</code>, <code>is-equiv</code>, <code>FunExt</code>, <code>eq-htpy</code>, <code>htpy-eq</code>, <code>equiv-comp</code>, <code>inv-ap-is-emb</code>.</li>
+<li><code>hott/04-modalities.rzk.md</code> — <code>b-map</code>, <code>b-equiv</code>, <code>b-elim</code>, <code>b-path-commute-fwd</code>.</li>
+<li><code>hott/05-half-adjoint-equivalences.rzk.md</code> — <code>is-emb-is-equiv</code>.</li>
+<li><code>hott/06-sigma.rzk.md</code> — <code>eq-pair</code>, <code>total-type</code>.</li>
+<li><code>hott/07-contractible.rzk.md</code> — <code>is-contr</code>, <code>WeakFunExt</code>, <code>equiv-total-type-is-contr-fiber</code>, <code>transport-section-eq-at</code>, <code>transport-section-eq-at-cancel</code>.</li>
+<li><code>hott/08-fibers.rzk.md</code> — <code>fib</code>.</li>
+<li><code>hott/09-families-of-maps.rzk.md</code> — <code>total-equiv-family-of-equiv</code>, <code>total-b-equiv-family2</code>.</li>
+<li><code>hott/10-propositions.rzk.md</code> — <code>is-prop-Unit</code>, <code>is-prop-is-prop</code>, <code>is-prop-flat</code>.</li>
+<li><code>hott/11-trivial-fibrations.rzk.md</code> — <code>is-equiv-domain-sum-of-fibers</code>.</li>
+<li><code>simplicial-hott/03-extension-types.rzk.md</code> — <code>ExtExt</code>, <code>naiveextext-extext</code>, <code>ap-ext-eq-htpy-at</code>.</li>
+<li><code>simplicial-hott/04-right-orthogonal.rzk.md</code> — RS17 Thm 8.5 / pullback via right orthogonality.</li>
+<li><code>simplicial-hott/07-discrete.rzk.md</code> — <code>is-discrete</code>, <code>is-discrete-function-type</code>, <code>is-discrete-extension-type</code>, <code>is-discrete-Σ</code>, <code>is-discrete-Id</code>, <code>is-discrete-op</code>, <code>is-contr-of-op</code>.</li>
+<li><code>hott/06-sigma.rzk.md</code> — <code>equiv-dependent-curry</code>, <code>inv-equiv-dependent-curry</code>, <code>equiv-choice3</code>.</li>
+<li><code>simplicial-hott/03-extension-types.rzk.md</code> — <code>equiv-ext-shape-fun</code>.</li>
+<li><code>hott/04-modalities.rzk.md</code> — Modality operations and type aliases.</li>
+<li><code>simplicial-hott/05-segal-types.rzk.md</code> — <code>hom</code>, <code>hom-II</code>, <code>dhom-II</code>, <code>dhom-from-II</code>.</li>
+<li><code>simplicial-hott/02-simplicial-type-theory.rzk.md</code> — <code>shape-at-1</code>, <code>equiv-shape-1-op-uninv</code>, <code>shape-at-1-of-eq-form-1</code>, <code>eq-form-1-of-shape-at-1</code>, <code>is-prop-shape-at-1</code>, <code>fun-monotonicity-at</code>, <code>fun-monotonicity</code>, <code>sec-shape-at-1-along-form</code>, <code>dhom-II-form-line-shape-at-1</code>, <code>is-prop-dhom-II-form-line-shape-at-1</code>, <code>is-prop-Σ-dhom-II-form-line-shape-at-1</code>.</li>
+<li><code>triangulated/03-cub-covariant.rzk.md</code> — <code>is-covariant-arrow-II</code>, <code>covariant-transport-line-II</code>, <code>covariant-transport-line-inv-II</code>, <code>equiv-is-cov-i-coslice</code>, <code>is-covariant-arrow-II-coslice</code>, <code>is-covariant-ext</code>.</li>
+</ul>
+<h2 id="covariant-families">Covariant families<a class="headerlink" href="#covariant-families" title="Permanent link">&para;</a></h2>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-prop-is-covariant-arrow-II" id="define:is-prop-is-covariant-arrow-II" style="visibility: visible; position: relative; color: inherit">is-prop-is-covariant-arrow-II</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>weakfunext funext<span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="p">(</span>t <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) → <span class="kt">U</span>)
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  : is-prop (is-covariant-arrow-II A)
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  := is-prop-is-covariant-II funext weakfunext <span class="p">(</span>shape (_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) <span class="p">(</span>\ (s <span class="p">:</span> shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) → A (unform s))
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-covariant-arrow-II-Prop" id="define:is-covariant-arrow-II-Prop" style="visibility: visible; position: relative; color: inherit">is-covariant-arrow-II-Prop</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>weakfunext funext<span class="p">)</span> <span class="p">(</span>A <span class="p">:</span> <span class="p">(</span>t <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) → <span class="kt">U</span>)
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>  : Prop
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>  := (is-covariant-arrow-II A , is-prop-is-covariant-arrow-II A)
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-pointwise-op-I-U" id="define:equiv-pointwise-op-I-U" style="visibility: visible; position: relative; color: inherit">equiv-pointwise-op-I-U</a></span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  : Equiv <span class="p">(</span>(i <span class="p">:</span> 𝕀) → <span class="nd">ᵒᵖ</span> <span class="kt">U</span>) (<span class="nd">ᵒᵖ</span> (𝕀 → <span class="kt">U</span>))
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>  :=
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    inv-equiv
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>      ( <span class="nd">ᵒᵖ</span> (𝕀 → <span class="kt">U</span>))
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>      <span class="p">( </span>(i <span class="p">:</span> 𝕀) → <span class="nd">ᵒᵖ</span> <span class="kt">U</span>)
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>      <span class="p">( </span>op-ext-commute-equiv (\ (_ <span class="p">:</span> 𝕀) → <span class="kt">U</span>))
+</span></code></pre></div>
+<h2 id="amazing-covariance">Amazing covariance<a class="headerlink" href="#amazing-covariance" title="Permanent link">&para;</a></h2>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov" id="define:is-a-cov" style="visibility: visible; position: relative; color: inherit">is-a-cov</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span> <span class="p">(</span>X <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  : <span class="kt">U</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  := amazing-predicate is-covariant-arrow-II-Prop X
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-discrete-is-a-cov" id="define:is-discrete-is-a-cov" style="visibility: visible; position: relative; color: inherit">is-discrete-is-a-cov</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext extext<span class="p">)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> is-a-cov A)
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  : is-discrete A
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  := <span class="bp">?</span>is-discrete-is-a-cov
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-prop-is-a-cov" id="define:is-prop-is-a-cov" style="visibility: visible; position: relative; color: inherit">is-prop-is-a-cov</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span> <span class="p">(</span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>  : is-prop (is-a-cov A)
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>  := <span class="bp">?</span>is-prop-is-a-cov
+</span></code></pre></div>
+<h2 id="amazing-covariance-machinery">Amazing covariance machinery<a class="headerlink" href="#amazing-covariance-machinery" title="Permanent link">&para;</a></h2>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-transpose" id="define:is-a-cov-transpose" style="visibility: visible; position: relative; color: inherit">is-a-cov-transpose</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  ( A :♭ <span class="kt">U</span>)
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  ( h :♭ A → <span class="kt">U</span>)
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  ( f :♭ <span class="p">(</span>a <span class="p">:</span> A) → is-a-cov (h a))
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  : <span class="p">( </span>♭ ( ( g <span class="p">:</span> 𝕀 → A) → is-covariant-arrow-II (<span class="p">\ </span>b → h (g b))))
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  := amazing-transpose funext weakfunext (is-covariant-arrow-II-Prop) (A) (h) (f)
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-untranspose" id="define:is-a-cov-untranspose" style="visibility: visible; position: relative; color: inherit">is-a-cov-untranspose</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>  ( A :♭ <span class="kt">U</span>)
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>  ( h :♭ A → <span class="kt">U</span>)
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>  ( f :♭ <span class="p">(</span>g <span class="p">:</span> 𝕀 → A) → is-covariant-arrow-II (<span class="p">\ </span>b → h (g b)))
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>  : <span class="p">( </span>♭ ( ( a <span class="p">:</span> A) → is-a-cov (h a)))
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>  := amazing-untranspose (is-covariant-arrow-II-Prop) (A) (h) (f)
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-transposition-equiv" id="define:is-a-cov-transposition-equiv" style="visibility: visible; position: relative; color: inherit">is-a-cov-transposition-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>  ( A :♭ <span class="kt">U</span>)
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>  ( h :♭ A → <span class="kt">U</span>)
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>  : Equiv
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="p">( </span>♭ ( ( a <span class="p">:</span> A) → is-a-cov (h a)))
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="p">( </span>♭ ( ( g <span class="p">:</span> 𝕀 → A) → is-covariant-arrow-II (<span class="p">\ </span>b → h (g b))))
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>  := amazing-transpose-untranspose-equiv funext weakfunext (is-covariant-arrow-II-Prop) (A) (h)
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-covariant-uniqueness-line-II" id="define:amazing-covariant-uniqueness-line-II" style="visibility: visible; position: relative; color: inherit">amazing-covariant-uniqueness-line-II</a></span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="p">(</span>t <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) → <span class="kt">U</span>)
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>  <span class="p">( </span>cov <span class="p">:</span> is-covariant-arrow-II A)
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>  <span class="p">( </span>a0 <span class="p">:</span> A <span class="m">0₂</span>)
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>  <span class="p">( </span>a1 <span class="p">:</span> A <span class="m">1₂</span>)
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>  <span class="p">( </span>h <span class="p">:</span> dhom-II <span class="p">(</span>shape (_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) (form <span class="m">0₂</span>) (form <span class="m">1₂</span>) (<span class="p">\ </span>t → form t) (<span class="p">\ </span>s → A (unform s)) a0 a1)
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>  : covariant-transport-line-II A cov (<span class="p">\ </span>k → form k) a0 = a1
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>  :=
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>    covariant-uniqueness-II
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>      <span class="p">( </span>shape (_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>      ( form <span class="m">0₂</span>) ( form <span class="m">1₂</span>)
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>      <span class="p">( </span>\ (t <span class="p">:</span> 𝕀) → form t)
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>      <span class="p">( </span>\ (t <span class="p">:</span> shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) → A (unform t))
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>      ( cov)
+</span><span id="__span-3-37"><a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>      ( a0)
+</span><span id="__span-3-38"><a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>      ( a1 , h)
+</span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>
+</span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-covariant-transport-line-II" id="define:amazing-covariant-transport-line-II" style="visibility: visible; position: relative; color: inherit">amazing-covariant-transport-line-II</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>  <span class="p">( </span>A <span class="p">:</span> 𝕀 → <span class="kt">U</span>)
+</span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> <span class="p">(</span>i <span class="p">:</span> 𝕀) → is-a-cov (A i))
+</span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>  <span class="p">( </span>l <span class="p">:</span> 𝕀 → shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
+</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>  : A (unform (l <span class="m">0₂</span>)) → A (unform (l <span class="m">1₂</span>))
+</span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>  :=
+</span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>    covariant-transport-line-II
+</span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>      <span class="p">( </span>\ (t <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) → A t)
+</span><span id="__span-3-48"><a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>      <span class="p">( </span>b-extract
+</span><span id="__span-3-49"><a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>          ( ( g&#39; <span class="p">:</span> 𝕀 → <span class="kt">Σ</span> <span class="p">(</span>X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-50"><a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>              → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (g&#39; b)))
+</span><span id="__span-3-51"><a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>          <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-3-52"><a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>              ( Σ ( X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-53"><a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>              ( \ (X , _) → X)
+</span><span id="__span-3-54"><a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>              ( \ (_ , cX) → cX))
+</span><span id="__span-3-55"><a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>          ( <span class="p">\ </span>k → (A k , is-a-cov-A k)))
+</span><span id="__span-3-56"><a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>      ( l)
+</span><span id="__span-3-57"><a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>
+</span><span id="__span-3-58"><a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-covariant-transport-line-const-II" id="define:amazing-covariant-transport-line-const-II" style="visibility: visible; position: relative; color: inherit">amazing-covariant-transport-line-const-II</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-59"><a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>  <span class="p">( </span>A <span class="p">:</span> 𝕀 → <span class="kt">U</span>)
+</span><span id="__span-3-60"><a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> <span class="p">(</span>i <span class="p">:</span> 𝕀) → is-a-cov (A i))
+</span><span id="__span-3-61"><a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>  <span class="p">( </span>j <span class="p">:</span> 𝕀)
+</span><span id="__span-3-62"><a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>  <span class="p">( </span>x <span class="p">:</span> A j)
+</span><span id="__span-3-63"><a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>  : amazing-covariant-transport-line-II A is-a-cov-A (<span class="p">\ </span>k → form j) x = x
+</span><span id="__span-3-64"><a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>  :=
+</span><span id="__span-3-65"><a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>    covariant-transport-line-const-II
+</span><span id="__span-3-66"><a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>      <span class="p">( </span>\ (t <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) → A t)
+</span><span id="__span-3-67"><a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>      <span class="p">( </span>b-extract
+</span><span id="__span-3-68"><a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>          ( ( g&#39; <span class="p">:</span> 𝕀 → <span class="kt">Σ</span> <span class="p">(</span>X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-69"><a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>              → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (g&#39; b)))
+</span><span id="__span-3-70"><a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a>          <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-3-71"><a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a>              ( Σ ( X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-72"><a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>              ( \ (X , _) → X)
+</span><span id="__span-3-73"><a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>              ( \ (_ , cX) → cX))
+</span><span id="__span-3-74"><a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a>          ( <span class="p">\ </span>k → (A k , is-a-cov-A k)))
+</span><span id="__span-3-75"><a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>      ( form j)
+</span><span id="__span-3-76"><a id="__codelineno-3-76" name="__codelineno-3-76" href="#__codelineno-3-76"></a>      ( x)
+</span><span id="__span-3-77"><a id="__codelineno-3-77" name="__codelineno-3-77" href="#__codelineno-3-77"></a>
+</span><span id="__span-3-78"><a id="__codelineno-3-78" name="__codelineno-3-78" href="#__codelineno-3-78"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-covariant-transport-line-const-at-0-II" id="define:amazing-covariant-transport-line-const-at-0-II" style="visibility: visible; position: relative; color: inherit">amazing-covariant-transport-line-const-at-0-II</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-79"><a id="__codelineno-3-79" name="__codelineno-3-79" href="#__codelineno-3-79"></a>  <span class="p">( </span>A <span class="p">:</span> 𝕀 → <span class="kt">U</span>)
+</span><span id="__span-3-80"><a id="__codelineno-3-80" name="__codelineno-3-80" href="#__codelineno-3-80"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> <span class="p">(</span>i <span class="p">:</span> 𝕀) → is-a-cov (A i))
+</span><span id="__span-3-81"><a id="__codelineno-3-81" name="__codelineno-3-81" href="#__codelineno-3-81"></a>  <span class="p">( </span>x <span class="p">:</span> A <span class="m">0₂</span>)
+</span><span id="__span-3-82"><a id="__codelineno-3-82" name="__codelineno-3-82" href="#__codelineno-3-82"></a>  : amazing-covariant-transport-line-II A is-a-cov-A (<span class="p">\ </span>k → form (inf <span class="m">0₂</span> k)) x = x
+</span><span id="__span-3-83"><a id="__codelineno-3-83" name="__codelineno-3-83" href="#__codelineno-3-83"></a>  :=
+</span><span id="__span-3-84"><a id="__codelineno-3-84" name="__codelineno-3-84" href="#__codelineno-3-84"></a>    covariant-transport-line-const-at-0-II
+</span><span id="__span-3-85"><a id="__codelineno-3-85" name="__codelineno-3-85" href="#__codelineno-3-85"></a>      <span class="p">( </span>\ (t <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) → A t)
+</span><span id="__span-3-86"><a id="__codelineno-3-86" name="__codelineno-3-86" href="#__codelineno-3-86"></a>      <span class="p">( </span>b-extract
+</span><span id="__span-3-87"><a id="__codelineno-3-87" name="__codelineno-3-87" href="#__codelineno-3-87"></a>          ( ( g&#39; <span class="p">:</span> 𝕀 → <span class="kt">Σ</span> <span class="p">(</span>X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-88"><a id="__codelineno-3-88" name="__codelineno-3-88" href="#__codelineno-3-88"></a>              → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (g&#39; b)))
+</span><span id="__span-3-89"><a id="__codelineno-3-89" name="__codelineno-3-89" href="#__codelineno-3-89"></a>          <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-3-90"><a id="__codelineno-3-90" name="__codelineno-3-90" href="#__codelineno-3-90"></a>              ( Σ ( X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-91"><a id="__codelineno-3-91" name="__codelineno-3-91" href="#__codelineno-3-91"></a>              ( \ (X , _) → X)
+</span><span id="__span-3-92"><a id="__codelineno-3-92" name="__codelineno-3-92" href="#__codelineno-3-92"></a>              ( \ (_ , cX) → cX))
+</span><span id="__span-3-93"><a id="__codelineno-3-93" name="__codelineno-3-93" href="#__codelineno-3-93"></a>          ( <span class="p">\ </span>k → (A k , is-a-cov-A k)))
+</span><span id="__span-3-94"><a id="__codelineno-3-94" name="__codelineno-3-94" href="#__codelineno-3-94"></a>      ( x)
+</span><span id="__span-3-95"><a id="__codelineno-3-95" name="__codelineno-3-95" href="#__codelineno-3-95"></a>
+</span><span id="__span-3-96"><a id="__codelineno-3-96" name="__codelineno-3-96" href="#__codelineno-3-96"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-covariant-transport-line-const-0-sup-II" id="define:amazing-covariant-transport-line-const-0-sup-II" style="visibility: visible; position: relative; color: inherit">amazing-covariant-transport-line-const-0-sup-II</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-97"><a id="__codelineno-3-97" name="__codelineno-3-97" href="#__codelineno-3-97"></a>  <span class="p">( </span>A <span class="p">:</span> 𝕀 → <span class="kt">U</span>)
+</span><span id="__span-3-98"><a id="__codelineno-3-98" name="__codelineno-3-98" href="#__codelineno-3-98"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> <span class="p">(</span>i <span class="p">:</span> 𝕀) → is-a-cov (A i))
+</span><span id="__span-3-99"><a id="__codelineno-3-99" name="__codelineno-3-99" href="#__codelineno-3-99"></a>  <span class="p">( </span>j <span class="p">:</span> 𝕀)
+</span><span id="__span-3-100"><a id="__codelineno-3-100" name="__codelineno-3-100" href="#__codelineno-3-100"></a>  <span class="p">( </span>x <span class="p">:</span> A <span class="m">0₂</span>)
+</span><span id="__span-3-101"><a id="__codelineno-3-101" name="__codelineno-3-101" href="#__codelineno-3-101"></a>  : amazing-covariant-transport-line-II A is-a-cov-A (<span class="p">\ </span>k → form (inf <span class="m">0₂</span> (sup j k))) x = x
+</span><span id="__span-3-102"><a id="__codelineno-3-102" name="__codelineno-3-102" href="#__codelineno-3-102"></a>  :=
+</span><span id="__span-3-103"><a id="__codelineno-3-103" name="__codelineno-3-103" href="#__codelineno-3-103"></a>    covariant-transport-line-const-0-sup-II
+</span><span id="__span-3-104"><a id="__codelineno-3-104" name="__codelineno-3-104" href="#__codelineno-3-104"></a>      <span class="p">( </span>\ (t <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) → A t)
+</span><span id="__span-3-105"><a id="__codelineno-3-105" name="__codelineno-3-105" href="#__codelineno-3-105"></a>      <span class="p">( </span>b-extract
+</span><span id="__span-3-106"><a id="__codelineno-3-106" name="__codelineno-3-106" href="#__codelineno-3-106"></a>          ( ( g&#39; <span class="p">:</span> 𝕀 → <span class="kt">Σ</span> <span class="p">(</span>X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-107"><a id="__codelineno-3-107" name="__codelineno-3-107" href="#__codelineno-3-107"></a>              → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (g&#39; b)))
+</span><span id="__span-3-108"><a id="__codelineno-3-108" name="__codelineno-3-108" href="#__codelineno-3-108"></a>          <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-3-109"><a id="__codelineno-3-109" name="__codelineno-3-109" href="#__codelineno-3-109"></a>              ( Σ ( X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-110"><a id="__codelineno-3-110" name="__codelineno-3-110" href="#__codelineno-3-110"></a>              ( \ (X , _) → X)
+</span><span id="__span-3-111"><a id="__codelineno-3-111" name="__codelineno-3-111" href="#__codelineno-3-111"></a>              ( \ (_ , cX) → cX))
+</span><span id="__span-3-112"><a id="__codelineno-3-112" name="__codelineno-3-112" href="#__codelineno-3-112"></a>          ( <span class="p">\ </span>k → (A k , is-a-cov-A k)))
+</span><span id="__span-3-113"><a id="__codelineno-3-113" name="__codelineno-3-113" href="#__codelineno-3-113"></a>      ( j)
+</span><span id="__span-3-114"><a id="__codelineno-3-114" name="__codelineno-3-114" href="#__codelineno-3-114"></a>      ( x)
+</span><span id="__span-3-115"><a id="__codelineno-3-115" name="__codelineno-3-115" href="#__codelineno-3-115"></a>
+</span><span id="__span-3-116"><a id="__codelineno-3-116" name="__codelineno-3-116" href="#__codelineno-3-116"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-covariant-transport-line-const-1-sup-II" id="define:amazing-covariant-transport-line-const-1-sup-II" style="visibility: visible; position: relative; color: inherit">amazing-covariant-transport-line-const-1-sup-II</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-117"><a id="__codelineno-3-117" name="__codelineno-3-117" href="#__codelineno-3-117"></a>  <span class="p">( </span>A <span class="p">:</span> 𝕀 → <span class="kt">U</span>)
+</span><span id="__span-3-118"><a id="__codelineno-3-118" name="__codelineno-3-118" href="#__codelineno-3-118"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> <span class="p">(</span>i <span class="p">:</span> 𝕀) → is-a-cov (A i))
+</span><span id="__span-3-119"><a id="__codelineno-3-119" name="__codelineno-3-119" href="#__codelineno-3-119"></a>  <span class="p">( </span>i <span class="p">:</span> 𝕀)
+</span><span id="__span-3-120"><a id="__codelineno-3-120" name="__codelineno-3-120" href="#__codelineno-3-120"></a>  <span class="p">( </span>x <span class="p">:</span> A i)
+</span><span id="__span-3-121"><a id="__codelineno-3-121" name="__codelineno-3-121" href="#__codelineno-3-121"></a>  : amazing-covariant-transport-line-II A is-a-cov-A (<span class="p">\ </span>k → form (inf i (sup <span class="m">1₂</span> k))) x = x
+</span><span id="__span-3-122"><a id="__codelineno-3-122" name="__codelineno-3-122" href="#__codelineno-3-122"></a>  := amazing-covariant-transport-line-const-II A is-a-cov-A i x
+</span><span id="__span-3-123"><a id="__codelineno-3-123" name="__codelineno-3-123" href="#__codelineno-3-123"></a>
+</span><span id="__span-3-124"><a id="__codelineno-3-124" name="__codelineno-3-124" href="#__codelineno-3-124"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-covariant-transport-line-const-0-sup-1-II" id="define:amazing-covariant-transport-line-const-0-sup-1-II" style="visibility: visible; position: relative; color: inherit">amazing-covariant-transport-line-const-0-sup-1-II</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-125"><a id="__codelineno-3-125" name="__codelineno-3-125" href="#__codelineno-3-125"></a>  <span class="p">( </span>A <span class="p">:</span> 𝕀 → <span class="kt">U</span>)
+</span><span id="__span-3-126"><a id="__codelineno-3-126" name="__codelineno-3-126" href="#__codelineno-3-126"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> <span class="p">(</span>i <span class="p">:</span> 𝕀) → is-a-cov (A i))
+</span><span id="__span-3-127"><a id="__codelineno-3-127" name="__codelineno-3-127" href="#__codelineno-3-127"></a>  <span class="p">( </span>x <span class="p">:</span> A <span class="m">0₂</span>)
+</span><span id="__span-3-128"><a id="__codelineno-3-128" name="__codelineno-3-128" href="#__codelineno-3-128"></a>  : amazing-covariant-transport-line-const-0-sup-II A is-a-cov-A <span class="m">1₂</span> x
+</span><span id="__span-3-129"><a id="__codelineno-3-129" name="__codelineno-3-129" href="#__codelineno-3-129"></a>    = amazing-covariant-transport-line-const-1-sup-II A is-a-cov-A <span class="m">0₂</span> x
+</span><span id="__span-3-130"><a id="__codelineno-3-130" name="__codelineno-3-130" href="#__codelineno-3-130"></a>  := <span class="s">refl</span>
+</span><span id="__span-3-131"><a id="__codelineno-3-131" name="__codelineno-3-131" href="#__codelineno-3-131"></a>
+</span><span id="__span-3-132"><a id="__codelineno-3-132" name="__codelineno-3-132" href="#__codelineno-3-132"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-covariant-transport-line-inv-II" id="define:amazing-covariant-transport-line-inv-II" style="visibility: visible; position: relative; color: inherit">amazing-covariant-transport-line-inv-II</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-3-133"><a id="__codelineno-3-133" name="__codelineno-3-133" href="#__codelineno-3-133"></a>  <span class="p">( </span>packed <span class="p">:</span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>𝕀 → Σ (X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X))
+</span><span id="__span-3-134"><a id="__codelineno-3-134" name="__codelineno-3-134" href="#__codelineno-3-134"></a>  <span class="p">( </span>l <span class="p">:</span> 𝕀 → shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
+</span><span id="__span-3-135"><a id="__codelineno-3-135" name="__codelineno-3-135" href="#__codelineno-3-135"></a>  : ( <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p := packed <span class="k">in</span>
+</span><span id="__span-3-136"><a id="__codelineno-3-136" name="__codelineno-3-136" href="#__codelineno-3-136"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j₁ := <span class="s">flip_op</span> (unform (l <span class="m">1₂</span>)) <span class="k">in</span>
+</span><span id="__span-3-137"><a id="__codelineno-3-137" name="__codelineno-3-137" href="#__codelineno-3-137"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j₀ := <span class="s">flip_op</span> (unform (l <span class="m">0₂</span>)) <span class="k">in</span>
+</span><span id="__span-3-138"><a id="__codelineno-3-138" name="__codelineno-3-138" href="#__codelineno-3-138"></a>      <span class="nd">ᵒᵖ</span> (<span class="s">first</span> (p j₁)) → <span class="nd">ᵒᵖ</span> (<span class="s">first</span> (p j₀)))
+</span><span id="__span-3-139"><a id="__codelineno-3-139" name="__codelineno-3-139" href="#__codelineno-3-139"></a>  :=
+</span><span id="__span-3-140"><a id="__codelineno-3-140" name="__codelineno-3-140" href="#__codelineno-3-140"></a>    <span class="p">\ </span>x →
+</span><span id="__span-3-141"><a id="__codelineno-3-141" name="__codelineno-3-141" href="#__codelineno-3-141"></a>      <span class="k">let</span> F-acov
+</span><span id="__span-3-142"><a id="__codelineno-3-142" name="__codelineno-3-142" href="#__codelineno-3-142"></a>        : <span class="p">(</span>k <span class="p">:</span> 𝕀) → <span class="nd">ᵒᵖ</span> <span class="p">(</span>Σ (X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-3-143"><a id="__codelineno-3-143" name="__codelineno-3-143" href="#__codelineno-3-143"></a>        :=
+</span><span id="__span-3-144"><a id="__codelineno-3-144" name="__codelineno-3-144" href="#__codelineno-3-144"></a>          \ <span class="p">(</span>k <span class="p">:</span> 𝕀) →
+</span><span id="__span-3-145"><a id="__codelineno-3-145" name="__codelineno-3-145" href="#__codelineno-3-145"></a>            <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p0 := packed <span class="k">in</span>
+</span><span id="__span-3-146"><a id="__codelineno-3-146" name="__codelineno-3-146" href="#__codelineno-3-146"></a>            <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j : 𝕀 := <span class="s">flip_op</span> (unform (l k)) <span class="k">in</span>
+</span><span id="__span-3-147"><a id="__codelineno-3-147" name="__codelineno-3-147" href="#__codelineno-3-147"></a>              <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> (p0 j)
+</span><span id="__span-3-148"><a id="__codelineno-3-148" name="__codelineno-3-148" href="#__codelineno-3-148"></a>      <span class="k">in</span>
+</span><span id="__span-3-149"><a id="__codelineno-3-149" name="__codelineno-3-149" href="#__codelineno-3-149"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> pA :=
+</span><span id="__span-3-150"><a id="__codelineno-3-150" name="__codelineno-3-150" href="#__codelineno-3-150"></a>        op-ext-commute-bwd <span class="p">(</span>\ (_ <span class="p">:</span> 𝕀) → <span class="kt">Σ</span> <span class="p">(</span>X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X) F-acov
+</span><span id="__span-3-151"><a id="__codelineno-3-151" name="__codelineno-3-151" href="#__codelineno-3-151"></a>      <span class="k">in</span>
+</span><span id="__span-3-152"><a id="__codelineno-3-152" name="__codelineno-3-152" href="#__codelineno-3-152"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> x0 := x <span class="k">in</span>
+</span><span id="__span-3-153"><a id="__codelineno-3-153" name="__codelineno-3-153" href="#__codelineno-3-153"></a>        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> (
+</span><span id="__span-3-154"><a id="__codelineno-3-154" name="__codelineno-3-154" href="#__codelineno-3-154"></a>          amazing-covariant-transport-line-II
+</span><span id="__span-3-155"><a id="__codelineno-3-155" name="__codelineno-3-155" href="#__codelineno-3-155"></a>            ( <span class="p">\ </span>i → <span class="s">first</span> (pA i))
+</span><span id="__span-3-156"><a id="__codelineno-3-156" name="__codelineno-3-156" href="#__codelineno-3-156"></a>            ( <span class="p">\ </span>i → <span class="s">second</span> (pA i))
+</span><span id="__span-3-157"><a id="__codelineno-3-157" name="__codelineno-3-157" href="#__codelineno-3-157"></a>            ( <span class="p">\ </span>k → form k)
+</span><span id="__span-3-158"><a id="__codelineno-3-158" name="__codelineno-3-158" href="#__codelineno-3-158"></a>            x0)
+</span></code></pre></div>
+<h2 id="amazing-covariance-closure-properties">Amazing covariance closure properties<a class="headerlink" href="#amazing-covariance-closure-properties" title="Permanent link">&para;</a></h2>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-const-cov" id="define:is-a-cov-const-cov" style="visibility: visible; position: relative; color: inherit">is-a-cov-const-cov</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span> <span class="p">(</span>A <span class="p">:</span> <span class="kt">U</span>) <span class="p">(</span>is-a-cov-A <span class="p">:</span> is-a-cov A)
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  : is-covariant-arrow-II <span class="p">(</span>\ (_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) → A)
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  :=
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    b-extract
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>      <span class="p">( </span>( g <span class="p">:</span> 𝕀 → <span class="kt">Σ</span> <span class="p">(</span>A&#39; <span class="p">:</span> <span class="kt">U</span>) , is-a-cov A&#39;)
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (g b)))
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>      <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>          ( Σ ( A&#39; <span class="p">:</span> <span class="kt">U</span>) , is-a-cov A&#39;)
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>          ( \ (A&#39; , _) → A&#39;)
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>          ( \ (_ , cA&#39;) → cA&#39;))
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>      ( <span class="p">\ </span>_ → (A , is-a-cov-A))
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-sigma-closed" id="define:is-a-cov-sigma-closed" style="visibility: visible; position: relative; color: inherit">is-a-cov-sigma-closed</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>) <span class="p">(</span>B <span class="p">:</span> A → <span class="kt">U</span>)
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> is-a-cov A)
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>  <span class="p">( </span>is-a-cov-B <span class="p">:</span> <span class="p">(</span>a <span class="p">:</span> A) → is-a-cov (B a))
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>  : is-a-cov <span class="p">(</span>Σ (a <span class="p">:</span> A) , B a)
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>  :=
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    b-extract
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>      <span class="p">( </span>( w
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>        <span class="p">:</span> <span class="kt">Σ</span> <span class="p">( </span>A&#39; <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>          , <span class="p">( </span>Σ ( _ <span class="p">:</span> is-a-cov A&#39;)
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>          , <span class="p">( </span>Σ ( B&#39; <span class="p">:</span> A&#39; → <span class="kt">U</span>)
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>          , <span class="p">( </span>( a <span class="p">:</span> A&#39;) → is-a-cov (B&#39; a)))))
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>        → is-a-cov <span class="p">(</span>Σ (a <span class="p">:</span> <span class="s">first</span> w) , (<span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> w))) a))
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>      <span class="p">( </span>is-a-cov-untranspose
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>          ( Σ ( A&#39; <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>          , <span class="p">( </span>Σ ( _ <span class="p">:</span> is-a-cov A&#39;)
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>          , <span class="p">( </span>Σ ( B&#39; <span class="p">:</span> A&#39; → <span class="kt">U</span>)
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>          , <span class="p">( </span>( a <span class="p">:</span> A&#39;) → is-a-cov (B&#39; a)))))
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>          ( \ (A&#39; , (_ , (B&#39; , _))) → <span class="kt">Σ</span> <span class="p">(</span>a <span class="p">:</span> A&#39;) , B&#39; a)
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>          ( <span class="p">\ </span>g →
+</span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>            is-covariant-arrow-II-Σ
+</span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>              ( <span class="p">\ </span>c → <span class="s">first</span> (g c))
+</span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>              ( <span class="p">\ </span>c a → (<span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> (g c)))) a)
+</span><span id="__span-4-36"><a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>              <span class="p">( </span>b-extract
+</span><span id="__span-4-37"><a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>                  ( ( g&#39; <span class="p">:</span> 𝕀 → <span class="p">(</span>Σ (A&#39; <span class="p">:</span> <span class="kt">U</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> is-a-cov A&#39;) , <span class="p">(</span>Σ (B&#39; <span class="p">:</span> A&#39; → <span class="kt">U</span>) , <span class="p">(</span>(a <span class="p">:</span> A&#39;) → is-a-cov (B&#39; a))))))
+</span><span id="__span-4-38"><a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>                    → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (g&#39; b)))
+</span><span id="__span-4-39"><a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>                  <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-4-40"><a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>                      ( Σ ( A&#39; <span class="p">:</span> <span class="kt">U</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> is-a-cov A&#39;) , <span class="p">(</span>Σ (B&#39; <span class="p">:</span> A&#39; → <span class="kt">U</span>) , <span class="p">(</span>(a <span class="p">:</span> A&#39;) → is-a-cov (B&#39; a)))))
+</span><span id="__span-4-41"><a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>                      ( \ (A&#39; , _) → A&#39;)
+</span><span id="__span-4-42"><a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>                      ( \ (_ , (cA&#39; , _)) → cA&#39;))
+</span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>                  ( g))
+</span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>              <span class="p">( </span>\ s →
+</span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>                b-extract
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>                  ( ( G <span class="p">:</span> 𝕀 → <span class="p">(</span>Σ (w <span class="p">:</span> <span class="kt">Σ</span> <span class="p">(</span>A&#39; <span class="p">:</span> <span class="kt">U</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> is-a-cov A&#39;) , <span class="p">(</span>Σ (B&#39; <span class="p">:</span> A&#39; → <span class="kt">U</span>) , <span class="p">(</span>(a <span class="p">:</span> A&#39;) → is-a-cov (B&#39; a))))) , <span class="s">first</span> w))
+</span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>                    → is-covariant-arrow-II (<span class="p">\ </span>b → (<span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> (<span class="s">first</span> (G b))))) (<span class="s">second</span> (G b))))
+</span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>                  <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>                      ( Σ ( w <span class="p">:</span> <span class="kt">Σ</span> <span class="p">(</span>A&#39; <span class="p">:</span> <span class="kt">U</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> is-a-cov A&#39;) , <span class="p">(</span>Σ (B&#39; <span class="p">:</span> A&#39; → <span class="kt">U</span>) , <span class="p">(</span>(a <span class="p">:</span> A&#39;) → is-a-cov (B&#39; a))))) , <span class="s">first</span> w)
+</span><span id="__span-4-50"><a id="__codelineno-4-50" name="__codelineno-4-50" href="#__codelineno-4-50"></a>                      ( \ ((_ , (_ , (B&#39; , _))) , a) → B&#39; a)
+</span><span id="__span-4-51"><a id="__codelineno-4-51" name="__codelineno-4-51" href="#__codelineno-4-51"></a>                      ( \ ((_ , (_ , (_ , cB&#39;))) , a) → cB&#39; a))
+</span><span id="__span-4-52"><a id="__codelineno-4-52" name="__codelineno-4-52" href="#__codelineno-4-52"></a>                  ( <span class="p">\ </span>c → (g c , s c)))))
+</span><span id="__span-4-53"><a id="__codelineno-4-53" name="__codelineno-4-53" href="#__codelineno-4-53"></a>      ( A , (is-a-cov-A , (B , is-a-cov-B)))
+</span><span id="__span-4-54"><a id="__codelineno-4-54" name="__codelineno-4-54" href="#__codelineno-4-54"></a>
+</span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-id-closed" id="define:is-a-cov-id-closed" style="visibility: visible; position: relative; color: inherit">is-a-cov-id-closed</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span> <span class="p">(</span>A <span class="p">:</span> <span class="kt">U</span>) <span class="p">(</span>is-a-cov-A <span class="p">:</span> is-a-cov A) <span class="p">(</span>x y <span class="p">:</span> A)
+</span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a>  : is-a-cov (x = y)
+</span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>  :=
+</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a>    b-extract
+</span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>      <span class="p">( </span>( w <span class="p">:</span> <span class="kt">Σ</span> <span class="p">(</span>A&#39; <span class="p">:</span> <span class="kt">U</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> is-a-cov A&#39;) , <span class="p">(</span>Σ (_ <span class="p">:</span> A&#39;) , A&#39;)))
+</span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>        → is-a-cov ((<span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> w))) = (<span class="s">second</span> (<span class="s">second</span> (<span class="s">second</span> w)))))
+</span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>      <span class="p">( </span>is-a-cov-untranspose
+</span><span id="__span-4-62"><a id="__codelineno-4-62" name="__codelineno-4-62" href="#__codelineno-4-62"></a>          ( Σ ( A&#39; <span class="p">:</span> <span class="kt">U</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> is-a-cov A&#39;) , <span class="p">(</span>Σ (_ <span class="p">:</span> A&#39;) , A&#39;)))
+</span><span id="__span-4-63"><a id="__codelineno-4-63" name="__codelineno-4-63" href="#__codelineno-4-63"></a>          ( \ (_ , (_ , (x&#39; , y&#39;))) → x&#39; = y&#39;)
+</span><span id="__span-4-64"><a id="__codelineno-4-64" name="__codelineno-4-64" href="#__codelineno-4-64"></a>          ( <span class="p">\ </span>g →
+</span><span id="__span-4-65"><a id="__codelineno-4-65" name="__codelineno-4-65" href="#__codelineno-4-65"></a>            is-covariant-arrow-II-Id
+</span><span id="__span-4-66"><a id="__codelineno-4-66" name="__codelineno-4-66" href="#__codelineno-4-66"></a>              ( <span class="p">\ </span>c → <span class="s">first</span> (g c))
+</span><span id="__span-4-67"><a id="__codelineno-4-67" name="__codelineno-4-67" href="#__codelineno-4-67"></a>              <span class="p">( </span>b-extract
+</span><span id="__span-4-68"><a id="__codelineno-4-68" name="__codelineno-4-68" href="#__codelineno-4-68"></a>                  ( ( g&#39; <span class="p">:</span> 𝕀 → <span class="p">(</span>Σ (A&#39; <span class="p">:</span> <span class="kt">U</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> is-a-cov A&#39;) , <span class="p">(</span>Σ (_ <span class="p">:</span> A&#39;) , A&#39;))))
+</span><span id="__span-4-69"><a id="__codelineno-4-69" name="__codelineno-4-69" href="#__codelineno-4-69"></a>                    → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (g&#39; b)))
+</span><span id="__span-4-70"><a id="__codelineno-4-70" name="__codelineno-4-70" href="#__codelineno-4-70"></a>                  <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-4-71"><a id="__codelineno-4-71" name="__codelineno-4-71" href="#__codelineno-4-71"></a>                      ( Σ ( A&#39; <span class="p">:</span> <span class="kt">U</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> is-a-cov A&#39;) , <span class="p">(</span>Σ (_ <span class="p">:</span> A&#39;) , A&#39;)))
+</span><span id="__span-4-72"><a id="__codelineno-4-72" name="__codelineno-4-72" href="#__codelineno-4-72"></a>                      ( \ (A&#39; , _) → A&#39;)
+</span><span id="__span-4-73"><a id="__codelineno-4-73" name="__codelineno-4-73" href="#__codelineno-4-73"></a>                      ( \ (_ , (cA&#39; , _)) → cA&#39;))
+</span><span id="__span-4-74"><a id="__codelineno-4-74" name="__codelineno-4-74" href="#__codelineno-4-74"></a>                  ( g))
+</span><span id="__span-4-75"><a id="__codelineno-4-75" name="__codelineno-4-75" href="#__codelineno-4-75"></a>              ( <span class="p">\ </span>c → <span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> (g c))))
+</span><span id="__span-4-76"><a id="__codelineno-4-76" name="__codelineno-4-76" href="#__codelineno-4-76"></a>              ( <span class="p">\ </span>c → <span class="s">second</span> (<span class="s">second</span> (<span class="s">second</span> (g c))))))
+</span><span id="__span-4-77"><a id="__codelineno-4-77" name="__codelineno-4-77" href="#__codelineno-4-77"></a>      ( A , (is-a-cov-A , (x , y)))
+</span><span id="__span-4-78"><a id="__codelineno-4-78" name="__codelineno-4-78" href="#__codelineno-4-78"></a>
+</span><span id="__span-4-79"><a id="__codelineno-4-79" name="__codelineno-4-79" href="#__codelineno-4-79"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-fib" id="define:is-a-cov-fib" style="visibility: visible; position: relative; color: inherit">is-a-cov-fib</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span> <span class="p">(</span>A B <span class="p">:</span> <span class="kt">U</span>) <span class="p">(</span>is-a-cov-A <span class="p">:</span> is-a-cov A) <span class="p">(</span>is-a-cov-B <span class="p">:</span> is-a-cov B) <span class="p">(</span>f <span class="p">:</span> A → B) <span class="p">(</span>b <span class="p">:</span> B)
+</span><span id="__span-4-80"><a id="__codelineno-4-80" name="__codelineno-4-80" href="#__codelineno-4-80"></a>  : is-a-cov (fib A B f b)
+</span><span id="__span-4-81"><a id="__codelineno-4-81" name="__codelineno-4-81" href="#__codelineno-4-81"></a>  :=
+</span><span id="__span-4-82"><a id="__codelineno-4-82" name="__codelineno-4-82" href="#__codelineno-4-82"></a>    is-a-cov-sigma-closed
+</span><span id="__span-4-83"><a id="__codelineno-4-83" name="__codelineno-4-83" href="#__codelineno-4-83"></a>      A
+</span><span id="__span-4-84"><a id="__codelineno-4-84" name="__codelineno-4-84" href="#__codelineno-4-84"></a>      ( <span class="p">\ </span>a → (f a) = b)
+</span><span id="__span-4-85"><a id="__codelineno-4-85" name="__codelineno-4-85" href="#__codelineno-4-85"></a>      is-a-cov-A
+</span><span id="__span-4-86"><a id="__codelineno-4-86" name="__codelineno-4-86" href="#__codelineno-4-86"></a>      ( <span class="p">\ </span>a → is-a-cov-id-closed B is-a-cov-B (f a) b)
+</span><span id="__span-4-87"><a id="__codelineno-4-87" name="__codelineno-4-87" href="#__codelineno-4-87"></a>
+</span><span id="__span-4-88"><a id="__codelineno-4-88" name="__codelineno-4-88" href="#__codelineno-4-88"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-i===0" id="define:is-a-cov-i===0" style="visibility: visible; position: relative; color: inherit">is-a-cov-i===0</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext extext<span class="p">)</span> <span class="p">(</span>i <span class="p">:</span> 𝕀)
+</span><span id="__span-4-89"><a id="__codelineno-4-89" name="__codelineno-4-89" href="#__codelineno-4-89"></a>  : is-a-cov <span class="p">(</span>shape (_ <span class="p">:</span> <span class="kt">1</span> | i <span class="sx">≡</span> <span class="m">1₂</span>))
+</span><span id="__span-4-90"><a id="__codelineno-4-90" name="__codelineno-4-90" href="#__codelineno-4-90"></a>  :=
+</span><span id="__span-4-91"><a id="__codelineno-4-91" name="__codelineno-4-91" href="#__codelineno-4-91"></a>    b-extract
+</span><span id="__span-4-92"><a id="__codelineno-4-92" name="__codelineno-4-92" href="#__codelineno-4-92"></a>      <span class="p">( </span>( i&#39; <span class="p">:</span> 𝕀) → is-a-cov <span class="p">(</span>shape (_ <span class="p">:</span> <span class="kt">1</span> | i&#39; <span class="sx">≡</span> <span class="m">1₂</span>)))
+</span><span id="__span-4-93"><a id="__codelineno-4-93" name="__codelineno-4-93" href="#__codelineno-4-93"></a>      <span class="p">( </span>first
+</span><span id="__span-4-94"><a id="__codelineno-4-94" name="__codelineno-4-94" href="#__codelineno-4-94"></a>          ( b-equiv
+</span><span id="__span-4-95"><a id="__codelineno-4-95" name="__codelineno-4-95" href="#__codelineno-4-95"></a>              ( ( t <span class="p">:</span> shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
+</span><span id="__span-4-96"><a id="__codelineno-4-96" name="__codelineno-4-96" href="#__codelineno-4-96"></a>                → is-a-cov <span class="p">(</span>shape (_ <span class="p">:</span> <span class="kt">1</span> | unform t <span class="sx">≡</span> <span class="m">1₂</span>)))
+</span><span id="__span-4-97"><a id="__codelineno-4-97" name="__codelineno-4-97" href="#__codelineno-4-97"></a>              <span class="p">( </span>( i&#39; <span class="p">:</span> 𝕀) → is-a-cov <span class="p">(</span>shape (_ <span class="p">:</span> <span class="kt">1</span> | i&#39; <span class="sx">≡</span> <span class="m">1₂</span>)))
+</span><span id="__span-4-98"><a id="__codelineno-4-98" name="__codelineno-4-98" href="#__codelineno-4-98"></a>              <span class="p">( </span>inv-equiv
+</span><span id="__span-4-99"><a id="__codelineno-4-99" name="__codelineno-4-99" href="#__codelineno-4-99"></a>                  ( ( i&#39; <span class="p">:</span> 𝕀) → is-a-cov <span class="p">(</span>shape (_ <span class="p">:</span> <span class="kt">1</span> | i&#39; <span class="sx">≡</span> <span class="m">1₂</span>)))
+</span><span id="__span-4-100"><a id="__codelineno-4-100" name="__codelineno-4-100" href="#__codelineno-4-100"></a>                  <span class="p">( </span>( t <span class="p">:</span> shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
+</span><span id="__span-4-101"><a id="__codelineno-4-101" name="__codelineno-4-101" href="#__codelineno-4-101"></a>                    → is-a-cov <span class="p">(</span>shape (_ <span class="p">:</span> <span class="kt">1</span> | unform t <span class="sx">≡</span> <span class="m">1₂</span>)))
+</span><span id="__span-4-102"><a id="__codelineno-4-102" name="__codelineno-4-102" href="#__codelineno-4-102"></a>                  ( equiv-ext-shape-fun
+</span><span id="__span-4-103"><a id="__codelineno-4-103" name="__codelineno-4-103" href="#__codelineno-4-103"></a>                      𝕀
+</span><span id="__span-4-104"><a id="__codelineno-4-104" name="__codelineno-4-104" href="#__codelineno-4-104"></a>                      ( <span class="p">\ </span>_ → <span class="m">TOP</span>)
+</span><span id="__span-4-105"><a id="__codelineno-4-105" name="__codelineno-4-105" href="#__codelineno-4-105"></a>                      <span class="p">( </span>\ i&#39; → is-a-cov (shape (_ <span class="p">:</span> <span class="kt">1</span> | i&#39; <span class="sx">≡</span> <span class="m">1₂</span>))))))
+</span><span id="__span-4-106"><a id="__codelineno-4-106" name="__codelineno-4-106" href="#__codelineno-4-106"></a>          <span class="p">( </span>is-a-cov-untranspose
+</span><span id="__span-4-107"><a id="__codelineno-4-107" name="__codelineno-4-107" href="#__codelineno-4-107"></a>              ( shape (_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
+</span><span id="__span-4-108"><a id="__codelineno-4-108" name="__codelineno-4-108" href="#__codelineno-4-108"></a>              <span class="p">( </span>\ t → shape (_ <span class="p">:</span> <span class="kt">1</span> | unform t <span class="sx">≡</span> <span class="m">1₂</span>))
+</span><span id="__span-4-109"><a id="__codelineno-4-109" name="__codelineno-4-109" href="#__codelineno-4-109"></a>              <span class="p">( </span>\ (f <span class="p">:</span> 𝕀 → shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) →
+</span><span id="__span-4-110"><a id="__codelineno-4-110" name="__codelineno-4-110" href="#__codelineno-4-110"></a>                  \ <span class="p">(</span>x <span class="p">:</span> shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) <span class="p">(</span>y <span class="p">:</span> shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
+</span><span id="__span-4-111"><a id="__codelineno-4-111" name="__codelineno-4-111" href="#__codelineno-4-111"></a>                    <span class="p">(</span>arr <span class="p">:</span> hom-II <span class="p">(</span>shape (_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) x y)
+</span><span id="__span-4-112"><a id="__codelineno-4-112" name="__codelineno-4-112" href="#__codelineno-4-112"></a>                    <span class="p">(</span>a0 <span class="p">:</span> shape-at-1 (f (unform x))) →
+</span><span id="__span-4-113"><a id="__codelineno-4-113" name="__codelineno-4-113" href="#__codelineno-4-113"></a>                    <span class="k">let</span> larr : 𝕀 → shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) := <span class="p">\ </span>j → arr j <span class="k">in</span>
+</span><span id="__span-4-114"><a id="__codelineno-4-114" name="__codelineno-4-114" href="#__codelineno-4-114"></a>                    <span class="k">let</span> f : 𝕀 → shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>) := <span class="p">\ </span>j → f (unform (larr j)) <span class="k">in</span>
+</span><span id="__span-4-115"><a id="__codelineno-4-115" name="__codelineno-4-115" href="#__codelineno-4-115"></a>                    <span class="k">let</span> e0
+</span><span id="__span-4-116"><a id="__codelineno-4-116" name="__codelineno-4-116" href="#__codelineno-4-116"></a>                      : (f <span class="m">0₂</span>) = form (<span class="m">1₂</span>)
+</span><span id="__span-4-117"><a id="__codelineno-4-117" name="__codelineno-4-117" href="#__codelineno-4-117"></a>                      := eq-form-1-of-shape-at-1 (f <span class="m">0₂</span>) a0
+</span><span id="__span-4-118"><a id="__codelineno-4-118" name="__codelineno-4-118" href="#__codelineno-4-118"></a>                    <span class="k">in</span>
+</span><span id="__span-4-119"><a id="__codelineno-4-119" name="__codelineno-4-119" href="#__codelineno-4-119"></a>                    <span class="k">let</span> e1
+</span><span id="__span-4-120"><a id="__codelineno-4-120" name="__codelineno-4-120" href="#__codelineno-4-120"></a>                      : (f <span class="m">1₂</span>) = form (<span class="m">1₂</span>)
+</span><span id="__span-4-121"><a id="__codelineno-4-121" name="__codelineno-4-121" href="#__codelineno-4-121"></a>                      := fun-monotonicity f e0
+</span><span id="__span-4-122"><a id="__codelineno-4-122" name="__codelineno-4-122" href="#__codelineno-4-122"></a>                    <span class="k">in</span>
+</span><span id="__span-4-123"><a id="__codelineno-4-123" name="__codelineno-4-123" href="#__codelineno-4-123"></a>                    <span class="k">let</span> a1
+</span><span id="__span-4-124"><a id="__codelineno-4-124" name="__codelineno-4-124" href="#__codelineno-4-124"></a>                      : shape-at-1 (f <span class="m">1₂</span>)
+</span><span id="__span-4-125"><a id="__codelineno-4-125" name="__codelineno-4-125" href="#__codelineno-4-125"></a>                      := shape-at-1-of-eq-form-1 (f <span class="m">1₂</span>) e1
+</span><span id="__span-4-126"><a id="__codelineno-4-126" name="__codelineno-4-126" href="#__codelineno-4-126"></a>                    <span class="k">in</span>
+</span><span id="__span-4-127"><a id="__codelineno-4-127" name="__codelineno-4-127" href="#__codelineno-4-127"></a>                    <span class="k">let</span> h
+</span><span id="__span-4-128"><a id="__codelineno-4-128" name="__codelineno-4-128" href="#__codelineno-4-128"></a>                      : dhom-II <span class="p">(</span>shape (_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) (form <span class="m">0₂</span>) (form <span class="m">1₂</span>) (<span class="p">\ </span>t → form t) (<span class="p">\ </span>s → shape-at-1 (f (unform s))) a0 a1
+</span><span id="__span-4-129"><a id="__codelineno-4-129" name="__codelineno-4-129" href="#__codelineno-4-129"></a>                      := dhom-II-form-line-shape-at-1 f a0 a1 e0
+</span><span id="__span-4-130"><a id="__codelineno-4-130" name="__codelineno-4-130" href="#__codelineno-4-130"></a>                    <span class="k">in</span>
+</span><span id="__span-4-131"><a id="__codelineno-4-131" name="__codelineno-4-131" href="#__codelineno-4-131"></a>                      is-contr-is-inhabited-is-prop
+</span><span id="__span-4-132"><a id="__codelineno-4-132" name="__codelineno-4-132" href="#__codelineno-4-132"></a>                        <span class="p">( </span>Σ ( a1&#39; <span class="p">:</span> shape-at-1 (f <span class="m">1₂</span>))
+</span><span id="__span-4-133"><a id="__codelineno-4-133" name="__codelineno-4-133" href="#__codelineno-4-133"></a>                        , dhom-II <span class="p">(</span>shape (_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>)) (form <span class="m">0₂</span>) (form <span class="m">1₂</span>) (<span class="p">\ </span>t → form t) (<span class="p">\ </span>s → shape-at-1 (f (unform s))) a0 a1&#39;)
+</span><span id="__span-4-134"><a id="__codelineno-4-134" name="__codelineno-4-134" href="#__codelineno-4-134"></a>                        ( is-prop-Σ-dhom-II-form-line-shape-at-1 extext f a0)
+</span><span id="__span-4-135"><a id="__codelineno-4-135" name="__codelineno-4-135" href="#__codelineno-4-135"></a>                        ( a1 , h))))
+</span><span id="__span-4-136"><a id="__codelineno-4-136" name="__codelineno-4-136" href="#__codelineno-4-136"></a>      ( i)
+</span></code></pre></div>
+<h2 id="extension-theorem">Extension theorem<a class="headerlink" href="#extension-theorem" title="Permanent link">&para;</a></h2>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-a-cov-ext" id="define:is-a-cov-ext" style="visibility: visible; position: relative; color: inherit">is-a-cov-ext</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext extext<span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="p">( </span>phi <span class="p">:</span> <span class="nd">ᵒᵖ</span> <span class="kt">TOPE</span>)
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  <span class="p">( </span>shape-is-a-cov <span class="p">:</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> phi_op := phi <span class="k">in</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="nd">ᵒᵖ</span> <span class="p">(</span>is-a-cov (shape (_ <span class="p">:</span> <span class="kt">1</span> | phi_op))))
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  <span class="p">( </span>is-a-cov-A <span class="p">:</span> is-a-cov A)
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>  : is-a-cov <span class="p">(</span>(t <span class="p">:</span> <span class="kt">1</span> | <span class="s">uninvᵒᵖ</span> phi) → A)
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>  :=
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    b-extract
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>      <span class="p">( </span>( w
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>        <span class="p">:</span> <span class="kt">Σ</span> <span class="p">( </span>phi&#39; <span class="p">:</span> <span class="nd">ᵒᵖ</span> <span class="kt">TOPE</span>)
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        , <span class="p">( </span>Σ ( _ <span class="p">:</span> <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p := phi&#39; <span class="k">in</span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>is-a-cov (shape (_ <span class="p">:</span> <span class="kt">1</span> | p))))
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>        , <span class="p">( </span>Σ ( B&#39; <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>        , is-a-cov B&#39;)))
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>        → is-a-cov <span class="p">(</span>(t <span class="p">:</span> <span class="kt">1</span> | <span class="s">uninvᵒᵖ</span> (<span class="s">first</span> w)) → <span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> w))))
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>      <span class="p">( </span>is-a-cov-untranspose
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>          ( Σ ( phi&#39; <span class="p">:</span> <span class="nd">ᵒᵖ</span> <span class="kt">TOPE</span>)
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>          , <span class="p">( </span>Σ ( _ <span class="p">:</span> <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p := phi&#39; <span class="k">in</span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>is-a-cov (shape (_ <span class="p">:</span> <span class="kt">1</span> | p))))
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>          , <span class="p">( </span>Σ ( B&#39; <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a>          , is-a-cov B&#39;)))
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>          ( \ (phi&#39; , (_ , (B&#39; , _))) → <span class="p">(</span>t <span class="p">:</span> <span class="kt">1</span> | <span class="s">uninvᵒᵖ</span> phi&#39;) → B&#39;)
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a>          <span class="p">( </span>\ g →
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>            let phi-i <span class="p">:</span> 𝕀 → <span class="nd">ᵒᵖ</span> <span class="kt">TOPE</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>              := <span class="p">\ </span>i → <span class="s">first</span> (g i)
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>            <span class="k">in</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>            <span class="k">let</span> phi-shape-i-is-acov
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>              : <span class="p">( </span>i <span class="p">:</span> 𝕀)
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>                  → ( <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p := phi-i i <span class="k">in</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>                        <span class="nd">ᵒᵖ</span> <span class="p">(</span>is-a-cov (shape (_ <span class="p">:</span> <span class="kt">1</span> | p))))
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>              := <span class="p">\ </span>i → <span class="s">first</span> (<span class="s">second</span> (g i))
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a>            <span class="k">in</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a>            <span class="k">let</span> D : 𝕀 → <span class="kt">U</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>              := <span class="p">\ </span>i → <span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> (g i)))
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>            <span class="k">in</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a>            <span class="k">let</span> is-a-cov-D : <span class="p">(</span>i <span class="p">:</span> 𝕀) → is-a-cov (D i)
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a>              := <span class="p">\ </span>i → <span class="s">second</span> (<span class="s">second</span> (<span class="s">second</span> (g i)))
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a>            <span class="k">in</span>
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a>            <span class="k">let</span> C : <span class="nd">ᵒᵖ</span> (𝕀 → <span class="kt">U</span>)
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>              :=
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a>                op-ext-commute-bwd
+</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a>                  <span class="p">(</span>\ (_ <span class="p">:</span> 𝕀) → <span class="kt">U</span>)
+</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a>                  ( <span class="p">\ </span>i →
+</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a>                      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p := phi-i i <span class="k">in</span>
+</span><span id="__span-5-45"><a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a>                        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>shape (_ <span class="p">:</span> <span class="kt">1</span> | p)))
+</span><span id="__span-5-46"><a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a>            <span class="k">in</span>
+</span><span id="__span-5-47"><a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a>            <span class="k">let</span> is-a-cov-C
+</span><span id="__span-5-48"><a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a>              : <span class="p">( </span>i <span class="p">:</span> 𝕀)
+</span><span id="__span-5-49"><a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a>                  → ( <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> X := op-ext-commute-fwd <span class="p">(</span>\ (_ <span class="p">:</span> 𝕀) → <span class="kt">U</span>) C i <span class="k">in</span>
+</span><span id="__span-5-50"><a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a>                        <span class="nd">ᵒᵖ</span> (is-a-cov X))
+</span><span id="__span-5-51"><a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a>              :=
+</span><span id="__span-5-52"><a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>                <span class="p">\ </span>i →
+</span><span id="__span-5-53"><a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a>                  transport
+</span><span id="__span-5-54"><a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a>                    ( <span class="nd">ᵒᵖ</span> <span class="kt">U</span>)
+</span><span id="__span-5-55"><a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a>                    ( <span class="p">\ </span>Z → <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> X := Z <span class="k">in</span> <span class="nd">ᵒᵖ</span> (is-a-cov X))
+</span><span id="__span-5-56"><a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a>                    ( <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p := phi-i i <span class="k">in</span>
+</span><span id="__span-5-57"><a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a>                        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>shape (_ <span class="p">:</span> <span class="kt">1</span> | p)))
+</span><span id="__span-5-58"><a id="__codelineno-5-58" name="__codelineno-5-58" href="#__codelineno-5-58"></a>                    <span class="p">( </span>op-ext-commute-fwd (\ (_ <span class="p">:</span> 𝕀) → <span class="kt">U</span>) C i)
+</span><span id="__span-5-59"><a id="__codelineno-5-59" name="__codelineno-5-59" href="#__codelineno-5-59"></a>                    <span class="s">refl</span>
+</span><span id="__span-5-60"><a id="__codelineno-5-60" name="__codelineno-5-60" href="#__codelineno-5-60"></a>                    ( phi-shape-i-is-acov i)
+</span><span id="__span-5-61"><a id="__codelineno-5-61" name="__codelineno-5-61" href="#__codelineno-5-61"></a>            <span class="k">in</span>
+</span><span id="__span-5-62"><a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a>            <span class="k">let</span> packed-S : <span class="nd">ᵒᵖ</span> <span class="p">(</span>𝕀 → Σ (X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-5-63"><a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a>              :=
+</span><span id="__span-5-64"><a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a>                op-ext-commute-bwd
+</span><span id="__span-5-65"><a id="__codelineno-5-65" name="__codelineno-5-65" href="#__codelineno-5-65"></a>                  <span class="p">(</span>\ (_ <span class="p">:</span> 𝕀) → <span class="kt">Σ</span> <span class="p">(</span>X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-5-66"><a id="__codelineno-5-66" name="__codelineno-5-66" href="#__codelineno-5-66"></a>                  ( <span class="p">\ </span>i →
+</span><span id="__span-5-67"><a id="__codelineno-5-67" name="__codelineno-5-67" href="#__codelineno-5-67"></a>                      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> X := op-ext-commute-fwd <span class="p">(</span>\ (_ <span class="p">:</span> 𝕀) → <span class="kt">U</span>) C i <span class="k">in</span>
+</span><span id="__span-5-68"><a id="__codelineno-5-68" name="__codelineno-5-68" href="#__codelineno-5-68"></a>                      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> c := is-a-cov-C i <span class="k">in</span>
+</span><span id="__span-5-69"><a id="__codelineno-5-69" name="__codelineno-5-69" href="#__codelineno-5-69"></a>                        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> (X , c))
+</span><span id="__span-5-70"><a id="__codelineno-5-70" name="__codelineno-5-70" href="#__codelineno-5-70"></a>            <span class="k">in</span>
+</span><span id="__span-5-71"><a id="__codelineno-5-71" name="__codelineno-5-71" href="#__codelineno-5-71"></a>            <span class="k">let</span> is-cov-C
+</span><span id="__span-5-72"><a id="__codelineno-5-72" name="__codelineno-5-72" href="#__codelineno-5-72"></a>              : <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> C0 := C <span class="k">in</span> <span class="nd">ᵒᵖ</span> (is-covariant-arrow-II C0)
+</span><span id="__span-5-73"><a id="__codelineno-5-73" name="__codelineno-5-73" href="#__codelineno-5-73"></a>              :=
+</span><span id="__span-5-74"><a id="__codelineno-5-74" name="__codelineno-5-74" href="#__codelineno-5-74"></a>                <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> packed := packed-S <span class="k">in</span>
+</span><span id="__span-5-75"><a id="__codelineno-5-75" name="__codelineno-5-75" href="#__codelineno-5-75"></a>                  <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>
+</span><span id="__span-5-76"><a id="__codelineno-5-76" name="__codelineno-5-76" href="#__codelineno-5-76"></a><span class="p">                    </span>b-extract
+</span><span id="__span-5-77"><a id="__codelineno-5-77" name="__codelineno-5-77" href="#__codelineno-5-77"></a>                      ( ( g&#39; <span class="p">:</span> 𝕀 → <span class="kt">Σ</span> <span class="p">(</span>X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-5-78"><a id="__codelineno-5-78" name="__codelineno-5-78" href="#__codelineno-5-78"></a>                          → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (g&#39; b)))
+</span><span id="__span-5-79"><a id="__codelineno-5-79" name="__codelineno-5-79" href="#__codelineno-5-79"></a>                      <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-5-80"><a id="__codelineno-5-80" name="__codelineno-5-80" href="#__codelineno-5-80"></a>                          ( Σ ( X <span class="p">:</span> <span class="kt">U</span>) , is-a-cov X)
+</span><span id="__span-5-81"><a id="__codelineno-5-81" name="__codelineno-5-81" href="#__codelineno-5-81"></a>                          ( \ (X , _) → X)
+</span><span id="__span-5-82"><a id="__codelineno-5-82" name="__codelineno-5-82" href="#__codelineno-5-82"></a>                          ( \ (_ , cX) → cX))
+</span><span id="__span-5-83"><a id="__codelineno-5-83" name="__codelineno-5-83" href="#__codelineno-5-83"></a>                      packed)
+</span><span id="__span-5-84"><a id="__codelineno-5-84" name="__codelineno-5-84" href="#__codelineno-5-84"></a>            <span class="k">in</span>
+</span><span id="__span-5-85"><a id="__codelineno-5-85" name="__codelineno-5-85" href="#__codelineno-5-85"></a>            <span class="k">let</span> is-cov-D : is-covariant-arrow-II D
+</span><span id="__span-5-86"><a id="__codelineno-5-86" name="__codelineno-5-86" href="#__codelineno-5-86"></a>              :=
+</span><span id="__span-5-87"><a id="__codelineno-5-87" name="__codelineno-5-87" href="#__codelineno-5-87"></a>                b-extract
+</span><span id="__span-5-88"><a id="__codelineno-5-88" name="__codelineno-5-88" href="#__codelineno-5-88"></a>                  <span class="p">( </span>( g&#39; <span class="p">:</span> 𝕀 →
+</span><span id="__span-5-89"><a id="__codelineno-5-89" name="__codelineno-5-89" href="#__codelineno-5-89"></a>                    <span class="p">(</span>Σ (phi&#39; <span class="p">:</span> <span class="nd">ᵒᵖ</span> <span class="kt">TOPE</span>) ,
+</span><span id="__span-5-90"><a id="__codelineno-5-90" name="__codelineno-5-90" href="#__codelineno-5-90"></a>                    <span class="p">(</span>Σ (_ <span class="p">:</span> <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p := phi&#39; <span class="k">in</span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>is-a-cov (shape (_ <span class="p">:</span> <span class="kt">1</span> | p)))) ,
+</span><span id="__span-5-91"><a id="__codelineno-5-91" name="__codelineno-5-91" href="#__codelineno-5-91"></a>                    <span class="p">(</span>Σ (B&#39; <span class="p">:</span> <span class="kt">U</span>) , is-a-cov B&#39;))))
+</span><span id="__span-5-92"><a id="__codelineno-5-92" name="__codelineno-5-92" href="#__codelineno-5-92"></a>                    → is-covariant-arrow-II (<span class="p">\ </span>b → <span class="s">first</span> (<span class="s">second</span> (<span class="s">second</span> (g&#39; b)))))
+</span><span id="__span-5-93"><a id="__codelineno-5-93" name="__codelineno-5-93" href="#__codelineno-5-93"></a>                  <span class="p">( </span>is-a-cov-transpose
+</span><span id="__span-5-94"><a id="__codelineno-5-94" name="__codelineno-5-94" href="#__codelineno-5-94"></a>                      ( Σ ( phi&#39; <span class="p">:</span> <span class="nd">ᵒᵖ</span> <span class="kt">TOPE</span>) , <span class="p">(</span>Σ (_ <span class="p">:</span> <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> p := phi&#39; <span class="k">in</span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>is-a-cov (shape (_ <span class="p">:</span> <span class="kt">1</span> | p)))) , <span class="p">(</span>Σ (B&#39; <span class="p">:</span> <span class="kt">U</span>) , is-a-cov B&#39;)))
+</span><span id="__span-5-95"><a id="__codelineno-5-95" name="__codelineno-5-95" href="#__codelineno-5-95"></a>                      ( \ (_ , (_ , (B&#39; , _))) → B&#39;)
+</span><span id="__span-5-96"><a id="__codelineno-5-96" name="__codelineno-5-96" href="#__codelineno-5-96"></a>                      ( \ (_ , (_ , (_ , cB&#39;))) → cB&#39;))
+</span><span id="__span-5-97"><a id="__codelineno-5-97" name="__codelineno-5-97" href="#__codelineno-5-97"></a>                  g
+</span><span id="__span-5-98"><a id="__codelineno-5-98" name="__codelineno-5-98" href="#__codelineno-5-98"></a>            <span class="k">in</span>
+</span><span id="__span-5-99"><a id="__codelineno-5-99" name="__codelineno-5-99" href="#__codelineno-5-99"></a>              is-covariant-ext
+</span><span id="__span-5-100"><a id="__codelineno-5-100" name="__codelineno-5-100" href="#__codelineno-5-100"></a>                funext
+</span><span id="__span-5-101"><a id="__codelineno-5-101" name="__codelineno-5-101" href="#__codelineno-5-101"></a>                extext
+</span><span id="__span-5-102"><a id="__codelineno-5-102" name="__codelineno-5-102" href="#__codelineno-5-102"></a>                ( phi-i)
+</span><span id="__span-5-103"><a id="__codelineno-5-103" name="__codelineno-5-103" href="#__codelineno-5-103"></a>                ( is-cov-C)
+</span><span id="__span-5-104"><a id="__codelineno-5-104" name="__codelineno-5-104" href="#__codelineno-5-104"></a>                ( D)
+</span><span id="__span-5-105"><a id="__codelineno-5-105" name="__codelineno-5-105" href="#__codelineno-5-105"></a>                ( is-cov-D)
+</span><span id="__span-5-106"><a id="__codelineno-5-106" name="__codelineno-5-106" href="#__codelineno-5-106"></a>                ( <span class="p">\ </span>i → is-discrete-is-a-cov (D i) (is-a-cov-D i))))
+</span><span id="__span-5-107"><a id="__codelineno-5-107" name="__codelineno-5-107" href="#__codelineno-5-107"></a>      ( phi , (shape-is-a-cov , (A , is-a-cov-A)))
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "content.action.edit", "navigation.footer", "navigation.sections", "navigation.path"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+        <script src="../../javascript/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -16,7 +16,7 @@
     
     
       
-        <title>3. Internal Universe - Simplicial HoTT</title>
+        <title>2. Internal Universe - Simplicial HoTT</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#3-internal-universe" class="md-skip">
+        <a href="#2-internal-universe" class="md-skip">
           Skip to content
         </a>
       
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3. Internal Universe
+              2. Internal Universe
             
           </span>
         </div>
@@ -483,7 +483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hott/04-half-adjoint-equivalences.rzk/" class="md-nav__link">
+      <a href="../../hott/04-half-adjoint-equivalences.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -504,7 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hott/05-sigma.rzk/" class="md-nav__link">
+      <a href="../../hott/05-sigma.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -525,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hott/06-contractible.rzk/" class="md-nav__link">
+      <a href="../../hott/06-contractible.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -546,7 +546,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hott/07-fibers.rzk/" class="md-nav__link">
+      <a href="../../hott/07-fibers.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -567,7 +567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hott/08-families-of-maps.rzk/" class="md-nav__link">
+      <a href="../../hott/08-families-of-maps.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -588,7 +588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hott/09-propositions.rzk/" class="md-nav__link">
+      <a href="../../hott/09-propositions.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -609,7 +609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hott/10-trivial-fibrations.rzk/" class="md-nav__link">
+      <a href="../../hott/10-trivial-fibrations.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -630,7 +630,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../hott/11-homotopy-pullbacks.rzk/" class="md-nav__link">
+      <a href="../../hott/11-homotopy-pullbacks.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -1158,7 +1158,7 @@
                   
 
   
-    <a href="https://github.com/LIshy2/sHoTT/edit/main/src/triangulated/04-internal-universe.rzk.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/LIshy2/sHoTT/edit/main/src/triangulated/02-internal-universe.rzk.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
     </a>
@@ -1166,9 +1166,11 @@
   
 
 
-<h1 id="3-internal-universe">3. Internal Universe<a class="headerlink" href="#3-internal-universe" title="Permanent link">&para;</a></h1>
+<h1 id="2-internal-universe">2. Internal Universe<a class="headerlink" href="#2-internal-universe" title="Permanent link">&para;</a></h1>
 <p>This is a literate <code>rzk</code> file:</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">#lang</span><span class="p"> </span><span class="s">rzk-1</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kr">#assume</span><span class="p"> </span>funext : FunExt
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kr">#assume</span><span class="p"> </span>weakfunext : WeakFunExt
 </span></code></pre></div>
 <p>We formalize the internal universe construction following
 Licata, Orton, Pitts, and Spitters' "Internal Universes in Models of Homotopy
@@ -1176,13 +1178,13 @@ Type Theory" (arXiv:1801.07664).</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>hott/01-paths.rzk.md</code> — <code>ap</code>, <code>rev</code>, <code>concat</code>, <code>transport</code>.</li>
-<li><code>hott/03-equivalences.rzk.md</code> — <code>Equiv</code>, <code>is-equiv</code>, <code>UA</code>.</li>
-<li><code>hott/04-half-adjoint-equivalences.rzk.md</code> — <code>is-emb-is-equiv</code>.</li>
-<li><code>hott/05-sigma.rzk.md</code> — <code>eq-pair</code>.</li>
-<li><code>hott/07-fibers.rzk.md</code> — <code>fib</code>.</li>
-<li><code>hott/09-propositions.rzk.md</code> — <code>Prop</code>, <code>Unit-Prop</code>, <code>univ-family-Prop</code>, <code>ufp-first-eq-const-Unit</code>.</li>
-<li><code>01-modalities.rzk.md</code> — Modality operations, <code>Prop-b</code>, <code>univ-family-Prop-b</code>.</li>
-<li><code>02-axioms.rzk.md</code> — Right adjoint, transpose adjunction, crisp induction.</li>
+<li><code>hott/03-equivalences.rzk.md</code> — <code>Equiv</code>, <code>is-equiv</code>, <code>UA</code>, <code>ua</code>, <code>transport-ua</code>.</li>
+<li><code>hott/05-half-adjoint-equivalences.rzk.md</code> — <code>is-emb-is-equiv</code>.</li>
+<li><code>hott/06-sigma.rzk.md</code> — <code>eq-pair</code>.</li>
+<li><code>hott/08-fibers.rzk.md</code> — <code>fib</code>.</li>
+<li><code>hott/10-propositions.rzk.md</code> — <code>Prop</code>, <code>Unit-Prop</code>, <code>univ-family-Prop</code>, <code>ufp-first-eq-const-Unit</code>.</li>
+<li><code>hott/04-modalities.rzk.md</code> — Modality operations, <code>Prop-b</code>, <code>univ-family-Prop-b</code>.</li>
+<li><code>triangulated/01-tiny.rzk.md</code> — Right adjoint, transpose adjunction.</li>
 </ul>
 <h2 id="amazing-predicate">Amazing predicate<a class="headerlink" href="#amazing-predicate" title="Permanent link">&para;</a></h2>
 <p>Given a propositional predicate <code>pred : (II → U) → Prop</code> on arrow types,
@@ -1246,13 +1248,13 @@ via the right adjoint <code>rar</code>.</p>
 </span><span id="__span-1-56"><a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>        <span class="k">let mod</span> <span class="nd">♭</span> f0 := f <span class="k">in</span>
 </span><span id="__span-1-57"><a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>        <span class="k">let mod</span> <span class="nd">♭</span> fmap := rar-fmap univ-family-Prop Prop f0
 </span><span id="__span-1-58"><a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>        <span class="k">in</span> fmap)
-</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>      ( crisp-induction-flat
+</span><span id="__span-1-59"><a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>      ( b-path-commute-fwd
 </span><span id="__span-1-60"><a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>        ( univ-family-Prop → Prop)
 </span><span id="__span-1-61"><a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>        ( <span class="p">\ </span>x → <span class="s">first</span> x)
 </span><span id="__span-1-62"><a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>        ( <span class="p">\ </span>x → Unit-Prop)
-</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>        ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (ufp-first-eq-const-Unit funext weakfunext ua)))
+</span><span id="__span-1-63"><a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>        ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (ufp-first-eq-const-Unit funext weakfunext)))
 </span><span id="__span-1-64"><a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>
-</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pred-tr-eq-ufp-const-Unit" id="define:pred-tr-eq-ufp-const-Unit" style="visibility: visible; position: relative; color: inherit">pred-tr-eq-ufp-const-Unit</a></span>
+</span><span id="__span-1-65"><a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pred-tr-eq-ufp-const-Unit" id="define:pred-tr-eq-ufp-const-Unit" style="visibility: visible; position: relative; color: inherit">pred-tr-eq-ufp-const-Unit</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
 </span><span id="__span-1-66"><a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>  ( pred :♭ (𝕀 → <span class="kt">U</span>) → Prop)
 </span><span id="__span-1-67"><a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>  ( A :♭ <span class="kt">U</span>)
 </span><span id="__span-1-68"><a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>  ( h :♭ A → <span class="kt">U</span>)
@@ -1298,7 +1300,7 @@ via the right adjoint <code>rar</code>.</p>
 </span><span id="__span-1-108"><a id="__codelineno-1-108" name="__codelineno-1-108" href="#__codelineno-1-108"></a>           <span class="p">( </span>\ (_ <span class="p">:</span> 𝕀 → b-extract <span class="kt">U</span> (rar univ-family-Prop-b)) → Unit-Prop) <span class="k">in</span>
 </span><span id="__span-1-109"><a id="__codelineno-1-109" name="__codelineno-1-109" href="#__codelineno-1-109"></a>    <span class="k">let</span> B-L
 </span><span id="__span-1-110"><a id="__codelineno-1-110" name="__codelineno-1-110" href="#__codelineno-1-110"></a>      : ( b-extract (A → b-extract <span class="kt">U</span> (rar Prop-b)) F-inner) a = const-Unit-Prop-ufp-tr (<span class="s">first</span> (f a))
-</span><span id="__span-1-111"><a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>      := flat-convoy
+</span><span id="__span-1-111"><a id="__codelineno-1-111" name="__codelineno-1-111" href="#__codelineno-1-111"></a>      := b-elim
 </span><span id="__span-1-112"><a id="__codelineno-1-112" name="__codelineno-1-112" href="#__codelineno-1-112"></a>           ( b-extract <span class="kt">U</span> (rar univ-family-Prop-b) → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-1-113"><a id="__codelineno-1-113" name="__codelineno-1-113" href="#__codelineno-1-113"></a>           <span class="p">( </span>\ (z <span class="p">:</span> <span class="nd">♭</span> (b-extract <span class="kt">U</span> (rar univ-family-Prop-b) → b-extract <span class="kt">U</span> (rar Prop-b)))
 </span><span id="__span-1-114"><a id="__codelineno-1-114" name="__codelineno-1-114" href="#__codelineno-1-114"></a>           → ( b-extract (A → b-extract <span class="kt">U</span> (rar Prop-b)) (<span class="k">let mod</span> <span class="nd">♭</span> sec := z <span class="k">in</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> <span class="p">(</span>\ (x <span class="p">:</span> A) → sec (<span class="s">first</span> (f x))))) a
@@ -1316,7 +1318,7 @@ via the right adjoint <code>rar</code>.</p>
 </span><span id="__span-1-126"><a id="__codelineno-1-126" name="__codelineno-1-126" href="#__codelineno-1-126"></a>          ( <span class="k">let mod</span> <span class="nd">♭</span> g := F-inner <span class="k">in</span> g a)
 </span><span id="__span-1-127"><a id="__codelineno-1-127" name="__codelineno-1-127" href="#__codelineno-1-127"></a>          ( ( b-extract (A → b-extract <span class="kt">U</span> (rar Prop-b)) F-inner) a)
 </span><span id="__span-1-128"><a id="__codelineno-1-128" name="__codelineno-1-128" href="#__codelineno-1-128"></a>          ( const-Unit-Prop-ufp-tr (<span class="s">first</span> (f a)))
-</span><span id="__span-1-129"><a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a>          ( flat-<span class="k">let</span>-commute
+</span><span id="__span-1-129"><a id="__codelineno-1-129" name="__codelineno-1-129" href="#__codelineno-1-129"></a>          ( b-<span class="k">let</span>-commute
 </span><span id="__span-1-130"><a id="__codelineno-1-130" name="__codelineno-1-130" href="#__codelineno-1-130"></a>            ( A → b-extract <span class="kt">U</span> (rar Prop-b)) (b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-1-131"><a id="__codelineno-1-131" name="__codelineno-1-131" href="#__codelineno-1-131"></a>            <span class="p">( </span>\ (g <span class="p">:</span> A → b-extract <span class="kt">U</span> (rar Prop-b)) → g a) F-inner)
 </span><span id="__span-1-132"><a id="__codelineno-1-132" name="__codelineno-1-132" href="#__codelineno-1-132"></a>          ( B-L)))
@@ -1328,11 +1330,11 @@ via the right adjoint <code>rar</code>.</p>
 </span><span id="__span-1-138"><a id="__codelineno-1-138" name="__codelineno-1-138" href="#__codelineno-1-138"></a>          F-inner V
 </span><span id="__span-1-139"><a id="__codelineno-1-139" name="__codelineno-1-139" href="#__codelineno-1-139"></a>          <span class="p">( </span>\ (F <span class="p">:</span> <span class="nd">♭</span> (A → b-extract <span class="kt">U</span> (rar Prop-b))) → <span class="k">let mod</span> <span class="nd">♭</span> g := F <span class="k">in</span> g a)
 </span><span id="__span-1-140"><a id="__codelineno-1-140" name="__codelineno-1-140" href="#__codelineno-1-140"></a>          key)
-</span><span id="__span-1-141"><a id="__codelineno-1-141" name="__codelineno-1-141" href="#__codelineno-1-141"></a>        ( flat-<span class="k">let</span>-commute
+</span><span id="__span-1-141"><a id="__codelineno-1-141" name="__codelineno-1-141" href="#__codelineno-1-141"></a>        ( b-<span class="k">let</span>-commute
 </span><span id="__span-1-142"><a id="__codelineno-1-142" name="__codelineno-1-142" href="#__codelineno-1-142"></a>          ( A → b-extract <span class="kt">U</span> (rar Prop-b)) (b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-1-143"><a id="__codelineno-1-143" name="__codelineno-1-143" href="#__codelineno-1-143"></a>          <span class="p">( </span>\ (g <span class="p">:</span> A → b-extract <span class="kt">U</span> (rar Prop-b)) → g a) V))
 </span><span id="__span-1-144"><a id="__codelineno-1-144" name="__codelineno-1-144" href="#__codelineno-1-144"></a>
-</span><span id="__span-1-145"><a id="__codelineno-1-145" name="__codelineno-1-145" href="#__codelineno-1-145"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pred-tr-eq-A-const-Unit" id="define:pred-tr-eq-A-const-Unit" style="visibility: visible; position: relative; color: inherit">pred-tr-eq-A-const-Unit</a></span>
+</span><span id="__span-1-145"><a id="__codelineno-1-145" name="__codelineno-1-145" href="#__codelineno-1-145"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:pred-tr-eq-A-const-Unit" id="define:pred-tr-eq-A-const-Unit" style="visibility: visible; position: relative; color: inherit">pred-tr-eq-A-const-Unit</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
 </span><span id="__span-1-146"><a id="__codelineno-1-146" name="__codelineno-1-146" href="#__codelineno-1-146"></a>  ( pred :♭ (𝕀 → <span class="kt">U</span>) → Prop)
 </span><span id="__span-1-147"><a id="__codelineno-1-147" name="__codelineno-1-147" href="#__codelineno-1-147"></a>  ( A :♭ <span class="kt">U</span>)
 </span><span id="__span-1-148"><a id="__codelineno-1-148" name="__codelineno-1-148" href="#__codelineno-1-148"></a>  ( h :♭ A → <span class="kt">U</span>)
@@ -1359,7 +1361,7 @@ arrow predicate.</p>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  : transpose-ar Prop A <span class="p">(</span>mod ♭ (\ (a <span class="p">:</span> A) → amazing-tr pred (h a)))
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  =_{<span class="nd">♭</span> ((ar A) → Prop)}
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>  (<span class="k">let mod</span> <span class="nd">♭</span> sec := untranspose-ar Prop <span class="kt">U</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> pred) <span class="k">in</span> transpose-ar Prop A <span class="p">(</span>mod ♭ (\ (x <span class="p">:</span> A) → sec (h x))))
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  := flat-flat-convoy
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>  := b-b-elim
 </span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>       ( <span class="kt">U</span> → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>       <span class="p">( </span>\ (z <span class="p">:</span> <span class="nd">♭</span> (<span class="kt">U</span> → b-extract <span class="kt">U</span> (rar Prop-b)))
 </span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>         → transpose-ar Prop A <span class="p">(</span>mod ♭ (\ (a <span class="p">:</span> A) → amazing-tr pred (h a)))
@@ -1372,7 +1374,7 @@ arrow predicate.</p>
 </span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>             <span class="p">( </span>mod ♭ (\ (a <span class="p">:</span> A) → amazing-tr pred (h a)))
 </span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>             <span class="p">( </span>mod ♭ (\ (x <span class="p">:</span> A) → g (h x)))
 </span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>             ( transpose-ar Prop A)
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>             ( crisp-induction-flat (A → b-extract <span class="kt">U</span> (rar Prop-b))
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>             ( b-path-commute-fwd (A → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>                 <span class="p">( </span>\ (a <span class="p">:</span> A) → amazing-tr pred (h a)) <span class="p">(</span>\ (x <span class="p">:</span> A) → g (h x))
 </span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>                 ( <span class="k">let mod</span> <span class="nd">♭</span> e0 := e <span class="k">in</span>
 </span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>                   <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (rev (A → b-extract <span class="kt">U</span> (rar Prop-b))
@@ -1389,7 +1391,7 @@ arrow predicate.</p>
 </span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>  : transpose-ar Prop A (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (const-Unit-Prop-tr A))
 </span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>  =_{<span class="nd">♭</span> ((ar A) → Prop)}
 </span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>  transpose-ar Prop A <span class="p">(</span>untranspose-ar Prop A (mod ♭ (\ (_ <span class="p">:</span> 𝕀 → A) → Unit-Prop)))
-</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>  := flat-flat-convoy
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>  := b-b-elim
 </span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>       ( A → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>       <span class="p">( </span>\ (z <span class="p">:</span> <span class="nd">♭</span> (A → b-extract <span class="kt">U</span> (rar Prop-b)))
 </span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>         → transpose-ar Prop A (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (const-Unit-Prop-tr A)) =_{<span class="nd">♭</span> ((ar A) → Prop)} transpose-ar Prop A z)
@@ -1399,14 +1401,14 @@ arrow predicate.</p>
 </span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>         → ap (<span class="nd">♭</span> (A → b-extract <span class="kt">U</span> (rar Prop-b))) (<span class="nd">♭</span> ((ar A) → Prop))
 </span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>             ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (const-Unit-Prop-tr A)) (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> g)
 </span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>             ( transpose-ar Prop A)
-</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>             ( crisp-induction-flat (A → b-extract <span class="kt">U</span> (rar Prop-b)) (const-Unit-Prop-tr A) g
+</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>             ( b-path-commute-fwd (A → b-extract <span class="kt">U</span> (rar Prop-b)) (const-Unit-Prop-tr A) g
 </span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>                 ( <span class="k">let mod</span> <span class="nd">♭</span> e0 := e <span class="k">in</span>
 </span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a>                   <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (rev (A → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-2-51"><a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>                            ( g) (const-Unit-Prop-tr A)
 </span><span id="__span-2-52"><a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>                            ( b-extract-eq (A → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-2-53"><a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>                                ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> g) <span class="p">(</span>untranspose-ar Prop A (mod ♭ (\ (_ <span class="p">:</span> 𝕀 → A) → Unit-Prop))) e0)))))
 </span><span id="__span-2-54"><a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>
-</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-transpose" id="define:amazing-transpose" style="visibility: visible; position: relative; color: inherit">amazing-transpose</a></span>
+</span><span id="__span-2-55"><a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-transpose" id="define:amazing-transpose" style="visibility: visible; position: relative; color: inherit">amazing-transpose</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
 </span><span id="__span-2-56"><a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>  ( pred :♭ (𝕀 → <span class="kt">U</span>) → Prop)
 </span><span id="__span-2-57"><a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>  ( A :♭ <span class="kt">U</span>)
 </span><span id="__span-2-58"><a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a>  ( h :♭ A → <span class="kt">U</span>)
@@ -1419,7 +1421,7 @@ arrow predicate.</p>
 </span><span id="__span-2-65"><a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> <span class="p">(</span>\ (a <span class="p">:</span> A) → pred-tr-eq-A-const-Unit pred A h f a)
 </span><span id="__span-2-66"><a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>    <span class="k">in</span>
 </span><span id="__span-2-67"><a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a>    <span class="k">let mod</span> <span class="nd">♭</span> f0=f1 :=
-</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (crisp-induction-flat
+</span><span id="__span-2-68"><a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (b-path-commute-fwd
 </span><span id="__span-2-69"><a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>          ( A → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-2-70"><a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>          ( f0) (f1)
 </span><span id="__span-2-71"><a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>          ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (eq-htpy funext A (<span class="p">\ </span>_ → b-extract <span class="kt">U</span> (rar Prop-b)) (f0) (f1) (A-is-pullback))))
@@ -1524,7 +1526,7 @@ arrow predicate.</p>
 </span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>                <span class="k">let mod</span> <span class="nd">♭</span> k := untranspose-ar univ-family-Prop A (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> t) <span class="k">in</span>
 </span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>                <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> <span class="p">(</span>\ (x <span class="p">:</span> A) → fmap (k x))) a)
 </span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>            ( amazing-tr pred (h a))
-</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>            ( flat-convoy
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>            ( b-elim
 </span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>                ( b-extract <span class="kt">U</span> (rar univ-family-Prop-b) → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>                <span class="p">( </span>\ (z1 <span class="p">:</span> <span class="nd">♭</span> (b-extract <span class="kt">U</span> (rar univ-family-Prop-b) → b-extract <span class="kt">U</span> (rar Prop-b)))
 </span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>                → ( b-extract (b-extract <span class="kt">U</span> (rar univ-family-Prop-b) → b-extract <span class="kt">U</span> (rar Prop-b)) z1)
@@ -1537,7 +1539,7 @@ arrow predicate.</p>
 </span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>                <span class="p">( </span>rar-fmap univ-family-Prop Prop (\ (x <span class="p">:</span> univ-family-Prop) → <span class="s">first</span> x))
 </span><span id="__span-3-42"><a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>                ( \ (fm0 :♭ b-extract <span class="kt">U</span> (rar univ-family-Prop-b) → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-3-43"><a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>                → \ <span class="p">(</span>e1 <span class="p">:</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> fm0 =_{<span class="nd">♭</span> (b-extract <span class="kt">U</span> (rar univ-family-Prop-b) → b-extract <span class="kt">U</span> (rar Prop-b))} rar-fmap univ-family-Prop Prop <span class="p">(</span>\ (x <span class="p">:</span> univ-family-Prop) → <span class="s">first</span> x))
-</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>                → flat-convoy
+</span><span id="__span-3-44"><a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>                → b-elim
 </span><span id="__span-3-45"><a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>                    ( A → b-extract <span class="kt">U</span> (rar univ-family-Prop-b))
 </span><span id="__span-3-46"><a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>                    <span class="p">( </span>\ (z2 <span class="p">:</span> <span class="nd">♭</span> (A → b-extract <span class="kt">U</span> (rar univ-family-Prop-b)))
 </span><span id="__span-3-47"><a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>                    → fm0 (b-extract (A → b-extract <span class="kt">U</span> (rar univ-family-Prop-b)) z2 a)
@@ -1562,7 +1564,7 @@ arrow predicate.</p>
 </span><span id="__span-3-66"><a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>                ( <span class="k">let mod</span> <span class="nd">♭</span> sec := untranspose-ar Prop <span class="kt">U</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> pred) <span class="k">in</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> <span class="p">(</span>\ (x <span class="p">:</span> A) → sec (h x)))
 </span><span id="__span-3-67"><a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>                <span class="p">( </span>\ (F <span class="p">:</span> <span class="nd">♭</span> (A → b-extract <span class="kt">U</span> (rar Prop-b))) → b-extract (A → b-extract <span class="kt">U</span> (rar Prop-b)) F a)
 </span><span id="__span-3-68"><a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>                ( full-eq))
-</span><span id="__span-3-69"><a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>              ( flat-convoy
+</span><span id="__span-3-69"><a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>              ( b-elim
 </span><span id="__span-3-70"><a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a>                  ( <span class="kt">U</span> → b-extract <span class="kt">U</span> (rar Prop-b))
 </span><span id="__span-3-71"><a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a>                  <span class="p">( </span>\ (z <span class="p">:</span> <span class="nd">♭</span> (<span class="kt">U</span> → b-extract <span class="kt">U</span> (rar Prop-b)))
 </span><span id="__span-3-72"><a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a>                  → b-extract (A → b-extract <span class="kt">U</span> (rar Prop-b)) (<span class="k">let mod</span> <span class="nd">♭</span> sec := z <span class="k">in</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> <span class="p">(</span>\ (x <span class="p">:</span> A) → sec (h x))) a
@@ -1581,7 +1583,7 @@ that <code>amazing-predicate</code> is a proposition.</p>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="p">( </span>X <span class="p">:</span> <span class="kt">U</span>)
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  : is-prop (amazing-predicate pred X)
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-transpose-untranspose-section" id="define:amazing-transpose-untranspose-section" style="visibility: visible; position: relative; color: inherit">amazing-transpose-untranspose-section</a></span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-transpose-untranspose-section" id="define:amazing-transpose-untranspose-section" style="visibility: visible; position: relative; color: inherit">amazing-transpose-untranspose-section</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
 </span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  ( pred :♭ (𝕀 → <span class="kt">U</span>) → Prop)
 </span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  ( A :♭ <span class="kt">U</span>)
 </span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  ( h :♭ A → <span class="kt">U</span>)
@@ -1595,7 +1597,7 @@ that <code>amazing-predicate</code> is a proposition.</p>
 </span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>      <span class="p">( </span>amazing-untranspose pred A h
 </span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>        ( b-extract ((g <span class="p">:</span> 𝕀 → A) → <span class="s">first</span> (pred (<span class="p">\ </span>b → h (g b)))) (amazing-transpose pred A h f)))
 </span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="k">in</span>
-</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    crisp-induction-flat
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    b-path-commute-fwd
 </span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>      <span class="p">( </span>( a <span class="p">:</span> A) → amazing-predicate pred (h a))
 </span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>      ( a-untranspose-transpose) f
 </span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>      ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (eq-htpy funext A (<span class="p">\ </span>a → amazing-predicate pred (h a))
@@ -1607,7 +1609,7 @@ that <code>amazing-predicate</code> is a proposition.</p>
 </span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>                ( a-untranspose-transpose a)
 </span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>                ( f a)))))
 </span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>
-</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-transpose-untranspose-retraction" id="define:amazing-transpose-untranspose-retraction" style="visibility: visible; position: relative; color: inherit">amazing-transpose-untranspose-retraction</a></span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-transpose-untranspose-retraction" id="define:amazing-transpose-untranspose-retraction" style="visibility: visible; position: relative; color: inherit">amazing-transpose-untranspose-retraction</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
 </span><span id="__span-4-33"><a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>  ( pred :♭ (𝕀 → <span class="kt">U</span>) → Prop)
 </span><span id="__span-4-34"><a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>  ( A :♭ <span class="kt">U</span>)
 </span><span id="__span-4-35"><a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>  ( h :♭ A → <span class="kt">U</span>)
@@ -1621,7 +1623,7 @@ that <code>amazing-predicate</code> is a proposition.</p>
 </span><span id="__span-4-43"><a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>      <span class="p">( </span>amazing-transpose pred A h
 </span><span id="__span-4-44"><a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>        ( b-extract ((a <span class="p">:</span> A) → amazing-predicate pred (h a)) (amazing-untranspose pred A h f)))
 </span><span id="__span-4-45"><a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>    <span class="k">in</span>
-</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>    crisp-induction-flat
+</span><span id="__span-4-46"><a id="__codelineno-4-46" name="__codelineno-4-46" href="#__codelineno-4-46"></a>    b-path-commute-fwd
 </span><span id="__span-4-47"><a id="__codelineno-4-47" name="__codelineno-4-47" href="#__codelineno-4-47"></a>      <span class="p">( </span>( g <span class="p">:</span> 𝕀 → A) → <span class="s">first</span> (pred (<span class="p">\ </span>b → h (g b))))
 </span><span id="__span-4-48"><a id="__codelineno-4-48" name="__codelineno-4-48" href="#__codelineno-4-48"></a>      ( a-transpose-untranspose) f
 </span><span id="__span-4-49"><a id="__codelineno-4-49" name="__codelineno-4-49" href="#__codelineno-4-49"></a>      ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (eq-htpy funext (𝕀 → A) (<span class="p">\ </span>g → <span class="s">first</span> (pred (<span class="p">\ </span>b → h (g b))))
@@ -1633,7 +1635,7 @@ that <code>amazing-predicate</code> is a proposition.</p>
 </span><span id="__span-4-55"><a id="__codelineno-4-55" name="__codelineno-4-55" href="#__codelineno-4-55"></a>              ( a-transpose-untranspose g)
 </span><span id="__span-4-56"><a id="__codelineno-4-56" name="__codelineno-4-56" href="#__codelineno-4-56"></a>              ( f g)))))
 </span><span id="__span-4-57"><a id="__codelineno-4-57" name="__codelineno-4-57" href="#__codelineno-4-57"></a>
-</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-transpose-untranspose-equiv" id="define:amazing-transpose-untranspose-equiv" style="visibility: visible; position: relative; color: inherit">amazing-transpose-untranspose-equiv</a></span>
+</span><span id="__span-4-58"><a id="__codelineno-4-58" name="__codelineno-4-58" href="#__codelineno-4-58"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:amazing-transpose-untranspose-equiv" id="define:amazing-transpose-untranspose-equiv" style="visibility: visible; position: relative; color: inherit">amazing-transpose-untranspose-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext weakfunext<span class="p">)</span>
 </span><span id="__span-4-59"><a id="__codelineno-4-59" name="__codelineno-4-59" href="#__codelineno-4-59"></a>  ( pred :♭ (𝕀 → <span class="kt">U</span>) → Prop)
 </span><span id="__span-4-60"><a id="__codelineno-4-60" name="__codelineno-4-60" href="#__codelineno-4-60"></a>  ( A :♭ <span class="kt">U</span>)
 </span><span id="__span-4-61"><a id="__codelineno-4-61" name="__codelineno-4-61" href="#__codelineno-4-61"></a>  ( h :♭ A → <span class="kt">U</span>)
@@ -1651,7 +1653,7 @@ that <code>amazing-predicate</code> is a proposition.</p>
 </span><span id="__span-4-73"><a id="__codelineno-4-73" name="__codelineno-4-73" href="#__codelineno-4-73"></a>    , (
 </span><span id="__span-4-74"><a id="__codelineno-4-74" name="__codelineno-4-74" href="#__codelineno-4-74"></a>      ( inv
 </span><span id="__span-4-75"><a id="__codelineno-4-75" name="__codelineno-4-75" href="#__codelineno-4-75"></a>        , \ (x <span class="p">:</span> <span class="nd">♭</span> <span class="p">(</span>(a <span class="p">:</span> A) → amazing-predicate pred (h a)))
-</span><span id="__span-4-76"><a id="__codelineno-4-76" name="__codelineno-4-76" href="#__codelineno-4-76"></a>          → flat-convoy
+</span><span id="__span-4-76"><a id="__codelineno-4-76" name="__codelineno-4-76" href="#__codelineno-4-76"></a>          → b-elim
 </span><span id="__span-4-77"><a id="__codelineno-4-77" name="__codelineno-4-77" href="#__codelineno-4-77"></a>              <span class="p">( </span>( a <span class="p">:</span> A) → amazing-predicate pred (h a))
 </span><span id="__span-4-78"><a id="__codelineno-4-78" name="__codelineno-4-78" href="#__codelineno-4-78"></a>              <span class="p">( </span>\ (z <span class="p">:</span> <span class="nd">♭</span> <span class="p">(</span>(a <span class="p">:</span> A) → amazing-predicate pred (h a))) → inv (fwd z) = z)
 </span><span id="__span-4-79"><a id="__codelineno-4-79" name="__codelineno-4-79" href="#__codelineno-4-79"></a>              ( x)
@@ -1659,7 +1661,7 @@ that <code>amazing-predicate</code> is a proposition.</p>
 </span><span id="__span-4-81"><a id="__codelineno-4-81" name="__codelineno-4-81" href="#__codelineno-4-81"></a>
 </span><span id="__span-4-82"><a id="__codelineno-4-82" name="__codelineno-4-82" href="#__codelineno-4-82"></a>      , <span class="p">( </span>inv
 </span><span id="__span-4-83"><a id="__codelineno-4-83" name="__codelineno-4-83" href="#__codelineno-4-83"></a>        , \ (y <span class="p">:</span> <span class="nd">♭</span> <span class="p">(</span>(g <span class="p">:</span> 𝕀 → A) → <span class="s">first</span> (pred (<span class="p">\ </span>b → h (g b)))))
-</span><span id="__span-4-84"><a id="__codelineno-4-84" name="__codelineno-4-84" href="#__codelineno-4-84"></a>          → flat-convoy
+</span><span id="__span-4-84"><a id="__codelineno-4-84" name="__codelineno-4-84" href="#__codelineno-4-84"></a>          → b-elim
 </span><span id="__span-4-85"><a id="__codelineno-4-85" name="__codelineno-4-85" href="#__codelineno-4-85"></a>              <span class="p">( </span>( g <span class="p">:</span> 𝕀 → A) → <span class="s">first</span> (pred (<span class="p">\ </span>b → h (g b))))
 </span><span id="__span-4-86"><a id="__codelineno-4-86" name="__codelineno-4-86" href="#__codelineno-4-86"></a>              <span class="p">( </span>\ (z <span class="p">:</span> <span class="nd">♭</span> <span class="p">(</span>(g <span class="p">:</span> 𝕀 → A) → <span class="s">first</span> (pred (<span class="p">\ </span>b → h (g b))))) → fwd (inv z) = z)
 </span><span id="__span-4-87"><a id="__codelineno-4-87" name="__codelineno-4-87" href="#__codelineno-4-87"></a>              ( y)

@@ -12,7 +12,7 @@
         <link rel="prev" href="../02-homotopies.rzk/">
       
       
-        <link rel="next" href="../04-half-adjoint-equivalences.rzk/">
+        <link rel="next" href="../../simplicial-hott/02-simplicial-type-theory.rzk/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -724,7 +724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04-half-adjoint-equivalences.rzk/" class="md-nav__link">
+      <a href="../04-half-adjoint-equivalences.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -745,7 +745,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05-sigma.rzk/" class="md-nav__link">
+      <a href="../05-sigma.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -766,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06-contractible.rzk/" class="md-nav__link">
+      <a href="../06-contractible.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -787,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07-fibers.rzk/" class="md-nav__link">
+      <a href="../07-fibers.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -808,7 +808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08-families-of-maps.rzk/" class="md-nav__link">
+      <a href="../08-families-of-maps.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -829,7 +829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09-propositions.rzk/" class="md-nav__link">
+      <a href="../09-propositions.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -850,7 +850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../10-trivial-fibrations.rzk/" class="md-nav__link">
+      <a href="../10-trivial-fibrations.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -871,7 +871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../11-homotopy-pullbacks.rzk/" class="md-nav__link">
+      <a href="../11-homotopy-pullbacks.rzk.md" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -2311,241 +2311,326 @@ identifications. This defines <code class="language-rzk highlight">eq-htpy</code
 </span><span id="__span-45-4"><a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>  <span class="p">( </span>f g <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → A x)
 </span><span id="__span-45-5"><a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>  : <span class="p">( </span>( x <span class="p">:</span> X) → f x = g x) → (f = g)
 </span><span id="__span-45-6"><a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>  := <span class="s">first</span> (<span class="s">first</span> (funext X A f g))
-</span><span id="__span-45-7"><a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>
-</span><span id="__span-45-8"><a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:left-cancel-is-equiv" id="define:left-cancel-is-equiv" style="visibility: visible; position: relative; color: inherit">left-cancel-is-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
-</span><span id="__span-45-9"><a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-45-10"><a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
-</span><span id="__span-45-11"><a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a>  <span class="p">( </span>is-equiv-f <span class="p">:</span> is-equiv A B f)
-</span><span id="__span-45-12"><a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a>  : ( comp A B A (<span class="s">π₁</span> (<span class="s">π₁</span> is-equiv-f)) f) = (identity A)
-</span><span id="__span-45-13"><a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a>  :=
-</span><span id="__span-45-14"><a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a>    eq-htpy A (<span class="p">\ </span>x&#39; → A)
-</span><span id="__span-45-15"><a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a>    ( comp A B A (<span class="s">π₁</span> (<span class="s">π₁</span> is-equiv-f)) f)
-</span><span id="__span-45-16"><a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a>    ( identity A)
-</span><span id="__span-45-17"><a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a>    ( <span class="s">π₂</span> (<span class="s">π₁</span> is-equiv-f))
-</span><span id="__span-45-18"><a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a>
-</span><span id="__span-45-19"><a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:right-cancel-is-equiv" id="define:right-cancel-is-equiv" style="visibility: visible; position: relative; color: inherit">right-cancel-is-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
-</span><span id="__span-45-20"><a id="__codelineno-45-20" name="__codelineno-45-20" href="#__codelineno-45-20"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-45-21"><a id="__codelineno-45-21" name="__codelineno-45-21" href="#__codelineno-45-21"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
-</span><span id="__span-45-22"><a id="__codelineno-45-22" name="__codelineno-45-22" href="#__codelineno-45-22"></a>  <span class="p">( </span>is-equiv-f <span class="p">:</span> is-equiv A B f)
-</span><span id="__span-45-23"><a id="__codelineno-45-23" name="__codelineno-45-23" href="#__codelineno-45-23"></a>  : ( comp B A B f (<span class="s">π₁</span> (<span class="s">π₂</span> is-equiv-f))) = (identity B)
-</span><span id="__span-45-24"><a id="__codelineno-45-24" name="__codelineno-45-24" href="#__codelineno-45-24"></a>  :=
-</span><span id="__span-45-25"><a id="__codelineno-45-25" name="__codelineno-45-25" href="#__codelineno-45-25"></a>    eq-htpy B (<span class="p">\ </span>x&#39; → B)
-</span><span id="__span-45-26"><a id="__codelineno-45-26" name="__codelineno-45-26" href="#__codelineno-45-26"></a>    ( comp B A B f (<span class="s">π₁</span> (<span class="s">π₂</span> is-equiv-f)))
-</span><span id="__span-45-27"><a id="__codelineno-45-27" name="__codelineno-45-27" href="#__codelineno-45-27"></a>    ( identity B)
-</span><span id="__span-45-28"><a id="__codelineno-45-28" name="__codelineno-45-28" href="#__codelineno-45-28"></a>    ( <span class="s">π₂</span> (<span class="s">π₂</span> is-equiv-f))
+</span></code></pre></div>
+<p>Application of <code>eq-htpy</code> commutes with evaluation at a point.</p>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ap-eq-htpy-at" id="define:ap-eq-htpy-at" style="visibility: visible; position: relative; color: inherit">ap-eq-htpy-at</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>  <span class="p">( </span>X <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>  <span class="p">( </span>A <span class="p">:</span> X → <span class="kt">U</span>)
+</span><span id="__span-46-4"><a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>  <span class="p">( </span>f g <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → A x)
+</span><span id="__span-46-5"><a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>  <span class="p">( </span>h <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → f x = g x)
+</span><span id="__span-46-6"><a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>  <span class="p">( </span>x0 <span class="p">:</span> X)
+</span><span id="__span-46-7"><a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>  : ap
+</span><span id="__span-46-8"><a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>      <span class="p">( </span>(x <span class="p">:</span> X) → A x)
+</span><span id="__span-46-9"><a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>      ( A x0)
+</span><span id="__span-46-10"><a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a>      f g
+</span><span id="__span-46-11"><a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>      ( <span class="p">\ </span>φ → φ x0)
+</span><span id="__span-46-12"><a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>      ( eq-htpy X A f g h)
+</span><span id="__span-46-13"><a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a>    = h x0
+</span><span id="__span-46-14"><a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a>  :=
+</span><span id="__span-46-15"><a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>    <span class="k">let</span> is-equiv-htpy-eq
+</span><span id="__span-46-16"><a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a>      : is-equiv (f = g) <span class="p">(</span>(x <span class="p">:</span> X) → f x = g x) (htpy-eq X A f g)
+</span><span id="__span-46-17"><a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a>      := funext X A f g
+</span><span id="__span-46-18"><a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a>    <span class="k">in</span>
+</span><span id="__span-46-19"><a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a>    <span class="k">let</span> s
+</span><span id="__span-46-20"><a id="__codelineno-46-20" name="__codelineno-46-20" href="#__codelineno-46-20"></a>      : <span class="p">( </span>(x <span class="p">:</span> X) → f x = g x) → (f = g)
+</span><span id="__span-46-21"><a id="__codelineno-46-21" name="__codelineno-46-21" href="#__codelineno-46-21"></a>      := eq-htpy X A f g
+</span><span id="__span-46-22"><a id="__codelineno-46-22" name="__codelineno-46-22" href="#__codelineno-46-22"></a>    <span class="k">in</span>
+</span><span id="__span-46-23"><a id="__codelineno-46-23" name="__codelineno-46-23" href="#__codelineno-46-23"></a>    <span class="k">let</span> sec
+</span><span id="__span-46-24"><a id="__codelineno-46-24" name="__codelineno-46-24" href="#__codelineno-46-24"></a>      : <span class="p">( </span>(x <span class="p">:</span> X) → f x = g x) → (f = g)
+</span><span id="__span-46-25"><a id="__codelineno-46-25" name="__codelineno-46-25" href="#__codelineno-46-25"></a>      := section-is-equiv (f = g) <span class="p">(</span>(x <span class="p">:</span> X) → f x = g x) (htpy-eq X A f g) is-equiv-htpy-eq
+</span><span id="__span-46-26"><a id="__codelineno-46-26" name="__codelineno-46-26" href="#__codelineno-46-26"></a>    <span class="k">in</span>
+</span><span id="__span-46-27"><a id="__codelineno-46-27" name="__codelineno-46-27" href="#__codelineno-46-27"></a>    <span class="k">let</span> η
+</span><span id="__span-46-28"><a id="__codelineno-46-28" name="__codelineno-46-28" href="#__codelineno-46-28"></a>      : htpy-eq X A f g (s h) = h
+</span><span id="__span-46-29"><a id="__codelineno-46-29" name="__codelineno-46-29" href="#__codelineno-46-29"></a>      := concat
+</span><span id="__span-46-30"><a id="__codelineno-46-30" name="__codelineno-46-30" href="#__codelineno-46-30"></a>          <span class="p">( </span>(x <span class="p">:</span> X) → f x = g x)
+</span><span id="__span-46-31"><a id="__codelineno-46-31" name="__codelineno-46-31" href="#__codelineno-46-31"></a>          ( htpy-eq X A f g (s h))
+</span><span id="__span-46-32"><a id="__codelineno-46-32" name="__codelineno-46-32" href="#__codelineno-46-32"></a>          ( htpy-eq X A f g (sec h))
+</span><span id="__span-46-33"><a id="__codelineno-46-33" name="__codelineno-46-33" href="#__codelineno-46-33"></a>          ( h)
+</span><span id="__span-46-34"><a id="__codelineno-46-34" name="__codelineno-46-34" href="#__codelineno-46-34"></a>          <span class="p">( </span>rev ((x <span class="p">:</span> X) → f x = g x) (htpy-eq X A f g (sec h)) (htpy-eq X A f g (s h)) (ap (f = g) <span class="p">(</span>(x <span class="p">:</span> X) → f x = g x) (sec h) (s h) (htpy-eq X A f g) (homotopy-section-retraction-is-equiv (f = g) <span class="p">(</span>(x <span class="p">:</span> X) → f x = g x) (htpy-eq X A f g) is-equiv-htpy-eq h)))
+</span><span id="__span-46-35"><a id="__codelineno-46-35" name="__codelineno-46-35" href="#__codelineno-46-35"></a>          ( <span class="s">second</span> (has-section-is-equiv (f = g) <span class="p">(</span>(x <span class="p">:</span> X) → f x = g x) (htpy-eq X A f g) is-equiv-htpy-eq) h)
+</span><span id="__span-46-36"><a id="__codelineno-46-36" name="__codelineno-46-36" href="#__codelineno-46-36"></a>    <span class="k">in</span>
+</span><span id="__span-46-37"><a id="__codelineno-46-37" name="__codelineno-46-37" href="#__codelineno-46-37"></a>    <span class="k">let</span> ap=htpy
+</span><span id="__span-46-38"><a id="__codelineno-46-38" name="__codelineno-46-38" href="#__codelineno-46-38"></a>      : ap <span class="p">(</span>(x <span class="p">:</span> X) → A x) (A x0) f g (<span class="p">\ </span>φ → φ x0) (s h)
+</span><span id="__span-46-39"><a id="__codelineno-46-39" name="__codelineno-46-39" href="#__codelineno-46-39"></a>        = htpy-eq X A f g (s h) x0
+</span><span id="__span-46-40"><a id="__codelineno-46-40" name="__codelineno-46-40" href="#__codelineno-46-40"></a>      :=
+</span><span id="__span-46-41"><a id="__codelineno-46-41" name="__codelineno-46-41" href="#__codelineno-46-41"></a>        ind-path
+</span><span id="__span-46-42"><a id="__codelineno-46-42" name="__codelineno-46-42" href="#__codelineno-46-42"></a>          <span class="p">( </span>(x <span class="p">:</span> X) → A x)
+</span><span id="__span-46-43"><a id="__codelineno-46-43" name="__codelineno-46-43" href="#__codelineno-46-43"></a>          f
+</span><span id="__span-46-44"><a id="__codelineno-46-44" name="__codelineno-46-44" href="#__codelineno-46-44"></a>          <span class="p">( </span>\ g&#39; p&#39; →
+</span><span id="__span-46-45"><a id="__codelineno-46-45" name="__codelineno-46-45" href="#__codelineno-46-45"></a>              ap ((x <span class="p">:</span> X) → A x) (A x0) f g&#39; (<span class="p">\ </span>φ → φ x0) p&#39;
+</span><span id="__span-46-46"><a id="__codelineno-46-46" name="__codelineno-46-46" href="#__codelineno-46-46"></a>            = htpy-eq X A f g&#39; p&#39; x0)
+</span><span id="__span-46-47"><a id="__codelineno-46-47" name="__codelineno-46-47" href="#__codelineno-46-47"></a>          ( <span class="s">refl</span>)
+</span><span id="__span-46-48"><a id="__codelineno-46-48" name="__codelineno-46-48" href="#__codelineno-46-48"></a>          g
+</span><span id="__span-46-49"><a id="__codelineno-46-49" name="__codelineno-46-49" href="#__codelineno-46-49"></a>          ( s h)
+</span><span id="__span-46-50"><a id="__codelineno-46-50" name="__codelineno-46-50" href="#__codelineno-46-50"></a>    <span class="k">in</span>
+</span><span id="__span-46-51"><a id="__codelineno-46-51" name="__codelineno-46-51" href="#__codelineno-46-51"></a>      concat
+</span><span id="__span-46-52"><a id="__codelineno-46-52" name="__codelineno-46-52" href="#__codelineno-46-52"></a>        ( f x0 = g x0)
+</span><span id="__span-46-53"><a id="__codelineno-46-53" name="__codelineno-46-53" href="#__codelineno-46-53"></a>        <span class="p">( </span>ap ((x <span class="p">:</span> X) → A x) (A x0) f g (<span class="p">\ </span>φ → φ x0) (s h))
+</span><span id="__span-46-54"><a id="__codelineno-46-54" name="__codelineno-46-54" href="#__codelineno-46-54"></a>        ( htpy-eq X A f g (s h) x0)
+</span><span id="__span-46-55"><a id="__codelineno-46-55" name="__codelineno-46-55" href="#__codelineno-46-55"></a>        ( h x0)
+</span><span id="__span-46-56"><a id="__codelineno-46-56" name="__codelineno-46-56" href="#__codelineno-46-56"></a>        ap=htpy
+</span><span id="__span-46-57"><a id="__codelineno-46-57" name="__codelineno-46-57" href="#__codelineno-46-57"></a>        <span class="p">( </span>ap
+</span><span id="__span-46-58"><a id="__codelineno-46-58" name="__codelineno-46-58" href="#__codelineno-46-58"></a>            ( (x <span class="p">:</span> X) → f x = g x)
+</span><span id="__span-46-59"><a id="__codelineno-46-59" name="__codelineno-46-59" href="#__codelineno-46-59"></a>            ( f x0 = g x0)
+</span><span id="__span-46-60"><a id="__codelineno-46-60" name="__codelineno-46-60" href="#__codelineno-46-60"></a>            ( htpy-eq X A f g (s h))
+</span><span id="__span-46-61"><a id="__codelineno-46-61" name="__codelineno-46-61" href="#__codelineno-46-61"></a>            h
+</span><span id="__span-46-62"><a id="__codelineno-46-62" name="__codelineno-46-62" href="#__codelineno-46-62"></a>            ( <span class="p">\ </span>k → k x0)
+</span><span id="__span-46-63"><a id="__codelineno-46-63" name="__codelineno-46-63" href="#__codelineno-46-63"></a>            η)
+</span></code></pre></div>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:left-cancel-is-equiv" id="define:left-cancel-is-equiv" style="visibility: visible; position: relative; color: inherit">left-cancel-is-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>  <span class="p">( </span>is-equiv-f <span class="p">:</span> is-equiv A B f)
+</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>  : ( comp A B A (<span class="s">π₁</span> (<span class="s">π₁</span> is-equiv-f)) f) = (identity A)
+</span><span id="__span-47-6"><a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a>  :=
+</span><span id="__span-47-7"><a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a>    eq-htpy A (<span class="p">\ </span>x&#39; → A)
+</span><span id="__span-47-8"><a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a>    ( comp A B A (<span class="s">π₁</span> (<span class="s">π₁</span> is-equiv-f)) f)
+</span><span id="__span-47-9"><a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a>    ( identity A)
+</span><span id="__span-47-10"><a id="__codelineno-47-10" name="__codelineno-47-10" href="#__codelineno-47-10"></a>    ( <span class="s">π₂</span> (<span class="s">π₁</span> is-equiv-f))
+</span><span id="__span-47-11"><a id="__codelineno-47-11" name="__codelineno-47-11" href="#__codelineno-47-11"></a>
+</span><span id="__span-47-12"><a id="__codelineno-47-12" name="__codelineno-47-12" href="#__codelineno-47-12"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:right-cancel-is-equiv" id="define:right-cancel-is-equiv" style="visibility: visible; position: relative; color: inherit">right-cancel-is-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-47-13"><a id="__codelineno-47-13" name="__codelineno-47-13" href="#__codelineno-47-13"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-47-14"><a id="__codelineno-47-14" name="__codelineno-47-14" href="#__codelineno-47-14"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-47-15"><a id="__codelineno-47-15" name="__codelineno-47-15" href="#__codelineno-47-15"></a>  <span class="p">( </span>is-equiv-f <span class="p">:</span> is-equiv A B f)
+</span><span id="__span-47-16"><a id="__codelineno-47-16" name="__codelineno-47-16" href="#__codelineno-47-16"></a>  : ( comp B A B f (<span class="s">π₁</span> (<span class="s">π₂</span> is-equiv-f))) = (identity B)
+</span><span id="__span-47-17"><a id="__codelineno-47-17" name="__codelineno-47-17" href="#__codelineno-47-17"></a>  :=
+</span><span id="__span-47-18"><a id="__codelineno-47-18" name="__codelineno-47-18" href="#__codelineno-47-18"></a>    eq-htpy B (<span class="p">\ </span>x&#39; → B)
+</span><span id="__span-47-19"><a id="__codelineno-47-19" name="__codelineno-47-19" href="#__codelineno-47-19"></a>    ( comp B A B f (<span class="s">π₁</span> (<span class="s">π₂</span> is-equiv-f)))
+</span><span id="__span-47-20"><a id="__codelineno-47-20" name="__codelineno-47-20" href="#__codelineno-47-20"></a>    ( identity B)
+</span><span id="__span-47-21"><a id="__codelineno-47-21" name="__codelineno-47-21" href="#__codelineno-47-21"></a>    ( <span class="s">π₂</span> (<span class="s">π₂</span> is-equiv-f))
 </span></code></pre></div>
 <p>Using function extensionality, a fiberwise equivalence defines an equivalence of
 dependent function types.</p>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-function-is-equiv-family" id="define:is-equiv-function-is-equiv-family" style="visibility: visible; position: relative; color: inherit">is-equiv-function-is-equiv-family</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
-</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>  <span class="p">( </span>X <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>  <span class="p">( </span>A B <span class="p">:</span> X → <span class="kt">U</span>)
-</span><span id="__span-46-4"><a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → (A x) → (B x))
-</span><span id="__span-46-5"><a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>  <span class="p">( </span>famisequiv <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → is-equiv (A x) (B x) (f x))
-</span><span id="__span-46-6"><a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>  : is-equiv <span class="p">(</span>(x <span class="p">:</span> X) → A x) <span class="p">(</span>(x <span class="p">:</span> X) → B x) (<span class="p">\ </span>a x → f x (a x))
-</span><span id="__span-46-7"><a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>  :=
-</span><span id="__span-46-8"><a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>    ( ( ( <span class="p">\ </span>b x → <span class="s">first</span> (<span class="s">first</span> (famisequiv x)) (b x))
-</span><span id="__span-46-9"><a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>      , ( <span class="p">\ </span>a →
-</span><span id="__span-46-10"><a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a>           eq-htpy
-</span><span id="__span-46-11"><a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>            X A
-</span><span id="__span-46-12"><a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>           ( <span class="p">\ </span>x →
-</span><span id="__span-46-13"><a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a>              <span class="s">first</span>
-</span><span id="__span-46-14"><a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a>                ( <span class="s">first</span> (famisequiv x))
-</span><span id="__span-46-15"><a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>                ( f x (a x)))
-</span><span id="__span-46-16"><a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a>            ( a)
-</span><span id="__span-46-17"><a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a>            ( <span class="p">\ </span>x → <span class="s">second</span> (<span class="s">first</span> (famisequiv x)) (a x))))
-</span><span id="__span-46-18"><a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a>    , ( ( <span class="p">\ </span>b x → <span class="s">first</span> (<span class="s">second</span> (famisequiv x)) (b x))
-</span><span id="__span-46-19"><a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a>      , ( <span class="p">\ </span>b →
-</span><span id="__span-46-20"><a id="__codelineno-46-20" name="__codelineno-46-20" href="#__codelineno-46-20"></a>            eq-htpy
-</span><span id="__span-46-21"><a id="__codelineno-46-21" name="__codelineno-46-21" href="#__codelineno-46-21"></a>            X B
-</span><span id="__span-46-22"><a id="__codelineno-46-22" name="__codelineno-46-22" href="#__codelineno-46-22"></a>            ( <span class="p">\ </span>x → f x (<span class="s">first</span> (<span class="s">second</span> (famisequiv x)) (b x)))
-</span><span id="__span-46-23"><a id="__codelineno-46-23" name="__codelineno-46-23" href="#__codelineno-46-23"></a>            ( b)
-</span><span id="__span-46-24"><a id="__codelineno-46-24" name="__codelineno-46-24" href="#__codelineno-46-24"></a>            ( <span class="p">\ </span>x → <span class="s">second</span> (<span class="s">second</span> (famisequiv x)) (b x)))))
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-function-is-equiv-family" id="define:is-equiv-function-is-equiv-family" style="visibility: visible; position: relative; color: inherit">is-equiv-function-is-equiv-family</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>  <span class="p">( </span>X <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>  <span class="p">( </span>A B <span class="p">:</span> X → <span class="kt">U</span>)
+</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → (A x) → (B x))
+</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>  <span class="p">( </span>famisequiv <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → is-equiv (A x) (B x) (f x))
+</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>  : is-equiv <span class="p">(</span>(x <span class="p">:</span> X) → A x) <span class="p">(</span>(x <span class="p">:</span> X) → B x) (<span class="p">\ </span>a x → f x (a x))
+</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a>  :=
+</span><span id="__span-48-8"><a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a>    ( ( ( <span class="p">\ </span>b x → <span class="s">first</span> (<span class="s">first</span> (famisequiv x)) (b x))
+</span><span id="__span-48-9"><a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>      , ( <span class="p">\ </span>a →
+</span><span id="__span-48-10"><a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a>           eq-htpy
+</span><span id="__span-48-11"><a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a>            X A
+</span><span id="__span-48-12"><a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a>           ( <span class="p">\ </span>x →
+</span><span id="__span-48-13"><a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a>              <span class="s">first</span>
+</span><span id="__span-48-14"><a id="__codelineno-48-14" name="__codelineno-48-14" href="#__codelineno-48-14"></a>                ( <span class="s">first</span> (famisequiv x))
+</span><span id="__span-48-15"><a id="__codelineno-48-15" name="__codelineno-48-15" href="#__codelineno-48-15"></a>                ( f x (a x)))
+</span><span id="__span-48-16"><a id="__codelineno-48-16" name="__codelineno-48-16" href="#__codelineno-48-16"></a>            ( a)
+</span><span id="__span-48-17"><a id="__codelineno-48-17" name="__codelineno-48-17" href="#__codelineno-48-17"></a>            ( <span class="p">\ </span>x → <span class="s">second</span> (<span class="s">first</span> (famisequiv x)) (a x))))
+</span><span id="__span-48-18"><a id="__codelineno-48-18" name="__codelineno-48-18" href="#__codelineno-48-18"></a>    , ( ( <span class="p">\ </span>b x → <span class="s">first</span> (<span class="s">second</span> (famisequiv x)) (b x))
+</span><span id="__span-48-19"><a id="__codelineno-48-19" name="__codelineno-48-19" href="#__codelineno-48-19"></a>      , ( <span class="p">\ </span>b →
+</span><span id="__span-48-20"><a id="__codelineno-48-20" name="__codelineno-48-20" href="#__codelineno-48-20"></a>            eq-htpy
+</span><span id="__span-48-21"><a id="__codelineno-48-21" name="__codelineno-48-21" href="#__codelineno-48-21"></a>            X B
+</span><span id="__span-48-22"><a id="__codelineno-48-22" name="__codelineno-48-22" href="#__codelineno-48-22"></a>            ( <span class="p">\ </span>x → f x (<span class="s">first</span> (<span class="s">second</span> (famisequiv x)) (b x)))
+</span><span id="__span-48-23"><a id="__codelineno-48-23" name="__codelineno-48-23" href="#__codelineno-48-23"></a>            ( b)
+</span><span id="__span-48-24"><a id="__codelineno-48-24" name="__codelineno-48-24" href="#__codelineno-48-24"></a>            ( <span class="p">\ </span>x → <span class="s">second</span> (<span class="s">second</span> (famisequiv x)) (b x)))))
 </span></code></pre></div>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-function-equiv-family" id="define:equiv-function-equiv-family" style="visibility: visible; position: relative; color: inherit">equiv-function-equiv-family</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
-</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>  <span class="p">( </span>X <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>  <span class="p">( </span>A B <span class="p">:</span> X → <span class="kt">U</span>)
-</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>  <span class="p">( </span>famequiv <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → Equiv (A x) (B x))
-</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>  : Equiv <span class="p">(</span>(x <span class="p">:</span> X) → A x) <span class="p">(</span>(x <span class="p">:</span> X) → B x)
-</span><span id="__span-47-6"><a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a>  :=
-</span><span id="__span-47-7"><a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a>    ( ( <span class="p">\ </span>a x → (<span class="s">first</span> (famequiv x)) (a x))
-</span><span id="__span-47-8"><a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a>    , ( is-equiv-function-is-equiv-family
-</span><span id="__span-47-9"><a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a>        ( X)
-</span><span id="__span-47-10"><a id="__codelineno-47-10" name="__codelineno-47-10" href="#__codelineno-47-10"></a>        ( A)
-</span><span id="__span-47-11"><a id="__codelineno-47-11" name="__codelineno-47-11" href="#__codelineno-47-11"></a>        ( B)
-</span><span id="__span-47-12"><a id="__codelineno-47-12" name="__codelineno-47-12" href="#__codelineno-47-12"></a>        ( <span class="p">\ </span>x ax → <span class="s">first</span> (famequiv x) (ax))
-</span><span id="__span-47-13"><a id="__codelineno-47-13" name="__codelineno-47-13" href="#__codelineno-47-13"></a>        ( <span class="p">\ </span>x → <span class="s">second</span> (famequiv x))))
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-function-equiv-family" id="define:equiv-function-equiv-family" style="visibility: visible; position: relative; color: inherit">equiv-function-equiv-family</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>  <span class="p">( </span>X <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>  <span class="p">( </span>A B <span class="p">:</span> X → <span class="kt">U</span>)
+</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>  <span class="p">( </span>famequiv <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → Equiv (A x) (B x))
+</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>  : Equiv <span class="p">(</span>(x <span class="p">:</span> X) → A x) <span class="p">(</span>(x <span class="p">:</span> X) → B x)
+</span><span id="__span-49-6"><a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>  :=
+</span><span id="__span-49-7"><a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>    ( ( <span class="p">\ </span>a x → (<span class="s">first</span> (famequiv x)) (a x))
+</span><span id="__span-49-8"><a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>    , ( is-equiv-function-is-equiv-family
+</span><span id="__span-49-9"><a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>        ( X)
+</span><span id="__span-49-10"><a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>        ( A)
+</span><span id="__span-49-11"><a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a>        ( B)
+</span><span id="__span-49-12"><a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a>        ( <span class="p">\ </span>x ax → <span class="s">first</span> (famequiv x) (ax))
+</span><span id="__span-49-13"><a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a>        ( <span class="p">\ </span>x → <span class="s">second</span> (famequiv x))))
 </span></code></pre></div>
 <h2 id="embeddings">Embeddings<a class="headerlink" href="#embeddings" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-48-1"><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb" id="define:is-emb" style="visibility: visible; position: relative; color: inherit">is-emb</a></span>
-</span><span id="__span-48-2"><a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-48-3"><a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
-</span><span id="__span-48-4"><a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a>  : <span class="kt">U</span>
-</span><span id="__span-48-5"><a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a>  := <span class="p">(</span>x <span class="p">:</span> A) → <span class="p">(</span>y <span class="p">:</span> A) → is-equiv (x = y) (f x = f y) (ap A B x y f)
-</span><span id="__span-48-6"><a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a>
-</span><span id="__span-48-7"><a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Emb" id="define:Emb" style="visibility: visible; position: relative; color: inherit">Emb</a></span>
-</span><span id="__span-48-8"><a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-48-9"><a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>  : <span class="kt">U</span>
-</span><span id="__span-48-10"><a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a>  := <span class="p">(</span>Σ (f <span class="p">:</span> A → B) , is-emb A B f)
-</span><span id="__span-48-11"><a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a>
-</span><span id="__span-48-12"><a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb-is-inhabited-emb" id="define:is-emb-is-inhabited-emb" style="visibility: visible; position: relative; color: inherit">is-emb-is-inhabited-emb</a></span>
-</span><span id="__span-48-13"><a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-48-14"><a id="__codelineno-48-14" name="__codelineno-48-14" href="#__codelineno-48-14"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
-</span><span id="__span-48-15"><a id="__codelineno-48-15" name="__codelineno-48-15" href="#__codelineno-48-15"></a>  <span class="p">( </span>e <span class="p">:</span> A → is-emb A B f)
-</span><span id="__span-48-16"><a id="__codelineno-48-16" name="__codelineno-48-16" href="#__codelineno-48-16"></a>  : is-emb A B f
-</span><span id="__span-48-17"><a id="__codelineno-48-17" name="__codelineno-48-17" href="#__codelineno-48-17"></a>  := <span class="p">\ </span>x y → e x x y
-</span><span id="__span-48-18"><a id="__codelineno-48-18" name="__codelineno-48-18" href="#__codelineno-48-18"></a>
-</span><span id="__span-48-19"><a id="__codelineno-48-19" name="__codelineno-48-19" href="#__codelineno-48-19"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:inv-ap-is-emb" id="define:inv-ap-is-emb" style="visibility: visible; position: relative; color: inherit">inv-ap-is-emb</a></span>
-</span><span id="__span-48-20"><a id="__codelineno-48-20" name="__codelineno-48-20" href="#__codelineno-48-20"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-48-21"><a id="__codelineno-48-21" name="__codelineno-48-21" href="#__codelineno-48-21"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
-</span><span id="__span-48-22"><a id="__codelineno-48-22" name="__codelineno-48-22" href="#__codelineno-48-22"></a>  <span class="p">( </span>is-emb-f <span class="p">:</span> is-emb A B f)
-</span><span id="__span-48-23"><a id="__codelineno-48-23" name="__codelineno-48-23" href="#__codelineno-48-23"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
-</span><span id="__span-48-24"><a id="__codelineno-48-24" name="__codelineno-48-24" href="#__codelineno-48-24"></a>  <span class="p">( </span>p <span class="p">:</span> f x = f y)
-</span><span id="__span-48-25"><a id="__codelineno-48-25" name="__codelineno-48-25" href="#__codelineno-48-25"></a>  : ( x = y)
-</span><span id="__span-48-26"><a id="__codelineno-48-26" name="__codelineno-48-26" href="#__codelineno-48-26"></a>  := <span class="s">first</span> (<span class="s">first</span> (is-emb-f x y)) p
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb" id="define:is-emb" style="visibility: visible; position: relative; color: inherit">is-emb</a></span>
+</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-50-4"><a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>  : <span class="kt">U</span>
+</span><span id="__span-50-5"><a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>  := <span class="p">(</span>x <span class="p">:</span> A) → <span class="p">(</span>y <span class="p">:</span> A) → is-equiv (x = y) (f x = f y) (ap A B x y f)
+</span><span id="__span-50-6"><a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>
+</span><span id="__span-50-7"><a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Emb" id="define:Emb" style="visibility: visible; position: relative; color: inherit">Emb</a></span>
+</span><span id="__span-50-8"><a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-50-9"><a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a>  : <span class="kt">U</span>
+</span><span id="__span-50-10"><a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a>  := <span class="p">(</span>Σ (f <span class="p">:</span> A → B) , is-emb A B f)
+</span><span id="__span-50-11"><a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a>
+</span><span id="__span-50-12"><a id="__codelineno-50-12" name="__codelineno-50-12" href="#__codelineno-50-12"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb-is-inhabited-emb" id="define:is-emb-is-inhabited-emb" style="visibility: visible; position: relative; color: inherit">is-emb-is-inhabited-emb</a></span>
+</span><span id="__span-50-13"><a id="__codelineno-50-13" name="__codelineno-50-13" href="#__codelineno-50-13"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-50-14"><a id="__codelineno-50-14" name="__codelineno-50-14" href="#__codelineno-50-14"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-50-15"><a id="__codelineno-50-15" name="__codelineno-50-15" href="#__codelineno-50-15"></a>  <span class="p">( </span>e <span class="p">:</span> A → is-emb A B f)
+</span><span id="__span-50-16"><a id="__codelineno-50-16" name="__codelineno-50-16" href="#__codelineno-50-16"></a>  : is-emb A B f
+</span><span id="__span-50-17"><a id="__codelineno-50-17" name="__codelineno-50-17" href="#__codelineno-50-17"></a>  := <span class="p">\ </span>x y → e x x y
+</span><span id="__span-50-18"><a id="__codelineno-50-18" name="__codelineno-50-18" href="#__codelineno-50-18"></a>
+</span><span id="__span-50-19"><a id="__codelineno-50-19" name="__codelineno-50-19" href="#__codelineno-50-19"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:inv-ap-is-emb" id="define:inv-ap-is-emb" style="visibility: visible; position: relative; color: inherit">inv-ap-is-emb</a></span>
+</span><span id="__span-50-20"><a id="__codelineno-50-20" name="__codelineno-50-20" href="#__codelineno-50-20"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-50-21"><a id="__codelineno-50-21" name="__codelineno-50-21" href="#__codelineno-50-21"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-50-22"><a id="__codelineno-50-22" name="__codelineno-50-22" href="#__codelineno-50-22"></a>  <span class="p">( </span>is-emb-f <span class="p">:</span> is-emb A B f)
+</span><span id="__span-50-23"><a id="__codelineno-50-23" name="__codelineno-50-23" href="#__codelineno-50-23"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-50-24"><a id="__codelineno-50-24" name="__codelineno-50-24" href="#__codelineno-50-24"></a>  <span class="p">( </span>p <span class="p">:</span> f x = f y)
+</span><span id="__span-50-25"><a id="__codelineno-50-25" name="__codelineno-50-25" href="#__codelineno-50-25"></a>  : ( x = y)
+</span><span id="__span-50-26"><a id="__codelineno-50-26" name="__codelineno-50-26" href="#__codelineno-50-26"></a>  := <span class="s">first</span> (<span class="s">first</span> (is-emb-f x y)) p
 </span></code></pre></div>
 <h2 id="reversal-is-an-equivalence">Reversal is an equivalence<a class="headerlink" href="#reversal-is-an-equivalence" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-rev" id="define:equiv-rev" style="visibility: visible; position: relative; color: inherit">equiv-rev</a></span>
-</span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-49-3"><a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
-</span><span id="__span-49-4"><a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>  : Equiv (x = y) (y = x)
-</span><span id="__span-49-5"><a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>  := (rev A x y , ((rev A y x , rev-rev A x y) , (rev A y x , rev-rev A y x)))
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-rev" id="define:equiv-rev" style="visibility: visible; position: relative; color: inherit">equiv-rev</a></span>
+</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-51-3"><a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-51-4"><a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>  : Equiv (x = y) (y = x)
+</span><span id="__span-51-5"><a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a>  := (rev A x y , ((rev A y x , rev-rev A x y) , (rev A y x , rev-rev A y x)))
 </span></code></pre></div>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ind-rev" id="define:ind-rev" style="visibility: visible; position: relative; color: inherit">ind-rev</a></span>
-</span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
-</span><span id="__span-50-4"><a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a>  <span class="p">( </span>B <span class="p">:</span> (x = y) → <span class="kt">U</span>)
-</span><span id="__span-50-5"><a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a>  : <span class="p">( </span>( p <span class="p">:</span> y = x) → B (rev A y x p)) → <span class="p">(</span>q <span class="p">:</span> x = y) → B q
-</span><span id="__span-50-6"><a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a>  :=
-</span><span id="__span-50-7"><a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a>    ind-has-section-equiv (y = x) (x = y) (equiv-rev A y x) (B)
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ind-rev" id="define:ind-rev" style="visibility: visible; position: relative; color: inherit">ind-rev</a></span>
+</span><span id="__span-52-2"><a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-52-3"><a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-52-4"><a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>  <span class="p">( </span>B <span class="p">:</span> (x = y) → <span class="kt">U</span>)
+</span><span id="__span-52-5"><a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a>  : <span class="p">( </span>( p <span class="p">:</span> y = x) → B (rev A y x p)) → <span class="p">(</span>q <span class="p">:</span> x = y) → B q
+</span><span id="__span-52-6"><a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a>  :=
+</span><span id="__span-52-7"><a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a>    ind-has-section-equiv (y = x) (x = y) (equiv-rev A y x) (B)
 </span></code></pre></div>
 <h2 id="concatenation-with-a-fixed-path-is-an-equivalence">Concatenation with a fixed path is an equivalence<a class="headerlink" href="#concatenation-with-a-fixed-path-is-an-equivalence" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-preconcat" id="define:equiv-preconcat" style="visibility: visible; position: relative; color: inherit">equiv-preconcat</a></span>
-</span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-51-3"><a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>  <span class="p">( </span>x y z <span class="p">:</span> A)
-</span><span id="__span-51-4"><a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>  <span class="p">( </span>p <span class="p">:</span> x = y)
-</span><span id="__span-51-5"><a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a>  : Equiv (y = z) (x = z)
-</span><span id="__span-51-6"><a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a>  :=
-</span><span id="__span-51-7"><a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a>    ( concat A x y z p
-</span><span id="__span-51-8"><a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a>    , ( ( concat A y x z (rev A x y p) , retraction-preconcat A x y z p)
-</span><span id="__span-51-9"><a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>      , ( concat A y x z (rev A x y p) , section-preconcat A x y z p)))
-</span><span id="__span-51-10"><a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a>
-</span><span id="__span-51-11"><a id="__codelineno-51-11" name="__codelineno-51-11" href="#__codelineno-51-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-postconcat" id="define:equiv-postconcat" style="visibility: visible; position: relative; color: inherit">equiv-postconcat</a></span>
-</span><span id="__span-51-12"><a id="__codelineno-51-12" name="__codelineno-51-12" href="#__codelineno-51-12"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-51-13"><a id="__codelineno-51-13" name="__codelineno-51-13" href="#__codelineno-51-13"></a>  <span class="p">( </span>x y z <span class="p">:</span> A)
-</span><span id="__span-51-14"><a id="__codelineno-51-14" name="__codelineno-51-14" href="#__codelineno-51-14"></a>  <span class="p">( </span>q <span class="p">:</span> y = z)
-</span><span id="__span-51-15"><a id="__codelineno-51-15" name="__codelineno-51-15" href="#__codelineno-51-15"></a>  : Equiv (x = y) (x = z)
-</span><span id="__span-51-16"><a id="__codelineno-51-16" name="__codelineno-51-16" href="#__codelineno-51-16"></a>  :=
-</span><span id="__span-51-17"><a id="__codelineno-51-17" name="__codelineno-51-17" href="#__codelineno-51-17"></a>    ( <span class="p">\ </span>p → concat A x y z p q
-</span><span id="__span-51-18"><a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a>    , ( ( <span class="p">\ </span>r → concat A x z y r (rev A y z q)
-</span><span id="__span-51-19"><a id="__codelineno-51-19" name="__codelineno-51-19" href="#__codelineno-51-19"></a>        , retraction-postconcat A x y z q)
-</span><span id="__span-51-20"><a id="__codelineno-51-20" name="__codelineno-51-20" href="#__codelineno-51-20"></a>      , ( <span class="p">\ </span>r → concat A x z y r (rev A y z q)
-</span><span id="__span-51-21"><a id="__codelineno-51-21" name="__codelineno-51-21" href="#__codelineno-51-21"></a>        , section-postconcat A x y z q)))
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-preconcat" id="define:equiv-preconcat" style="visibility: visible; position: relative; color: inherit">equiv-preconcat</a></span>
+</span><span id="__span-53-2"><a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-53-3"><a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>  <span class="p">( </span>x y z <span class="p">:</span> A)
+</span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>  <span class="p">( </span>p <span class="p">:</span> x = y)
+</span><span id="__span-53-5"><a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a>  : Equiv (y = z) (x = z)
+</span><span id="__span-53-6"><a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a>  :=
+</span><span id="__span-53-7"><a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a>    ( concat A x y z p
+</span><span id="__span-53-8"><a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a>    , ( ( concat A y x z (rev A x y p) , retraction-preconcat A x y z p)
+</span><span id="__span-53-9"><a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a>      , ( concat A y x z (rev A x y p) , section-preconcat A x y z p)))
+</span><span id="__span-53-10"><a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a>
+</span><span id="__span-53-11"><a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-postconcat" id="define:equiv-postconcat" style="visibility: visible; position: relative; color: inherit">equiv-postconcat</a></span>
+</span><span id="__span-53-12"><a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-53-13"><a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a>  <span class="p">( </span>x y z <span class="p">:</span> A)
+</span><span id="__span-53-14"><a id="__codelineno-53-14" name="__codelineno-53-14" href="#__codelineno-53-14"></a>  <span class="p">( </span>q <span class="p">:</span> y = z)
+</span><span id="__span-53-15"><a id="__codelineno-53-15" name="__codelineno-53-15" href="#__codelineno-53-15"></a>  : Equiv (x = y) (x = z)
+</span><span id="__span-53-16"><a id="__codelineno-53-16" name="__codelineno-53-16" href="#__codelineno-53-16"></a>  :=
+</span><span id="__span-53-17"><a id="__codelineno-53-17" name="__codelineno-53-17" href="#__codelineno-53-17"></a>    ( <span class="p">\ </span>p → concat A x y z p q
+</span><span id="__span-53-18"><a id="__codelineno-53-18" name="__codelineno-53-18" href="#__codelineno-53-18"></a>    , ( ( <span class="p">\ </span>r → concat A x z y r (rev A y z q)
+</span><span id="__span-53-19"><a id="__codelineno-53-19" name="__codelineno-53-19" href="#__codelineno-53-19"></a>        , retraction-postconcat A x y z q)
+</span><span id="__span-53-20"><a id="__codelineno-53-20" name="__codelineno-53-20" href="#__codelineno-53-20"></a>      , ( <span class="p">\ </span>r → concat A x z y r (rev A y z q)
+</span><span id="__span-53-21"><a id="__codelineno-53-21" name="__codelineno-53-21" href="#__codelineno-53-21"></a>        , section-postconcat A x y z q)))
 </span></code></pre></div>
 <h2 id="transport-along-a-path-is-an-equivalence">Transport along a path is an equivalence<a class="headerlink" href="#transport-along-a-path-is-an-equivalence" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-transport" id="define:is-equiv-transport" style="visibility: visible; position: relative; color: inherit">is-equiv-transport</a></span>
-</span><span id="__span-52-2"><a id="__codelineno-52-2" name="__codelineno-52-2" href="#__codelineno-52-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-52-3"><a id="__codelineno-52-3" name="__codelineno-52-3" href="#__codelineno-52-3"></a>  <span class="p">( </span>C <span class="p">:</span> A → <span class="kt">U</span>)
-</span><span id="__span-52-4"><a id="__codelineno-52-4" name="__codelineno-52-4" href="#__codelineno-52-4"></a>  <span class="p">( </span>x <span class="p">:</span> A)
-</span><span id="__span-52-5"><a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a>  : <span class="p">( </span>y <span class="p">:</span> A) → <span class="p">(</span>p <span class="p">:</span> x = y) → is-equiv (C x) (C y) (transport A C x y p)
-</span><span id="__span-52-6"><a id="__codelineno-52-6" name="__codelineno-52-6" href="#__codelineno-52-6"></a>  := ind-path A x
-</span><span id="__span-52-7"><a id="__codelineno-52-7" name="__codelineno-52-7" href="#__codelineno-52-7"></a>       ( <span class="p">\ </span>y p → is-equiv (C x) (C y) (transport A C x y p))
-</span><span id="__span-52-8"><a id="__codelineno-52-8" name="__codelineno-52-8" href="#__codelineno-52-8"></a>       ( is-equiv-identity (C x))
-</span><span id="__span-52-9"><a id="__codelineno-52-9" name="__codelineno-52-9" href="#__codelineno-52-9"></a>
-</span><span id="__span-52-10"><a id="__codelineno-52-10" name="__codelineno-52-10" href="#__codelineno-52-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-transport" id="define:equiv-transport" style="visibility: visible; position: relative; color: inherit">equiv-transport</a></span>
-</span><span id="__span-52-11"><a id="__codelineno-52-11" name="__codelineno-52-11" href="#__codelineno-52-11"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-52-12"><a id="__codelineno-52-12" name="__codelineno-52-12" href="#__codelineno-52-12"></a>  <span class="p">( </span>C <span class="p">:</span> A → <span class="kt">U</span>)
-</span><span id="__span-52-13"><a id="__codelineno-52-13" name="__codelineno-52-13" href="#__codelineno-52-13"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
-</span><span id="__span-52-14"><a id="__codelineno-52-14" name="__codelineno-52-14" href="#__codelineno-52-14"></a>  <span class="p">( </span>p <span class="p">:</span> x = y)
-</span><span id="__span-52-15"><a id="__codelineno-52-15" name="__codelineno-52-15" href="#__codelineno-52-15"></a>  : Equiv (C x) (C y)
-</span><span id="__span-52-16"><a id="__codelineno-52-16" name="__codelineno-52-16" href="#__codelineno-52-16"></a>  := (transport A C x y p , is-equiv-transport A C x y p)
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-transport" id="define:is-equiv-transport" style="visibility: visible; position: relative; color: inherit">is-equiv-transport</a></span>
+</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>  <span class="p">( </span>C <span class="p">:</span> A → <span class="kt">U</span>)
+</span><span id="__span-54-4"><a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a>  <span class="p">( </span>x <span class="p">:</span> A)
+</span><span id="__span-54-5"><a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a>  : <span class="p">( </span>y <span class="p">:</span> A) → <span class="p">(</span>p <span class="p">:</span> x = y) → is-equiv (C x) (C y) (transport A C x y p)
+</span><span id="__span-54-6"><a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a>  := ind-path A x
+</span><span id="__span-54-7"><a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a>       ( <span class="p">\ </span>y p → is-equiv (C x) (C y) (transport A C x y p))
+</span><span id="__span-54-8"><a id="__codelineno-54-8" name="__codelineno-54-8" href="#__codelineno-54-8"></a>       ( is-equiv-identity (C x))
+</span><span id="__span-54-9"><a id="__codelineno-54-9" name="__codelineno-54-9" href="#__codelineno-54-9"></a>
+</span><span id="__span-54-10"><a id="__codelineno-54-10" name="__codelineno-54-10" href="#__codelineno-54-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-transport" id="define:equiv-transport" style="visibility: visible; position: relative; color: inherit">equiv-transport</a></span>
+</span><span id="__span-54-11"><a id="__codelineno-54-11" name="__codelineno-54-11" href="#__codelineno-54-11"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-54-12"><a id="__codelineno-54-12" name="__codelineno-54-12" href="#__codelineno-54-12"></a>  <span class="p">( </span>C <span class="p">:</span> A → <span class="kt">U</span>)
+</span><span id="__span-54-13"><a id="__codelineno-54-13" name="__codelineno-54-13" href="#__codelineno-54-13"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-54-14"><a id="__codelineno-54-14" name="__codelineno-54-14" href="#__codelineno-54-14"></a>  <span class="p">( </span>p <span class="p">:</span> x = y)
+</span><span id="__span-54-15"><a id="__codelineno-54-15" name="__codelineno-54-15" href="#__codelineno-54-15"></a>  : Equiv (C x) (C y)
+</span><span id="__span-54-16"><a id="__codelineno-54-16" name="__codelineno-54-16" href="#__codelineno-54-16"></a>  := (transport A C x y p , is-equiv-transport A C x y p)
 </span></code></pre></div>
 <h2 id="equivalence-is-equivalence-invariant">Equivalence is equivalence invariant<a class="headerlink" href="#equivalence-is-equivalence-invariant" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:map-of-maps" id="define:map-of-maps" style="visibility: visible; position: relative; color: inherit">map-of-maps</a></span>
-</span><span id="__span-53-2"><a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-3"><a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
-</span><span id="__span-53-4"><a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-5"><a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
-</span><span id="__span-53-6"><a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a>  : <span class="kt">U</span>
-</span><span id="__span-53-7"><a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a>  :=
-</span><span id="__span-53-8"><a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a>    <span class="kt">Σ</span> ( ( s&#39; , s) : product (A&#39; → B&#39;) (A → B))
-</span><span id="__span-53-9"><a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a>    , <span class="p">( </span>( a&#39; <span class="p">:</span> A&#39;) → β (s&#39; a&#39;) = s (α a&#39;))
-</span><span id="__span-53-10"><a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a>
-</span><span id="__span-53-11"><a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:map-Map" id="define:map-Map" style="visibility: visible; position: relative; color: inherit">map-Map</a></span>
-</span><span id="__span-53-12"><a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a>  ( ( ( A&#39; , A) , α) : Map)
-</span><span id="__span-53-13"><a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a>  ( ( ( B&#39; , B) , β) : Map)
-</span><span id="__span-53-14"><a id="__codelineno-53-14" name="__codelineno-53-14" href="#__codelineno-53-14"></a>  : <span class="kt">U</span>
-</span><span id="__span-53-15"><a id="__codelineno-53-15" name="__codelineno-53-15" href="#__codelineno-53-15"></a>  := map-of-maps A&#39; A α B&#39; B β
-</span><span id="__span-53-16"><a id="__codelineno-53-16" name="__codelineno-53-16" href="#__codelineno-53-16"></a>
-</span><span id="__span-53-17"><a id="__codelineno-53-17" name="__codelineno-53-17" href="#__codelineno-53-17"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Equiv-of-maps" id="define:Equiv-of-maps" style="visibility: visible; position: relative; color: inherit">Equiv-of-maps</a></span>
-</span><span id="__span-53-18"><a id="__codelineno-53-18" name="__codelineno-53-18" href="#__codelineno-53-18"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-19"><a id="__codelineno-53-19" name="__codelineno-53-19" href="#__codelineno-53-19"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
-</span><span id="__span-53-20"><a id="__codelineno-53-20" name="__codelineno-53-20" href="#__codelineno-53-20"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-21"><a id="__codelineno-53-21" name="__codelineno-53-21" href="#__codelineno-53-21"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
-</span><span id="__span-53-22"><a id="__codelineno-53-22" name="__codelineno-53-22" href="#__codelineno-53-22"></a>  : <span class="kt">U</span>
-</span><span id="__span-53-23"><a id="__codelineno-53-23" name="__codelineno-53-23" href="#__codelineno-53-23"></a>  :=
-</span><span id="__span-53-24"><a id="__codelineno-53-24" name="__codelineno-53-24" href="#__codelineno-53-24"></a>    <span class="kt">Σ</span> ( ( ( s&#39; , s) , _) : map-of-maps A&#39; A α B&#39; B β)
-</span><span id="__span-53-25"><a id="__codelineno-53-25" name="__codelineno-53-25" href="#__codelineno-53-25"></a>    , ( product
-</span><span id="__span-53-26"><a id="__codelineno-53-26" name="__codelineno-53-26" href="#__codelineno-53-26"></a>        ( is-equiv A&#39; B&#39; s&#39;)
-</span><span id="__span-53-27"><a id="__codelineno-53-27" name="__codelineno-53-27" href="#__codelineno-53-27"></a>        ( is-equiv A B s))
-</span><span id="__span-53-28"><a id="__codelineno-53-28" name="__codelineno-53-28" href="#__codelineno-53-28"></a>
-</span><span id="__span-53-29"><a id="__codelineno-53-29" name="__codelineno-53-29" href="#__codelineno-53-29"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-equiv-is-equiv" id="define:is-equiv-equiv-is-equiv" style="visibility: visible; position: relative; color: inherit">is-equiv-equiv-is-equiv</a></span>
-</span><span id="__span-53-30"><a id="__codelineno-53-30" name="__codelineno-53-30" href="#__codelineno-53-30"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-31"><a id="__codelineno-53-31" name="__codelineno-53-31" href="#__codelineno-53-31"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
-</span><span id="__span-53-32"><a id="__codelineno-53-32" name="__codelineno-53-32" href="#__codelineno-53-32"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-33"><a id="__codelineno-53-33" name="__codelineno-53-33" href="#__codelineno-53-33"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
-</span><span id="__span-53-34"><a id="__codelineno-53-34" name="__codelineno-53-34" href="#__codelineno-53-34"></a>  ( ( ( s&#39; , s) , η) : map-of-maps A&#39; A α B&#39; B β)
-</span><span id="__span-53-35"><a id="__codelineno-53-35" name="__codelineno-53-35" href="#__codelineno-53-35"></a>  <span class="p">( </span>is-equiv-s&#39; <span class="p">:</span> is-equiv A&#39; B&#39; s&#39;)
-</span><span id="__span-53-36"><a id="__codelineno-53-36" name="__codelineno-53-36" href="#__codelineno-53-36"></a>  <span class="p">( </span>is-equiv-s <span class="p">:</span> is-equiv A B s)
-</span><span id="__span-53-37"><a id="__codelineno-53-37" name="__codelineno-53-37" href="#__codelineno-53-37"></a>  <span class="p">( </span>is-equiv-β <span class="p">:</span> is-equiv B&#39; B β)
-</span><span id="__span-53-38"><a id="__codelineno-53-38" name="__codelineno-53-38" href="#__codelineno-53-38"></a>  : is-equiv A&#39; A α
-</span><span id="__span-53-39"><a id="__codelineno-53-39" name="__codelineno-53-39" href="#__codelineno-53-39"></a>  :=
-</span><span id="__span-53-40"><a id="__codelineno-53-40" name="__codelineno-53-40" href="#__codelineno-53-40"></a>    is-equiv-right-factor A&#39; A B α s is-equiv-s
-</span><span id="__span-53-41"><a id="__codelineno-53-41" name="__codelineno-53-41" href="#__codelineno-53-41"></a>      ( is-equiv-rev-homotopy A&#39; B
-</span><span id="__span-53-42"><a id="__codelineno-53-42" name="__codelineno-53-42" href="#__codelineno-53-42"></a>        ( comp A&#39; B&#39; B β s&#39;)
-</span><span id="__span-53-43"><a id="__codelineno-53-43" name="__codelineno-53-43" href="#__codelineno-53-43"></a>        ( comp A&#39; A B s α)
-</span><span id="__span-53-44"><a id="__codelineno-53-44" name="__codelineno-53-44" href="#__codelineno-53-44"></a>        ( η)
-</span><span id="__span-53-45"><a id="__codelineno-53-45" name="__codelineno-53-45" href="#__codelineno-53-45"></a>        ( is-equiv-comp A&#39; B&#39; B s&#39; is-equiv-s&#39; β is-equiv-β))
-</span><span id="__span-53-46"><a id="__codelineno-53-46" name="__codelineno-53-46" href="#__codelineno-53-46"></a>
-</span><span id="__span-53-47"><a id="__codelineno-53-47" name="__codelineno-53-47" href="#__codelineno-53-47"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-Equiv-is-equiv" id="define:is-equiv-Equiv-is-equiv" style="visibility: visible; position: relative; color: inherit">is-equiv-Equiv-is-equiv</a></span>
-</span><span id="__span-53-48"><a id="__codelineno-53-48" name="__codelineno-53-48" href="#__codelineno-53-48"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-49"><a id="__codelineno-53-49" name="__codelineno-53-49" href="#__codelineno-53-49"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
-</span><span id="__span-53-50"><a id="__codelineno-53-50" name="__codelineno-53-50" href="#__codelineno-53-50"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-51"><a id="__codelineno-53-51" name="__codelineno-53-51" href="#__codelineno-53-51"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
-</span><span id="__span-53-52"><a id="__codelineno-53-52" name="__codelineno-53-52" href="#__codelineno-53-52"></a>  ( ( S , (is-equiv-s&#39; , is-equiv-s)) : Equiv-of-maps A&#39; A α B&#39; B β)
-</span><span id="__span-53-53"><a id="__codelineno-53-53" name="__codelineno-53-53" href="#__codelineno-53-53"></a>  : is-equiv B&#39; B β → is-equiv A&#39; A α
-</span><span id="__span-53-54"><a id="__codelineno-53-54" name="__codelineno-53-54" href="#__codelineno-53-54"></a>  := is-equiv-equiv-is-equiv A&#39; A α B&#39; B β S is-equiv-s&#39; is-equiv-s
-</span><span id="__span-53-55"><a id="__codelineno-53-55" name="__codelineno-53-55" href="#__codelineno-53-55"></a>
-</span><span id="__span-53-56"><a id="__codelineno-53-56" name="__codelineno-53-56" href="#__codelineno-53-56"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-equiv-is-equiv&#39;" id="define:is-equiv-equiv-is-equiv&#39;" style="visibility: visible; position: relative; color: inherit">is-equiv-equiv-is-equiv&#39;</a></span>
-</span><span id="__span-53-57"><a id="__codelineno-53-57" name="__codelineno-53-57" href="#__codelineno-53-57"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-58"><a id="__codelineno-53-58" name="__codelineno-53-58" href="#__codelineno-53-58"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
-</span><span id="__span-53-59"><a id="__codelineno-53-59" name="__codelineno-53-59" href="#__codelineno-53-59"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-60"><a id="__codelineno-53-60" name="__codelineno-53-60" href="#__codelineno-53-60"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
-</span><span id="__span-53-61"><a id="__codelineno-53-61" name="__codelineno-53-61" href="#__codelineno-53-61"></a>  ( ( ( s&#39; , s) , η) : map-of-maps A&#39; A α B&#39; B β)
-</span><span id="__span-53-62"><a id="__codelineno-53-62" name="__codelineno-53-62" href="#__codelineno-53-62"></a>  <span class="p">( </span>is-equiv-s&#39; <span class="p">:</span> is-equiv A&#39; B&#39; s&#39;)
-</span><span id="__span-53-63"><a id="__codelineno-53-63" name="__codelineno-53-63" href="#__codelineno-53-63"></a>  <span class="p">( </span>is-equiv-s <span class="p">:</span> is-equiv A B s)
-</span><span id="__span-53-64"><a id="__codelineno-53-64" name="__codelineno-53-64" href="#__codelineno-53-64"></a>  <span class="p">( </span>is-equiv-α <span class="p">:</span> is-equiv A&#39; A α)
-</span><span id="__span-53-65"><a id="__codelineno-53-65" name="__codelineno-53-65" href="#__codelineno-53-65"></a>  : is-equiv B&#39; B β
-</span><span id="__span-53-66"><a id="__codelineno-53-66" name="__codelineno-53-66" href="#__codelineno-53-66"></a>  :=
-</span><span id="__span-53-67"><a id="__codelineno-53-67" name="__codelineno-53-67" href="#__codelineno-53-67"></a>    is-equiv-left-factor A&#39; B&#39; B s&#39; is-equiv-s&#39; β
-</span><span id="__span-53-68"><a id="__codelineno-53-68" name="__codelineno-53-68" href="#__codelineno-53-68"></a>      ( is-equiv-homotopy A&#39; B
-</span><span id="__span-53-69"><a id="__codelineno-53-69" name="__codelineno-53-69" href="#__codelineno-53-69"></a>        ( comp A&#39; B&#39; B β s&#39;)
-</span><span id="__span-53-70"><a id="__codelineno-53-70" name="__codelineno-53-70" href="#__codelineno-53-70"></a>        ( comp A&#39; A B s α)
-</span><span id="__span-53-71"><a id="__codelineno-53-71" name="__codelineno-53-71" href="#__codelineno-53-71"></a>        ( η)
-</span><span id="__span-53-72"><a id="__codelineno-53-72" name="__codelineno-53-72" href="#__codelineno-53-72"></a>        ( is-equiv-comp A&#39; A B α is-equiv-α s is-equiv-s))
-</span><span id="__span-53-73"><a id="__codelineno-53-73" name="__codelineno-53-73" href="#__codelineno-53-73"></a>
-</span><span id="__span-53-74"><a id="__codelineno-53-74" name="__codelineno-53-74" href="#__codelineno-53-74"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-Equiv-is-equiv&#39;" id="define:is-equiv-Equiv-is-equiv&#39;" style="visibility: visible; position: relative; color: inherit">is-equiv-Equiv-is-equiv&#39;</a></span>
-</span><span id="__span-53-75"><a id="__codelineno-53-75" name="__codelineno-53-75" href="#__codelineno-53-75"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-76"><a id="__codelineno-53-76" name="__codelineno-53-76" href="#__codelineno-53-76"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
-</span><span id="__span-53-77"><a id="__codelineno-53-77" name="__codelineno-53-77" href="#__codelineno-53-77"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-53-78"><a id="__codelineno-53-78" name="__codelineno-53-78" href="#__codelineno-53-78"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
-</span><span id="__span-53-79"><a id="__codelineno-53-79" name="__codelineno-53-79" href="#__codelineno-53-79"></a>  ( ( S , (is-equiv-s&#39; , is-equiv-s)) : Equiv-of-maps A&#39; A α B&#39; B β)
-</span><span id="__span-53-80"><a id="__codelineno-53-80" name="__codelineno-53-80" href="#__codelineno-53-80"></a>  : is-equiv A&#39; A α → is-equiv B&#39; B β
-</span><span id="__span-53-81"><a id="__codelineno-53-81" name="__codelineno-53-81" href="#__codelineno-53-81"></a>  := is-equiv-equiv-is-equiv&#39; A&#39; A α B&#39; B β S is-equiv-s&#39; is-equiv-s
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-55-1"><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:map-of-maps" id="define:map-of-maps" style="visibility: visible; position: relative; color: inherit">map-of-maps</a></span>
+</span><span id="__span-55-2"><a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-3"><a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
+</span><span id="__span-55-4"><a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-5"><a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
+</span><span id="__span-55-6"><a id="__codelineno-55-6" name="__codelineno-55-6" href="#__codelineno-55-6"></a>  : <span class="kt">U</span>
+</span><span id="__span-55-7"><a id="__codelineno-55-7" name="__codelineno-55-7" href="#__codelineno-55-7"></a>  :=
+</span><span id="__span-55-8"><a id="__codelineno-55-8" name="__codelineno-55-8" href="#__codelineno-55-8"></a>    <span class="kt">Σ</span> ( ( s&#39; , s) : product (A&#39; → B&#39;) (A → B))
+</span><span id="__span-55-9"><a id="__codelineno-55-9" name="__codelineno-55-9" href="#__codelineno-55-9"></a>    , <span class="p">( </span>( a&#39; <span class="p">:</span> A&#39;) → β (s&#39; a&#39;) = s (α a&#39;))
+</span><span id="__span-55-10"><a id="__codelineno-55-10" name="__codelineno-55-10" href="#__codelineno-55-10"></a>
+</span><span id="__span-55-11"><a id="__codelineno-55-11" name="__codelineno-55-11" href="#__codelineno-55-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:map-Map" id="define:map-Map" style="visibility: visible; position: relative; color: inherit">map-Map</a></span>
+</span><span id="__span-55-12"><a id="__codelineno-55-12" name="__codelineno-55-12" href="#__codelineno-55-12"></a>  ( ( ( A&#39; , A) , α) : Map)
+</span><span id="__span-55-13"><a id="__codelineno-55-13" name="__codelineno-55-13" href="#__codelineno-55-13"></a>  ( ( ( B&#39; , B) , β) : Map)
+</span><span id="__span-55-14"><a id="__codelineno-55-14" name="__codelineno-55-14" href="#__codelineno-55-14"></a>  : <span class="kt">U</span>
+</span><span id="__span-55-15"><a id="__codelineno-55-15" name="__codelineno-55-15" href="#__codelineno-55-15"></a>  := map-of-maps A&#39; A α B&#39; B β
+</span><span id="__span-55-16"><a id="__codelineno-55-16" name="__codelineno-55-16" href="#__codelineno-55-16"></a>
+</span><span id="__span-55-17"><a id="__codelineno-55-17" name="__codelineno-55-17" href="#__codelineno-55-17"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Equiv-of-maps" id="define:Equiv-of-maps" style="visibility: visible; position: relative; color: inherit">Equiv-of-maps</a></span>
+</span><span id="__span-55-18"><a id="__codelineno-55-18" name="__codelineno-55-18" href="#__codelineno-55-18"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-19"><a id="__codelineno-55-19" name="__codelineno-55-19" href="#__codelineno-55-19"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
+</span><span id="__span-55-20"><a id="__codelineno-55-20" name="__codelineno-55-20" href="#__codelineno-55-20"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-21"><a id="__codelineno-55-21" name="__codelineno-55-21" href="#__codelineno-55-21"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
+</span><span id="__span-55-22"><a id="__codelineno-55-22" name="__codelineno-55-22" href="#__codelineno-55-22"></a>  : <span class="kt">U</span>
+</span><span id="__span-55-23"><a id="__codelineno-55-23" name="__codelineno-55-23" href="#__codelineno-55-23"></a>  :=
+</span><span id="__span-55-24"><a id="__codelineno-55-24" name="__codelineno-55-24" href="#__codelineno-55-24"></a>    <span class="kt">Σ</span> ( ( ( s&#39; , s) , _) : map-of-maps A&#39; A α B&#39; B β)
+</span><span id="__span-55-25"><a id="__codelineno-55-25" name="__codelineno-55-25" href="#__codelineno-55-25"></a>    , ( product
+</span><span id="__span-55-26"><a id="__codelineno-55-26" name="__codelineno-55-26" href="#__codelineno-55-26"></a>        ( is-equiv A&#39; B&#39; s&#39;)
+</span><span id="__span-55-27"><a id="__codelineno-55-27" name="__codelineno-55-27" href="#__codelineno-55-27"></a>        ( is-equiv A B s))
+</span><span id="__span-55-28"><a id="__codelineno-55-28" name="__codelineno-55-28" href="#__codelineno-55-28"></a>
+</span><span id="__span-55-29"><a id="__codelineno-55-29" name="__codelineno-55-29" href="#__codelineno-55-29"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-equiv-is-equiv" id="define:is-equiv-equiv-is-equiv" style="visibility: visible; position: relative; color: inherit">is-equiv-equiv-is-equiv</a></span>
+</span><span id="__span-55-30"><a id="__codelineno-55-30" name="__codelineno-55-30" href="#__codelineno-55-30"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-31"><a id="__codelineno-55-31" name="__codelineno-55-31" href="#__codelineno-55-31"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
+</span><span id="__span-55-32"><a id="__codelineno-55-32" name="__codelineno-55-32" href="#__codelineno-55-32"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-33"><a id="__codelineno-55-33" name="__codelineno-55-33" href="#__codelineno-55-33"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
+</span><span id="__span-55-34"><a id="__codelineno-55-34" name="__codelineno-55-34" href="#__codelineno-55-34"></a>  ( ( ( s&#39; , s) , η) : map-of-maps A&#39; A α B&#39; B β)
+</span><span id="__span-55-35"><a id="__codelineno-55-35" name="__codelineno-55-35" href="#__codelineno-55-35"></a>  <span class="p">( </span>is-equiv-s&#39; <span class="p">:</span> is-equiv A&#39; B&#39; s&#39;)
+</span><span id="__span-55-36"><a id="__codelineno-55-36" name="__codelineno-55-36" href="#__codelineno-55-36"></a>  <span class="p">( </span>is-equiv-s <span class="p">:</span> is-equiv A B s)
+</span><span id="__span-55-37"><a id="__codelineno-55-37" name="__codelineno-55-37" href="#__codelineno-55-37"></a>  <span class="p">( </span>is-equiv-β <span class="p">:</span> is-equiv B&#39; B β)
+</span><span id="__span-55-38"><a id="__codelineno-55-38" name="__codelineno-55-38" href="#__codelineno-55-38"></a>  : is-equiv A&#39; A α
+</span><span id="__span-55-39"><a id="__codelineno-55-39" name="__codelineno-55-39" href="#__codelineno-55-39"></a>  :=
+</span><span id="__span-55-40"><a id="__codelineno-55-40" name="__codelineno-55-40" href="#__codelineno-55-40"></a>    is-equiv-right-factor A&#39; A B α s is-equiv-s
+</span><span id="__span-55-41"><a id="__codelineno-55-41" name="__codelineno-55-41" href="#__codelineno-55-41"></a>      ( is-equiv-rev-homotopy A&#39; B
+</span><span id="__span-55-42"><a id="__codelineno-55-42" name="__codelineno-55-42" href="#__codelineno-55-42"></a>        ( comp A&#39; B&#39; B β s&#39;)
+</span><span id="__span-55-43"><a id="__codelineno-55-43" name="__codelineno-55-43" href="#__codelineno-55-43"></a>        ( comp A&#39; A B s α)
+</span><span id="__span-55-44"><a id="__codelineno-55-44" name="__codelineno-55-44" href="#__codelineno-55-44"></a>        ( η)
+</span><span id="__span-55-45"><a id="__codelineno-55-45" name="__codelineno-55-45" href="#__codelineno-55-45"></a>        ( is-equiv-comp A&#39; B&#39; B s&#39; is-equiv-s&#39; β is-equiv-β))
+</span><span id="__span-55-46"><a id="__codelineno-55-46" name="__codelineno-55-46" href="#__codelineno-55-46"></a>
+</span><span id="__span-55-47"><a id="__codelineno-55-47" name="__codelineno-55-47" href="#__codelineno-55-47"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-Equiv-is-equiv" id="define:is-equiv-Equiv-is-equiv" style="visibility: visible; position: relative; color: inherit">is-equiv-Equiv-is-equiv</a></span>
+</span><span id="__span-55-48"><a id="__codelineno-55-48" name="__codelineno-55-48" href="#__codelineno-55-48"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-49"><a id="__codelineno-55-49" name="__codelineno-55-49" href="#__codelineno-55-49"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
+</span><span id="__span-55-50"><a id="__codelineno-55-50" name="__codelineno-55-50" href="#__codelineno-55-50"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-51"><a id="__codelineno-55-51" name="__codelineno-55-51" href="#__codelineno-55-51"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
+</span><span id="__span-55-52"><a id="__codelineno-55-52" name="__codelineno-55-52" href="#__codelineno-55-52"></a>  ( ( S , (is-equiv-s&#39; , is-equiv-s)) : Equiv-of-maps A&#39; A α B&#39; B β)
+</span><span id="__span-55-53"><a id="__codelineno-55-53" name="__codelineno-55-53" href="#__codelineno-55-53"></a>  : is-equiv B&#39; B β → is-equiv A&#39; A α
+</span><span id="__span-55-54"><a id="__codelineno-55-54" name="__codelineno-55-54" href="#__codelineno-55-54"></a>  := is-equiv-equiv-is-equiv A&#39; A α B&#39; B β S is-equiv-s&#39; is-equiv-s
+</span><span id="__span-55-55"><a id="__codelineno-55-55" name="__codelineno-55-55" href="#__codelineno-55-55"></a>
+</span><span id="__span-55-56"><a id="__codelineno-55-56" name="__codelineno-55-56" href="#__codelineno-55-56"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-equiv-is-equiv&#39;" id="define:is-equiv-equiv-is-equiv&#39;" style="visibility: visible; position: relative; color: inherit">is-equiv-equiv-is-equiv&#39;</a></span>
+</span><span id="__span-55-57"><a id="__codelineno-55-57" name="__codelineno-55-57" href="#__codelineno-55-57"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-58"><a id="__codelineno-55-58" name="__codelineno-55-58" href="#__codelineno-55-58"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
+</span><span id="__span-55-59"><a id="__codelineno-55-59" name="__codelineno-55-59" href="#__codelineno-55-59"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-60"><a id="__codelineno-55-60" name="__codelineno-55-60" href="#__codelineno-55-60"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
+</span><span id="__span-55-61"><a id="__codelineno-55-61" name="__codelineno-55-61" href="#__codelineno-55-61"></a>  ( ( ( s&#39; , s) , η) : map-of-maps A&#39; A α B&#39; B β)
+</span><span id="__span-55-62"><a id="__codelineno-55-62" name="__codelineno-55-62" href="#__codelineno-55-62"></a>  <span class="p">( </span>is-equiv-s&#39; <span class="p">:</span> is-equiv A&#39; B&#39; s&#39;)
+</span><span id="__span-55-63"><a id="__codelineno-55-63" name="__codelineno-55-63" href="#__codelineno-55-63"></a>  <span class="p">( </span>is-equiv-s <span class="p">:</span> is-equiv A B s)
+</span><span id="__span-55-64"><a id="__codelineno-55-64" name="__codelineno-55-64" href="#__codelineno-55-64"></a>  <span class="p">( </span>is-equiv-α <span class="p">:</span> is-equiv A&#39; A α)
+</span><span id="__span-55-65"><a id="__codelineno-55-65" name="__codelineno-55-65" href="#__codelineno-55-65"></a>  : is-equiv B&#39; B β
+</span><span id="__span-55-66"><a id="__codelineno-55-66" name="__codelineno-55-66" href="#__codelineno-55-66"></a>  :=
+</span><span id="__span-55-67"><a id="__codelineno-55-67" name="__codelineno-55-67" href="#__codelineno-55-67"></a>    is-equiv-left-factor A&#39; B&#39; B s&#39; is-equiv-s&#39; β
+</span><span id="__span-55-68"><a id="__codelineno-55-68" name="__codelineno-55-68" href="#__codelineno-55-68"></a>      ( is-equiv-homotopy A&#39; B
+</span><span id="__span-55-69"><a id="__codelineno-55-69" name="__codelineno-55-69" href="#__codelineno-55-69"></a>        ( comp A&#39; B&#39; B β s&#39;)
+</span><span id="__span-55-70"><a id="__codelineno-55-70" name="__codelineno-55-70" href="#__codelineno-55-70"></a>        ( comp A&#39; A B s α)
+</span><span id="__span-55-71"><a id="__codelineno-55-71" name="__codelineno-55-71" href="#__codelineno-55-71"></a>        ( η)
+</span><span id="__span-55-72"><a id="__codelineno-55-72" name="__codelineno-55-72" href="#__codelineno-55-72"></a>        ( is-equiv-comp A&#39; A B α is-equiv-α s is-equiv-s))
+</span><span id="__span-55-73"><a id="__codelineno-55-73" name="__codelineno-55-73" href="#__codelineno-55-73"></a>
+</span><span id="__span-55-74"><a id="__codelineno-55-74" name="__codelineno-55-74" href="#__codelineno-55-74"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-Equiv-is-equiv&#39;" id="define:is-equiv-Equiv-is-equiv&#39;" style="visibility: visible; position: relative; color: inherit">is-equiv-Equiv-is-equiv&#39;</a></span>
+</span><span id="__span-55-75"><a id="__codelineno-55-75" name="__codelineno-55-75" href="#__codelineno-55-75"></a>  <span class="p">( </span>A&#39; A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-76"><a id="__codelineno-55-76" name="__codelineno-55-76" href="#__codelineno-55-76"></a>  <span class="p">( </span>α <span class="p">:</span> A&#39; → A)
+</span><span id="__span-55-77"><a id="__codelineno-55-77" name="__codelineno-55-77" href="#__codelineno-55-77"></a>  <span class="p">( </span>B&#39; B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-55-78"><a id="__codelineno-55-78" name="__codelineno-55-78" href="#__codelineno-55-78"></a>  <span class="p">( </span>β <span class="p">:</span> B&#39; → B)
+</span><span id="__span-55-79"><a id="__codelineno-55-79" name="__codelineno-55-79" href="#__codelineno-55-79"></a>  ( ( S , (is-equiv-s&#39; , is-equiv-s)) : Equiv-of-maps A&#39; A α B&#39; B β)
+</span><span id="__span-55-80"><a id="__codelineno-55-80" name="__codelineno-55-80" href="#__codelineno-55-80"></a>  : is-equiv A&#39; A α → is-equiv B&#39; B β
+</span><span id="__span-55-81"><a id="__codelineno-55-81" name="__codelineno-55-81" href="#__codelineno-55-81"></a>  := is-equiv-equiv-is-equiv&#39; A&#39; A α B&#39; B β S is-equiv-s&#39; is-equiv-s
 </span></code></pre></div>
 <h2 id="univalence">Univalence<a class="headerlink" href="#univalence" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:UA" id="define:UA" style="visibility: visible; position: relative; color: inherit">UA</a></span>
-</span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a>  : <span class="kt">U</span>
-</span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a>  := <span class="p">(</span>A <span class="p">:</span> <span class="kt">U</span>) → <span class="p">(</span>B <span class="p">:</span> <span class="kt">U</span>) → Equiv (Equiv A B) (A = B)
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:UA" id="define:UA" style="visibility: visible; position: relative; color: inherit">UA</a></span>
+</span><span id="__span-56-2"><a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>  : <span class="kt">U</span>
+</span><span id="__span-56-3"><a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>  := <span class="p">(</span>A <span class="p">:</span> <span class="kt">U</span>) → <span class="p">(</span>B <span class="p">:</span> <span class="kt">U</span>) → Equiv (Equiv A B) (A = B)
+</span><span id="__span-56-4"><a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a>
+</span><span id="__span-56-5"><a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:idtoeqv" id="define:idtoeqv" style="visibility: visible; position: relative; color: inherit">idtoeqv</a></span> <span class="p">(</span>A B <span class="p">:</span> <span class="kt">U</span>) <span class="p">(</span>p <span class="p">:</span> A = B)
+</span><span id="__span-56-6"><a id="__codelineno-56-6" name="__codelineno-56-6" href="#__codelineno-56-6"></a>  : Equiv A B
+</span><span id="__span-56-7"><a id="__codelineno-56-7" name="__codelineno-56-7" href="#__codelineno-56-7"></a>  := equiv-transport <span class="kt">U</span> (<span class="p">\ </span>Z → Z) A B p
+</span><span id="__span-56-8"><a id="__codelineno-56-8" name="__codelineno-56-8" href="#__codelineno-56-8"></a>
+</span><span id="__span-56-9"><a id="__codelineno-56-9" name="__codelineno-56-9" href="#__codelineno-56-9"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:univalence" id="define:univalence" style="visibility: visible; position: relative; color: inherit">univalence</a></span> <span class="p">(</span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-56-10"><a id="__codelineno-56-10" name="__codelineno-56-10" href="#__codelineno-56-10"></a>  : is-equiv (A = B) (Equiv A B) (idtoeqv A B)
+</span><span id="__span-56-11"><a id="__codelineno-56-11" name="__codelineno-56-11" href="#__codelineno-56-11"></a>
+</span><span id="__span-56-12"><a id="__codelineno-56-12" name="__codelineno-56-12" href="#__codelineno-56-12"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:ua" id="define:ua" style="visibility: visible; position: relative; color: inherit">ua</a></span>
+</span><span id="__span-56-13"><a id="__codelineno-56-13" name="__codelineno-56-13" href="#__codelineno-56-13"></a>  : UA
+</span><span id="__span-56-14"><a id="__codelineno-56-14" name="__codelineno-56-14" href="#__codelineno-56-14"></a>  := <span class="p">\ </span>A B → inv-equiv (A = B) (Equiv A B) (idtoeqv A B , univalence A B)
+</span><span id="__span-56-15"><a id="__codelineno-56-15" name="__codelineno-56-15" href="#__codelineno-56-15"></a>
+</span><span id="__span-56-16"><a id="__codelineno-56-16" name="__codelineno-56-16" href="#__codelineno-56-16"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:transport-ua" id="define:transport-ua" style="visibility: visible; position: relative; color: inherit">transport-ua</a></span>
+</span><span id="__span-56-17"><a id="__codelineno-56-17" name="__codelineno-56-17" href="#__codelineno-56-17"></a>  <span class="p">( </span>X Y <span class="p">:</span> <span class="kt">U</span>) <span class="p">(</span>e <span class="p">:</span> Equiv X Y) <span class="p">(</span>x <span class="p">:</span> X)
+</span><span id="__span-56-18"><a id="__codelineno-56-18" name="__codelineno-56-18" href="#__codelineno-56-18"></a>  : transport <span class="kt">U</span> (<span class="p">\ </span>Z → Z) X Y (<span class="s">first</span> (ua X Y) e) x = <span class="s">first</span> e x
+</span><span id="__span-56-19"><a id="__codelineno-56-19" name="__codelineno-56-19" href="#__codelineno-56-19"></a>  :=
+</span><span id="__span-56-20"><a id="__codelineno-56-20" name="__codelineno-56-20" href="#__codelineno-56-20"></a>    ap ( Equiv X Y) Y
+</span><span id="__span-56-21"><a id="__codelineno-56-21" name="__codelineno-56-21" href="#__codelineno-56-21"></a>      ( idtoeqv X Y (<span class="s">first</span> (ua X Y) e)) e
+</span><span id="__span-56-22"><a id="__codelineno-56-22" name="__codelineno-56-22" href="#__codelineno-56-22"></a>      ( <span class="p">\ </span>ee → <span class="s">first</span> ee x)
+</span><span id="__span-56-23"><a id="__codelineno-56-23" name="__codelineno-56-23" href="#__codelineno-56-23"></a>      ( inv-equiv-cancel&#39; (X = Y) (Equiv X Y) (idtoeqv X Y , univalence X Y) e)
 </span></code></pre></div>
 
 
@@ -2593,13 +2678,13 @@ dependent function types.</p>
         
         
           
-          <a href="../04-half-adjoint-equivalences.rzk/" class="md-footer__link md-footer__link--next" aria-label="Next: Half Adjoint Equivalences">
+          <a href="../../simplicial-hott/02-simplicial-type-theory.rzk/" class="md-footer__link md-footer__link--next" aria-label="Next: Simplicial Type Theory">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Half Adjoint Equivalences
+                Simplicial Type Theory
               </div>
             </div>
             <div class="md-footer__button md-icon">
