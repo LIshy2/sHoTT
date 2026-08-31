@@ -800,3 +800,288 @@ and `univ-family-Prop`.
   : ( ♭ U)
   := mod ♭ univ-family-Prop
 ```
+
+## Diagonal characterization of embeddings
+
+```rzk
+#def emb-pullback
+  ( A B : U)
+  ( f : A → B)
+  : U
+  := Σ ( x : A) , (Σ ( y : A) , f x = f y)
+
+#def emb-diagonal
+  ( A B : U)
+  ( f : A → B)
+  : A → emb-pullback A B f
+  := \ a → (a , (a , refl))
+
+#def is-contr-emb-fiber
+  ( A B : U)
+  ( f : A → B)
+  ( emb-f : is-emb A B f)
+  ( x : A)
+  : is-contr (Σ (y : A) , f x = f y)
+  :=
+    is-contr-equiv-is-contr
+      ( Σ (y : A) , x = y)
+      ( Σ (y : A) , f x = f y)
+      ( total-equiv-family-of-equiv A (\ y → x = y) (\ y → f x = f y)
+          ( \ y → (ap A B x y f , emb-f x y)))
+      ( is-contr-based-paths A x)
+
+#def is-equiv-emb-diagonal-is-emb
+  ( A B : U)
+  ( f : A → B)
+  ( emb-f : is-emb A B f)
+  : is-equiv A (emb-pullback A B f) (emb-diagonal A B f)
+  :=
+    is-equiv-has-inverse A (emb-pullback A B f) (emb-diagonal A B f)
+    ( ( \ (x , _) → x)
+    , ( ( \ a → refl)
+      , ( \ (x , c) →
+          eq-pair A (\ a → Σ (y : A) , f a = f y)
+            ( x , (x , refl)) (x , c)
+            ( refl
+            , all-elements-equal-is-contr
+                ( Σ (y : A) , f x = f y)
+                ( is-contr-emb-fiber A B f emb-f x)
+                ( x , refl) c))))
+
+#def is-emb-is-equiv-emb-diagonal
+  ( A B : U)
+  ( f : A → B)
+  ( eq-diag : is-equiv A (emb-pullback A B f) (emb-diagonal A B f))
+  : is-emb A B f
+  :=
+    let pr1-equiv
+      : is-equiv (emb-pullback A B f) A
+          ( projection-total-type A (\ x' → Σ (y' : A) , f x' = f y'))
+      := is-equiv-left-factor A (emb-pullback A B f) A
+           ( emb-diagonal A B f) (eq-diag)
+           ( projection-total-type A (\ x' → Σ (y' : A) , f x' = f y'))
+           ( is-equiv-identity A)
+    in
+    \ x y →
+      are-equiv-from-paths-is-contr-total A x
+        ( \ z → f x = f z) (\ z → ap A B x z f)
+        ( is-contr-equiv-is-contr'
+            ( Σ (y' : A) , f x = f y')
+            ( fib (emb-pullback A B f) A
+                ( projection-total-type A (\ x' → Σ (y' : A) , f x' = f y')) x)
+            ( equiv-homotopy-fiber-strict-fiber A (\ x' → Σ (y' : A) , f x' = f y') x)
+            ( is-contr-map-is-equiv (emb-pullback A B f) A
+                ( projection-total-type A (\ x' → Σ (y' : A) , f x' = f y')) pr1-equiv x))
+        y
+
+#def is-emb-postcomp uses (funext)
+  ( W A B : U)
+  ( f : A → B)
+  ( emb-f : is-emb A B f)
+  : is-emb (W → A) (W → B) (\ g w → f (g w))
+  :=
+    is-emb-is-prop-fib (W → A) (W → B) (\ g w → f (g w))
+      ( \ h →
+        is-prop-Equiv-is-prop'
+          ( ( w : W) → fib A B f (h w))
+          ( fib (W → A) (W → B) (\ g w → f (g w)) h)
+          ( equiv-comp
+              ( ( w : W) → fib A B f (h w))
+              ( Σ ( g : W → A) , ((w : W) → f (g w) = h w))
+              ( fib (W → A) (W → B) (\ g w → f (g w)) h)
+              ( equiv-choice W (\ _ → A) (\ w a → f a = h w))
+              ( total-equiv-family-of-equiv (W → A)
+                  ( \ g → (w : W) → f (g w) = h w)
+                  ( \ g → (\ (w : W) → f (g w)) = h)
+                  ( \ g → inv-equiv
+                      ( (\ (w : W) → f (g w)) = h)
+                      ( (w : W) → f (g w) = h w)
+                      ( htpy-eq W (\ _ → B) (\ (w : W) → f (g w)) h
+                      , funext W (\ _ → B) (\ (w : W) → f (g w)) h))))
+          ( is-prop-fiberwise-prop W (\ w → fib A B f (h w))
+              ( \ w → is-prop-fib-is-emb A B f emb-f (h w))))
+
+#def equiv-fib-b-map
+  ( E B :♭ U)
+  ( h :♭ E → B)
+  ( b :♭ B)
+  : Equiv
+      ( fib (♭ E) (♭ B) (b-map E B h) (mod ♭ b))
+      ( ♭ (fib E B h b))
+  :=
+    equiv-comp
+      ( fib (♭ E) (♭ B) (b-map E B h) (mod ♭ b))
+      ( Σ ( x : ♭ E) , (let mod ♭ a0 := x in ♭ (h a0 = b)))
+      ( ♭ (fib E B h b))
+      ( total-equiv-family-of-equiv (♭ E)
+          ( \ x → b-map E B h x = mod ♭ b)
+          ( \ x → let mod ♭ a0 := x in ♭ (h a0 = b))
+          ( \ x →
+            b-elim E
+              ( \ z → Equiv (b-map E B h z = mod ♭ b) (let mod ♭ a0 := z in ♭ (h a0 = b)))
+              ( x)
+              ( \ (a :_b E) → \ _ →
+                inv-equiv
+                  ( ♭ (h a = b))
+                  ( mod ♭ (h a) = mod ♭ b)
+                  ( b-path-commute-fwd B (h a) b
+                  , b-path-commute-equiv B (h a) b))))
+      ( inv-equiv
+          ( ♭ (fib E B h b))
+          ( Σ ( x : ♭ E) , (let mod ♭ a0 := x in ♭ (h a0 = b)))
+          ( b-sigma-commute-equiv E (\ a → h a = b)))
+
+#def is-emb-b-map
+  ( E B :♭ U)
+  ( h :♭ E → B)
+  ( emb-h :♭ is-emb E B h)
+  : is-emb (♭ E) (♭ B) (b-map E B h)
+  :=
+    is-emb-is-prop-fib (♭ E) (♭ B) (b-map E B h)
+      ( \ y →
+        b-elim B
+          ( \ z → is-prop (fib (♭ E) (♭ B) (b-map E B h) z))
+          ( y)
+          ( \ (b :_b B) → \ _ →
+            is-prop-Equiv-is-prop'
+              ( ♭ (fib E B h b))
+              ( fib (♭ E) (♭ B) (b-map E B h) (mod ♭ b))
+              ( inv-equiv
+                  ( fib (♭ E) (♭ B) (b-map E B h) (mod ♭ b))
+                  ( ♭ (fib E B h b))
+                  ( equiv-fib-b-map E B h b))
+              ( is-prop-flat (fib E B h b)
+                  ( mod ♭ (is-prop-fib-is-emb E B h emb-h b)))))
+
+#def equiv-pullback-postcomp uses (funext)
+  ( W A B : U)
+  ( f : A → B)
+  : Equiv (W → emb-pullback A B f)
+      ( emb-pullback (W → A) (W → B) (\ g w → f (g w)))
+  :=
+    equiv-triple-comp
+      ( W → emb-pullback A B f)
+      ( Σ ( g : W → A) , ((w : W) → Σ (y : A) , f (g w) = f y))
+      ( Σ ( g : W → A) , (Σ (k : W → A) , ((w : W) → f (g w) = f (k w))))
+      ( emb-pullback (W → A) (W → B) (\ g w → f (g w)))
+      ( equiv-choice W (\ _ → A) (\ w x → Σ (y : A) , f x = f y))
+      ( total-equiv-family-of-equiv (W → A)
+          ( \ g → (w : W) → Σ (y : A) , f (g w) = f y)
+          ( \ g → Σ (k : W → A) , ((w : W) → f (g w) = f (k w)))
+          ( \ g → equiv-choice W (\ _ → A) (\ w y → f (g w) = f y)))
+      ( total-equiv-family-of-equiv (W → A)
+          ( \ g → Σ (k : W → A) , ((w : W) → f (g w) = f (k w)))
+          ( \ g → Σ (k : W → A) , ((\ (w : W) → f (g w)) = (\ (w : W) → f (k w))))
+          ( \ g → total-equiv-family-of-equiv (W → A)
+              ( \ k → (w : W) → f (g w) = f (k w))
+              ( \ k → (\ (w : W) → f (g w)) = (\ (w : W) → f (k w)))
+              ( \ k → inv-equiv
+                  ( (\ (w : W) → f (g w)) = (\ (w : W) → f (k w)))
+                  ( (w : W) → f (g w) = f (k w))
+                  ( htpy-eq W (\ _ → B) (\ (w : W) → f (g w)) (\ (w : W) → f (k w))
+                  , funext W (\ _ → B) (\ (w : W) → f (g w)) (\ (w : W) → f (k w))))))
+
+#def equiv-flat-emb-pullback
+  ( A B :♭ U)
+  ( f :♭ A → B)
+  : Equiv
+      ( ♭ (emb-pullback A B f))
+      ( emb-pullback (♭ A) (♭ B) (b-map A B f))
+  :=
+    equiv-comp
+      ( ♭ (emb-pullback A B f))
+      ( Σ ( X : ♭ A) , (let mod ♭ x0 := X in ♭ (Σ (y : A) , f x0 = f y)))
+      ( emb-pullback (♭ A) (♭ B) (b-map A B f))
+      ( b-sigma-commute-equiv A (\ x → Σ (y : A) , f x = f y))
+      ( total-equiv-family-of-equiv (♭ A)
+          ( \ X → let mod ♭ x0 := X in ♭ (Σ (y : A) , f x0 = f y))
+          ( \ X → Σ (Y : ♭ A) , b-map A B f X = b-map A B f Y)
+          ( \ X →
+            b-elim A
+              ( \ Z → Equiv
+                  ( let mod ♭ x0 := Z in ♭ (Σ (y : A) , f x0 = f y))
+                  ( Σ (Y : ♭ A) , b-map A B f Z = b-map A B f Y))
+              ( X)
+              ( \ (x0 :_b A) → \ _ →
+                equiv-comp
+                  ( ♭ (Σ (y : A) , f x0 = f y))
+                  ( Σ (Y : ♭ A) , (let mod ♭ y0 := Y in ♭ (f x0 = f y0)))
+                  ( Σ (Y : ♭ A) , mod ♭ (f x0) = b-map A B f Y)
+                  ( b-sigma-commute-equiv A (\ y → f x0 = f y))
+                  ( total-equiv-family-of-equiv (♭ A)
+                      ( \ Y → let mod ♭ y0 := Y in ♭ (f x0 = f y0))
+                      ( \ Y → mod ♭ (f x0) = b-map A B f Y)
+                      ( \ Y →
+                        b-elim A
+                          ( \ Z' → Equiv
+                              ( let mod ♭ y0 := Z' in ♭ (f x0 = f y0))
+                              ( mod ♭ (f x0) = b-map A B f Z'))
+                          ( Y)
+                          ( \ (y0 :_b A) → \ _ →
+                            ( b-path-commute-fwd B (f x0) (f y0)
+                            , b-path-commute-equiv B (f x0) (f y0))))))))
+
+#def eq-htpy-refl uses (funext)
+  ( X : U)
+  ( A : X → U)
+  ( f : (x : X) → A x)
+  : eq-htpy funext X A f f (\ x → refl) = refl
+  := second (first (funext X A f f)) refl
+
+#def section-htpy-eq-refl uses (funext)
+  ( X : U)
+  ( A : X → U)
+  ( f : (x : X) → A x)
+  : first (second (funext X A f f)) (\ x → refl) = refl
+  :=
+    inv-ap-is-emb
+      ( f = f)
+      ( (x : X) → f x = f x)
+      ( htpy-eq X A f f)
+      ( is-emb-is-equiv (f = f) ((x : X) → f x = f x) (htpy-eq X A f f) (funext X A f f))
+      ( first (second (funext X A f f)) (\ x → refl))
+      ( refl)
+      ( second (second (funext X A f f)) (\ x → refl))
+
+#def is-emb-comp
+  ( A B C : U)
+  ( f : A → B)
+  ( g : B → C)
+  ( emb-f : is-emb A B f)
+  ( emb-g : is-emb B C g)
+  : is-emb A C (comp A B C g f)
+  :=
+    \ x y →
+      is-equiv-homotopy (x = y) (g (f x) = g (f y))
+        ( ap A C x y (comp A B C g f))
+        ( comp (x = y) (f x = f y) (g (f x) = g (f y))
+            ( ap B C (f x) (f y) g)
+            ( ap A B x y f))
+        ( \ p → ap-comp A B C x y f g p)
+        ( is-equiv-comp (x = y) (f x = f y) (g (f x) = g (f y))
+            ( ap A B x y f) (emb-f x y)
+            ( ap B C (f x) (f y) g) (emb-g (f x) (f y)))
+
+#def is-emb-right-factor-equiv
+  ( A B C : U)
+  ( g : A → B)
+  ( h : B → C)
+  ( is-equiv-h : is-equiv B C h)
+  ( emb-hg : is-emb A C (comp A B C h g))
+  : is-emb A B g
+  :=
+    \ x y →
+      is-equiv-right-factor (x = y) (g x = g y) (h (g x) = h (g y))
+        ( ap A B x y g)
+        ( ap B C (g x) (g y) h)
+        ( is-emb-is-equiv B C h is-equiv-h (g x) (g y))
+        ( is-equiv-homotopy (x = y) (h (g x) = h (g y))
+            ( comp (x = y) (g x = g y) (h (g x) = h (g y))
+                ( ap B C (g x) (g y) h) (ap A B x y g))
+            ( ap A C x y (comp A B C h g))
+            ( \ p → rev (h (g x) = h (g y))
+                ( ap A C x y (comp A B C h g) p)
+                ( ap B C (g x) (g y) h (ap A B x y g p))
+                ( ap-comp A B C x y g h p))
+            ( emb-hg x y))
+```

@@ -5,6 +5,8 @@ This is a literate `rzk` file: exponentiation by the interval (`ar`), its right 
 
 ```rzk
 #lang rzk-1
+
+#assume funext : FunExt
 ```
 
 ## Prerequisites
@@ -290,5 +292,364 @@ Naturality of transpositions.
          mod ♭ (\ (x : C) → fmap (k x)))
        ( untranspose-ar B C (mod ♭ (\ (p : 𝕀 → C) → f (t p))))
        ( untranspose-naturality-right-rev A B C f t)
+```
 
+## Counit
+
+```rzk
+#def ar-counit
+  ( A :♭ U)
+  : ar (b-extract U (rar (mod ♭ A))) → A
+  := (let mod ♭ e := ar-rar-counit in e) A
+```
+
+## Cubes separate
+
+```rzk
+#postulate cubes-separate (A B :♭ U) (f :♭ A → B)
+  : iff (is-equiv A B f) ((n :♭ nat) → is-equiv (♭ (I^n n → A)) (♭ (I^n n → B)) (b-map (I^n n → A) (I^n n → B) (\ p t → f (p t))))
+```
+
+## Root preserves equivalences
+
+```rzk
+#def rar-preserves-is-equiv uses (funext)
+  ( A B :♭ U)
+  ( f :♭ A → B)
+  ( ef :♭ is-equiv A B f)
+  : is-equiv
+      ( b-extract U (rar (mod ♭ A)))
+      ( b-extract U (rar (mod ♭ B)))
+      ( b-extract
+          ( b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))
+          ( rar-fmap A B f))
+  :=
+    b-b-elim
+      ( b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))
+      ( \ w → is-equiv (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B)))
+                ( b-extract (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B))) w))
+      ( rar-fmap A B f)
+      ( \ (g :_b b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))
+          ( e : ♭ (mod ♭ g =_{♭ (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))} rar-fmap A B f)) →
+          second
+            ( cubes-separate
+                ( b-extract U (rar (mod ♭ A)))
+                ( b-extract U (rar (mod ♭ B)))
+                ( g))
+            ( \ n →
+                is-equiv-b-map-via-splits
+                  ( I^n n → b-extract U (rar (mod ♭ A)))
+                  ( I^n n → b-extract U (rar (mod ♭ B)))
+                  ( \ p t → g (p t))
+                  ( ♭ (ar (I^n n) → A))
+                  ( ♭ (ar (I^n n) → B))
+                  ( transpose-ar-equiv A (I^n n))
+                  ( transpose-ar-equiv B (I^n n))
+                  ( b-equiv (ar (I^n n) → A) (ar (I^n n) → B)
+                      ( \ m p → f (m p) , is-equiv-postcomp-is-equiv funext A B (ar (I^n n)) f ef))
+                  ( \ a →
+                      b-path-commute-fwd ( ar (I^n n) → B)
+                        ( \ p → f (ar-counit A (\ i → a (p i))))
+                        ( \ h → ar-counit B (\ i → g (a (h i))))
+                        ( let mod ♭ e0 := e in
+                          mod ♭
+                            ( let key
+                                : transpose-ar B (b-extract U (rar (mod ♭ A))) (mod ♭ g)
+                                  =_{♭ (ar (b-extract U (rar (mod ♭ A))) → B)}
+                                  ( mod ♭ (\ (p : ar (b-extract U (rar (mod ♭ A)))) → f (ar-counit A p)))
+                                := concat ( ♭ (ar (b-extract U (rar (mod ♭ A))) → B))
+                                     ( transpose-ar B (b-extract U (rar (mod ♭ A))) (mod ♭ g))
+                                     ( transpose-ar B (b-extract U (rar (mod ♭ A))) (rar-fmap A B f))
+                                     ( mod ♭ (\ p → f (ar-counit A p)))
+                                     ( ap ( ♭ (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B))))
+                                          ( ♭ (ar (b-extract U (rar (mod ♭ A))) → B))
+                                          ( mod ♭ g) (rar-fmap A B f)
+                                          ( transpose-ar B (b-extract U (rar (mod ♭ A))))
+                                          ( e0))
+                                     ( transpose-untranspose-ar B (b-extract U (rar (mod ♭ A)))
+                                         ( mod ♭ (\ p → f (ar-counit A p))))
+                              in
+                              let natptwise
+                                : ( m : ar (b-extract U (rar (mod ♭ A))))
+                                  → ar-counit B (\ i → g (m i)) = f (ar-counit A m)
+                                := htpy-eq (ar (b-extract U (rar (mod ♭ A)))) (\ _ → B)
+                                     ( \ h → ar-counit B (\ i → g (h i)))
+                                     ( \ p → f (ar-counit A p))
+                                     ( b-extract-eq (ar (b-extract U (rar (mod ♭ A))) → B)
+                                         ( transpose-ar B (b-extract U (rar (mod ♭ A))) (mod ♭ g))
+                                         ( mod ♭ (\ p → f (ar-counit A p)))
+                                         ( key))
+                              in
+                              eq-htpy funext (ar (I^n n)) (\ _ → B)
+                                ( \ p → f (ar-counit A (\ i → a (p i))))
+                                ( \ h → ar-counit B (\ i → g (a (h i))))
+                                ( \ p → rev B
+                                    ( ar-counit B (\ i → g (a (p i))))
+                                    ( f (ar-counit A (\ i → a (p i))))
+                                    ( natptwise (\ i → a (p i)))))))))
+```
+
+## Root preserves embeddings
+
+```rzk
+#def is-emb-b-map-gf uses (funext)
+  ( A B :♭ U)
+  ( f :♭ A → B)
+  ( emb-f :♭ is-emb A B f)
+  ( n :♭ nat)
+  ( g :_b b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))
+  ( e : ♭ (mod ♭ g =_{♭ (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))} rar-fmap A B f))
+  : is-emb
+      ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+      ( ♭ (I^n n → b-extract U (rar (mod ♭ B))))
+      ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B)))
+          ( \ p t → g (p t)))
+  :=
+          is-emb-right-factor-equiv
+            ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+            ( ♭ (I^n n → b-extract U (rar (mod ♭ B))))
+            ( ♭ (ar (I^n n) → B))
+            ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B)))
+                ( \ p t → g (p t)))
+            ( first (transpose-ar-equiv B (I^n n)))
+            ( second (transpose-ar-equiv B (I^n n)))
+            ( transport
+                ( ♭ (I^n n → b-extract U (rar (mod ♭ A))) → ♭ (ar (I^n n) → B))
+                ( \ m → is-emb (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (ar (I^n n) → B)) m)
+                ( comp (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (ar (I^n n) → A)) (♭ (ar (I^n n) → B))
+                    ( b-map (ar (I^n n) → A) (ar (I^n n) → B) (\ m p → f (m p)))
+                    ( first (transpose-ar-equiv A (I^n n))))
+                ( comp (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B)))) (♭ (ar (I^n n) → B))
+                    ( first (transpose-ar-equiv B (I^n n)))
+                    ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B)))
+                        ( \ p t → g (p t))))
+                ( eq-htpy funext
+                    ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+                    ( \ _ → ♭ (ar (I^n n) → B))
+                    ( comp (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (ar (I^n n) → A)) (♭ (ar (I^n n) → B))
+                        ( b-map (ar (I^n n) → A) (ar (I^n n) → B) (\ m p → f (m p)))
+                        ( first (transpose-ar-equiv A (I^n n))))
+                    ( comp (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B)))) (♭ (ar (I^n n) → B))
+                        ( first (transpose-ar-equiv B (I^n n)))
+                        ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B)))
+                            ( \ p t → g (p t))))
+                    ( \ x →
+                      b-elim (I^n n → b-extract U (rar (mod ♭ A)))
+                        ( \ z →
+                            b-map (ar (I^n n) → A) (ar (I^n n) → B) (\ m p → f (m p))
+                              ( first (transpose-ar-equiv A (I^n n)) z)
+                          = first (transpose-ar-equiv B (I^n n))
+                              ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B)))
+                                  ( \ p t → g (p t)) z))
+                        ( x)
+                        ( \ (a :_b I^n n → b-extract U (rar (mod ♭ A))) → \ _ →
+                          b-path-commute-fwd ( ar (I^n n) → B)
+                            ( \ p → f (ar-counit A (\ i → a (p i))))
+                            ( \ h → ar-counit B (\ i → g (a (h i))))
+                            ( let mod ♭ e0 := e in
+                              mod ♭
+                                ( let key
+                                    : transpose-ar B (b-extract U (rar (mod ♭ A))) (mod ♭ g)
+                                      =_{♭ (ar (b-extract U (rar (mod ♭ A))) → B)}
+                                      ( mod ♭ (\ (p : ar (b-extract U (rar (mod ♭ A)))) → f (ar-counit A p)))
+                                    := concat ( ♭ (ar (b-extract U (rar (mod ♭ A))) → B))
+                                         ( transpose-ar B (b-extract U (rar (mod ♭ A))) (mod ♭ g))
+                                         ( transpose-ar B (b-extract U (rar (mod ♭ A))) (rar-fmap A B f))
+                                         ( mod ♭ (\ p → f (ar-counit A p)))
+                                         ( ap ( ♭ (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B))))
+                                              ( ♭ (ar (b-extract U (rar (mod ♭ A))) → B))
+                                              ( mod ♭ g) (rar-fmap A B f)
+                                              ( transpose-ar B (b-extract U (rar (mod ♭ A))))
+                                              ( e0))
+                                         ( transpose-untranspose-ar B (b-extract U (rar (mod ♭ A)))
+                                             ( mod ♭ (\ p → f (ar-counit A p))))
+                                  in
+                                  let natptwise
+                                    : ( m : ar (b-extract U (rar (mod ♭ A))))
+                                      → ar-counit B (\ i → g (m i)) = f (ar-counit A m)
+                                    := htpy-eq (ar (b-extract U (rar (mod ♭ A)))) (\ _ → B)
+                                         ( \ h → ar-counit B (\ i → g (h i)))
+                                         ( \ p → f (ar-counit A p))
+                                         ( b-extract-eq (ar (b-extract U (rar (mod ♭ A))) → B)
+                                             ( transpose-ar B (b-extract U (rar (mod ♭ A))) (mod ♭ g))
+                                             ( mod ♭ (\ p → f (ar-counit A p)))
+                                             ( key))
+                                  in
+                                  eq-htpy funext (ar (I^n n)) (\ _ → B)
+                                    ( \ p → f (ar-counit A (\ i → a (p i))))
+                                    ( \ h → ar-counit B (\ i → g (a (h i))))
+                                    ( \ p → rev B
+                                        ( ar-counit B (\ i → g (a (p i))))
+                                        ( f (ar-counit A (\ i → a (p i))))
+                                        ( natptwise (\ i → a (p i)))))))))
+                ( is-emb-comp
+                    ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+                    ( ♭ (ar (I^n n) → A))
+                    ( ♭ (ar (I^n n) → B))
+                    ( first (transpose-ar-equiv A (I^n n)))
+                    ( b-map (ar (I^n n) → A) (ar (I^n n) → B) (\ m p → f (m p)))
+                    ( is-emb-is-equiv (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (ar (I^n n) → A))
+                        ( first (transpose-ar-equiv A (I^n n))) (second (transpose-ar-equiv A (I^n n))))
+                    ( is-emb-b-map (ar (I^n n) → A) (ar (I^n n) → B) (\ m p → f (m p))
+                        ( is-emb-postcomp funext (ar (I^n n)) A B f emb-f))))
+
+#def is-equiv-emb-diagonal-rar uses (funext)
+  ( A B :♭ U)
+  ( f :♭ A → B)
+  ( emb-f :♭ is-emb A B f)
+  : is-equiv
+      ( b-extract U (rar (mod ♭ A)))
+      ( emb-pullback
+          ( b-extract U (rar (mod ♭ A)))
+          ( b-extract U (rar (mod ♭ B)))
+          ( b-extract (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B))) (rar-fmap A B f)))
+      ( emb-diagonal
+          ( b-extract U (rar (mod ♭ A)))
+          ( b-extract U (rar (mod ♭ B)))
+          ( b-extract (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B))) (rar-fmap A B f)))
+  :=
+    b-b-elim
+      ( b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))
+      ( \ w → is-equiv
+                ( b-extract U (rar (mod ♭ A)))
+                ( emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B)))
+                    ( b-extract (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B))) w))
+                ( emb-diagonal (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B)))
+                    ( b-extract (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B))) w)))
+      ( rar-fmap A B f)
+      ( \ (g :_b b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))
+          ( e : ♭ (mod ♭ g =_{♭ (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))} rar-fmap A B f)) →
+          second
+            ( cubes-separate
+                ( b-extract U (rar (mod ♭ A)))
+                ( emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g)
+                ( emb-diagonal (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+            ( \ n →
+                is-equiv-right-factor
+                  ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+                  ( ♭ (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                  ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                      ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                  ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g)
+                      ( \ p t → emb-diagonal (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g (p t)))
+                  ( first
+                      ( equiv-comp
+                          ( ♭ (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                          ( ♭ (emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                          ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                              ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                          ( b-equiv (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g)
+                              ( emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))
+                              ( equiv-pullback-postcomp funext (I^n n) (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                          ( equiv-flat-emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))))
+                  ( second
+                      ( equiv-comp
+                          ( ♭ (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                          ( ♭ (emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                          ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                              ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                          ( b-equiv (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g)
+                              ( emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))
+                              ( equiv-pullback-postcomp funext (I^n n) (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                          ( equiv-flat-emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))))
+                  ( is-equiv-homotopy
+                      ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+                      ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                          ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                      ( comp
+                          ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+                          ( ♭ (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                          ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                              ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                          ( first
+                              ( equiv-comp
+                                  ( ♭ (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                                  ( ♭ (emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                                  ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                                      ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                                  ( b-equiv (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g)
+                                      ( emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))
+                                      ( equiv-pullback-postcomp funext (I^n n) (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                                  ( equiv-flat-emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))))
+                          ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g)
+                              ( \ p t → emb-diagonal (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g (p t))))
+                      ( emb-diagonal (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                          ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                      ( \ a →
+                        b-elim ( I^n n → b-extract U (rar (mod ♭ A)))
+                          ( \ z →
+                              comp
+                                ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+                                ( ♭ (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                                ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                                    ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                                ( first
+                                    ( equiv-comp
+                                        ( ♭ (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                                        ( ♭ (emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                                        ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                                            ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))))
+                                        ( b-equiv (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g)
+                                            ( emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))
+                                            ( equiv-pullback-postcomp funext (I^n n) (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g))
+                                        ( equiv-flat-emb-pullback (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))))
+                                ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → emb-pullback (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g)
+                                    ( \ p t → emb-diagonal (b-extract U (rar (mod ♭ A))) (b-extract U (rar (mod ♭ B))) g (p t)))
+                                ( z)
+                            =_{ emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B)))) (b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t))) }
+                              emb-diagonal (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                                ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))
+                                ( z))
+                          ( a)
+                          ( \ (c :_b I^n n → b-extract U (rar (mod ♭ A))) → \ _ →
+                            ap
+                              ( mod ♭ (\ (t : I^n n) → g (c t)) = mod ♭ (\ (t : I^n n) → g (c t)))
+                              ( emb-pullback (♭ (I^n n → b-extract U (rar (mod ♭ A)))) (♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                                  ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c₁ t → g (c₁ t))))
+                              ( b-path-commute-fwd (I^n n → b-extract U (rar (mod ♭ B)))
+                                  ( \ (t : I^n n) → g (c t)) (\ (t : I^n n) → g (c t))
+                                  ( mod ♭ (first (second (funext (I^n n) (\ _ → b-extract U (rar (mod ♭ B))) (\ (t : I^n n) → g (c t)) (\ (t : I^n n) → g (c t)))) (\ w → refl))))
+                              ( refl)
+                              ( \ p → (mod ♭ c , (mod ♭ c , p)))
+                              ( concat
+                                  ( mod ♭ (\ (t : I^n n) → g (c t)) = mod ♭ (\ (t : I^n n) → g (c t)))
+                                  ( b-path-commute-fwd (I^n n → b-extract U (rar (mod ♭ B)))
+                                      ( \ (t : I^n n) → g (c t)) (\ (t : I^n n) → g (c t))
+                                      ( mod ♭ (first (second (funext (I^n n) (\ _ → b-extract U (rar (mod ♭ B))) (\ (t : I^n n) → g (c t)) (\ (t : I^n n) → g (c t)))) (\ w → refl))))
+                                  ( b-path-commute-fwd (I^n n → b-extract U (rar (mod ♭ B)))
+                                      ( \ (t : I^n n) → g (c t)) (\ (t : I^n n) → g (c t)) (mod ♭ refl))
+                                  ( refl)
+                                  ( ap
+                                      ( ♭ ((\ (t : I^n n) → g (c t)) = (\ (t : I^n n) → g (c t))))
+                                      ( mod ♭ (\ (t : I^n n) → g (c t)) = mod ♭ (\ (t : I^n n) → g (c t)))
+                                      ( mod ♭ (first (second (funext (I^n n) (\ _ → b-extract U (rar (mod ♭ B))) (\ (t : I^n n) → g (c t)) (\ (t : I^n n) → g (c t)))) (\ w → refl)))
+                                      ( mod ♭ refl)
+                                      ( b-path-commute-fwd (I^n n → b-extract U (rar (mod ♭ B))) (\ (t : I^n n) → g (c t)) (\ (t : I^n n) → g (c t)))
+                                      ( b-path-commute-fwd ((\ (t : I^n n) → g (c t)) = (\ (t : I^n n) → g (c t)))
+                                          ( first (second (funext (I^n n) (\ _ → b-extract U (rar (mod ♭ B))) (\ (t : I^n n) → g (c t)) (\ (t : I^n n) → g (c t)))) (\ w → refl))
+                                          ( refl)
+                                          ( mod ♭ (section-htpy-eq-refl funext (I^n n) (\ _ → b-extract U (rar (mod ♭ B))) (\ (t : I^n n) → g (c t))))))
+                                  ( b-path-commute-fwd-refl (I^n n → b-extract U (rar (mod ♭ B))) (\ (t : I^n n) → g (c t))))))
+                      ( is-equiv-emb-diagonal-is-emb
+                          ( ♭ (I^n n → b-extract U (rar (mod ♭ A))))
+                          ( ♭ (I^n n → b-extract U (rar (mod ♭ B))))
+                          ( b-map (I^n n → b-extract U (rar (mod ♭ A))) (I^n n → b-extract U (rar (mod ♭ B))) (\ c t → g (c t)))
+                          ( is-emb-b-map-gf A B f emb-f n g e)))))
+
+#def rar-preserves-is-emb uses (funext)
+  ( A B :♭ U)
+  ( f :♭ A → B)
+  ( emb-f :♭ is-emb A B f)
+  : is-emb
+      ( b-extract U (rar (mod ♭ A)))
+      ( b-extract U (rar (mod ♭ B)))
+      ( b-extract
+          ( b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B)))
+          ( rar-fmap A B f))
+  :=
+    is-emb-is-equiv-emb-diagonal
+      ( b-extract U (rar (mod ♭ A)))
+      ( b-extract U (rar (mod ♭ B)))
+      ( b-extract (b-extract U (rar (mod ♭ A)) → b-extract U (rar (mod ♭ B))) (rar-fmap A B f))
+      ( is-equiv-emb-diagonal-rar A B f emb-f)
 ```

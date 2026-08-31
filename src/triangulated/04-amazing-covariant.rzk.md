@@ -65,15 +65,9 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
   : U
   := amazing-predicate is-covariant-arrow-II-Prop X
 
-#def is-discrete-is-a-cov uses (funext weakfunext extext)
-  ( A : U)
-  ( is-a-cov-A : is-a-cov A)
-  : is-discrete A
-  := ?is-discrete-is-a-cov
-
 #def is-prop-is-a-cov uses (funext weakfunext) (A : U)
   : is-prop (is-a-cov A)
-  := ?is-prop-is-a-cov
+  := is-prop-amazing-predicate funext is-covariant-arrow-II-Prop A
 
 ```
 
@@ -257,6 +251,17 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
           ( \ (_ , cA') → cA'))
       ( \ _ → (A , is-a-cov-A))
 
+#def is-discrete-is-a-cov uses (funext weakfunext)
+  ( A : U)
+  ( is-a-cov-A : is-a-cov A)
+  : is-discrete-II A
+  :=
+    is-discrete-is-covariant-II
+      ( shape (_ : 𝕀 | TOP))
+      ( \ _ → A)
+      ( is-a-cov-const-cov A is-a-cov-A)
+      ( form 0₂)
+
 #def is-a-cov-sigma-closed uses (funext weakfunext)
   ( A : U) (B : A → U)
   ( is-a-cov-A : is-a-cov A)
@@ -380,7 +385,7 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
                         , dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → shape-at-1 (f (unform s))) a0 a1')
                         ( is-prop-Σ-dhom-II-form-line-shape-at-1 extext f a0)
                         ( a1 , h))))
-      ( i)
+      ( i)  
 ```
 
 ## Extension theorem

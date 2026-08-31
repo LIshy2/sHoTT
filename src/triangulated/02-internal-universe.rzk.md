@@ -433,10 +433,18 @@ that `amazing-predicate` is a proposition.
 
 ```rzk
 
-#postulate is-prop-amazing-predicate
+#def is-prop-amazing-predicate uses (funext)
   ( pred :♭ (𝕀 → U) → Prop)
   ( X : U)
   : is-prop (amazing-predicate pred X)
+  :=
+    is-prop-fib-is-emb
+      ( b-extract U (rar univ-family-Prop-b))
+      ( b-extract U (rar Prop-b))
+      ( univ-family-proj-1_i)
+      ( rar-preserves-is-emb funext univ-family-Prop Prop (\ x → first x)
+          ( is-emb-subtype-projection Prop (\ P → first P) (\ P → second P)))
+      ( amazing-tr pred X)
 
 #def amazing-transpose-untranspose-section uses (funext weakfunext)
   ( pred :♭ (𝕀 → U) → Prop)

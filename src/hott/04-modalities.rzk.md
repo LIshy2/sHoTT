@@ -146,6 +146,11 @@ This is a literate `rzk` file:
   ( p : (mod ♭ x) = (mod ♭ y))
   : b-path-commute-fwd A x y (b-path-commute-bwd A x y p) = p
 
+#postulate b-path-commute-fwd-refl
+  ( A :♭ U)
+  ( x :♭ A)
+  : b-path-commute-fwd A x x (mod ♭ refl) = refl
+
 #def b-path-commute-equiv (A :♭ U) (x y :♭ A)
   : is-equiv
     ( ♭ ( x = y))

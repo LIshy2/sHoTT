@@ -363,22 +363,71 @@ Function types and extension types into discrete families are already discrete:
 `#!rzk is-discrete-function-type`, `#!rzk is-discrete-extension-type` above.
 
 ```rzk
--- Σ of discrete types is discrete (same pattern as is-discrete-function-type).
-#def is-discrete-Σ uses (extext)
+-- Σ of discrete types is discrete: via Δ¹-locality and the axiom of choice,
+-- Δ¹ → Σ A B ≃ Σ (φ : Δ¹ → A), ((t : Δ¹) → B (φ t)), and the constant map is the
+-- composite of the const equivalences on base and fibres.
+#def is-discrete-Σ
   ( A : U)
   ( B : A → U)
   ( is-discrete-A : is-discrete A)
   ( is-discrete-B : (a : A) → is-discrete (B a))
   : is-discrete (Σ (a : A) , B a)
-  := ?is-discrete-Σ
+  :=
+    is-discrete-is-Δ¹-local
+      ( Σ (a : A) , B a)
+      ( second
+        ( equiv-comp
+          ( Σ (a : A) , B a)
+          ( Σ (φ : Δ¹ → A) , ((t : Δ¹) → B (φ t)))
+          ( Δ¹ → (Σ (a : A) , B a))
+          ( equiv-comp
+            ( Σ (a : A) , B a)
+            ( Σ (a : A) , (Δ¹ → B a))
+            ( Σ (φ : Δ¹ → A) , ((t : Δ¹) → B (φ t)))
+            ( total-equiv-family-of-equiv
+              ( A) (B) (\ a → Δ¹ → B a)
+              ( \ a → (\ b _ → b , is-Δ¹-local-is-discrete (B a) (is-discrete-B a))))
+            ( equiv-total-pullback-is-equiv
+              ( A) (Δ¹ → A) (\ a _ → a)
+              ( is-Δ¹-local-is-discrete A is-discrete-A)
+              ( \ φ → (t : Δ¹) → B (φ t))))
+          ( inv-equiv-axiom-choice
+            ( 2) (Δ¹) (\ _ → BOT) (\ _ → A) (\ _ x → B x)
+            ( \ _ → recBOT) (\ _ → recBOT))))
 
--- Path types in a discrete type are discrete.
+-- Path types in a discrete type are discrete: x = y ≃ Δ¹ → (x = y), where the
+-- first equivalence is `ap` of the const equivalence A ≃ (Δ¹ → A) and the second
+-- is extension extensionality; the composite is homotopic to the constant map.
 #def is-discrete-Id uses (extext)
   ( A : U)
   ( is-discrete-A : is-discrete A)
   ( x y : A)
   : is-discrete (x = y)
-  := ?is-discrete-Id
+  :=
+    let la : is-equiv A (Δ¹ → A) (\ a _ → a)
+      := is-Δ¹-local-is-discrete A is-discrete-A
+    in
+    let e : Equiv (x = y) (Δ¹ → (x = y))
+      := equiv-comp (x = y)
+           ( (\ (_ : Δ¹) → x) = (\ (_ : Δ¹) → y))
+           ( Δ¹ → (x = y))
+           ( equiv-ap-is-equiv A (Δ¹ → A) (\ a _ → a) la x y)
+           ( equiv-ExtExt extext 2 Δ¹ (\ _ → BOT) (\ _ → A) (\ _ → recBOT)
+               (\ _ → x) (\ _ → y))
+    in
+    is-discrete-is-Δ¹-local (x = y)
+      ( is-equiv-homotopy (x = y) (Δ¹ → (x = y))
+          ( \ p _ → p)
+          ( first e)
+          ( \ p → ind-path A x
+              ( \ y' p' →
+                  ( \ (_ : Δ¹) → p')
+                  = ext-htpy-eq 2 Δ¹ (\ _ → BOT) (\ _ → A) (\ _ → recBOT)
+                      (\ _ → x) (\ _ → y')
+                      ( ap A (Δ¹ → A) x y' (\ a _ → a) p'))
+              ( refl)
+              ( y) (p))
+          ( second e))
 ```
 
 ## Opposite modality

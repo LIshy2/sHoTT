@@ -18,13 +18,6 @@ This is a literate `rzk` file:
 - `triangulated/01`–`02` — tiny interval, internal universe.
 - `triangulated/04-amazing-covariant.rzk.md` — `is-covariant-arrow-II`, `is-covariant-arrow-II-Prop`, `amazing-covariant-uniqueness-line-II`, `is-a-cov`, `is-a-cov-sigma-closed`, `is-a-cov-fib`, `is-a-cov-ext`, `is-a-cov-i===0`, `is-prop-is-a-cov`.
 
-## Cubes separate
-
-```rzk
-#postulate cubes-separate (A B :♭ U) (f :♭ A → B)
-  : iff (is-equiv A B f) ((n :_b nat) → is-equiv (♭ (I^n n → A)) (♭ (I^n n → B)) (b-map (I^n n → A) (I^n n → B) (\ p t → f (p t))))
-```
-
 ## S and its morphisms
 
 `S` is the type of amazingly-covariant types; a map `𝕀 → S` is a morphism.
@@ -58,7 +51,7 @@ This is a literate `rzk` file:
   ( f 0₂ , (f 1₂ , covariant-transport-line-II
       ( \ (t : 𝕀 | TOP) → first (f t))
       ( s-is-covariant-arrow-II f)
-      (\ k → form k)))
+      ( \ k → form k)))
 ```
 
 ## dirglue
@@ -66,7 +59,7 @@ This is a literate `rzk` file:
 ```rzk
 
 #def dirglue-is-acov uses (funext weakfunext extext) (A B : S) (f : (first A) → (first B)) (i : 𝕀)
-  : (is-a-cov funext weakfunext) (
+  : ( is-a-cov funext weakfunext) (
     Σ ( b : (first B))
   , ( ( t : 1 | i ≡ 0₂) → fib (first A) (first B) f b)
   )
@@ -82,9 +75,9 @@ This is a literate `rzk` file:
               ( mod ᵒᵖ (is-a-cov-i===0 funext weakfunext extext flip_i))
               ( fib (first A) (first B) f b)
               ( is-a-cov-fib funext weakfunext
-                  ( first A) ( first B)
-                  ( second A) ( second B)
-                  ( f) ( b)))
+                  ( first A) (first B)
+                  ( second A) (second B)
+                  ( f) (b)))
 
 #def dirglue uses (funext weakfunext extext) (A B : S) (f : (first A) → (first B))
   : 𝕀 → S

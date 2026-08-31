@@ -21,6 +21,33 @@
 ```
 
 ```rzk
+#def is-discrete-is-covariant-II
+  ( A : U)
+  ( C : A → U)
+  ( is-cov-C : is-covariant-II A C)
+  ( x : A)
+  : is-discrete-II (C x)
+  :=
+    ( \ u v →
+    is-equiv-fiberwise-is-equiv-total
+      ( C x)
+      ( \ v' → (u = v'))
+      ( hom-II (C x) u)
+      ( hom-eq-II (C x) u)
+      ( is-equiv-are-contr
+        ( Σ ( y : (C x)) , u = y)
+        ( Σ ( y : (C x)) , hom-II (C x) u y)
+        ( is-contr-based-paths (C x) u)
+        ( is-cov-C x x (id-hom-II A x) u)
+        ( total-map
+          ( C x)
+          ( \ v' → u = v')
+          ( hom-II (C x) u)
+          ( hom-eq-II (C x) u)))
+      ( v))
+```
+
+```rzk
 #def covariant-transport-II
   ( A : U)
   ( x y : A)
@@ -287,7 +314,7 @@
       in ᵒᵖ (is-covariant-arrow-II (\ (t : 𝕀 | TOP) → C0 t)))
   ( D : 𝕀 → U)
   ( cov-D : is-covariant-arrow-II (\ (t : 𝕀 | TOP) → D t))
-  ( disc-D : (i : 𝕀) → is-discrete (D i))
+  ( disc-D : (i : 𝕀) → is-discrete-II (D i))
   : is-covariant-II
       ( shape (_ : 𝕀 | TOP))
       ( \ (t : shape (_ : 𝕀 | TOP)) → (s : 1 | uninvᵒᵖ (phi-i (unform t))) → D (unform t))
@@ -331,7 +358,7 @@
     let cov-D
       : is-covariant-arrow-II (\ (t : 𝕀 | TOP) → D t)
       := cov-D-r in
-    let disc-D : (i : 𝕀) → is-discrete (D i) := disc-D-r in
+    let disc-D : (i : 𝕀) → is-discrete-II (D i) := disc-D-r in
     let shape-cov
       : let mod ᵒᵖ C0 :=
           op-ext-commute-bwd (\ (_ : 𝕀) → U)
@@ -478,10 +505,10 @@
                 := \ j → (H-sec j , r j)
               in
               let is-discrete-E-i
-                : (i : 𝕀) → is-discrete (E i)
+                : (i : 𝕀) → is-discrete-II (E i)
                 :=
                   \ i →
-                    is-discrete-extension-type
+                    is-discrete-extension-type-II
                       extext
                       ( 1)
                       ( \ _ → uninvᵒᵖ (phi-i i))
@@ -489,9 +516,9 @@
                       ( \ _ → disc-D i)
               in
               let is-discrete-E-I
-                : is-discrete ((i : 𝕀) → E i)
+                : is-discrete-II ((i : 𝕀) → E i)
                 :=
-                  is-discrete-extension-type
+                  is-discrete-extension-type-II
                     extext
                     ( 𝕀)
                     ( \ _ → TOP)
@@ -500,20 +527,20 @@
               in
               let is-discrete-fib
                 : ( φ : (i : 𝕀) → E i)
-                  → is-discrete (φ 0₂ = f0)
+                  → is-discrete-II (φ 0₂ = f0)
                 :=
                   \ φ →
-                    is-discrete-Id
+                    is-discrete-Id-II extext
                       ( E 0₂)
                       ( is-discrete-E-i 0₂)
                       ( φ 0₂)
                       f0
               in
               let is-discrete-total
-                : is-discrete
+                : is-discrete-II
                     ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                 :=
-                  is-discrete-Σ
+                  is-discrete-Σ-II
                     ( (i : 𝕀) → E i)
                     ( \ φ → φ 0₂ = f0)
                     ( is-discrete-E-I)
@@ -709,14 +736,14 @@
                       , pack1-eq-second)
               in
               let arrow-pack
-                : hom
+                : hom-II
                     ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                     ( pack 0₂)
                     ( pack 1₂)
                 := \ t → pack t
               in
               let arrow
-                : hom
+                : hom-II
                     ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                     ( contr-center)
                     ( p , q)
@@ -724,7 +751,7 @@
                   transport
                     ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                     ( \ z →
-                        hom
+                        hom-II
                           ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                           ( z)
                           ( p , q))
@@ -734,7 +761,7 @@
                     ( transport
                         ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                         ( \ z →
-                            hom
+                            hom-II
                               ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                               ( pack 0₂)
                               ( z))
@@ -746,11 +773,11 @@
                 first
                   ( has-inverse-is-equiv
                       ( contr-center = (p , q))
-                      ( hom
+                      ( hom-II
                           ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                           ( contr-center)
                           ( p , q))
-                      ( hom-eq
+                      ( hom-eq-II
                           ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                           ( contr-center)
                           ( p , q))
