@@ -1800,22 +1800,71 @@ is discrete.</p>
 <h2 id="closure-properties-of-discreteness">Closure properties of discreteness<a class="headerlink" href="#closure-properties-of-discreteness" title="Permanent link">&para;</a></h2>
 <p>Function types and extension types into discrete families are already discrete:
 <code class="language-rzk highlight">is-discrete-function-type</code>, <code class="language-rzk highlight">is-discrete-extension-type</code> above.</p>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c">-- Σ of discrete types is discrete (same pattern as is-discrete-function-type).</span>
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-discrete-Σ" id="define:is-discrete-Σ" style="visibility: visible; position: relative; color: inherit">is-discrete-Σ</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>extext<span class="p">)</span>
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>  <span class="p">( </span>B <span class="p">:</span> A → <span class="kt">U</span>)
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>  <span class="p">( </span>is-discrete-A <span class="p">:</span> is-discrete A)
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>  <span class="p">( </span>is-discrete-B <span class="p">:</span> <span class="p">(</span>a <span class="p">:</span> A) → is-discrete (B a))
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>  : is-discrete <span class="p">(</span>Σ (a <span class="p">:</span> A) , B a)
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>  := <span class="bp">?</span>is-discrete-Σ
-</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
-</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c">-- Path types in a discrete type are discrete.</span>
-</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-discrete-Id" id="define:is-discrete-Id" style="visibility: visible; position: relative; color: inherit">is-discrete-Id</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>extext<span class="p">)</span>
-</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>  <span class="p">( </span>is-discrete-A <span class="p">:</span> is-discrete A)
-</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
-</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>  : is-discrete (x = y)
-</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>  := <span class="bp">?</span>is-discrete-Id
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c">-- Σ of discrete types is discrete: via Δ¹-locality and the axiom of choice,</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c">-- Δ¹ → Σ A B ≃ Σ (φ : Δ¹ → A), ((t : Δ¹) → B (φ t)), and the constant map is the</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c">-- composite of the const equivalences on base and fibres.</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-discrete-Σ" id="define:is-discrete-Σ" style="visibility: visible; position: relative; color: inherit">is-discrete-Σ</a></span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>  <span class="p">( </span>B <span class="p">:</span> A → <span class="kt">U</span>)
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>  <span class="p">( </span>is-discrete-A <span class="p">:</span> is-discrete A)
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>  <span class="p">( </span>is-discrete-B <span class="p">:</span> <span class="p">(</span>a <span class="p">:</span> A) → is-discrete (B a))
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>  : is-discrete <span class="p">(</span>Σ (a <span class="p">:</span> A) , B a)
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>  :=
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>    is-discrete-is-Δ¹-local
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>      <span class="p">( </span>Σ (a <span class="p">:</span> A) , B a)
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>      <span class="p">( </span>second
+</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>        ( equiv-comp
+</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>          ( Σ (a <span class="p">:</span> A) , B a)
+</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>          <span class="p">( </span>Σ (φ <span class="p">:</span> Δ¹ → A) , <span class="p">(</span>(t <span class="p">:</span> Δ¹) → B (φ t)))
+</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>          <span class="p">( </span>Δ¹ → (Σ (a <span class="p">:</span> A) , B a))
+</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>          <span class="p">( </span>equiv-comp
+</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>            ( Σ (a <span class="p">:</span> A) , B a)
+</span><span id="__span-15-20"><a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>            <span class="p">( </span>Σ (a <span class="p">:</span> A) , (Δ¹ → B a))
+</span><span id="__span-15-21"><a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>            <span class="p">( </span>Σ (φ <span class="p">:</span> Δ¹ → A) , <span class="p">(</span>(t <span class="p">:</span> Δ¹) → B (φ t)))
+</span><span id="__span-15-22"><a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>            ( total-equiv-family-of-equiv
+</span><span id="__span-15-23"><a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>              ( A) (B) (<span class="p">\ </span>a → Δ¹ → B a)
+</span><span id="__span-15-24"><a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>              ( <span class="p">\ </span>a → (<span class="p">\ </span>b _ → b , is-Δ¹-local-is-discrete (B a) (is-discrete-B a))))
+</span><span id="__span-15-25"><a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>            ( equiv-total-pullback-is-equiv
+</span><span id="__span-15-26"><a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>              ( A) (Δ¹ → A) (<span class="p">\ </span>a _ → a)
+</span><span id="__span-15-27"><a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>              ( is-Δ¹-local-is-discrete A is-discrete-A)
+</span><span id="__span-15-28"><a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>              <span class="p">( </span>\ φ → (t <span class="p">:</span> Δ¹) → B (φ t))))
+</span><span id="__span-15-29"><a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>          ( inv-equiv-axiom-choice
+</span><span id="__span-15-30"><a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>            ( <span class="kt">2</span>) (Δ¹) (<span class="p">\ </span>_ → <span class="m">BOT</span>) (<span class="p">\ </span>_ → A) (<span class="p">\ </span>_ x → B x)
+</span><span id="__span-15-31"><a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>            ( <span class="p">\ </span>_ → <span class="s">recBOT</span>) (<span class="p">\ </span>_ → <span class="s">recBOT</span>))))
+</span><span id="__span-15-32"><a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>
+</span><span id="__span-15-33"><a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a><span class="c">-- Path types in a discrete type are discrete: x = y ≃ Δ¹ → (x = y), where the</span>
+</span><span id="__span-15-34"><a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a><span class="c">-- first equivalence is `ap` of the const equivalence A ≃ (Δ¹ → A) and the second</span>
+</span><span id="__span-15-35"><a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a><span class="c">-- is extension extensionality; the composite is homotopic to the constant map.</span>
+</span><span id="__span-15-36"><a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-discrete-Id" id="define:is-discrete-Id" style="visibility: visible; position: relative; color: inherit">is-discrete-Id</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>extext<span class="p">)</span>
+</span><span id="__span-15-37"><a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-15-38"><a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>  <span class="p">( </span>is-discrete-A <span class="p">:</span> is-discrete A)
+</span><span id="__span-15-39"><a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-15-40"><a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a>  : is-discrete (x = y)
+</span><span id="__span-15-41"><a id="__codelineno-15-41" name="__codelineno-15-41" href="#__codelineno-15-41"></a>  :=
+</span><span id="__span-15-42"><a id="__codelineno-15-42" name="__codelineno-15-42" href="#__codelineno-15-42"></a>    <span class="k">let</span> la : is-equiv A (Δ¹ → A) (<span class="p">\ </span>a _ → a)
+</span><span id="__span-15-43"><a id="__codelineno-15-43" name="__codelineno-15-43" href="#__codelineno-15-43"></a>      := is-Δ¹-local-is-discrete A is-discrete-A
+</span><span id="__span-15-44"><a id="__codelineno-15-44" name="__codelineno-15-44" href="#__codelineno-15-44"></a>    <span class="k">in</span>
+</span><span id="__span-15-45"><a id="__codelineno-15-45" name="__codelineno-15-45" href="#__codelineno-15-45"></a>    <span class="k">let</span> e : Equiv (x = y) (Δ¹ → (x = y))
+</span><span id="__span-15-46"><a id="__codelineno-15-46" name="__codelineno-15-46" href="#__codelineno-15-46"></a>      := equiv-comp (x = y)
+</span><span id="__span-15-47"><a id="__codelineno-15-47" name="__codelineno-15-47" href="#__codelineno-15-47"></a>           <span class="p">( </span>(\ (_ <span class="p">:</span> Δ¹) → x) = <span class="p">(</span>\ (_ <span class="p">:</span> Δ¹) → y))
+</span><span id="__span-15-48"><a id="__codelineno-15-48" name="__codelineno-15-48" href="#__codelineno-15-48"></a>           ( Δ¹ → (x = y))
+</span><span id="__span-15-49"><a id="__codelineno-15-49" name="__codelineno-15-49" href="#__codelineno-15-49"></a>           ( equiv-ap-is-equiv A (Δ¹ → A) (<span class="p">\ </span>a _ → a) la x y)
+</span><span id="__span-15-50"><a id="__codelineno-15-50" name="__codelineno-15-50" href="#__codelineno-15-50"></a>           ( equiv-ExtExt extext <span class="kt">2</span> Δ¹ (<span class="p">\ </span>_ → <span class="m">BOT</span>) (<span class="p">\ </span>_ → A) (<span class="p">\ </span>_ → <span class="s">recBOT</span>)
+</span><span id="__span-15-51"><a id="__codelineno-15-51" name="__codelineno-15-51" href="#__codelineno-15-51"></a>               (<span class="p">\ </span>_ → x) (<span class="p">\ </span>_ → y))
+</span><span id="__span-15-52"><a id="__codelineno-15-52" name="__codelineno-15-52" href="#__codelineno-15-52"></a>    <span class="k">in</span>
+</span><span id="__span-15-53"><a id="__codelineno-15-53" name="__codelineno-15-53" href="#__codelineno-15-53"></a>    is-discrete-is-Δ¹-local (x = y)
+</span><span id="__span-15-54"><a id="__codelineno-15-54" name="__codelineno-15-54" href="#__codelineno-15-54"></a>      ( is-equiv-homotopy (x = y) (Δ¹ → (x = y))
+</span><span id="__span-15-55"><a id="__codelineno-15-55" name="__codelineno-15-55" href="#__codelineno-15-55"></a>          ( <span class="p">\ </span>p _ → p)
+</span><span id="__span-15-56"><a id="__codelineno-15-56" name="__codelineno-15-56" href="#__codelineno-15-56"></a>          ( <span class="s">first</span> e)
+</span><span id="__span-15-57"><a id="__codelineno-15-57" name="__codelineno-15-57" href="#__codelineno-15-57"></a>          <span class="p">( </span>\ p → ind-path A x
+</span><span id="__span-15-58"><a id="__codelineno-15-58" name="__codelineno-15-58" href="#__codelineno-15-58"></a>              ( \ y&#39; p&#39; →
+</span><span id="__span-15-59"><a id="__codelineno-15-59" name="__codelineno-15-59" href="#__codelineno-15-59"></a>                  ( \ (_ <span class="p">:</span> Δ¹) → p&#39;)
+</span><span id="__span-15-60"><a id="__codelineno-15-60" name="__codelineno-15-60" href="#__codelineno-15-60"></a>                  = ext-htpy-eq <span class="kt">2</span> Δ¹ (<span class="p">\ </span>_ → <span class="m">BOT</span>) (<span class="p">\ </span>_ → A) (<span class="p">\ </span>_ → <span class="s">recBOT</span>)
+</span><span id="__span-15-61"><a id="__codelineno-15-61" name="__codelineno-15-61" href="#__codelineno-15-61"></a>                      (<span class="p">\ </span>_ → x) (<span class="p">\ </span>_ → y&#39;)
+</span><span id="__span-15-62"><a id="__codelineno-15-62" name="__codelineno-15-62" href="#__codelineno-15-62"></a>                      ( ap A (Δ¹ → A) x y&#39; (<span class="p">\ </span>a _ → a) p&#39;))
+</span><span id="__span-15-63"><a id="__codelineno-15-63" name="__codelineno-15-63" href="#__codelineno-15-63"></a>              ( <span class="s">refl</span>)
+</span><span id="__span-15-64"><a id="__codelineno-15-64" name="__codelineno-15-64" href="#__codelineno-15-64"></a>              ( y) (p))
+</span><span id="__span-15-65"><a id="__codelineno-15-65" name="__codelineno-15-65" href="#__codelineno-15-65"></a>          ( <span class="s">second</span> e))
 </span></code></pre></div>
 <h2 id="opposite-modality">Opposite modality<a class="headerlink" href="#opposite-modality" title="Permanent link">&para;</a></h2>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-contr-of-op" id="define:is-contr-of-op" style="visibility: visible; position: relative; color: inherit">is-contr-of-op</a></span>

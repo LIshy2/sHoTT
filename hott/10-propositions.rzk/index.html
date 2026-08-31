@@ -1257,6 +1257,15 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#diagonal-characterization-of-embeddings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagonal characterization of embeddings
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1988,6 +1997,288 @@ and <code>univ-family-Prop</code>.</p>
 </span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:univ-family-Prop-b" id="define:univ-family-Prop-b" style="visibility: visible; position: relative; color: inherit">univ-family-Prop-b</a></span>
 </span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>  : ( <span class="nd">♭</span> <span class="kt">U</span>)
 </span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>  := <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> univ-family-Prop
+</span></code></pre></div>
+<h2 id="diagonal-characterization-of-embeddings">Diagonal characterization of embeddings<a class="headerlink" href="#diagonal-characterization-of-embeddings" title="Permanent link">&para;</a></h2>
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:emb-pullback" id="define:emb-pullback" style="visibility: visible; position: relative; color: inherit">emb-pullback</a></span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>  : <span class="kt">U</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>  := <span class="kt">Σ</span> <span class="p">( </span>x <span class="p">:</span> A) , <span class="p">(</span>Σ ( y <span class="p">:</span> A) , f x = f y)
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:emb-diagonal" id="define:emb-diagonal" style="visibility: visible; position: relative; color: inherit">emb-diagonal</a></span>
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>  : A → emb-pullback A B f
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>  := <span class="p">\ </span>a → (a , (a , <span class="s">refl</span>))
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>
+</span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-contr-emb-fiber" id="define:is-contr-emb-fiber" style="visibility: visible; position: relative; color: inherit">is-contr-emb-fiber</a></span>
+</span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-15"><a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-28-16"><a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>  <span class="p">( </span>emb-f <span class="p">:</span> is-emb A B f)
+</span><span id="__span-28-17"><a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>  <span class="p">( </span>x <span class="p">:</span> A)
+</span><span id="__span-28-18"><a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>  : is-contr <span class="p">(</span>Σ (y <span class="p">:</span> A) , f x = f y)
+</span><span id="__span-28-19"><a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a>  :=
+</span><span id="__span-28-20"><a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a>    is-contr-equiv-is-contr
+</span><span id="__span-28-21"><a id="__codelineno-28-21" name="__codelineno-28-21" href="#__codelineno-28-21"></a>      <span class="p">( </span>Σ (y <span class="p">:</span> A) , x = y)
+</span><span id="__span-28-22"><a id="__codelineno-28-22" name="__codelineno-28-22" href="#__codelineno-28-22"></a>      <span class="p">( </span>Σ (y <span class="p">:</span> A) , f x = f y)
+</span><span id="__span-28-23"><a id="__codelineno-28-23" name="__codelineno-28-23" href="#__codelineno-28-23"></a>      ( total-equiv-family-of-equiv A (<span class="p">\ </span>y → x = y) (<span class="p">\ </span>y → f x = f y)
+</span><span id="__span-28-24"><a id="__codelineno-28-24" name="__codelineno-28-24" href="#__codelineno-28-24"></a>          ( <span class="p">\ </span>y → (ap A B x y f , emb-f x y)))
+</span><span id="__span-28-25"><a id="__codelineno-28-25" name="__codelineno-28-25" href="#__codelineno-28-25"></a>      ( is-contr-based-paths A x)
+</span><span id="__span-28-26"><a id="__codelineno-28-26" name="__codelineno-28-26" href="#__codelineno-28-26"></a>
+</span><span id="__span-28-27"><a id="__codelineno-28-27" name="__codelineno-28-27" href="#__codelineno-28-27"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-equiv-emb-diagonal-is-emb" id="define:is-equiv-emb-diagonal-is-emb" style="visibility: visible; position: relative; color: inherit">is-equiv-emb-diagonal-is-emb</a></span>
+</span><span id="__span-28-28"><a id="__codelineno-28-28" name="__codelineno-28-28" href="#__codelineno-28-28"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-29"><a id="__codelineno-28-29" name="__codelineno-28-29" href="#__codelineno-28-29"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-28-30"><a id="__codelineno-28-30" name="__codelineno-28-30" href="#__codelineno-28-30"></a>  <span class="p">( </span>emb-f <span class="p">:</span> is-emb A B f)
+</span><span id="__span-28-31"><a id="__codelineno-28-31" name="__codelineno-28-31" href="#__codelineno-28-31"></a>  : is-equiv A (emb-pullback A B f) (emb-diagonal A B f)
+</span><span id="__span-28-32"><a id="__codelineno-28-32" name="__codelineno-28-32" href="#__codelineno-28-32"></a>  :=
+</span><span id="__span-28-33"><a id="__codelineno-28-33" name="__codelineno-28-33" href="#__codelineno-28-33"></a>    is-equiv-has-inverse A (emb-pullback A B f) (emb-diagonal A B f)
+</span><span id="__span-28-34"><a id="__codelineno-28-34" name="__codelineno-28-34" href="#__codelineno-28-34"></a>    ( ( \ (x , _) → x)
+</span><span id="__span-28-35"><a id="__codelineno-28-35" name="__codelineno-28-35" href="#__codelineno-28-35"></a>    , ( ( <span class="p">\ </span>a → <span class="s">refl</span>)
+</span><span id="__span-28-36"><a id="__codelineno-28-36" name="__codelineno-28-36" href="#__codelineno-28-36"></a>      , ( \ (x , c) →
+</span><span id="__span-28-37"><a id="__codelineno-28-37" name="__codelineno-28-37" href="#__codelineno-28-37"></a>          eq-pair A <span class="p">(</span>\ a → Σ (y <span class="p">:</span> A) , f a = f y)
+</span><span id="__span-28-38"><a id="__codelineno-28-38" name="__codelineno-28-38" href="#__codelineno-28-38"></a>            ( x , (x , <span class="s">refl</span>)) (x , c)
+</span><span id="__span-28-39"><a id="__codelineno-28-39" name="__codelineno-28-39" href="#__codelineno-28-39"></a>            <span class="p">( </span>refl
+</span><span id="__span-28-40"><a id="__codelineno-28-40" name="__codelineno-28-40" href="#__codelineno-28-40"></a>            , all-elements-equal-is-contr
+</span><span id="__span-28-41"><a id="__codelineno-28-41" name="__codelineno-28-41" href="#__codelineno-28-41"></a>                ( Σ (y <span class="p">:</span> A) , f x = f y)
+</span><span id="__span-28-42"><a id="__codelineno-28-42" name="__codelineno-28-42" href="#__codelineno-28-42"></a>                ( is-contr-emb-fiber A B f emb-f x)
+</span><span id="__span-28-43"><a id="__codelineno-28-43" name="__codelineno-28-43" href="#__codelineno-28-43"></a>                ( x , <span class="s">refl</span>) c))))
+</span><span id="__span-28-44"><a id="__codelineno-28-44" name="__codelineno-28-44" href="#__codelineno-28-44"></a>
+</span><span id="__span-28-45"><a id="__codelineno-28-45" name="__codelineno-28-45" href="#__codelineno-28-45"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb-is-equiv-emb-diagonal" id="define:is-emb-is-equiv-emb-diagonal" style="visibility: visible; position: relative; color: inherit">is-emb-is-equiv-emb-diagonal</a></span>
+</span><span id="__span-28-46"><a id="__codelineno-28-46" name="__codelineno-28-46" href="#__codelineno-28-46"></a>  <span class="p">( </span>A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-47"><a id="__codelineno-28-47" name="__codelineno-28-47" href="#__codelineno-28-47"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-28-48"><a id="__codelineno-28-48" name="__codelineno-28-48" href="#__codelineno-28-48"></a>  <span class="p">( </span>eq-diag <span class="p">:</span> is-equiv A (emb-pullback A B f) (emb-diagonal A B f))
+</span><span id="__span-28-49"><a id="__codelineno-28-49" name="__codelineno-28-49" href="#__codelineno-28-49"></a>  : is-emb A B f
+</span><span id="__span-28-50"><a id="__codelineno-28-50" name="__codelineno-28-50" href="#__codelineno-28-50"></a>  :=
+</span><span id="__span-28-51"><a id="__codelineno-28-51" name="__codelineno-28-51" href="#__codelineno-28-51"></a>    <span class="k">let</span> pr1-equiv
+</span><span id="__span-28-52"><a id="__codelineno-28-52" name="__codelineno-28-52" href="#__codelineno-28-52"></a>      : is-equiv (emb-pullback A B f) A
+</span><span id="__span-28-53"><a id="__codelineno-28-53" name="__codelineno-28-53" href="#__codelineno-28-53"></a>          <span class="p">( </span>projection-total-type A (\ x&#39; → Σ (y&#39; <span class="p">:</span> A) , f x&#39; = f y&#39;))
+</span><span id="__span-28-54"><a id="__codelineno-28-54" name="__codelineno-28-54" href="#__codelineno-28-54"></a>      := is-equiv-left-factor A (emb-pullback A B f) A
+</span><span id="__span-28-55"><a id="__codelineno-28-55" name="__codelineno-28-55" href="#__codelineno-28-55"></a>           ( emb-diagonal A B f) (eq-diag)
+</span><span id="__span-28-56"><a id="__codelineno-28-56" name="__codelineno-28-56" href="#__codelineno-28-56"></a>           <span class="p">( </span>projection-total-type A (\ x&#39; → Σ (y&#39; <span class="p">:</span> A) , f x&#39; = f y&#39;))
+</span><span id="__span-28-57"><a id="__codelineno-28-57" name="__codelineno-28-57" href="#__codelineno-28-57"></a>           ( is-equiv-identity A)
+</span><span id="__span-28-58"><a id="__codelineno-28-58" name="__codelineno-28-58" href="#__codelineno-28-58"></a>    <span class="k">in</span>
+</span><span id="__span-28-59"><a id="__codelineno-28-59" name="__codelineno-28-59" href="#__codelineno-28-59"></a>    <span class="p">\ </span>x y →
+</span><span id="__span-28-60"><a id="__codelineno-28-60" name="__codelineno-28-60" href="#__codelineno-28-60"></a>      are-equiv-from-paths-is-contr-total A x
+</span><span id="__span-28-61"><a id="__codelineno-28-61" name="__codelineno-28-61" href="#__codelineno-28-61"></a>        ( <span class="p">\ </span>z → f x = f z) (<span class="p">\ </span>z → ap A B x z f)
+</span><span id="__span-28-62"><a id="__codelineno-28-62" name="__codelineno-28-62" href="#__codelineno-28-62"></a>        <span class="p">( </span>is-contr-equiv-is-contr&#39;
+</span><span id="__span-28-63"><a id="__codelineno-28-63" name="__codelineno-28-63" href="#__codelineno-28-63"></a>            ( Σ (y&#39; <span class="p">:</span> A) , f x = f y&#39;)
+</span><span id="__span-28-64"><a id="__codelineno-28-64" name="__codelineno-28-64" href="#__codelineno-28-64"></a>            ( fib (emb-pullback A B f) A
+</span><span id="__span-28-65"><a id="__codelineno-28-65" name="__codelineno-28-65" href="#__codelineno-28-65"></a>                <span class="p">( </span>projection-total-type A (\ x&#39; → Σ (y&#39; <span class="p">:</span> A) , f x&#39; = f y&#39;)) x)
+</span><span id="__span-28-66"><a id="__codelineno-28-66" name="__codelineno-28-66" href="#__codelineno-28-66"></a>            <span class="p">( </span>equiv-homotopy-fiber-strict-fiber A (\ x&#39; → Σ (y&#39; <span class="p">:</span> A) , f x&#39; = f y&#39;) x)
+</span><span id="__span-28-67"><a id="__codelineno-28-67" name="__codelineno-28-67" href="#__codelineno-28-67"></a>            ( is-contr-map-is-equiv (emb-pullback A B f) A
+</span><span id="__span-28-68"><a id="__codelineno-28-68" name="__codelineno-28-68" href="#__codelineno-28-68"></a>                <span class="p">( </span>projection-total-type A (\ x&#39; → Σ (y&#39; <span class="p">:</span> A) , f x&#39; = f y&#39;)) pr1-equiv x))
+</span><span id="__span-28-69"><a id="__codelineno-28-69" name="__codelineno-28-69" href="#__codelineno-28-69"></a>        y
+</span><span id="__span-28-70"><a id="__codelineno-28-70" name="__codelineno-28-70" href="#__codelineno-28-70"></a>
+</span><span id="__span-28-71"><a id="__codelineno-28-71" name="__codelineno-28-71" href="#__codelineno-28-71"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb-postcomp" id="define:is-emb-postcomp" style="visibility: visible; position: relative; color: inherit">is-emb-postcomp</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-28-72"><a id="__codelineno-28-72" name="__codelineno-28-72" href="#__codelineno-28-72"></a>  <span class="p">( </span>W A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-73"><a id="__codelineno-28-73" name="__codelineno-28-73" href="#__codelineno-28-73"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-28-74"><a id="__codelineno-28-74" name="__codelineno-28-74" href="#__codelineno-28-74"></a>  <span class="p">( </span>emb-f <span class="p">:</span> is-emb A B f)
+</span><span id="__span-28-75"><a id="__codelineno-28-75" name="__codelineno-28-75" href="#__codelineno-28-75"></a>  : is-emb (W → A) (W → B) (<span class="p">\ </span>g w → f (g w))
+</span><span id="__span-28-76"><a id="__codelineno-28-76" name="__codelineno-28-76" href="#__codelineno-28-76"></a>  :=
+</span><span id="__span-28-77"><a id="__codelineno-28-77" name="__codelineno-28-77" href="#__codelineno-28-77"></a>    is-emb-is-prop-fib (W → A) (W → B) (<span class="p">\ </span>g w → f (g w))
+</span><span id="__span-28-78"><a id="__codelineno-28-78" name="__codelineno-28-78" href="#__codelineno-28-78"></a>      <span class="p">( </span>\ h →
+</span><span id="__span-28-79"><a id="__codelineno-28-79" name="__codelineno-28-79" href="#__codelineno-28-79"></a>        is-prop-Equiv-is-prop&#39;
+</span><span id="__span-28-80"><a id="__codelineno-28-80" name="__codelineno-28-80" href="#__codelineno-28-80"></a>          ( ( w <span class="p">:</span> W) → fib A B f (h w))
+</span><span id="__span-28-81"><a id="__codelineno-28-81" name="__codelineno-28-81" href="#__codelineno-28-81"></a>          ( fib (W → A) (W → B) (<span class="p">\ </span>g w → f (g w)) h)
+</span><span id="__span-28-82"><a id="__codelineno-28-82" name="__codelineno-28-82" href="#__codelineno-28-82"></a>          <span class="p">( </span>equiv-comp
+</span><span id="__span-28-83"><a id="__codelineno-28-83" name="__codelineno-28-83" href="#__codelineno-28-83"></a>              ( ( w <span class="p">:</span> W) → fib A B f (h w))
+</span><span id="__span-28-84"><a id="__codelineno-28-84" name="__codelineno-28-84" href="#__codelineno-28-84"></a>              <span class="p">( </span>Σ ( g <span class="p">:</span> W → A) , <span class="p">(</span>(w <span class="p">:</span> W) → f (g w) = h w))
+</span><span id="__span-28-85"><a id="__codelineno-28-85" name="__codelineno-28-85" href="#__codelineno-28-85"></a>              ( fib (W → A) (W → B) (<span class="p">\ </span>g w → f (g w)) h)
+</span><span id="__span-28-86"><a id="__codelineno-28-86" name="__codelineno-28-86" href="#__codelineno-28-86"></a>              ( equiv-choice W (<span class="p">\ </span>_ → A) (<span class="p">\ </span>w a → f a = h w))
+</span><span id="__span-28-87"><a id="__codelineno-28-87" name="__codelineno-28-87" href="#__codelineno-28-87"></a>              ( total-equiv-family-of-equiv (W → A)
+</span><span id="__span-28-88"><a id="__codelineno-28-88" name="__codelineno-28-88" href="#__codelineno-28-88"></a>                  <span class="p">( </span>\ g → (w <span class="p">:</span> W) → f (g w) = h w)
+</span><span id="__span-28-89"><a id="__codelineno-28-89" name="__codelineno-28-89" href="#__codelineno-28-89"></a>                  <span class="p">( </span>\ g → (\ (w <span class="p">:</span> W) → f (g w)) = h)
+</span><span id="__span-28-90"><a id="__codelineno-28-90" name="__codelineno-28-90" href="#__codelineno-28-90"></a>                  <span class="p">( </span>\ g → inv-equiv
+</span><span id="__span-28-91"><a id="__codelineno-28-91" name="__codelineno-28-91" href="#__codelineno-28-91"></a>                      ( (\ (w <span class="p">:</span> W) → f (g w)) = h)
+</span><span id="__span-28-92"><a id="__codelineno-28-92" name="__codelineno-28-92" href="#__codelineno-28-92"></a>                      <span class="p">( </span>(w <span class="p">:</span> W) → f (g w) = h w)
+</span><span id="__span-28-93"><a id="__codelineno-28-93" name="__codelineno-28-93" href="#__codelineno-28-93"></a>                      ( htpy-eq W (<span class="p">\ </span>_ → B) <span class="p">(</span>\ (w <span class="p">:</span> W) → f (g w)) h
+</span><span id="__span-28-94"><a id="__codelineno-28-94" name="__codelineno-28-94" href="#__codelineno-28-94"></a>                      , funext W (<span class="p">\ </span>_ → B) <span class="p">(</span>\ (w <span class="p">:</span> W) → f (g w)) h))))
+</span><span id="__span-28-95"><a id="__codelineno-28-95" name="__codelineno-28-95" href="#__codelineno-28-95"></a>          ( is-prop-fiberwise-prop W (<span class="p">\ </span>w → fib A B f (h w))
+</span><span id="__span-28-96"><a id="__codelineno-28-96" name="__codelineno-28-96" href="#__codelineno-28-96"></a>              ( <span class="p">\ </span>w → is-prop-fib-is-emb A B f emb-f (h w))))
+</span><span id="__span-28-97"><a id="__codelineno-28-97" name="__codelineno-28-97" href="#__codelineno-28-97"></a>
+</span><span id="__span-28-98"><a id="__codelineno-28-98" name="__codelineno-28-98" href="#__codelineno-28-98"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-fib-b-map" id="define:equiv-fib-b-map" style="visibility: visible; position: relative; color: inherit">equiv-fib-b-map</a></span>
+</span><span id="__span-28-99"><a id="__codelineno-28-99" name="__codelineno-28-99" href="#__codelineno-28-99"></a>  ( E B :♭ <span class="kt">U</span>)
+</span><span id="__span-28-100"><a id="__codelineno-28-100" name="__codelineno-28-100" href="#__codelineno-28-100"></a>  ( h :♭ E → B)
+</span><span id="__span-28-101"><a id="__codelineno-28-101" name="__codelineno-28-101" href="#__codelineno-28-101"></a>  ( b :♭ B)
+</span><span id="__span-28-102"><a id="__codelineno-28-102" name="__codelineno-28-102" href="#__codelineno-28-102"></a>  : Equiv
+</span><span id="__span-28-103"><a id="__codelineno-28-103" name="__codelineno-28-103" href="#__codelineno-28-103"></a>      ( fib (<span class="nd">♭</span> E) (<span class="nd">♭</span> B) (b-map E B h) (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> b))
+</span><span id="__span-28-104"><a id="__codelineno-28-104" name="__codelineno-28-104" href="#__codelineno-28-104"></a>      ( <span class="nd">♭</span> (fib E B h b))
+</span><span id="__span-28-105"><a id="__codelineno-28-105" name="__codelineno-28-105" href="#__codelineno-28-105"></a>  :=
+</span><span id="__span-28-106"><a id="__codelineno-28-106" name="__codelineno-28-106" href="#__codelineno-28-106"></a>    equiv-comp
+</span><span id="__span-28-107"><a id="__codelineno-28-107" name="__codelineno-28-107" href="#__codelineno-28-107"></a>      ( fib (<span class="nd">♭</span> E) (<span class="nd">♭</span> B) (b-map E B h) (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> b))
+</span><span id="__span-28-108"><a id="__codelineno-28-108" name="__codelineno-28-108" href="#__codelineno-28-108"></a>      <span class="p">( </span>Σ ( x <span class="p">:</span> <span class="nd">♭</span> E) , (<span class="k">let mod</span> <span class="nd">♭</span> a0 := x <span class="k">in</span> <span class="nd">♭</span> (h a0 = b)))
+</span><span id="__span-28-109"><a id="__codelineno-28-109" name="__codelineno-28-109" href="#__codelineno-28-109"></a>      ( <span class="nd">♭</span> (fib E B h b))
+</span><span id="__span-28-110"><a id="__codelineno-28-110" name="__codelineno-28-110" href="#__codelineno-28-110"></a>      ( total-equiv-family-of-equiv (<span class="nd">♭</span> E)
+</span><span id="__span-28-111"><a id="__codelineno-28-111" name="__codelineno-28-111" href="#__codelineno-28-111"></a>          ( <span class="p">\ </span>x → b-map E B h x = <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> b)
+</span><span id="__span-28-112"><a id="__codelineno-28-112" name="__codelineno-28-112" href="#__codelineno-28-112"></a>          ( <span class="p">\ </span>x → <span class="k">let mod</span> <span class="nd">♭</span> a0 := x <span class="k">in</span> <span class="nd">♭</span> (h a0 = b))
+</span><span id="__span-28-113"><a id="__codelineno-28-113" name="__codelineno-28-113" href="#__codelineno-28-113"></a>          ( <span class="p">\ </span>x →
+</span><span id="__span-28-114"><a id="__codelineno-28-114" name="__codelineno-28-114" href="#__codelineno-28-114"></a>            b-elim E
+</span><span id="__span-28-115"><a id="__codelineno-28-115" name="__codelineno-28-115" href="#__codelineno-28-115"></a>              ( <span class="p">\ </span>z → Equiv (b-map E B h z = <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> b) (<span class="k">let mod</span> <span class="nd">♭</span> a0 := z <span class="k">in</span> <span class="nd">♭</span> (h a0 = b)))
+</span><span id="__span-28-116"><a id="__codelineno-28-116" name="__codelineno-28-116" href="#__codelineno-28-116"></a>              ( x)
+</span><span id="__span-28-117"><a id="__codelineno-28-117" name="__codelineno-28-117" href="#__codelineno-28-117"></a>              ( \ (a :_b E) → <span class="p">\ </span>_ →
+</span><span id="__span-28-118"><a id="__codelineno-28-118" name="__codelineno-28-118" href="#__codelineno-28-118"></a>                inv-equiv
+</span><span id="__span-28-119"><a id="__codelineno-28-119" name="__codelineno-28-119" href="#__codelineno-28-119"></a>                  ( <span class="nd">♭</span> (h a = b))
+</span><span id="__span-28-120"><a id="__codelineno-28-120" name="__codelineno-28-120" href="#__codelineno-28-120"></a>                  ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (h a) = <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> b)
+</span><span id="__span-28-121"><a id="__codelineno-28-121" name="__codelineno-28-121" href="#__codelineno-28-121"></a>                  ( b-path-commute-fwd B (h a) b
+</span><span id="__span-28-122"><a id="__codelineno-28-122" name="__codelineno-28-122" href="#__codelineno-28-122"></a>                  , b-path-commute-equiv B (h a) b))))
+</span><span id="__span-28-123"><a id="__codelineno-28-123" name="__codelineno-28-123" href="#__codelineno-28-123"></a>      ( inv-equiv
+</span><span id="__span-28-124"><a id="__codelineno-28-124" name="__codelineno-28-124" href="#__codelineno-28-124"></a>          ( <span class="nd">♭</span> (fib E B h b))
+</span><span id="__span-28-125"><a id="__codelineno-28-125" name="__codelineno-28-125" href="#__codelineno-28-125"></a>          <span class="p">( </span>Σ ( x <span class="p">:</span> <span class="nd">♭</span> E) , (<span class="k">let mod</span> <span class="nd">♭</span> a0 := x <span class="k">in</span> <span class="nd">♭</span> (h a0 = b)))
+</span><span id="__span-28-126"><a id="__codelineno-28-126" name="__codelineno-28-126" href="#__codelineno-28-126"></a>          ( b-sigma-commute-equiv E (<span class="p">\ </span>a → h a = b)))
+</span><span id="__span-28-127"><a id="__codelineno-28-127" name="__codelineno-28-127" href="#__codelineno-28-127"></a>
+</span><span id="__span-28-128"><a id="__codelineno-28-128" name="__codelineno-28-128" href="#__codelineno-28-128"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb-b-map" id="define:is-emb-b-map" style="visibility: visible; position: relative; color: inherit">is-emb-b-map</a></span>
+</span><span id="__span-28-129"><a id="__codelineno-28-129" name="__codelineno-28-129" href="#__codelineno-28-129"></a>  ( E B :♭ <span class="kt">U</span>)
+</span><span id="__span-28-130"><a id="__codelineno-28-130" name="__codelineno-28-130" href="#__codelineno-28-130"></a>  ( h :♭ E → B)
+</span><span id="__span-28-131"><a id="__codelineno-28-131" name="__codelineno-28-131" href="#__codelineno-28-131"></a>  ( emb-h :♭ is-emb E B h)
+</span><span id="__span-28-132"><a id="__codelineno-28-132" name="__codelineno-28-132" href="#__codelineno-28-132"></a>  : is-emb (<span class="nd">♭</span> E) (<span class="nd">♭</span> B) (b-map E B h)
+</span><span id="__span-28-133"><a id="__codelineno-28-133" name="__codelineno-28-133" href="#__codelineno-28-133"></a>  :=
+</span><span id="__span-28-134"><a id="__codelineno-28-134" name="__codelineno-28-134" href="#__codelineno-28-134"></a>    is-emb-is-prop-fib (<span class="nd">♭</span> E) (<span class="nd">♭</span> B) (b-map E B h)
+</span><span id="__span-28-135"><a id="__codelineno-28-135" name="__codelineno-28-135" href="#__codelineno-28-135"></a>      ( <span class="p">\ </span>y →
+</span><span id="__span-28-136"><a id="__codelineno-28-136" name="__codelineno-28-136" href="#__codelineno-28-136"></a>        b-elim B
+</span><span id="__span-28-137"><a id="__codelineno-28-137" name="__codelineno-28-137" href="#__codelineno-28-137"></a>          ( <span class="p">\ </span>z → is-prop (fib (<span class="nd">♭</span> E) (<span class="nd">♭</span> B) (b-map E B h) z))
+</span><span id="__span-28-138"><a id="__codelineno-28-138" name="__codelineno-28-138" href="#__codelineno-28-138"></a>          ( y)
+</span><span id="__span-28-139"><a id="__codelineno-28-139" name="__codelineno-28-139" href="#__codelineno-28-139"></a>          ( \ (b :_b B) → <span class="p">\ </span>_ →
+</span><span id="__span-28-140"><a id="__codelineno-28-140" name="__codelineno-28-140" href="#__codelineno-28-140"></a>            is-prop-Equiv-is-prop&#39;
+</span><span id="__span-28-141"><a id="__codelineno-28-141" name="__codelineno-28-141" href="#__codelineno-28-141"></a>              ( <span class="nd">♭</span> (fib E B h b))
+</span><span id="__span-28-142"><a id="__codelineno-28-142" name="__codelineno-28-142" href="#__codelineno-28-142"></a>              ( fib (<span class="nd">♭</span> E) (<span class="nd">♭</span> B) (b-map E B h) (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> b))
+</span><span id="__span-28-143"><a id="__codelineno-28-143" name="__codelineno-28-143" href="#__codelineno-28-143"></a>              ( inv-equiv
+</span><span id="__span-28-144"><a id="__codelineno-28-144" name="__codelineno-28-144" href="#__codelineno-28-144"></a>                  ( fib (<span class="nd">♭</span> E) (<span class="nd">♭</span> B) (b-map E B h) (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> b))
+</span><span id="__span-28-145"><a id="__codelineno-28-145" name="__codelineno-28-145" href="#__codelineno-28-145"></a>                  ( <span class="nd">♭</span> (fib E B h b))
+</span><span id="__span-28-146"><a id="__codelineno-28-146" name="__codelineno-28-146" href="#__codelineno-28-146"></a>                  ( equiv-fib-b-map E B h b))
+</span><span id="__span-28-147"><a id="__codelineno-28-147" name="__codelineno-28-147" href="#__codelineno-28-147"></a>              ( is-prop-flat (fib E B h b)
+</span><span id="__span-28-148"><a id="__codelineno-28-148" name="__codelineno-28-148" href="#__codelineno-28-148"></a>                  ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (is-prop-fib-is-emb E B h emb-h b)))))
+</span><span id="__span-28-149"><a id="__codelineno-28-149" name="__codelineno-28-149" href="#__codelineno-28-149"></a>
+</span><span id="__span-28-150"><a id="__codelineno-28-150" name="__codelineno-28-150" href="#__codelineno-28-150"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-pullback-postcomp" id="define:equiv-pullback-postcomp" style="visibility: visible; position: relative; color: inherit">equiv-pullback-postcomp</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-28-151"><a id="__codelineno-28-151" name="__codelineno-28-151" href="#__codelineno-28-151"></a>  <span class="p">( </span>W A B <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-152"><a id="__codelineno-28-152" name="__codelineno-28-152" href="#__codelineno-28-152"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-28-153"><a id="__codelineno-28-153" name="__codelineno-28-153" href="#__codelineno-28-153"></a>  : Equiv (W → emb-pullback A B f)
+</span><span id="__span-28-154"><a id="__codelineno-28-154" name="__codelineno-28-154" href="#__codelineno-28-154"></a>      ( emb-pullback (W → A) (W → B) (<span class="p">\ </span>g w → f (g w)))
+</span><span id="__span-28-155"><a id="__codelineno-28-155" name="__codelineno-28-155" href="#__codelineno-28-155"></a>  :=
+</span><span id="__span-28-156"><a id="__codelineno-28-156" name="__codelineno-28-156" href="#__codelineno-28-156"></a>    equiv-triple-comp
+</span><span id="__span-28-157"><a id="__codelineno-28-157" name="__codelineno-28-157" href="#__codelineno-28-157"></a>      ( W → emb-pullback A B f)
+</span><span id="__span-28-158"><a id="__codelineno-28-158" name="__codelineno-28-158" href="#__codelineno-28-158"></a>      <span class="p">( </span>Σ ( g <span class="p">:</span> W → A) , <span class="p">(</span>(w <span class="p">:</span> W) → <span class="kt">Σ</span> <span class="p">(</span>y <span class="p">:</span> A) , f (g w) = f y))
+</span><span id="__span-28-159"><a id="__codelineno-28-159" name="__codelineno-28-159" href="#__codelineno-28-159"></a>      <span class="p">( </span>Σ ( g <span class="p">:</span> W → A) , <span class="p">(</span>Σ (k <span class="p">:</span> W → A) , <span class="p">(</span>(w <span class="p">:</span> W) → f (g w) = f (k w))))
+</span><span id="__span-28-160"><a id="__codelineno-28-160" name="__codelineno-28-160" href="#__codelineno-28-160"></a>      ( emb-pullback (W → A) (W → B) (<span class="p">\ </span>g w → f (g w)))
+</span><span id="__span-28-161"><a id="__codelineno-28-161" name="__codelineno-28-161" href="#__codelineno-28-161"></a>      ( equiv-choice W (<span class="p">\ </span>_ → A) <span class="p">(</span>\ w x → Σ (y <span class="p">:</span> A) , f x = f y))
+</span><span id="__span-28-162"><a id="__codelineno-28-162" name="__codelineno-28-162" href="#__codelineno-28-162"></a>      ( total-equiv-family-of-equiv (W → A)
+</span><span id="__span-28-163"><a id="__codelineno-28-163" name="__codelineno-28-163" href="#__codelineno-28-163"></a>          <span class="p">( </span>\ g → (w <span class="p">:</span> W) → <span class="kt">Σ</span> <span class="p">(</span>y <span class="p">:</span> A) , f (g w) = f y)
+</span><span id="__span-28-164"><a id="__codelineno-28-164" name="__codelineno-28-164" href="#__codelineno-28-164"></a>          <span class="p">( </span>\ g → Σ (k <span class="p">:</span> W → A) , <span class="p">(</span>(w <span class="p">:</span> W) → f (g w) = f (k w)))
+</span><span id="__span-28-165"><a id="__codelineno-28-165" name="__codelineno-28-165" href="#__codelineno-28-165"></a>          ( <span class="p">\ </span>g → equiv-choice W (<span class="p">\ </span>_ → A) (<span class="p">\ </span>w y → f (g w) = f y)))
+</span><span id="__span-28-166"><a id="__codelineno-28-166" name="__codelineno-28-166" href="#__codelineno-28-166"></a>      ( total-equiv-family-of-equiv (W → A)
+</span><span id="__span-28-167"><a id="__codelineno-28-167" name="__codelineno-28-167" href="#__codelineno-28-167"></a>          <span class="p">( </span>\ g → Σ (k <span class="p">:</span> W → A) , <span class="p">(</span>(w <span class="p">:</span> W) → f (g w) = f (k w)))
+</span><span id="__span-28-168"><a id="__codelineno-28-168" name="__codelineno-28-168" href="#__codelineno-28-168"></a>          <span class="p">( </span>\ g → Σ (k <span class="p">:</span> W → A) , <span class="p">(</span>(\ (w <span class="p">:</span> W) → f (g w)) = <span class="p">(</span>\ (w <span class="p">:</span> W) → f (k w))))
+</span><span id="__span-28-169"><a id="__codelineno-28-169" name="__codelineno-28-169" href="#__codelineno-28-169"></a>          ( <span class="p">\ </span>g → total-equiv-family-of-equiv (W → A)
+</span><span id="__span-28-170"><a id="__codelineno-28-170" name="__codelineno-28-170" href="#__codelineno-28-170"></a>              <span class="p">( </span>\ k → (w <span class="p">:</span> W) → f (g w) = f (k w))
+</span><span id="__span-28-171"><a id="__codelineno-28-171" name="__codelineno-28-171" href="#__codelineno-28-171"></a>              <span class="p">( </span>\ k → (\ (w <span class="p">:</span> W) → f (g w)) = <span class="p">(</span>\ (w <span class="p">:</span> W) → f (k w)))
+</span><span id="__span-28-172"><a id="__codelineno-28-172" name="__codelineno-28-172" href="#__codelineno-28-172"></a>              <span class="p">( </span>\ k → inv-equiv
+</span><span id="__span-28-173"><a id="__codelineno-28-173" name="__codelineno-28-173" href="#__codelineno-28-173"></a>                  ( (\ (w <span class="p">:</span> W) → f (g w)) = <span class="p">(</span>\ (w <span class="p">:</span> W) → f (k w)))
+</span><span id="__span-28-174"><a id="__codelineno-28-174" name="__codelineno-28-174" href="#__codelineno-28-174"></a>                  <span class="p">( </span>(w <span class="p">:</span> W) → f (g w) = f (k w))
+</span><span id="__span-28-175"><a id="__codelineno-28-175" name="__codelineno-28-175" href="#__codelineno-28-175"></a>                  ( htpy-eq W (<span class="p">\ </span>_ → B) <span class="p">(</span>\ (w <span class="p">:</span> W) → f (g w)) <span class="p">(</span>\ (w <span class="p">:</span> W) → f (k w))
+</span><span id="__span-28-176"><a id="__codelineno-28-176" name="__codelineno-28-176" href="#__codelineno-28-176"></a>                  , funext W (<span class="p">\ </span>_ → B) <span class="p">(</span>\ (w <span class="p">:</span> W) → f (g w)) <span class="p">(</span>\ (w <span class="p">:</span> W) → f (k w))))))
+</span><span id="__span-28-177"><a id="__codelineno-28-177" name="__codelineno-28-177" href="#__codelineno-28-177"></a>
+</span><span id="__span-28-178"><a id="__codelineno-28-178" name="__codelineno-28-178" href="#__codelineno-28-178"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-flat-emb-pullback" id="define:equiv-flat-emb-pullback" style="visibility: visible; position: relative; color: inherit">equiv-flat-emb-pullback</a></span>
+</span><span id="__span-28-179"><a id="__codelineno-28-179" name="__codelineno-28-179" href="#__codelineno-28-179"></a>  ( A B :♭ <span class="kt">U</span>)
+</span><span id="__span-28-180"><a id="__codelineno-28-180" name="__codelineno-28-180" href="#__codelineno-28-180"></a>  ( f :♭ A → B)
+</span><span id="__span-28-181"><a id="__codelineno-28-181" name="__codelineno-28-181" href="#__codelineno-28-181"></a>  : Equiv
+</span><span id="__span-28-182"><a id="__codelineno-28-182" name="__codelineno-28-182" href="#__codelineno-28-182"></a>      ( <span class="nd">♭</span> (emb-pullback A B f))
+</span><span id="__span-28-183"><a id="__codelineno-28-183" name="__codelineno-28-183" href="#__codelineno-28-183"></a>      ( emb-pullback (<span class="nd">♭</span> A) (<span class="nd">♭</span> B) (b-map A B f))
+</span><span id="__span-28-184"><a id="__codelineno-28-184" name="__codelineno-28-184" href="#__codelineno-28-184"></a>  :=
+</span><span id="__span-28-185"><a id="__codelineno-28-185" name="__codelineno-28-185" href="#__codelineno-28-185"></a>    equiv-comp
+</span><span id="__span-28-186"><a id="__codelineno-28-186" name="__codelineno-28-186" href="#__codelineno-28-186"></a>      ( <span class="nd">♭</span> (emb-pullback A B f))
+</span><span id="__span-28-187"><a id="__codelineno-28-187" name="__codelineno-28-187" href="#__codelineno-28-187"></a>      <span class="p">( </span>Σ ( X <span class="p">:</span> <span class="nd">♭</span> A) , (<span class="k">let mod</span> <span class="nd">♭</span> x0 := X <span class="k">in</span> <span class="nd">♭</span> <span class="p">(</span>Σ (y <span class="p">:</span> A) , f x0 = f y)))
+</span><span id="__span-28-188"><a id="__codelineno-28-188" name="__codelineno-28-188" href="#__codelineno-28-188"></a>      ( emb-pullback (<span class="nd">♭</span> A) (<span class="nd">♭</span> B) (b-map A B f))
+</span><span id="__span-28-189"><a id="__codelineno-28-189" name="__codelineno-28-189" href="#__codelineno-28-189"></a>      <span class="p">( </span>b-sigma-commute-equiv A (\ x → Σ (y <span class="p">:</span> A) , f x = f y))
+</span><span id="__span-28-190"><a id="__codelineno-28-190" name="__codelineno-28-190" href="#__codelineno-28-190"></a>      ( total-equiv-family-of-equiv (<span class="nd">♭</span> A)
+</span><span id="__span-28-191"><a id="__codelineno-28-191" name="__codelineno-28-191" href="#__codelineno-28-191"></a>          ( <span class="p">\ </span>X → <span class="k">let mod</span> <span class="nd">♭</span> x0 := X <span class="k">in</span> <span class="nd">♭</span> <span class="p">(</span>Σ (y <span class="p">:</span> A) , f x0 = f y))
+</span><span id="__span-28-192"><a id="__codelineno-28-192" name="__codelineno-28-192" href="#__codelineno-28-192"></a>          <span class="p">( </span>\ X → Σ (Y <span class="p">:</span> <span class="nd">♭</span> A) , b-map A B f X = b-map A B f Y)
+</span><span id="__span-28-193"><a id="__codelineno-28-193" name="__codelineno-28-193" href="#__codelineno-28-193"></a>          ( <span class="p">\ </span>X →
+</span><span id="__span-28-194"><a id="__codelineno-28-194" name="__codelineno-28-194" href="#__codelineno-28-194"></a>            b-elim A
+</span><span id="__span-28-195"><a id="__codelineno-28-195" name="__codelineno-28-195" href="#__codelineno-28-195"></a>              ( <span class="p">\ </span>Z → Equiv
+</span><span id="__span-28-196"><a id="__codelineno-28-196" name="__codelineno-28-196" href="#__codelineno-28-196"></a>                  ( <span class="k">let mod</span> <span class="nd">♭</span> x0 := Z <span class="k">in</span> <span class="nd">♭</span> <span class="p">(</span>Σ (y <span class="p">:</span> A) , f x0 = f y))
+</span><span id="__span-28-197"><a id="__codelineno-28-197" name="__codelineno-28-197" href="#__codelineno-28-197"></a>                  <span class="p">( </span>Σ (Y <span class="p">:</span> <span class="nd">♭</span> A) , b-map A B f Z = b-map A B f Y))
+</span><span id="__span-28-198"><a id="__codelineno-28-198" name="__codelineno-28-198" href="#__codelineno-28-198"></a>              ( X)
+</span><span id="__span-28-199"><a id="__codelineno-28-199" name="__codelineno-28-199" href="#__codelineno-28-199"></a>              ( \ (x0 :_b A) → <span class="p">\ </span>_ →
+</span><span id="__span-28-200"><a id="__codelineno-28-200" name="__codelineno-28-200" href="#__codelineno-28-200"></a>                equiv-comp
+</span><span id="__span-28-201"><a id="__codelineno-28-201" name="__codelineno-28-201" href="#__codelineno-28-201"></a>                  <span class="p">( </span>♭ (Σ (y <span class="p">:</span> A) , f x0 = f y))
+</span><span id="__span-28-202"><a id="__codelineno-28-202" name="__codelineno-28-202" href="#__codelineno-28-202"></a>                  <span class="p">( </span>Σ (Y <span class="p">:</span> <span class="nd">♭</span> A) , (<span class="k">let mod</span> <span class="nd">♭</span> y0 := Y <span class="k">in</span> <span class="nd">♭</span> (f x0 = f y0)))
+</span><span id="__span-28-203"><a id="__codelineno-28-203" name="__codelineno-28-203" href="#__codelineno-28-203"></a>                  <span class="p">( </span>Σ (Y <span class="p">:</span> <span class="nd">♭</span> A) , <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (f x0) = b-map A B f Y)
+</span><span id="__span-28-204"><a id="__codelineno-28-204" name="__codelineno-28-204" href="#__codelineno-28-204"></a>                  ( b-sigma-commute-equiv A (<span class="p">\ </span>y → f x0 = f y))
+</span><span id="__span-28-205"><a id="__codelineno-28-205" name="__codelineno-28-205" href="#__codelineno-28-205"></a>                  ( total-equiv-family-of-equiv (<span class="nd">♭</span> A)
+</span><span id="__span-28-206"><a id="__codelineno-28-206" name="__codelineno-28-206" href="#__codelineno-28-206"></a>                      ( <span class="p">\ </span>Y → <span class="k">let mod</span> <span class="nd">♭</span> y0 := Y <span class="k">in</span> <span class="nd">♭</span> (f x0 = f y0))
+</span><span id="__span-28-207"><a id="__codelineno-28-207" name="__codelineno-28-207" href="#__codelineno-28-207"></a>                      ( <span class="p">\ </span>Y → <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (f x0) = b-map A B f Y)
+</span><span id="__span-28-208"><a id="__codelineno-28-208" name="__codelineno-28-208" href="#__codelineno-28-208"></a>                      ( <span class="p">\ </span>Y →
+</span><span id="__span-28-209"><a id="__codelineno-28-209" name="__codelineno-28-209" href="#__codelineno-28-209"></a>                        b-elim A
+</span><span id="__span-28-210"><a id="__codelineno-28-210" name="__codelineno-28-210" href="#__codelineno-28-210"></a>                          ( <span class="p">\ </span>Z&#39; → Equiv
+</span><span id="__span-28-211"><a id="__codelineno-28-211" name="__codelineno-28-211" href="#__codelineno-28-211"></a>                              ( <span class="k">let mod</span> <span class="nd">♭</span> y0 := Z&#39; <span class="k">in</span> <span class="nd">♭</span> (f x0 = f y0))
+</span><span id="__span-28-212"><a id="__codelineno-28-212" name="__codelineno-28-212" href="#__codelineno-28-212"></a>                              ( <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> (f x0) = b-map A B f Z&#39;))
+</span><span id="__span-28-213"><a id="__codelineno-28-213" name="__codelineno-28-213" href="#__codelineno-28-213"></a>                          ( Y)
+</span><span id="__span-28-214"><a id="__codelineno-28-214" name="__codelineno-28-214" href="#__codelineno-28-214"></a>                          ( \ (y0 :_b A) → <span class="p">\ </span>_ →
+</span><span id="__span-28-215"><a id="__codelineno-28-215" name="__codelineno-28-215" href="#__codelineno-28-215"></a>                            ( b-path-commute-fwd B (f x0) (f y0)
+</span><span id="__span-28-216"><a id="__codelineno-28-216" name="__codelineno-28-216" href="#__codelineno-28-216"></a>                            , b-path-commute-equiv B (f x0) (f y0))))))))
+</span><span id="__span-28-217"><a id="__codelineno-28-217" name="__codelineno-28-217" href="#__codelineno-28-217"></a>
+</span><span id="__span-28-218"><a id="__codelineno-28-218" name="__codelineno-28-218" href="#__codelineno-28-218"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:eq-htpy-refl" id="define:eq-htpy-refl" style="visibility: visible; position: relative; color: inherit">eq-htpy-refl</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-28-219"><a id="__codelineno-28-219" name="__codelineno-28-219" href="#__codelineno-28-219"></a>  <span class="p">( </span>X <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-220"><a id="__codelineno-28-220" name="__codelineno-28-220" href="#__codelineno-28-220"></a>  <span class="p">( </span>A <span class="p">:</span> X → <span class="kt">U</span>)
+</span><span id="__span-28-221"><a id="__codelineno-28-221" name="__codelineno-28-221" href="#__codelineno-28-221"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → A x)
+</span><span id="__span-28-222"><a id="__codelineno-28-222" name="__codelineno-28-222" href="#__codelineno-28-222"></a>  : eq-htpy funext X A f f (<span class="p">\ </span>x → <span class="s">refl</span>) = <span class="s">refl</span>
+</span><span id="__span-28-223"><a id="__codelineno-28-223" name="__codelineno-28-223" href="#__codelineno-28-223"></a>  := <span class="s">second</span> (<span class="s">first</span> (funext X A f f)) <span class="s">refl</span>
+</span><span id="__span-28-224"><a id="__codelineno-28-224" name="__codelineno-28-224" href="#__codelineno-28-224"></a>
+</span><span id="__span-28-225"><a id="__codelineno-28-225" name="__codelineno-28-225" href="#__codelineno-28-225"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:section-htpy-eq-refl" id="define:section-htpy-eq-refl" style="visibility: visible; position: relative; color: inherit">section-htpy-eq-refl</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
+</span><span id="__span-28-226"><a id="__codelineno-28-226" name="__codelineno-28-226" href="#__codelineno-28-226"></a>  <span class="p">( </span>X <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-227"><a id="__codelineno-28-227" name="__codelineno-28-227" href="#__codelineno-28-227"></a>  <span class="p">( </span>A <span class="p">:</span> X → <span class="kt">U</span>)
+</span><span id="__span-28-228"><a id="__codelineno-28-228" name="__codelineno-28-228" href="#__codelineno-28-228"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="p">(</span>x <span class="p">:</span> X) → A x)
+</span><span id="__span-28-229"><a id="__codelineno-28-229" name="__codelineno-28-229" href="#__codelineno-28-229"></a>  : <span class="s">first</span> (<span class="s">second</span> (funext X A f f)) (<span class="p">\ </span>x → <span class="s">refl</span>) = <span class="s">refl</span>
+</span><span id="__span-28-230"><a id="__codelineno-28-230" name="__codelineno-28-230" href="#__codelineno-28-230"></a>  :=
+</span><span id="__span-28-231"><a id="__codelineno-28-231" name="__codelineno-28-231" href="#__codelineno-28-231"></a>    inv-ap-is-emb
+</span><span id="__span-28-232"><a id="__codelineno-28-232" name="__codelineno-28-232" href="#__codelineno-28-232"></a>      ( f = f)
+</span><span id="__span-28-233"><a id="__codelineno-28-233" name="__codelineno-28-233" href="#__codelineno-28-233"></a>      <span class="p">( </span>(x <span class="p">:</span> X) → f x = f x)
+</span><span id="__span-28-234"><a id="__codelineno-28-234" name="__codelineno-28-234" href="#__codelineno-28-234"></a>      ( htpy-eq X A f f)
+</span><span id="__span-28-235"><a id="__codelineno-28-235" name="__codelineno-28-235" href="#__codelineno-28-235"></a>      ( is-emb-is-equiv (f = f) <span class="p">(</span>(x <span class="p">:</span> X) → f x = f x) (htpy-eq X A f f) (funext X A f f))
+</span><span id="__span-28-236"><a id="__codelineno-28-236" name="__codelineno-28-236" href="#__codelineno-28-236"></a>      ( <span class="s">first</span> (<span class="s">second</span> (funext X A f f)) (<span class="p">\ </span>x → <span class="s">refl</span>))
+</span><span id="__span-28-237"><a id="__codelineno-28-237" name="__codelineno-28-237" href="#__codelineno-28-237"></a>      ( <span class="s">refl</span>)
+</span><span id="__span-28-238"><a id="__codelineno-28-238" name="__codelineno-28-238" href="#__codelineno-28-238"></a>      ( <span class="s">second</span> (<span class="s">second</span> (funext X A f f)) (<span class="p">\ </span>x → <span class="s">refl</span>))
+</span><span id="__span-28-239"><a id="__codelineno-28-239" name="__codelineno-28-239" href="#__codelineno-28-239"></a>
+</span><span id="__span-28-240"><a id="__codelineno-28-240" name="__codelineno-28-240" href="#__codelineno-28-240"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb-comp" id="define:is-emb-comp" style="visibility: visible; position: relative; color: inherit">is-emb-comp</a></span>
+</span><span id="__span-28-241"><a id="__codelineno-28-241" name="__codelineno-28-241" href="#__codelineno-28-241"></a>  <span class="p">( </span>A B C <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-242"><a id="__codelineno-28-242" name="__codelineno-28-242" href="#__codelineno-28-242"></a>  <span class="p">( </span>f <span class="p">:</span> A → B)
+</span><span id="__span-28-243"><a id="__codelineno-28-243" name="__codelineno-28-243" href="#__codelineno-28-243"></a>  <span class="p">( </span>g <span class="p">:</span> B → C)
+</span><span id="__span-28-244"><a id="__codelineno-28-244" name="__codelineno-28-244" href="#__codelineno-28-244"></a>  <span class="p">( </span>emb-f <span class="p">:</span> is-emb A B f)
+</span><span id="__span-28-245"><a id="__codelineno-28-245" name="__codelineno-28-245" href="#__codelineno-28-245"></a>  <span class="p">( </span>emb-g <span class="p">:</span> is-emb B C g)
+</span><span id="__span-28-246"><a id="__codelineno-28-246" name="__codelineno-28-246" href="#__codelineno-28-246"></a>  : is-emb A C (comp A B C g f)
+</span><span id="__span-28-247"><a id="__codelineno-28-247" name="__codelineno-28-247" href="#__codelineno-28-247"></a>  :=
+</span><span id="__span-28-248"><a id="__codelineno-28-248" name="__codelineno-28-248" href="#__codelineno-28-248"></a>    <span class="p">\ </span>x y →
+</span><span id="__span-28-249"><a id="__codelineno-28-249" name="__codelineno-28-249" href="#__codelineno-28-249"></a>      is-equiv-homotopy (x = y) (g (f x) = g (f y))
+</span><span id="__span-28-250"><a id="__codelineno-28-250" name="__codelineno-28-250" href="#__codelineno-28-250"></a>        ( ap A C x y (comp A B C g f))
+</span><span id="__span-28-251"><a id="__codelineno-28-251" name="__codelineno-28-251" href="#__codelineno-28-251"></a>        ( comp (x = y) (f x = f y) (g (f x) = g (f y))
+</span><span id="__span-28-252"><a id="__codelineno-28-252" name="__codelineno-28-252" href="#__codelineno-28-252"></a>            ( ap B C (f x) (f y) g)
+</span><span id="__span-28-253"><a id="__codelineno-28-253" name="__codelineno-28-253" href="#__codelineno-28-253"></a>            ( ap A B x y f))
+</span><span id="__span-28-254"><a id="__codelineno-28-254" name="__codelineno-28-254" href="#__codelineno-28-254"></a>        ( <span class="p">\ </span>p → ap-comp A B C x y f g p)
+</span><span id="__span-28-255"><a id="__codelineno-28-255" name="__codelineno-28-255" href="#__codelineno-28-255"></a>        ( is-equiv-comp (x = y) (f x = f y) (g (f x) = g (f y))
+</span><span id="__span-28-256"><a id="__codelineno-28-256" name="__codelineno-28-256" href="#__codelineno-28-256"></a>            ( ap A B x y f) (emb-f x y)
+</span><span id="__span-28-257"><a id="__codelineno-28-257" name="__codelineno-28-257" href="#__codelineno-28-257"></a>            ( ap B C (f x) (f y) g) (emb-g (f x) (f y)))
+</span><span id="__span-28-258"><a id="__codelineno-28-258" name="__codelineno-28-258" href="#__codelineno-28-258"></a>
+</span><span id="__span-28-259"><a id="__codelineno-28-259" name="__codelineno-28-259" href="#__codelineno-28-259"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-emb-right-factor-equiv" id="define:is-emb-right-factor-equiv" style="visibility: visible; position: relative; color: inherit">is-emb-right-factor-equiv</a></span>
+</span><span id="__span-28-260"><a id="__codelineno-28-260" name="__codelineno-28-260" href="#__codelineno-28-260"></a>  <span class="p">( </span>A B C <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-28-261"><a id="__codelineno-28-261" name="__codelineno-28-261" href="#__codelineno-28-261"></a>  <span class="p">( </span>g <span class="p">:</span> A → B)
+</span><span id="__span-28-262"><a id="__codelineno-28-262" name="__codelineno-28-262" href="#__codelineno-28-262"></a>  <span class="p">( </span>h <span class="p">:</span> B → C)
+</span><span id="__span-28-263"><a id="__codelineno-28-263" name="__codelineno-28-263" href="#__codelineno-28-263"></a>  <span class="p">( </span>is-equiv-h <span class="p">:</span> is-equiv B C h)
+</span><span id="__span-28-264"><a id="__codelineno-28-264" name="__codelineno-28-264" href="#__codelineno-28-264"></a>  <span class="p">( </span>emb-hg <span class="p">:</span> is-emb A C (comp A B C h g))
+</span><span id="__span-28-265"><a id="__codelineno-28-265" name="__codelineno-28-265" href="#__codelineno-28-265"></a>  : is-emb A B g
+</span><span id="__span-28-266"><a id="__codelineno-28-266" name="__codelineno-28-266" href="#__codelineno-28-266"></a>  :=
+</span><span id="__span-28-267"><a id="__codelineno-28-267" name="__codelineno-28-267" href="#__codelineno-28-267"></a>    <span class="p">\ </span>x y →
+</span><span id="__span-28-268"><a id="__codelineno-28-268" name="__codelineno-28-268" href="#__codelineno-28-268"></a>      is-equiv-right-factor (x = y) (g x = g y) (h (g x) = h (g y))
+</span><span id="__span-28-269"><a id="__codelineno-28-269" name="__codelineno-28-269" href="#__codelineno-28-269"></a>        ( ap A B x y g)
+</span><span id="__span-28-270"><a id="__codelineno-28-270" name="__codelineno-28-270" href="#__codelineno-28-270"></a>        ( ap B C (g x) (g y) h)
+</span><span id="__span-28-271"><a id="__codelineno-28-271" name="__codelineno-28-271" href="#__codelineno-28-271"></a>        ( is-emb-is-equiv B C h is-equiv-h (g x) (g y))
+</span><span id="__span-28-272"><a id="__codelineno-28-272" name="__codelineno-28-272" href="#__codelineno-28-272"></a>        ( is-equiv-homotopy (x = y) (h (g x) = h (g y))
+</span><span id="__span-28-273"><a id="__codelineno-28-273" name="__codelineno-28-273" href="#__codelineno-28-273"></a>            ( comp (x = y) (g x = g y) (h (g x) = h (g y))
+</span><span id="__span-28-274"><a id="__codelineno-28-274" name="__codelineno-28-274" href="#__codelineno-28-274"></a>                ( ap B C (g x) (g y) h) (ap A B x y g))
+</span><span id="__span-28-275"><a id="__codelineno-28-275" name="__codelineno-28-275" href="#__codelineno-28-275"></a>            ( ap A C x y (comp A B C h g))
+</span><span id="__span-28-276"><a id="__codelineno-28-276" name="__codelineno-28-276" href="#__codelineno-28-276"></a>            ( <span class="p">\ </span>p → rev (h (g x) = h (g y))
+</span><span id="__span-28-277"><a id="__codelineno-28-277" name="__codelineno-28-277" href="#__codelineno-28-277"></a>                ( ap A C x y (comp A B C h g) p)
+</span><span id="__span-28-278"><a id="__codelineno-28-278" name="__codelineno-28-278" href="#__codelineno-28-278"></a>                ( ap B C (g x) (g y) h (ap A B x y g p))
+</span><span id="__span-28-279"><a id="__codelineno-28-279" name="__codelineno-28-279" href="#__codelineno-28-279"></a>                ( ap-comp A B C x y g h p))
+</span><span id="__span-28-280"><a id="__codelineno-28-280" name="__codelineno-28-280" href="#__codelineno-28-280"></a>            ( emb-hg x y))
 </span></code></pre></div>
 
 
