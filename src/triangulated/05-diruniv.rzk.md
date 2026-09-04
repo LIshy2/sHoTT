@@ -1894,7 +1894,7 @@ maps.
 
 ```rzk
 
-#def equiv-S-path-to-underlying-equiv uses (funext weakfunext)
+#def path-in-S-is-equiv uses (funext weakfunext)
   ( x y : S)
   : Equiv (x = y) (Equiv (first x) (first y))
   :=
@@ -1944,6 +1944,12 @@ maps.
 	    hom-II-in-S-diagonal
 	      ( \ (t , s) →
 	          second (first (S-is-segal-II x y z f g)) (t , s))
+
+```
+
+### Isomorphisms in S
+
+```rzk
 
 #def equiv-S-retraction-law-II-to-underlying uses (funext weakfunext extext)
   ( x y : S)
@@ -2316,7 +2322,7 @@ maps.
 	    ( has-section (first x) (first y) (hom-II-in-S x y f))
 	    ( equiv-S-section-arrow-II-to-underlying x y f)
 
-#def equiv-S-Iso-II-to-underlying-equiv uses (funext weakfunext extext)
+#def S-Iso-is-Equiv uses (funext weakfunext extext)
   ( x y : S)
   : Equiv (Iso-II S S-is-segal-II x y) (Equiv (first x) (first y))
   :=
@@ -2336,6 +2342,12 @@ maps.
         ( hom-II-in-S x y)
         ( is-equiv-hom-II-in-S x y)
         ( \ f → is-equiv (first x) (first y) f))
+
+```
+
+### The path-to-iso comparison
+
+```rzk
 
 #def is-prop-is-iso-arrow-II-S uses (funext weakfunext extext)
   ( x y : S)
@@ -2377,23 +2389,23 @@ maps.
             ( second iso))
           ( second iso')))
 
-#def hom-II-in-S-iso-eq-II uses (funext weakfunext extext)
+#def hom-II-in-S-iso-eq-II-is-path-map uses (funext weakfunext extext)
   ( x y : S)
   ( p : x = y)
   : hom-II-in-S x y (first (iso-eq-II S S-is-segal-II x y p))
-    = first (first (equiv-S-path-to-underlying-equiv x y) p)
+    = first (first (path-in-S-is-equiv x y) p)
   :=
     ind-path
       ( S)
       ( x)
       ( \ y' p' →
         hom-II-in-S x y' (first (iso-eq-II S S-is-segal-II x y' p'))
-        = first (first (equiv-S-path-to-underlying-equiv x y') p'))
+        = first (first (path-in-S-is-equiv x y') p'))
       ( hom-II-in-S-id x)
       ( y)
       ( p)
 
-#def iso-eq-II-S-is-underlying-equiv uses (funext weakfunext extext)
+#def iso-eq-II-S-is-path-in-S-is-equiv uses (funext weakfunext extext)
   ( x y : S)
   : homotopy
       ( x = y)
@@ -2407,8 +2419,8 @@ maps.
           ( inv-equiv
             ( Iso-II S S-is-segal-II x y)
             ( Equiv (first x) (first y))
-            ( equiv-S-Iso-II-to-underlying-equiv x y)))
-        ( first (equiv-S-path-to-underlying-equiv x y)))
+            ( S-Iso-is-Equiv x y)))
+        ( first (path-in-S-is-equiv x y)))
   :=
     \ p →
       let iso : Iso-II S S-is-segal-II x y
@@ -2416,8 +2428,8 @@ maps.
           ( inv-equiv
             ( Iso-II S S-is-segal-II x y)
             ( Equiv (first x) (first y))
-            ( equiv-S-Iso-II-to-underlying-equiv x y))
-          ( first (equiv-S-path-to-underlying-equiv x y) p) in
+            ( S-Iso-is-Equiv x y))
+          ( first (path-in-S-is-equiv x y) p) in
       eq-S-Iso-II-eq-first
         x y
         ( iso-eq-II S S-is-segal-II x y p)
@@ -2432,23 +2444,29 @@ maps.
           ( concat
             ( first x → first y)
             ( hom-II-in-S x y (first (iso-eq-II S S-is-segal-II x y p)))
-            ( first (first (equiv-S-path-to-underlying-equiv x y) p))
+            ( first (first (path-in-S-is-equiv x y) p))
             ( hom-II-in-S x y (first iso))
-            ( hom-II-in-S-iso-eq-II x y p)
+            ( hom-II-in-S-iso-eq-II-is-path-map x y p)
             ( rev
               ( first x → first y)
               ( hom-II-in-S x y (first iso))
-              ( first (first (equiv-S-path-to-underlying-equiv x y) p))
+              ( first (first (path-in-S-is-equiv x y) p))
               ( first-path-Σ
                 ( first x → first y)
                 ( \ f → is-equiv (first x) (first y) f)
-                ( first (equiv-S-Iso-II-to-underlying-equiv x y) iso)
-                ( first (equiv-S-path-to-underlying-equiv x y) p)
+                ( first (S-Iso-is-Equiv x y) iso)
+                ( first (path-in-S-is-equiv x y) p)
                 ( inv-equiv-cancel'
                   ( Iso-II S S-is-segal-II x y)
                   ( Equiv (first x) (first y))
-                  ( equiv-S-Iso-II-to-underlying-equiv x y)
-                  ( first (equiv-S-path-to-underlying-equiv x y) p))))))
+                  ( S-Iso-is-Equiv x y)
+                  ( first (path-in-S-is-equiv x y) p))))))
+
+```
+
+### Rezkness of S
+
+```rzk
 
 #def S-is-rezk-II uses (funext weakfunext extext)
   : is-rezk-II S
@@ -2456,9 +2474,9 @@ maps.
     ( S-is-segal-II
     , \ x y →
         let path-to-equiv : Equiv (x = y) (Equiv (first x) (first y))
-          := equiv-S-path-to-underlying-equiv x y in
+          := path-in-S-is-equiv x y in
         let iso-to-equiv : Equiv (Iso-II S S-is-segal-II x y) (Equiv (first x) (first y))
-          := equiv-S-Iso-II-to-underlying-equiv x y in
+          := S-Iso-is-Equiv x y in
         is-equiv-homotopy
           ( x = y)
           ( Iso-II S S-is-segal-II x y)
@@ -2473,7 +2491,7 @@ maps.
                 ( Equiv (first x) (first y))
                 iso-to-equiv))
             ( first path-to-equiv))
-          ( iso-eq-II-S-is-underlying-equiv x y)
+          ( iso-eq-II-S-is-path-in-S-is-equiv x y)
           ( is-equiv-comp
             ( x = y)
             ( Equiv (first x) (first y))
