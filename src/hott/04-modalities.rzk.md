@@ -85,6 +85,8 @@ This is a literate `rzk` file:
 
 ### Interval
 
+
+GWB 24, axiom 7
 ```rzk
 #def discrete-interval-elim (i :♭ 𝕀) (A : 𝕀 → U) (x : A 0ᵢ) (y : A 1ᵢ)
   : A i
@@ -131,6 +133,7 @@ This is a literate `rzk` file:
 
 ### Path
 
+GWB, axiom 4
 ```rzk
 #postulate b-path-commute-fwd (A :♭ U) (x y :♭ A)
   : ( ♭ ( x = y)) → (mod ♭ x) = (mod ♭ y)
@@ -736,6 +739,7 @@ Lifting equivalences through the flat (`♭`) modality.
       ( \ _ → refl)
       ( \ _ → refl)
 
+-- GWB, Lemma 3.14
 #def op-fun-commute-op-fwd
   ( A : U)
   ( B :ᵒᵖ U)
@@ -828,6 +832,8 @@ Lifting equivalences through the flat (`♭`) modality.
 
 ### Path
 
+
+GWB24, axiom 5
 ```rzk
 #postulate sharp-path-commute-fwd (A :♯ U) (x y :♯ A)
   : ( ♯ ( x = y)) → (mod ♯ x) = (mod ♯ y)

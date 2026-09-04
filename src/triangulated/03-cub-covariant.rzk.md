@@ -8,6 +8,121 @@
 #assume extext : ExtExt
 ```
 
+## Pullback along the cubical base point
+
+```rzk
+#def orthogonality-pullback-fiber uses (funext weakfunext)
+  ( n m : nat)
+  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  : U
+  :=
+    Σ ( c : I^n m → product (I^n n) (shape (_ : 𝕀 | TOP)))
+    , F0 (c (zero-vec-I^n m))
+
+#def orthogonality-pullback-fwd uses (funext weakfunext)
+  ( n m : nat)
+  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  : ( I^n m
+      → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+        , F0 t)
+    → orthogonality-pullback-fiber n m F0
+  :=
+    \ f →
+      ( \ t → first (f t)
+      , second (f (zero-vec-I^n m)))
+
+#def orthogonality-pullback uses (funext weakfunext)
+  ( n m : nat)
+  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  : Equiv
+      ( I^n m
+        → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+          , F0 t)
+      ( orthogonality-pullback-fiber n m F0)
+  :=
+    ( orthogonality-pullback-fwd n m F0
+    , ?orthogonality-pullback)
+
+#def orthogonality-pullback-split uses (funext weakfunext)
+  ( n m : nat)
+  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  : U
+  :=
+    Σ ( v : I^n m → I^n n)
+    , Σ ( theta : I^n m → shape (_ : 𝕀 | TOP))
+    , F0
+        ( v (zero-vec-I^n m)
+        , theta (zero-vec-I^n m))
+
+#def equiv-orthogonality-pullback-split uses (funext weakfunext)
+  ( n m : nat)
+  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  : Equiv (orthogonality-pullback-fiber n m F0) (orthogonality-pullback-split n m F0)
+  :=
+    equiv-has-inverse
+      ( orthogonality-pullback-fiber n m F0)
+      ( orthogonality-pullback-split n m F0)
+      ( \ (c , p) →
+          ( \ t → first (c t)
+          , ( \ t → second (c t)
+            , p)))
+      ( \ (v , (theta , p)) →
+          ( \ t → (v t , theta t)
+          , p))
+      ( \ _ → refl)
+      ( \ _ → refl)
+
+#def orthogonality-pullback-flat-commute uses (funext weakfunext)
+  ( n m :♭ nat)
+  ( F0 :♭ product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  : Equiv
+      ( ♭ ( orthogonality-pullback-split n m F0))
+      ( Σ ( v : ♭ (I^n m → I^n n))
+      , ( let mod ♭ v' := v in
+          Σ ( theta : ♭ (I^n m → shape (_ : 𝕀 | TOP)))
+          , ( let mod ♭ theta' := theta in
+              ♭
+                ( F0
+                    ( v' (zero-vec-I^n m)
+                    , theta' (zero-vec-I^n m))))))
+  :=
+    b-sigma2-commute-equiv
+      ( I^n m → I^n n)
+      ( I^n m → shape (_ : 𝕀 | TOP))
+      ( \ v theta →
+          F0
+            ( v (zero-vec-I^n m)
+            , theta (zero-vec-I^n m)))
+
+#def equiv-orthogonality-to-flat uses (funext weakfunext)
+  ( n m :♭ nat)
+  ( F0 :♭ product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  : Equiv
+      ( ♭
+          ( I^n m
+            → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+              , F0 t))
+      ( ♭ ( orthogonality-pullback-split n m F0))
+  :=
+    let mod ♭ F-uncurried :=
+      mod ♭ (orthogonality-pullback-fiber n m F0) in
+    let mod ♭ curry-F :=
+      mod ♭ (equiv-orthogonality-pullback-split n m F0) in
+    b-equiv
+      ( I^n m
+        → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+          , F0 t)
+      ( orthogonality-pullback-split n m F0)
+      ( equiv-comp
+          ( I^n m
+            → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+              , F0 t)
+          ( F-uncurried)
+          ( orthogonality-pullback-split n m F0)
+          ( orthogonality-pullback n m F0)
+          ( curry-F))
+```
+
 ## Ordinary covariance over 𝕀
 
 ```rzk title="RS17 Def 8.2, cubical"

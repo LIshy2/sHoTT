@@ -35,6 +35,8 @@ First, introduce the exponentiation by interval functor.
 
 We postulate its right adjoint functor with counit, transpose, and untranspose.
 
+
+GWB 24, axiom 3
 ```rzk
 #postulate rar (A : (♭ U))
   : ( ♭ U)
@@ -305,6 +307,7 @@ Naturality of transpositions.
 
 ## Cubes separate
 
+GWB24, axiom 8
 ```rzk
 #postulate cubes-separate (A B :♭ U) (f :♭ A → B)
   : iff (is-equiv A B f) ((n :♭ nat) → is-equiv (♭ (I^n n → A)) (♭ (I^n n → B)) (b-map (I^n n → A) (I^n n → B) (\ p t → f (p t))))

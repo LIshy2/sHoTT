@@ -1209,6 +1209,8 @@ dependent function types.
 
 ## Univalence
 
+
+GWB24, axiom 4
 ```rzk
 #def UA
   : U

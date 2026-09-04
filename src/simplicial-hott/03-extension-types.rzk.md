@@ -715,6 +715,29 @@ fact, sometimes only this weaker form of the axiom is needed.
   := \ I ψ ϕ A a f g → (first (first (extext I ψ ϕ A a f g)))
 ```
 
+## Endpoint extension types
+
+```rzk
+#def equiv-extent-0 (X : U)
+  : Equiv ((t : 1 | 0₂ ≡ 0₂) → X) X
+  :=
+    ( ( \ h → h *₁)
+    , ( ( ( \ x _ → x , \ _ → refl)
+        , ( \ x _ → x , \ _ → refl))))
+
+#def is-contr-extent-1
+  ( extext : ExtExt)
+  ( X : U)
+  : is-contr ((t : 1 | 1₂ ≡ 0₂) → X)
+  :=
+    ( ( \ t → recBOT)
+    , \ f →
+        naiveextext-extext extext
+          1 (\ t → 1₂ ≡ 0₂) (\ _ → BOT) (\ _ → X) (\ _ → recBOT)
+          ( \ t → recBOT) f
+          ( \ t → recBOT))
+```
+
 We show that naive extension extensionality implies weak extension
 extensionality. On the way, we obtain another useful version of extension
 extensionality, stating that all extension types in a proposition are

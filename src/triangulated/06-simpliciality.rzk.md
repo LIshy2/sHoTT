@@ -7,6 +7,11 @@
   : U
   := Equiv (𝕀 → A) (2 → A)
 
+
+```
+
+GWB24, Proposition 3.2
+```rzk
 #postulate simp-monad (A : U) : U
 
 #postulate is-simplicial-simp-monad (A : U) : is-simplicial (simp-monad A)

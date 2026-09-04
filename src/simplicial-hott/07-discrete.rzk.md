@@ -363,9 +363,6 @@ Function types and extension types into discrete families are already discrete:
 `#!rzk is-discrete-function-type`, `#!rzk is-discrete-extension-type` above.
 
 ```rzk
--- Σ of discrete types is discrete: via Δ¹-locality and the axiom of choice,
--- Δ¹ → Σ A B ≃ Σ (φ : Δ¹ → A), ((t : Δ¹) → B (φ t)), and the constant map is the
--- composite of the const equivalences on base and fibres.
 #def is-discrete-Σ
   ( A : U)
   ( B : A → U)
@@ -395,9 +392,6 @@ Function types and extension types into discrete families are already discrete:
             ( 2) (Δ¹) (\ _ → BOT) (\ _ → A) (\ _ x → B x)
             ( \ _ → recBOT) (\ _ → recBOT))))
 
--- Path types in a discrete type are discrete: x = y ≃ Δ¹ → (x = y), where the
--- first equivalence is `ap` of the const equivalence A ≃ (Δ¹ → A) and the second
--- is extension extensionality; the composite is homotopic to the constant map.
 #def is-discrete-Id uses (extext)
   ( A : U)
   ( is-discrete-A : is-discrete A)
@@ -1320,6 +1314,7 @@ Finally, we conclude:
 
 ## I-detects-discreteness
 
+GWB24, axiom 6
 ```rzk
 #postulate I-detects-discreteness
   ( A :♭ U)

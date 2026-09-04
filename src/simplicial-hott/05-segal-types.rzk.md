@@ -428,6 +428,19 @@ Extension types are also used to define the type of commutative triangles:
   → A [ t₂ ≡ 0₂ ↦ f t₁ , -- the top edge is exactly `f`,
         t₁ ≡ 1₂ ↦ g t₂ , -- the right edge is exactly `g`, and
         t₂ ≡ t₁ ↦ h t₂]   -- the diagonal is exactly `h`
+
+#def hom2-II
+  ( A : U)
+  ( x y z : A)
+  ( f : hom-II A x y)
+  ( g : hom-II A y z)
+  ( h : hom-II A x z)
+  : U
+  :=
+    ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁)
+  → A [ t₂ ≡ 0₂ ↦ f t₁ ,
+        t₁ ≡ 1₂ ↦ g t₂ ,
+        t₂ ≡ t₁ ↦ h t₂]
 ```
 
 ## Arrow types
@@ -504,6 +517,29 @@ also requires homotopical uniqueness of higher-order composites.
     ( x : A) → (y : A) → (z : A)
   → ( f : hom A x y) → (g : hom A y z)
   → is-contr (Σ (h : hom A x z) , (hom2 A x y z f g h))
+
+#def is-segal-II
+  ( A : U)
+  : U
+  :=
+    ( x : A) → (y : A) → (z : A)
+  → ( f : hom-II A x y) → (g : hom-II A y z)
+  → is-contr (Σ (h : hom-II A x z) , (hom2-II A x y z f g h))
+
+#def id-hom-II
+  ( A : U)
+  ( x : A)
+  : hom-II A x x
+  := \ t → x
+
+#def comp-is-segal-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x y z : A)
+  ( f : hom-II A x y)
+  ( g : hom-II A y z)
+  : hom-II A x z
+  := first (first (is-segal-II-A x y z f g))
 ```
 
 Segal types have a composition functor and witnesses to the composition
@@ -782,6 +818,171 @@ We have now proven that both notions of Segal types are logically equivalent.
   ( A : U)
   : iff (is-segal A) (is-local-horn-inclusion A)
   := (is-local-horn-inclusion-is-segal A , is-segal-is-local-horn-inclusion A)
+```
+
+### Tiny-interval horn characterization
+
+The inner horn for the tiny-interval 2-simplex `(t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁`.
+
+```rzk
+#def Δ²-II
+  : ( 𝕀 × 𝕀) → TOPE
+  := \ (t₁ , t₂) → t₂ ≤ t₁
+
+#def Λ-II
+  : ( 𝕀 × 𝕀) → TOPE
+  := \ (t₁ , t₂) → (t₂ ≡ 0₂) ∨ (t₁ ≡ 1₂)
+
+#def horn-filler-II
+  ( A : U)
+  ( x y z : A)
+  ( f : hom-II A x y)
+  ( g : hom-II A y z)
+  : U
+  :=
+    ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁)
+  → A [ (t₂ ≡ 0₂) ∨ (t₁ ≡ 1₂) ↦ recOR (t₂ ≡ 0₂ ↦ f t₁ , t₁ ≡ 1₂ ↦ g t₂) ]
+
+#def horn-II
+  ( A : U)
+  ( x y z : A)
+  ( f : hom-II A x y)
+  ( g : hom-II A y z)
+  : ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A
+  := \ (t₁ , t₂) → recOR (t₂ ≡ 0₂ ↦ f t₁ , t₁ ≡ 1₂ ↦ g t₂)
+
+#def horn-restriction-II
+  ( A : U)
+  : ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁) → A)
+  → ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+  := \ F ts → F ts
+
+#def is-local-horn-inclusion-II
+  ( A : U)
+  : U
+  :=
+    is-equiv
+      ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁) → A)
+      ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+      ( horn-restriction-II A)
+
+#def compositions-are-horn-fillings-II
+  ( A : U)
+  ( x y z : A)
+  ( f : hom-II A x y)
+  ( g : hom-II A y z)
+  : Equiv
+    ( Σ ( h : hom-II A x z) , (hom2-II A x y z f g h))
+    ( horn-filler-II A x y z f g)
+  :=
+    ( \ hh ts → (second hh) ts
+    , ( ( \ k → ( \ t → k (t , t) , \ ts → k ts)
+        , \ hh → refl)
+      , ( \ k → ( \ t → k (t , t) , \ ts → k ts)
+        , \ hh → refl)))
+
+#def equiv-horn-restriction-II
+  ( A : U)
+  : Equiv
+    ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁) → A)
+    ( Σ ( k : ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+      , ( Σ ( h : hom-II A (k (0₂ , 0₂)) (k (1₂ , 1₂)))
+          , ( hom2-II A
+              ( k (0₂ , 0₂)) (k (1₂ , 0₂)) (k (1₂ , 1₂))
+              ( \ t → k (t , 0₂)) (\ t → k (1₂ , t))
+              ( h))))
+  :=
+    ( \ F →
+      ( horn-restriction-II A F
+      , ( \ t → F (t , t) , \ ts → F ts))
+    , ( ( \ khh ts → (second (second khh)) ts , \ F → refl)
+      , ( \ khh ts → (second (second khh)) ts , \ khh → refl)))
+
+#def equiv-horn-restriction-is-segal-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  : Equiv
+      ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁) → A)
+      ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+  :=
+    equiv-comp
+      ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁) → A)
+      ( Σ ( k : ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+        , ( Σ ( h : hom-II A (k (0₂ , 0₂)) (k (1₂ , 1₂)))
+            , ( hom2-II A
+                ( k (0₂ , 0₂)) (k (1₂ , 0₂)) (k (1₂ , 1₂))
+                ( \ t → k (t , 0₂)) (\ t → k (1₂ , t))
+                ( h))))
+      ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+      ( equiv-horn-restriction-II A)
+      ( projection-total-type
+        ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+        ( \ k →
+          Σ ( h : hom-II A (k (0₂ , 0₂)) (k (1₂ , 1₂)))
+          , ( hom2-II A
+              ( k (0₂ , 0₂)) (k (1₂ , 0₂)) (k (1₂ , 1₂))
+              ( \ t → k (t , 0₂)) (\ t → k (1₂ , t))
+              ( h)))
+      , ( is-equiv-projection-contractible-fibers
+          ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+          ( \ k →
+            Σ ( h : hom-II A (k (0₂ , 0₂)) (k (1₂ , 1₂)))
+            , ( hom2-II A
+                ( k (0₂ , 0₂)) (k (1₂ , 0₂)) (k (1₂ , 1₂))
+                ( \ t → k (t , 0₂)) (\ t → k (1₂ , t))
+                ( h)))
+          ( \ k →
+            is-segal-II-A
+              ( k (0₂ , 0₂)) (k (1₂ , 0₂)) (k (1₂ , 1₂))
+              ( \ t → k (t , 0₂)) (\ t → k (1₂ , t)))))
+
+#def is-local-horn-inclusion-is-segal-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  : is-local-horn-inclusion-II A
+  := second (equiv-horn-restriction-is-segal-II A is-segal-II-A)
+
+#def is-segal-is-local-horn-inclusion-II
+  ( A : U)
+  ( is-local-horn-inclusion-II-A : is-local-horn-inclusion-II A)
+  : is-segal-II A
+  :=
+    \ x y z f g →
+    contractible-fibers-is-equiv-projection
+      ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+      ( \ k →
+        Σ ( h : hom-II A (k (0₂ , 0₂)) (k (1₂ , 1₂)))
+        , ( hom2-II A
+            ( k (0₂ , 0₂)) (k (1₂ , 0₂)) (k (1₂ , 1₂))
+            ( \ t → k (t , 0₂)) (\ t → k (1₂ , t))
+            ( h)))
+      ( second
+        ( equiv-comp
+          ( Σ ( k : ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+            , Σ ( h : hom-II A (k (0₂ , 0₂)) (k (1₂ , 1₂)))
+              , ( hom2-II A
+                  ( k (0₂ , 0₂)) (k (1₂ , 0₂)) (k (1₂ , 1₂))
+                  ( \ t → k (t , 0₂)) (\ t → k (1₂ , t))
+                  ( h)))
+          ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁) → A)
+          ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+          ( inv-equiv
+            ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁) → A)
+            ( Σ ( k : ( ( t₁ , t₂) : 𝕀 × 𝕀 | t₂ ≤ t₁ ∧ Λ-II (t₁ , t₂)) → A)
+              , Σ ( h : hom-II A (k (0₂ , 0₂)) (k (1₂ , 1₂)))
+                , ( hom2-II A
+                    ( k (0₂ , 0₂)) (k (1₂ , 0₂)) (k (1₂ , 1₂))
+                    ( \ t → k (t , 0₂)) (\ t → k (1₂ , t))
+                    ( h)))
+            ( equiv-horn-restriction-II A))
+          ( horn-restriction-II A , is-local-horn-inclusion-II-A)))
+      ( horn-II A x y z f g)
+
+#def is-segal-II-iff-is-local-horn-inclusion-II
+  ( A : U)
+  : iff (is-segal-II A) (is-local-horn-inclusion-II A)
+  := ( is-local-horn-inclusion-is-segal-II A
+     , is-segal-is-local-horn-inclusion-II A)
 ```
 
 Similarly, Segal types are characterized by having unique extensions along

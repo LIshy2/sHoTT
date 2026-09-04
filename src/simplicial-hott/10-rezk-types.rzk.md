@@ -1026,6 +1026,112 @@ map from `#!rzk x = y` to `#!rzk Iso A is-segal-A x y` is an equivalence.
     , ( ( x : A)
       → ( y : A)
       → is-equiv (x = y) (Iso A is-segal-A x y) (iso-eq A is-segal-A x y))
+
+#def has-inverse-arrow-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x y : A)
+  ( f : hom-II A x y)
+  : U
+  :=
+    Σ ( g : hom-II A y x)
+    , product
+      ( comp-is-segal-II A is-segal-II-A x y x f g = id-hom-II A x)
+      ( comp-is-segal-II A is-segal-II-A y x y g f = id-hom-II A y)
+
+#def Retraction-arrow-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x y : A)
+  ( f : hom-II A x y)
+  : U
+  :=
+    Σ ( g : hom-II A y x)
+    , comp-is-segal-II A is-segal-II-A x y x f g = id-hom-II A x
+
+#def Section-arrow-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x y : A)
+  ( f : hom-II A x y)
+  : U
+  :=
+    Σ ( g : hom-II A y x)
+    , comp-is-segal-II A is-segal-II-A y x y g f = id-hom-II A y
+
+#def is-iso-arrow-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x y : A)
+  ( f : hom-II A x y)
+  : U
+  :=
+    product
+      ( Retraction-arrow-II A is-segal-II-A x y f)
+      ( Section-arrow-II A is-segal-II-A x y f)
+
+#def Iso-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x y : A)
+  : U
+  := Σ ( f : hom-II A x y) , is-iso-arrow-II A is-segal-II-A x y f
+
+#def comp-id-id-is-segal-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x : A)
+  : comp-is-segal-II A is-segal-II-A x x x (id-hom-II A x) (id-hom-II A x) = id-hom-II A x
+  :=
+    ap ( Σ ( h : hom-II A x x) , hom2-II A x x x (id-hom-II A x) (id-hom-II A x) h)
+       ( hom-II A x x)
+       ( first (is-segal-II-A x x x (id-hom-II A x) (id-hom-II A x)))
+       ( id-hom-II A x , \ _ → x)
+       ( \ w → first w)
+       ( all-elements-equal-is-contr
+           ( Σ ( h : hom-II A x x) , hom2-II A x x x (id-hom-II A x) (id-hom-II A x) h)
+           ( is-segal-II-A x x x (id-hom-II A x) (id-hom-II A x))
+           ( first (is-segal-II-A x x x (id-hom-II A x) (id-hom-II A x)))
+           ( id-hom-II A x , \ _ → x))
+
+#def is-iso-id-hom-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x : A)
+  : is-iso-arrow-II A is-segal-II-A x x (id-hom-II A x)
+  :=
+    ( ( id-hom-II A x
+      , comp-id-id-is-segal-II A is-segal-II-A x)
+    , ( id-hom-II A x
+      , comp-id-id-is-segal-II A is-segal-II-A x))
+
+#def hom-eq-II
+  ( A : U)
+  ( x y : A)
+  ( p : x = y)
+  : hom-II A x y
+  := ind-path A x (\ y' p' → hom-II A x y') (id-hom-II A x) y p
+
+#def iso-eq-II
+  ( A : U)
+  ( is-segal-II-A : is-segal-II A)
+  ( x y : A)
+  : ( x = y) → Iso-II A is-segal-II-A x y
+  :=
+    \ p →
+      ind-path A x
+        ( \ y' p' → Iso-II A is-segal-II-A x y')
+        ( id-hom-II A x , is-iso-id-hom-II A is-segal-II-A x)
+        ( y) (p)
+
+#def is-rezk-II
+  ( A : U)
+  : U
+  :=
+    Σ ( is-segal-II-A : is-segal-II A)
+    , ( ( x : A)
+      → ( y : A)
+      → is-equiv (x = y) (Iso-II A is-segal-II-A x y) (iso-eq-II A is-segal-II-A x y))
 ```
 
 Rezk types are Segal.

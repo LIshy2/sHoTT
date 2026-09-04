@@ -23,19 +23,6 @@ This is a literate `rzk` file: it mirrors the `Δ¹`-based discreteness theory o
 ## Hom-equality and discreteness over `𝕀`
 
 ```rzk
-#def id-hom-II
-  ( A : U)
-  ( x : A)
-  : hom-II A x x
-  := \ t → x
-
-#def hom-eq-II
-  ( A : U)
-  ( x y : A)
-  ( p : x = y)
-  : hom-II A x y
-  := ind-path (A) (x) (\ y' p' → hom-II A x y') (id-hom-II A x) (y) (p)
-
 #def is-discrete-II
   ( A : U)
   : U

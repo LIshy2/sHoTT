@@ -59,6 +59,8 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
 
 ## Amazing covariance
 
+Definition 5.10
+
 ```rzk
 
 #def is-a-cov uses (funext weakfunext) (X : U)
@@ -73,6 +75,7 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
 
 ## Amazing covariance machinery
 
+Lemma 5.11
 ```rzk
 #def is-a-cov-transpose uses (funext weakfunext)
   ( A :♭ U)
@@ -261,7 +264,13 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
       ( \ _ → A)
       ( is-a-cov-const-cov A is-a-cov-A)
       ( form 0₂)
+```
 
+GWB, Lemma 5.14
+
+```rzk
+
+-- GWB, Lemma 5.17
 #def is-a-cov-sigma-closed uses (funext weakfunext)
   ( A : U) (B : A → U)
   ( is-a-cov-A : is-a-cov A)
@@ -304,6 +313,8 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
                   ( \ c → (g c , s c)))))
       ( A , (is-a-cov-A , (B , is-a-cov-B)))
 
+
+-- Lemma 5.14(3)
 #def is-a-cov-id-closed uses (funext weakfunext) (A : U) (is-a-cov-A : is-a-cov A) (x y : A)
   : is-a-cov (x = y)
   :=
@@ -337,6 +348,7 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
       is-a-cov-A
       ( \ a → is-a-cov-id-closed B is-a-cov-B (f a) b)
 
+-- Lemma 5.16
 #def is-a-cov-i===0 uses (funext weakfunext extext) (i : 𝕀)
   : is-a-cov (shape (_ : 1 | i ≡ 1₂))
   :=
@@ -385,10 +397,9 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
                         , dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → shape-at-1 (f (unform s))) a0 a1')
                         ( is-prop-Σ-dhom-II-form-line-shape-at-1 extext f a0)
                         ( a1 , h))))
-      ( i)  
+      ( i)
 ```
-
-## Extension theorem
+Lemma 5.18
 
 ```rzk
 

@@ -257,6 +257,59 @@ Transport along the first projection of a dependent pair type.
           ( first-path-Σ-eq-pair U B X Y e))
 ```
 
+Paths in a sigma type over the universe induced by an equivalence of the first
+components.
+
+```rzk
+#def Eq-Σ-equiv
+  ( B : U → U)
+  ( X Y : Σ (A : U) , B A)
+  ( e : Equiv (first X) (first Y))
+  ( q : transport U B (first X) (first Y)
+      ( first (ua (first X) (first Y)) e)
+      ( second X)
+    = second Y)
+  : Eq-Σ U B X Y
+  :=
+    ( first (ua (first X) (first Y)) e
+    , q)
+
+#def eq-pair-equiv
+  ( B : U → U)
+  ( X Y : Σ (A : U) , B A)
+  ( e : Equiv (first X) (first Y))
+  ( q : transport U B (first X) (first Y)
+      ( first (ua (first X) (first Y)) e)
+      ( second X)
+    = second Y)
+  : X = Y
+  :=
+    eq-pair U B X Y (Eq-Σ-equiv B X Y e q)
+
+#def transport-first-eq-pair-equiv
+  ( B : U → U)
+  ( X Y : Σ (A : U) , B A)
+  ( e : Equiv (first X) (first Y))
+  ( q : transport U B (first X) (first Y)
+      ( first (ua (first X) (first Y)) e)
+      ( second X)
+    = second Y)
+  ( x : first X)
+  : transport (Σ (A : U) , B A) (\ s → first s) X Y
+      ( eq-pair-equiv B X Y e q) x
+    = first e x
+  :=
+    concat (first Y)
+      ( transport (Σ (A : U) , B A) (\ s → first s) X Y
+          ( eq-pair-equiv B X Y e q) x)
+      ( transport U (\ Z → Z) (first X) (first Y)
+          ( first (Eq-Σ-equiv B X Y e q)) x)
+      ( first e x)
+      ( transport-first-eq-pair B X Y
+          ( Eq-Σ-equiv B X Y e q) x)
+      ( transport-ua (first X) (first Y) e x)
+```
+
 ## Identity types of Sigma types over a product
 
 ```rzk
@@ -466,6 +519,170 @@ Here we've decomposed `#!rzk s`, `#!rzk t` and `#!rzk e` for induction purposes:
           ( refl)
           ( X') p)
       ( Y') q
+
+#def product-transport-rev-eq
+  ( A B : U)
+  ( C : A → B → U)
+  ( a a' : A)
+  ( b b' : B)
+  ( p : a = a')
+  ( q : b = b')
+  ( c : C a b)
+  ( c' : C a' b')
+  : ( product-transport A B C a a' b b' p q c = c')
+  → ( c = product-transport A B C a' a b' b (rev A a a' p) (rev B b b' q) c')
+  :=
+    ind-path
+      ( A)
+      ( a)
+      ( \ a'' p'' →
+          ( b' : B)
+        → ( q' : b = b')
+        → ( c' : C a'' b')
+        → ( product-transport A B C a a'' b b' p'' q' c = c')
+        → ( c = product-transport A B C a'' a b' b (rev A a a'' p'') (rev B b b' q') c'))
+      ( \ b' q' c' r →
+          ind-path
+            ( B)
+            ( b)
+            ( \ b'' q'' →
+                ( c'' : C a b'')
+              → ( product-transport A B C a a b b'' refl q'' c = c'')
+              → ( c = product-transport A B C a a b'' b refl (rev B b b'' q'') c''))
+            ( \ c'' r' → r')
+            ( b')
+            ( q')
+            ( c')
+            ( r))
+      ( a')
+      ( p)
+      ( b')
+      ( q)
+      ( c')
+
+#def product-transport-cancel
+  ( A B : U)
+  ( C : A → B → U)
+  ( a a' : A)
+  ( b b' : B)
+  ( p : a = a')
+  ( q : b = b')
+  ( c c' : C a b)
+  : ( product-transport A B C a a' b b' p q c
+    = product-transport A B C a a' b b' p q c')
+  → (c = c')
+  :=
+    ind-path
+      ( A)
+      ( a)
+      ( \ a'' p'' →
+          ( b' : B)
+        → ( q' : b = b')
+        → ( c c' : C a b)
+        → ( product-transport A B C a a'' b b' p'' q' c
+          = product-transport A B C a a'' b b' p'' q' c')
+        → (c = c'))
+      ( \ b' q' c c' r →
+          ind-path
+            ( B)
+            ( b)
+            ( \ b'' q'' →
+                ( c c' : C a b)
+              → ( product-transport A B C a a b b'' refl q'' c
+                = product-transport A B C a a b b'' refl q'' c')
+              → (c = c'))
+            ( \ c c' r' → r')
+            ( b')
+            ( q')
+            ( c)
+            ( c')
+            ( r))
+      ( a')
+      ( p)
+      ( b')
+      ( q)
+      ( c)
+      ( c')
+
+#def product-transport-comp
+  ( W : U)
+  ( el : W → U)
+  ( X X' Y Y' Z Z' : W)
+  ( p : X = X')
+  ( q : Y = Y')
+  ( r : Z = Z')
+  ( f : el X → el Y)
+  ( g : el Y → el Z)
+  : product-transport W W (\ A C → el A → el C) X X' Z Z' p r
+      ( comp (el X) (el Y) (el Z) g f)
+    =
+    comp (el X') (el Y') (el Z')
+      ( product-transport W W (\ B C → el B → el C) Y Y' Z Z' q r g)
+      ( product-transport W W (\ A B → el A → el B) X X' Y Y' p q f)
+  :=
+    ind-path
+      ( W)
+      ( Z)
+      ( \ Z'' r'' →
+          ( Y' : W)
+        → ( q' : Y = Y')
+        → ( X' : W)
+        → ( p' : X = X')
+        → ( f : el X → el Y)
+        → ( g : el Y → el Z)
+        → product-transport W W (\ A C → el A → el C) X X' Z Z'' p' r''
+            ( comp (el X) (el Y) (el Z) g f)
+          =
+          comp (el X') (el Y') (el Z'')
+            ( product-transport W W (\ B C → el B → el C) Y Y' Z Z'' q' r'' g)
+            ( product-transport W W (\ A B → el A → el B) X X' Y Y' p' q' f))
+      ( \ Y' q' X' p' f g →
+          ind-path
+            ( W)
+            ( Y)
+            ( \ Y'' q'' →
+                ( X' : W)
+              → ( p' : X = X')
+              → ( f : el X → el Y)
+              → ( g : el Y → el Z)
+              → product-transport W W (\ A C → el A → el C) X X' Z Z p' refl
+                  ( comp (el X) (el Y) (el Z) g f)
+                =
+                comp (el X') (el Y'') (el Z)
+                  ( product-transport W W (\ B C → el B → el C) Y Y'' Z Z q'' refl g)
+                  ( product-transport W W (\ A B → el A → el B) X X' Y Y'' p' q'' f))
+            ( \ X' p' f g →
+                ind-path
+                  ( W)
+                  ( X)
+                  ( \ X'' p'' →
+                      ( f : el X → el Y)
+                    → ( g : el Y → el Z)
+                    → product-transport W W (\ A C → el A → el C) X X'' Z Z p'' refl
+                        ( comp (el X) (el Y) (el Z) g f)
+                      =
+                      comp (el X'') (el Y) (el Z)
+                        ( product-transport W W (\ B C → el B → el C) Y Y Z Z refl refl g)
+                        ( product-transport W W (\ A B → el A → el B) X X'' Y Y p'' refl f))
+                  ( \ f g → refl)
+                  ( X')
+                  ( p')
+                  ( f)
+                  ( g))
+            ( Y')
+            ( q')
+            ( X')
+            ( p')
+            ( f)
+            ( g))
+      ( Z')
+      ( r)
+      ( Y')
+      ( q)
+      ( X')
+      ( p)
+      ( f)
+      ( g)
 ```
 
 ## Symmetry of products

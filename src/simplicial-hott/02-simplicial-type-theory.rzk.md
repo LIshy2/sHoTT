@@ -648,6 +648,8 @@ For completeness we verify that the intesection `Δ² ∧ {0}×Δ¹` is indeed `
 
 Maps `𝕀 → shape (_ : 𝕀 | TOP)` are monotone: if the shape at `0` is `form 1₂`, then every shape on the line is `form 1₂`.
 
+
+GWB24, axiom 10 weakened
 ```rzk
 #postulate fun-monotonicity-at
   ( f : 𝕀 → shape (_ : 𝕀 | TOP))
