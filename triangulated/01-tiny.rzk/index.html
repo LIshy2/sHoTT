@@ -1211,6 +1211,7 @@
 </span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  := <span class="p">\ </span>_ → a
 </span></code></pre></div>
 <p>We postulate its right adjoint functor with counit, transpose, and untranspose.</p>
+<p>GWB 24, axiom 3
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:rar" id="define:rar" style="visibility: visible; position: relative; color: inherit">rar</a></span> <span class="p">(</span>A <span class="p">:</span> (<span class="nd">♭</span> <span class="kt">U</span>))
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  : ( <span class="nd">♭</span> <span class="kt">U</span>)
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
@@ -1252,7 +1253,7 @@
 </span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>  :=
 </span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>  ( transpose-ar A B
 </span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>  , transpose-ar-is-equiv A B)
-</span></code></pre></div>
+</span></code></pre></div></p>
 <p>These operations induce canonical functorial actions.</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rar-pure" id="define:rar-pure" style="visibility: visible; position: relative; color: inherit">rar-pure</a></span> (A :♭ <span class="kt">U</span>) (a :♭ A)
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  : b-extract <span class="kt">U</span> (rar (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> A))
@@ -1468,9 +1469,10 @@
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  := (<span class="k">let mod</span> <span class="nd">♭</span> e := ar-rar-counit <span class="k">in</span> e) A
 </span></code></pre></div>
 <h2 id="cubes-separate">Cubes separate<a class="headerlink" href="#cubes-separate" title="Permanent link">&para;</a></h2>
+<p>GWB24, axiom 8
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:cubes-separate" id="define:cubes-separate" style="visibility: visible; position: relative; color: inherit">cubes-separate</a></span> (A B :♭ <span class="kt">U</span>) (f :♭ A → B)
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  : iff (is-equiv A B f) ((n :♭ nat) → is-equiv (<span class="nd">♭</span> (I^n n → A)) (<span class="nd">♭</span> (I^n n → B)) (b-map (I^n n → A) (I^n n → B) (<span class="p">\ </span>p t → f (p t))))
-</span></code></pre></div>
+</span></code></pre></div></p>
 <h2 id="root-preserves-equivalences">Root preserves equivalences<a class="headerlink" href="#root-preserves-equivalences" title="Permanent link">&para;</a></h2>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:rar-preserves-is-equiv" id="define:rar-preserves-is-equiv" style="visibility: visible; position: relative; color: inherit">rar-preserves-is-equiv</a></span><span class="p"> </span><span class="k">uses</span><span class="p"> (</span>funext<span class="p">)</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  ( A B :♭ <span class="kt">U</span>)

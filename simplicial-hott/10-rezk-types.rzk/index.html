@@ -2373,6 +2373,112 @@ map from <code class="language-rzk highlight">x = y</code> to <code class="langu
 </span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    , <span class="p">( </span>( x <span class="p">:</span> A)
 </span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>      → <span class="p">( </span>y <span class="p">:</span> A)
 </span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>      → is-equiv (x = y) (Iso A is-segal-A x y) (iso-eq A is-segal-A x y))
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:has-inverse-arrow-II" id="define:has-inverse-arrow-II" style="visibility: visible; position: relative; color: inherit">has-inverse-arrow-II</a></span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>  <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>  <span class="p">( </span>f <span class="p">:</span> hom-II A x y)
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>  : <span class="kt">U</span>
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>  :=
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="kt">Σ</span> <span class="p">( </span>g <span class="p">:</span> hom-II A y x)
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>    , product
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>      ( comp-is-segal-II A is-segal-II-A x y x f g = id-hom-II A x)
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>      ( comp-is-segal-II A is-segal-II-A y x y g f = id-hom-II A y)
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Retraction-arrow-II" id="define:Retraction-arrow-II" style="visibility: visible; position: relative; color: inherit">Retraction-arrow-II</a></span>
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>  <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>  <span class="p">( </span>f <span class="p">:</span> hom-II A x y)
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>  : <span class="kt">U</span>
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>  :=
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>    <span class="kt">Σ</span> <span class="p">( </span>g <span class="p">:</span> hom-II A y x)
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>    , comp-is-segal-II A is-segal-II-A x y x f g = id-hom-II A x
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Section-arrow-II" id="define:Section-arrow-II" style="visibility: visible; position: relative; color: inherit">Section-arrow-II</a></span>
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-34"><a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>  <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-35"><a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-13-36"><a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>  <span class="p">( </span>f <span class="p">:</span> hom-II A x y)
+</span><span id="__span-13-37"><a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>  : <span class="kt">U</span>
+</span><span id="__span-13-38"><a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>  :=
+</span><span id="__span-13-39"><a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>    <span class="kt">Σ</span> <span class="p">( </span>g <span class="p">:</span> hom-II A y x)
+</span><span id="__span-13-40"><a id="__codelineno-13-40" name="__codelineno-13-40" href="#__codelineno-13-40"></a>    , comp-is-segal-II A is-segal-II-A y x y g f = id-hom-II A y
+</span><span id="__span-13-41"><a id="__codelineno-13-41" name="__codelineno-13-41" href="#__codelineno-13-41"></a>
+</span><span id="__span-13-42"><a id="__codelineno-13-42" name="__codelineno-13-42" href="#__codelineno-13-42"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-iso-arrow-II" id="define:is-iso-arrow-II" style="visibility: visible; position: relative; color: inherit">is-iso-arrow-II</a></span>
+</span><span id="__span-13-43"><a id="__codelineno-13-43" name="__codelineno-13-43" href="#__codelineno-13-43"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-44"><a id="__codelineno-13-44" name="__codelineno-13-44" href="#__codelineno-13-44"></a>  <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-45"><a id="__codelineno-13-45" name="__codelineno-13-45" href="#__codelineno-13-45"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-13-46"><a id="__codelineno-13-46" name="__codelineno-13-46" href="#__codelineno-13-46"></a>  <span class="p">( </span>f <span class="p">:</span> hom-II A x y)
+</span><span id="__span-13-47"><a id="__codelineno-13-47" name="__codelineno-13-47" href="#__codelineno-13-47"></a>  : <span class="kt">U</span>
+</span><span id="__span-13-48"><a id="__codelineno-13-48" name="__codelineno-13-48" href="#__codelineno-13-48"></a>  :=
+</span><span id="__span-13-49"><a id="__codelineno-13-49" name="__codelineno-13-49" href="#__codelineno-13-49"></a>    product
+</span><span id="__span-13-50"><a id="__codelineno-13-50" name="__codelineno-13-50" href="#__codelineno-13-50"></a>      ( Retraction-arrow-II A is-segal-II-A x y f)
+</span><span id="__span-13-51"><a id="__codelineno-13-51" name="__codelineno-13-51" href="#__codelineno-13-51"></a>      ( Section-arrow-II A is-segal-II-A x y f)
+</span><span id="__span-13-52"><a id="__codelineno-13-52" name="__codelineno-13-52" href="#__codelineno-13-52"></a>
+</span><span id="__span-13-53"><a id="__codelineno-13-53" name="__codelineno-13-53" href="#__codelineno-13-53"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:Iso-II" id="define:Iso-II" style="visibility: visible; position: relative; color: inherit">Iso-II</a></span>
+</span><span id="__span-13-54"><a id="__codelineno-13-54" name="__codelineno-13-54" href="#__codelineno-13-54"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-55"><a id="__codelineno-13-55" name="__codelineno-13-55" href="#__codelineno-13-55"></a>  <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-56"><a id="__codelineno-13-56" name="__codelineno-13-56" href="#__codelineno-13-56"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-13-57"><a id="__codelineno-13-57" name="__codelineno-13-57" href="#__codelineno-13-57"></a>  : <span class="kt">U</span>
+</span><span id="__span-13-58"><a id="__codelineno-13-58" name="__codelineno-13-58" href="#__codelineno-13-58"></a>  := <span class="kt">Σ</span> <span class="p">( </span>f <span class="p">:</span> hom-II A x y) , is-iso-arrow-II A is-segal-II-A x y f
+</span><span id="__span-13-59"><a id="__codelineno-13-59" name="__codelineno-13-59" href="#__codelineno-13-59"></a>
+</span><span id="__span-13-60"><a id="__codelineno-13-60" name="__codelineno-13-60" href="#__codelineno-13-60"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:comp-id-id-is-segal-II" id="define:comp-id-id-is-segal-II" style="visibility: visible; position: relative; color: inherit">comp-id-id-is-segal-II</a></span>
+</span><span id="__span-13-61"><a id="__codelineno-13-61" name="__codelineno-13-61" href="#__codelineno-13-61"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-62"><a id="__codelineno-13-62" name="__codelineno-13-62" href="#__codelineno-13-62"></a>  <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-63"><a id="__codelineno-13-63" name="__codelineno-13-63" href="#__codelineno-13-63"></a>  <span class="p">( </span>x <span class="p">:</span> A)
+</span><span id="__span-13-64"><a id="__codelineno-13-64" name="__codelineno-13-64" href="#__codelineno-13-64"></a>  : comp-is-segal-II A is-segal-II-A x x x (id-hom-II A x) (id-hom-II A x) = id-hom-II A x
+</span><span id="__span-13-65"><a id="__codelineno-13-65" name="__codelineno-13-65" href="#__codelineno-13-65"></a>  :=
+</span><span id="__span-13-66"><a id="__codelineno-13-66" name="__codelineno-13-66" href="#__codelineno-13-66"></a>    ap <span class="p">( </span>Σ ( h <span class="p">:</span> hom-II A x x) , hom2-II A x x x (id-hom-II A x) (id-hom-II A x) h)
+</span><span id="__span-13-67"><a id="__codelineno-13-67" name="__codelineno-13-67" href="#__codelineno-13-67"></a>       ( hom-II A x x)
+</span><span id="__span-13-68"><a id="__codelineno-13-68" name="__codelineno-13-68" href="#__codelineno-13-68"></a>       ( <span class="s">first</span> (is-segal-II-A x x x (id-hom-II A x) (id-hom-II A x)))
+</span><span id="__span-13-69"><a id="__codelineno-13-69" name="__codelineno-13-69" href="#__codelineno-13-69"></a>       ( id-hom-II A x , <span class="p">\ </span>_ → x)
+</span><span id="__span-13-70"><a id="__codelineno-13-70" name="__codelineno-13-70" href="#__codelineno-13-70"></a>       ( <span class="p">\ </span>w → <span class="s">first</span> w)
+</span><span id="__span-13-71"><a id="__codelineno-13-71" name="__codelineno-13-71" href="#__codelineno-13-71"></a>       <span class="p">( </span>all-elements-equal-is-contr
+</span><span id="__span-13-72"><a id="__codelineno-13-72" name="__codelineno-13-72" href="#__codelineno-13-72"></a>           ( Σ ( h <span class="p">:</span> hom-II A x x) , hom2-II A x x x (id-hom-II A x) (id-hom-II A x) h)
+</span><span id="__span-13-73"><a id="__codelineno-13-73" name="__codelineno-13-73" href="#__codelineno-13-73"></a>           ( is-segal-II-A x x x (id-hom-II A x) (id-hom-II A x))
+</span><span id="__span-13-74"><a id="__codelineno-13-74" name="__codelineno-13-74" href="#__codelineno-13-74"></a>           ( <span class="s">first</span> (is-segal-II-A x x x (id-hom-II A x) (id-hom-II A x)))
+</span><span id="__span-13-75"><a id="__codelineno-13-75" name="__codelineno-13-75" href="#__codelineno-13-75"></a>           ( id-hom-II A x , <span class="p">\ </span>_ → x))
+</span><span id="__span-13-76"><a id="__codelineno-13-76" name="__codelineno-13-76" href="#__codelineno-13-76"></a>
+</span><span id="__span-13-77"><a id="__codelineno-13-77" name="__codelineno-13-77" href="#__codelineno-13-77"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-iso-id-hom-II" id="define:is-iso-id-hom-II" style="visibility: visible; position: relative; color: inherit">is-iso-id-hom-II</a></span>
+</span><span id="__span-13-78"><a id="__codelineno-13-78" name="__codelineno-13-78" href="#__codelineno-13-78"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-79"><a id="__codelineno-13-79" name="__codelineno-13-79" href="#__codelineno-13-79"></a>  <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-80"><a id="__codelineno-13-80" name="__codelineno-13-80" href="#__codelineno-13-80"></a>  <span class="p">( </span>x <span class="p">:</span> A)
+</span><span id="__span-13-81"><a id="__codelineno-13-81" name="__codelineno-13-81" href="#__codelineno-13-81"></a>  : is-iso-arrow-II A is-segal-II-A x x (id-hom-II A x)
+</span><span id="__span-13-82"><a id="__codelineno-13-82" name="__codelineno-13-82" href="#__codelineno-13-82"></a>  :=
+</span><span id="__span-13-83"><a id="__codelineno-13-83" name="__codelineno-13-83" href="#__codelineno-13-83"></a>    ( ( id-hom-II A x
+</span><span id="__span-13-84"><a id="__codelineno-13-84" name="__codelineno-13-84" href="#__codelineno-13-84"></a>      , comp-id-id-is-segal-II A is-segal-II-A x)
+</span><span id="__span-13-85"><a id="__codelineno-13-85" name="__codelineno-13-85" href="#__codelineno-13-85"></a>    , ( id-hom-II A x
+</span><span id="__span-13-86"><a id="__codelineno-13-86" name="__codelineno-13-86" href="#__codelineno-13-86"></a>      , comp-id-id-is-segal-II A is-segal-II-A x))
+</span><span id="__span-13-87"><a id="__codelineno-13-87" name="__codelineno-13-87" href="#__codelineno-13-87"></a>
+</span><span id="__span-13-88"><a id="__codelineno-13-88" name="__codelineno-13-88" href="#__codelineno-13-88"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:hom-eq-II" id="define:hom-eq-II" style="visibility: visible; position: relative; color: inherit">hom-eq-II</a></span>
+</span><span id="__span-13-89"><a id="__codelineno-13-89" name="__codelineno-13-89" href="#__codelineno-13-89"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-90"><a id="__codelineno-13-90" name="__codelineno-13-90" href="#__codelineno-13-90"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-13-91"><a id="__codelineno-13-91" name="__codelineno-13-91" href="#__codelineno-13-91"></a>  <span class="p">( </span>p <span class="p">:</span> x = y)
+</span><span id="__span-13-92"><a id="__codelineno-13-92" name="__codelineno-13-92" href="#__codelineno-13-92"></a>  : hom-II A x y
+</span><span id="__span-13-93"><a id="__codelineno-13-93" name="__codelineno-13-93" href="#__codelineno-13-93"></a>  := ind-path A x (<span class="p">\ </span>y&#39; p&#39; → hom-II A x y&#39;) (id-hom-II A x) y p
+</span><span id="__span-13-94"><a id="__codelineno-13-94" name="__codelineno-13-94" href="#__codelineno-13-94"></a>
+</span><span id="__span-13-95"><a id="__codelineno-13-95" name="__codelineno-13-95" href="#__codelineno-13-95"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:iso-eq-II" id="define:iso-eq-II" style="visibility: visible; position: relative; color: inherit">iso-eq-II</a></span>
+</span><span id="__span-13-96"><a id="__codelineno-13-96" name="__codelineno-13-96" href="#__codelineno-13-96"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-97"><a id="__codelineno-13-97" name="__codelineno-13-97" href="#__codelineno-13-97"></a>  <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-98"><a id="__codelineno-13-98" name="__codelineno-13-98" href="#__codelineno-13-98"></a>  <span class="p">( </span>x y <span class="p">:</span> A)
+</span><span id="__span-13-99"><a id="__codelineno-13-99" name="__codelineno-13-99" href="#__codelineno-13-99"></a>  : ( x = y) → Iso-II A is-segal-II-A x y
+</span><span id="__span-13-100"><a id="__codelineno-13-100" name="__codelineno-13-100" href="#__codelineno-13-100"></a>  :=
+</span><span id="__span-13-101"><a id="__codelineno-13-101" name="__codelineno-13-101" href="#__codelineno-13-101"></a>    <span class="p">\ </span>p →
+</span><span id="__span-13-102"><a id="__codelineno-13-102" name="__codelineno-13-102" href="#__codelineno-13-102"></a>      ind-path A x
+</span><span id="__span-13-103"><a id="__codelineno-13-103" name="__codelineno-13-103" href="#__codelineno-13-103"></a>        ( <span class="p">\ </span>y&#39; p&#39; → Iso-II A is-segal-II-A x y&#39;)
+</span><span id="__span-13-104"><a id="__codelineno-13-104" name="__codelineno-13-104" href="#__codelineno-13-104"></a>        ( id-hom-II A x , is-iso-id-hom-II A is-segal-II-A x)
+</span><span id="__span-13-105"><a id="__codelineno-13-105" name="__codelineno-13-105" href="#__codelineno-13-105"></a>        ( y) (p)
+</span><span id="__span-13-106"><a id="__codelineno-13-106" name="__codelineno-13-106" href="#__codelineno-13-106"></a>
+</span><span id="__span-13-107"><a id="__codelineno-13-107" name="__codelineno-13-107" href="#__codelineno-13-107"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-rezk-II" id="define:is-rezk-II" style="visibility: visible; position: relative; color: inherit">is-rezk-II</a></span>
+</span><span id="__span-13-108"><a id="__codelineno-13-108" name="__codelineno-13-108" href="#__codelineno-13-108"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-13-109"><a id="__codelineno-13-109" name="__codelineno-13-109" href="#__codelineno-13-109"></a>  : <span class="kt">U</span>
+</span><span id="__span-13-110"><a id="__codelineno-13-110" name="__codelineno-13-110" href="#__codelineno-13-110"></a>  :=
+</span><span id="__span-13-111"><a id="__codelineno-13-111" name="__codelineno-13-111" href="#__codelineno-13-111"></a>    <span class="kt">Σ</span> <span class="p">( </span>is-segal-II-A <span class="p">:</span> is-segal-II A)
+</span><span id="__span-13-112"><a id="__codelineno-13-112" name="__codelineno-13-112" href="#__codelineno-13-112"></a>    , <span class="p">( </span>( x <span class="p">:</span> A)
+</span><span id="__span-13-113"><a id="__codelineno-13-113" name="__codelineno-13-113" href="#__codelineno-13-113"></a>      → <span class="p">( </span>y <span class="p">:</span> A)
+</span><span id="__span-13-114"><a id="__codelineno-13-114" name="__codelineno-13-114" href="#__codelineno-13-114"></a>      → is-equiv (x = y) (Iso-II A is-segal-II-A x y) (iso-eq-II A is-segal-II-A x y))
 </span></code></pre></div>
 <p>Rezk types are Segal.</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:is-segal-is-rezk" id="define:is-segal-is-rezk" style="visibility: visible; position: relative; color: inherit">is-segal-is-rezk</a></span>

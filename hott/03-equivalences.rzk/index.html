@@ -2608,6 +2608,7 @@ dependent function types.</p>
 </span><span id="__span-55-81"><a id="__codelineno-55-81" name="__codelineno-55-81" href="#__codelineno-55-81"></a>  := is-equiv-equiv-is-equiv&#39; A&#39; A α B&#39; B β S is-equiv-s&#39; is-equiv-s
 </span></code></pre></div>
 <h2 id="univalence">Univalence<a class="headerlink" href="#univalence" title="Permanent link">&para;</a></h2>
+<p>GWB24, axiom 4
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-56-1"><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:UA" id="define:UA" style="visibility: visible; position: relative; color: inherit">UA</a></span>
 </span><span id="__span-56-2"><a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a>  : <span class="kt">U</span>
 </span><span id="__span-56-3"><a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a>  := <span class="p">(</span>A <span class="p">:</span> <span class="kt">U</span>) → <span class="p">(</span>B <span class="p">:</span> <span class="kt">U</span>) → Equiv (Equiv A B) (A = B)
@@ -2631,7 +2632,7 @@ dependent function types.</p>
 </span><span id="__span-56-21"><a id="__codelineno-56-21" name="__codelineno-56-21" href="#__codelineno-56-21"></a>      ( idtoeqv X Y (<span class="s">first</span> (ua X Y) e)) e
 </span><span id="__span-56-22"><a id="__codelineno-56-22" name="__codelineno-56-22" href="#__codelineno-56-22"></a>      ( <span class="p">\ </span>ee → <span class="s">first</span> ee x)
 </span><span id="__span-56-23"><a id="__codelineno-56-23" name="__codelineno-56-23" href="#__codelineno-56-23"></a>      ( inv-equiv-cancel&#39; (X = Y) (Equiv X Y) (idtoeqv X Y , univalence X Y) e)
-</span></code></pre></div>
+</span></code></pre></div></p>
 
 
 

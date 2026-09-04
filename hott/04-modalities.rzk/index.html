@@ -1385,6 +1385,7 @@
 </span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>       ( \ (x :_b P) → \ <span class="p">(</span>e <span class="p">:</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> x =_{<span class="nd">♭</span> P} w) → <span class="s">refl</span>)
 </span></code></pre></div>
 <h3 id="interval">Interval<a class="headerlink" href="#interval" title="Permanent link">&para;</a></h3>
+<p>GWB 24, axiom 7
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:discrete-interval-elim" id="define:discrete-interval-elim" style="visibility: visible; position: relative; color: inherit">discrete-interval-elim</a></span> (i :♭ 𝕀) <span class="p">(</span>A <span class="p">:</span> 𝕀 → <span class="kt">U</span>) <span class="p">(</span>x <span class="p">:</span> A 0ᵢ) <span class="p">(</span>y <span class="p">:</span> A 1ᵢ)
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  : A i
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  :=
@@ -1426,8 +1427,9 @@
 </span><span id="__span-3-39"><a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>              ( i <span class="sx">≡</span> 0ᵢ) ↦ <span class="s">refl</span>
 </span><span id="__span-3-40"><a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>            , ( i <span class="sx">≡</span> 1ᵢ) ↦ <span class="s">refl</span>))
 </span><span id="__span-3-41"><a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>      ( <span class="p">\ </span>b → match b (false ⇒ <span class="s">refl</span> | true ⇒ <span class="s">refl</span>))
-</span></code></pre></div>
+</span></code></pre></div></p>
 <h3 id="path">Path<a class="headerlink" href="#path" title="Permanent link">&para;</a></h3>
+<p>GWB, axiom 4
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:b-path-commute-fwd" id="define:b-path-commute-fwd" style="visibility: visible; position: relative; color: inherit">b-path-commute-fwd</a></span> (A :♭ <span class="kt">U</span>) (x y :♭ A)
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  : ( <span class="nd">♭</span> ( x = y)) → (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> x) = (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♭</span> y)
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
@@ -1457,7 +1459,7 @@
 </span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>    , b-path-commute-section A x y)
 </span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>  , ( b-path-commute-bwd A x y
 </span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>    , b-path-commute-retraction A x y))
-</span></code></pre></div>
+</span></code></pre></div></p>
 <h3 id="crisp-equivalences">Crisp equivalences<a class="headerlink" href="#crisp-equivalences" title="Permanent link">&para;</a></h3>
 <p>Lifting equivalences through the flat (<code>♭</code>) modality.</p>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:b-equiv" id="define:b-equiv" style="visibility: visible; position: relative; color: inherit">b-equiv</a></span> (A B :♭ <span class="kt">U</span>) (e :♭ Equiv A B)
@@ -2009,72 +2011,73 @@
 </span><span id="__span-11-34"><a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
 </span><span id="__span-11-35"><a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
 </span><span id="__span-11-36"><a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a>
-</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-fun-commute-op-fwd" id="define:op-fun-commute-op-fwd" style="visibility: visible; position: relative; color: inherit">op-fun-commute-op-fwd</a></span>
-</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>  ( B :ᵒᵖ <span class="kt">U</span>)
-</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="nd">ᵒᵖ</span> ((<span class="nd">ᵒᵖ</span> A) → B))
-</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>  <span class="p">( </span>a <span class="p">:</span> A)
-</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>  : <span class="nd">ᵒᵖ</span> B
-</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>  :=
-</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>    <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> f0 := f <span class="k">in</span>
-</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>      <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> (f0 (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> a))
-</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>
-</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-fun-commute-op-bwd" id="define:op-fun-commute-op-bwd" style="visibility: visible; position: relative; color: inherit">op-fun-commute-op-bwd</a></span>
-</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>  ( B :ᵒᵖ <span class="kt">U</span>)
-</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>  <span class="p">( </span>g <span class="p">:</span> A → <span class="nd">ᵒᵖ</span> B)
-</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>  : <span class="nd">ᵒᵖ</span> ((<span class="nd">ᵒᵖ</span> A) → B)
-</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>  :=
-</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>\ (x <span class="p">:</span> <span class="nd">ᵒᵖ</span> A) →
-</span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> a := x <span class="k">in</span>
-</span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>      <span class="k">let</span> <span class="nd">ᵒᵖ</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> b := g a <span class="k">in</span>
-</span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a>        b)
-</span><span id="__span-11-57"><a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a>
-</span><span id="__span-11-58"><a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-fun-commute-op-equiv" id="define:op-fun-commute-op-equiv" style="visibility: visible; position: relative; color: inherit">op-fun-commute-op-equiv</a></span>
-</span><span id="__span-11-59"><a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
-</span><span id="__span-11-60"><a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>  ( B :ᵒᵖ <span class="kt">U</span>)
-</span><span id="__span-11-61"><a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>  : Equiv (<span class="nd">ᵒᵖ</span> ((<span class="nd">ᵒᵖ</span> A) → B)) (A → <span class="nd">ᵒᵖ</span> B)
-</span><span id="__span-11-62"><a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a>  :=
-</span><span id="__span-11-63"><a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a>    equiv-has-inverse
-</span><span id="__span-11-64"><a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>      ( <span class="nd">ᵒᵖ</span> ((<span class="nd">ᵒᵖ</span> A) → B))
-</span><span id="__span-11-65"><a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a>      ( A → <span class="nd">ᵒᵖ</span> B)
-</span><span id="__span-11-66"><a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a>      ( op-fun-commute-op-fwd A B)
-</span><span id="__span-11-67"><a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a>      ( op-fun-commute-op-bwd A B)
-</span><span id="__span-11-68"><a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
+</span><span id="__span-11-37"><a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a><span class="c">-- GWB, Lemma 3.14</span>
+</span><span id="__span-11-38"><a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-fun-commute-op-fwd" id="define:op-fun-commute-op-fwd" style="visibility: visible; position: relative; color: inherit">op-fun-commute-op-fwd</a></span>
+</span><span id="__span-11-39"><a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-11-40"><a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a>  ( B :ᵒᵖ <span class="kt">U</span>)
+</span><span id="__span-11-41"><a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="nd">ᵒᵖ</span> ((<span class="nd">ᵒᵖ</span> A) → B))
+</span><span id="__span-11-42"><a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a>  <span class="p">( </span>a <span class="p">:</span> A)
+</span><span id="__span-11-43"><a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a>  : <span class="nd">ᵒᵖ</span> B
+</span><span id="__span-11-44"><a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a>  :=
+</span><span id="__span-11-45"><a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>    <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> f0 := f <span class="k">in</span>
+</span><span id="__span-11-46"><a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a>      <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> (f0 (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> a))
+</span><span id="__span-11-47"><a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a>
+</span><span id="__span-11-48"><a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-fun-commute-op-bwd" id="define:op-fun-commute-op-bwd" style="visibility: visible; position: relative; color: inherit">op-fun-commute-op-bwd</a></span>
+</span><span id="__span-11-49"><a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a>  ( B :ᵒᵖ <span class="kt">U</span>)
+</span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a>  <span class="p">( </span>g <span class="p">:</span> A → <span class="nd">ᵒᵖ</span> B)
+</span><span id="__span-11-52"><a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a>  : <span class="nd">ᵒᵖ</span> ((<span class="nd">ᵒᵖ</span> A) → B)
+</span><span id="__span-11-53"><a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a>  :=
+</span><span id="__span-11-54"><a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>\ (x <span class="p">:</span> <span class="nd">ᵒᵖ</span> A) →
+</span><span id="__span-11-55"><a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> a := x <span class="k">in</span>
+</span><span id="__span-11-56"><a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a>      <span class="k">let</span> <span class="nd">ᵒᵖ</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> b := g a <span class="k">in</span>
+</span><span id="__span-11-57"><a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a>        b)
+</span><span id="__span-11-58"><a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a>
+</span><span id="__span-11-59"><a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-fun-commute-op-equiv" id="define:op-fun-commute-op-equiv" style="visibility: visible; position: relative; color: inherit">op-fun-commute-op-equiv</a></span>
+</span><span id="__span-11-60"><a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a>  <span class="p">( </span>A <span class="p">:</span> <span class="kt">U</span>)
+</span><span id="__span-11-61"><a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a>  ( B :ᵒᵖ <span class="kt">U</span>)
+</span><span id="__span-11-62"><a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a>  : Equiv (<span class="nd">ᵒᵖ</span> ((<span class="nd">ᵒᵖ</span> A) → B)) (A → <span class="nd">ᵒᵖ</span> B)
+</span><span id="__span-11-63"><a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a>  :=
+</span><span id="__span-11-64"><a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a>    equiv-has-inverse
+</span><span id="__span-11-65"><a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a>      ( <span class="nd">ᵒᵖ</span> ((<span class="nd">ᵒᵖ</span> A) → B))
+</span><span id="__span-11-66"><a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a>      ( A → <span class="nd">ᵒᵖ</span> B)
+</span><span id="__span-11-67"><a id="__codelineno-11-67" name="__codelineno-11-67" href="#__codelineno-11-67"></a>      ( op-fun-commute-op-fwd A B)
+</span><span id="__span-11-68"><a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a>      ( op-fun-commute-op-bwd A B)
 </span><span id="__span-11-69"><a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
-</span><span id="__span-11-70"><a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a>
-</span><span id="__span-11-71"><a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-commute-fwd" id="define:op-ext-commute-fwd" style="visibility: visible; position: relative; color: inherit">op-ext-commute-fwd</a></span>
-</span><span id="__span-11-72"><a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a>  ( C :ᵒᵖ <span class="p">(</span>(i <span class="p">:</span> 𝕀) → <span class="kt">U</span>))
-</span><span id="__span-11-73"><a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>(i <span class="p">:</span> 𝕀) → C i))
-</span><span id="__span-11-74"><a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a>  : <span class="p">(</span>i <span class="p">:</span> 𝕀) → (<span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span> <span class="nd">ᵒᵖ</span> (C j))
-</span><span id="__span-11-75"><a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a>  :=
-</span><span id="__span-11-76"><a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a>    <span class="p">\ </span>i →
-</span><span id="__span-11-77"><a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> f0 := f <span class="k">in</span>
-</span><span id="__span-11-78"><a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span>
-</span><span id="__span-11-79"><a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a>        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> (f0 j)
-</span><span id="__span-11-80"><a id="__codelineno-11-80" name="__codelineno-11-80" href="#__codelineno-11-80"></a>
-</span><span id="__span-11-81"><a id="__codelineno-11-81" name="__codelineno-11-81" href="#__codelineno-11-81"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-commute-bwd" id="define:op-ext-commute-bwd" style="visibility: visible; position: relative; color: inherit">op-ext-commute-bwd</a></span>
-</span><span id="__span-11-82"><a id="__codelineno-11-82" name="__codelineno-11-82" href="#__codelineno-11-82"></a>  ( C :ᵒᵖ <span class="p">(</span>(i <span class="p">:</span> 𝕀) → <span class="kt">U</span>))
-</span><span id="__span-11-83"><a id="__codelineno-11-83" name="__codelineno-11-83" href="#__codelineno-11-83"></a>  <span class="p">( </span>k <span class="p">:</span> <span class="p">(</span>i <span class="p">:</span> 𝕀) → (<span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span> <span class="nd">ᵒᵖ</span> (C j)))
-</span><span id="__span-11-84"><a id="__codelineno-11-84" name="__codelineno-11-84" href="#__codelineno-11-84"></a>  : <span class="nd">ᵒᵖ</span> <span class="p">(</span>(i <span class="p">:</span> 𝕀) → C i)
-</span><span id="__span-11-85"><a id="__codelineno-11-85" name="__codelineno-11-85" href="#__codelineno-11-85"></a>  :=
-</span><span id="__span-11-86"><a id="__codelineno-11-86" name="__codelineno-11-86" href="#__codelineno-11-86"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>\ (i <span class="p">:</span> 𝕀) →
-</span><span id="__span-11-87"><a id="__codelineno-11-87" name="__codelineno-11-87" href="#__codelineno-11-87"></a>      <span class="k">let</span> <span class="nd">ᵒᵖ</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> b := k (<span class="s">unflipᵒᵖ</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> i)) <span class="k">in</span>
-</span><span id="__span-11-88"><a id="__codelineno-11-88" name="__codelineno-11-88" href="#__codelineno-11-88"></a>        b)
-</span><span id="__span-11-89"><a id="__codelineno-11-89" name="__codelineno-11-89" href="#__codelineno-11-89"></a>
-</span><span id="__span-11-90"><a id="__codelineno-11-90" name="__codelineno-11-90" href="#__codelineno-11-90"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-commute-equiv" id="define:op-ext-commute-equiv" style="visibility: visible; position: relative; color: inherit">op-ext-commute-equiv</a></span>
-</span><span id="__span-11-91"><a id="__codelineno-11-91" name="__codelineno-11-91" href="#__codelineno-11-91"></a>  ( C :ᵒᵖ <span class="p">(</span>(i <span class="p">:</span> 𝕀) → <span class="kt">U</span>))
-</span><span id="__span-11-92"><a id="__codelineno-11-92" name="__codelineno-11-92" href="#__codelineno-11-92"></a>  : Equiv
-</span><span id="__span-11-93"><a id="__codelineno-11-93" name="__codelineno-11-93" href="#__codelineno-11-93"></a>      <span class="p">( </span>ᵒᵖ ((i <span class="p">:</span> 𝕀) → C i))
-</span><span id="__span-11-94"><a id="__codelineno-11-94" name="__codelineno-11-94" href="#__codelineno-11-94"></a>      <span class="p">( </span>(i <span class="p">:</span> 𝕀) → (<span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span> <span class="nd">ᵒᵖ</span> (C j)))
-</span><span id="__span-11-95"><a id="__codelineno-11-95" name="__codelineno-11-95" href="#__codelineno-11-95"></a>  :=
-</span><span id="__span-11-96"><a id="__codelineno-11-96" name="__codelineno-11-96" href="#__codelineno-11-96"></a>    equiv-has-inverse
-</span><span id="__span-11-97"><a id="__codelineno-11-97" name="__codelineno-11-97" href="#__codelineno-11-97"></a>      <span class="p">( </span>ᵒᵖ ((i <span class="p">:</span> 𝕀) → C i))
-</span><span id="__span-11-98"><a id="__codelineno-11-98" name="__codelineno-11-98" href="#__codelineno-11-98"></a>      <span class="p">( </span>(i <span class="p">:</span> 𝕀) → (<span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span> <span class="nd">ᵒᵖ</span> (C j)))
-</span><span id="__span-11-99"><a id="__codelineno-11-99" name="__codelineno-11-99" href="#__codelineno-11-99"></a>      ( op-ext-commute-fwd C)
-</span><span id="__span-11-100"><a id="__codelineno-11-100" name="__codelineno-11-100" href="#__codelineno-11-100"></a>      ( op-ext-commute-bwd C)
-</span><span id="__span-11-101"><a id="__codelineno-11-101" name="__codelineno-11-101" href="#__codelineno-11-101"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
+</span><span id="__span-11-70"><a id="__codelineno-11-70" name="__codelineno-11-70" href="#__codelineno-11-70"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
+</span><span id="__span-11-71"><a id="__codelineno-11-71" name="__codelineno-11-71" href="#__codelineno-11-71"></a>
+</span><span id="__span-11-72"><a id="__codelineno-11-72" name="__codelineno-11-72" href="#__codelineno-11-72"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-commute-fwd" id="define:op-ext-commute-fwd" style="visibility: visible; position: relative; color: inherit">op-ext-commute-fwd</a></span>
+</span><span id="__span-11-73"><a id="__codelineno-11-73" name="__codelineno-11-73" href="#__codelineno-11-73"></a>  ( C :ᵒᵖ <span class="p">(</span>(i <span class="p">:</span> 𝕀) → <span class="kt">U</span>))
+</span><span id="__span-11-74"><a id="__codelineno-11-74" name="__codelineno-11-74" href="#__codelineno-11-74"></a>  <span class="p">( </span>f <span class="p">:</span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>(i <span class="p">:</span> 𝕀) → C i))
+</span><span id="__span-11-75"><a id="__codelineno-11-75" name="__codelineno-11-75" href="#__codelineno-11-75"></a>  : <span class="p">(</span>i <span class="p">:</span> 𝕀) → (<span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span> <span class="nd">ᵒᵖ</span> (C j))
+</span><span id="__span-11-76"><a id="__codelineno-11-76" name="__codelineno-11-76" href="#__codelineno-11-76"></a>  :=
+</span><span id="__span-11-77"><a id="__codelineno-11-77" name="__codelineno-11-77" href="#__codelineno-11-77"></a>    <span class="p">\ </span>i →
+</span><span id="__span-11-78"><a id="__codelineno-11-78" name="__codelineno-11-78" href="#__codelineno-11-78"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> f0 := f <span class="k">in</span>
+</span><span id="__span-11-79"><a id="__codelineno-11-79" name="__codelineno-11-79" href="#__codelineno-11-79"></a>      <span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span>
+</span><span id="__span-11-80"><a id="__codelineno-11-80" name="__codelineno-11-80" href="#__codelineno-11-80"></a>        <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> (f0 j)
+</span><span id="__span-11-81"><a id="__codelineno-11-81" name="__codelineno-11-81" href="#__codelineno-11-81"></a>
+</span><span id="__span-11-82"><a id="__codelineno-11-82" name="__codelineno-11-82" href="#__codelineno-11-82"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-commute-bwd" id="define:op-ext-commute-bwd" style="visibility: visible; position: relative; color: inherit">op-ext-commute-bwd</a></span>
+</span><span id="__span-11-83"><a id="__codelineno-11-83" name="__codelineno-11-83" href="#__codelineno-11-83"></a>  ( C :ᵒᵖ <span class="p">(</span>(i <span class="p">:</span> 𝕀) → <span class="kt">U</span>))
+</span><span id="__span-11-84"><a id="__codelineno-11-84" name="__codelineno-11-84" href="#__codelineno-11-84"></a>  <span class="p">( </span>k <span class="p">:</span> <span class="p">(</span>i <span class="p">:</span> 𝕀) → (<span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span> <span class="nd">ᵒᵖ</span> (C j)))
+</span><span id="__span-11-85"><a id="__codelineno-11-85" name="__codelineno-11-85" href="#__codelineno-11-85"></a>  : <span class="nd">ᵒᵖ</span> <span class="p">(</span>(i <span class="p">:</span> 𝕀) → C i)
+</span><span id="__span-11-86"><a id="__codelineno-11-86" name="__codelineno-11-86" href="#__codelineno-11-86"></a>  :=
+</span><span id="__span-11-87"><a id="__codelineno-11-87" name="__codelineno-11-87" href="#__codelineno-11-87"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> <span class="p">(</span>\ (i <span class="p">:</span> 𝕀) →
+</span><span id="__span-11-88"><a id="__codelineno-11-88" name="__codelineno-11-88" href="#__codelineno-11-88"></a>      <span class="k">let</span> <span class="nd">ᵒᵖ</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> b := k (<span class="s">unflipᵒᵖ</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> i)) <span class="k">in</span>
+</span><span id="__span-11-89"><a id="__codelineno-11-89" name="__codelineno-11-89" href="#__codelineno-11-89"></a>        b)
+</span><span id="__span-11-90"><a id="__codelineno-11-90" name="__codelineno-11-90" href="#__codelineno-11-90"></a>
+</span><span id="__span-11-91"><a id="__codelineno-11-91" name="__codelineno-11-91" href="#__codelineno-11-91"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-commute-equiv" id="define:op-ext-commute-equiv" style="visibility: visible; position: relative; color: inherit">op-ext-commute-equiv</a></span>
+</span><span id="__span-11-92"><a id="__codelineno-11-92" name="__codelineno-11-92" href="#__codelineno-11-92"></a>  ( C :ᵒᵖ <span class="p">(</span>(i <span class="p">:</span> 𝕀) → <span class="kt">U</span>))
+</span><span id="__span-11-93"><a id="__codelineno-11-93" name="__codelineno-11-93" href="#__codelineno-11-93"></a>  : Equiv
+</span><span id="__span-11-94"><a id="__codelineno-11-94" name="__codelineno-11-94" href="#__codelineno-11-94"></a>      <span class="p">( </span>ᵒᵖ ((i <span class="p">:</span> 𝕀) → C i))
+</span><span id="__span-11-95"><a id="__codelineno-11-95" name="__codelineno-11-95" href="#__codelineno-11-95"></a>      <span class="p">( </span>(i <span class="p">:</span> 𝕀) → (<span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span> <span class="nd">ᵒᵖ</span> (C j)))
+</span><span id="__span-11-96"><a id="__codelineno-11-96" name="__codelineno-11-96" href="#__codelineno-11-96"></a>  :=
+</span><span id="__span-11-97"><a id="__codelineno-11-97" name="__codelineno-11-97" href="#__codelineno-11-97"></a>    equiv-has-inverse
+</span><span id="__span-11-98"><a id="__codelineno-11-98" name="__codelineno-11-98" href="#__codelineno-11-98"></a>      <span class="p">( </span>ᵒᵖ ((i <span class="p">:</span> 𝕀) → C i))
+</span><span id="__span-11-99"><a id="__codelineno-11-99" name="__codelineno-11-99" href="#__codelineno-11-99"></a>      <span class="p">( </span>(i <span class="p">:</span> 𝕀) → (<span class="k">let mod</span> <span class="nd">ᵒᵖ</span> j := <span class="s">flipᵒᵖ</span> i <span class="k">in</span> <span class="nd">ᵒᵖ</span> (C j)))
+</span><span id="__span-11-100"><a id="__codelineno-11-100" name="__codelineno-11-100" href="#__codelineno-11-100"></a>      ( op-ext-commute-fwd C)
+</span><span id="__span-11-101"><a id="__codelineno-11-101" name="__codelineno-11-101" href="#__codelineno-11-101"></a>      ( op-ext-commute-bwd C)
 </span><span id="__span-11-102"><a id="__codelineno-11-102" name="__codelineno-11-102" href="#__codelineno-11-102"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
+</span><span id="__span-11-103"><a id="__codelineno-11-103" name="__codelineno-11-103" href="#__codelineno-11-103"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
 </span></code></pre></div>
 <h2 id="sharp">Sharp<a class="headerlink" href="#sharp" title="Permanent link">&para;</a></h2>
 <h3 id="basics_2">Basics<a class="headerlink" href="#basics_2" title="Permanent link">&para;</a></h3>
@@ -2095,6 +2098,7 @@
 </span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>  <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♯</span> (x_2)
 </span></code></pre></div>
 <h3 id="path_2">Path<a class="headerlink" href="#path_2" title="Permanent link">&para;</a></h3>
+<p>GWB24, axiom 5
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:sharp-path-commute-fwd" id="define:sharp-path-commute-fwd" style="visibility: visible; position: relative; color: inherit">sharp-path-commute-fwd</a></span> (A :♯ <span class="kt">U</span>) (x y :♯ A)
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>  : ( <span class="nd">♯</span> ( x = y)) → (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♯</span> x) = (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">♯</span> y)
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
@@ -2119,7 +2123,7 @@
 </span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>    , sharp-path-commute-section A x y)
 </span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>  , ( sharp-path-commute-bwd A x y
 </span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>    , sharp-path-commute-retraction A x y))
-</span></code></pre></div>
+</span></code></pre></div></p>
 <h3 id="sigma_2">Sigma<a class="headerlink" href="#sigma_2" title="Permanent link">&para;</a></h3>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:sharp-sigma-commute-fwd" id="define:sharp-sigma-commute-fwd" style="visibility: visible; position: relative; color: inherit">sharp-sigma-commute-fwd</a></span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>  ( A :♯ <span class="kt">U</span>)

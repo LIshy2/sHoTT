@@ -2074,6 +2074,7 @@ isomorphism (which we already dealt with) that <code>ζ ⊂ χ</code> are actual
 </span></code></pre></div>
 <h2 id="monotonicity-of-maps-out-of-i">Monotonicity of maps out of 𝕀<a class="headerlink" href="#monotonicity-of-maps-out-of-i" title="Permanent link">&para;</a></h2>
 <p>Maps <code>𝕀 → shape (_ : 𝕀 | TOP)</code> are monotone: if the shape at <code>0</code> is <code>form 1₂</code>, then every shape on the line is <code>form 1₂</code>.</p>
+<p>GWB24, axiom 10 weakened
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="kr">#postulate</span><span class="p"> </span><span class="nf"><a href="#define:fun-monotonicity-at" id="define:fun-monotonicity-at" style="visibility: visible; position: relative; color: inherit">fun-monotonicity-at</a></span>
 </span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>  <span class="p">( </span>f <span class="p">:</span> 𝕀 → shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
 </span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>  <span class="p">( </span>e <span class="p">:</span> (f <span class="m">0₂</span>) = (form <span class="m">1₂</span>))
@@ -2085,7 +2086,7 @@ isomorphism (which we already dealt with) that <code>ζ ⊂ χ</code> are actual
 </span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>  <span class="p">( </span>e <span class="p">:</span> (f <span class="m">0₂</span>) = (form <span class="m">1₂</span>))
 </span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>  : (f <span class="m">1₂</span>) = form (<span class="m">1₂</span>)
 </span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>  := fun-monotonicity-at f e <span class="m">1₂</span>
-</span></code></pre></div>
+</span></code></pre></div></p>
 <h2 id="sections-along-the-form-line">Sections along the form line<a class="headerlink" href="#sections-along-the-form-line" title="Permanent link">&para;</a></h2>
 <div class="language-rzk highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:sec-shape-at-1-along-form" id="define:sec-shape-at-1-along-form" style="visibility: visible; position: relative; color: inherit">sec-shape-at-1-along-form</a></span>
 </span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  <span class="p">( </span>f <span class="p">:</span> 𝕀 → shape <span class="p">(</span>_ <span class="p">:</span> 𝕀 | <span class="m">TOP</span>))
