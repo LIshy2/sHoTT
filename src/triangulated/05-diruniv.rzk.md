@@ -1945,382 +1945,368 @@ maps.
 	      ( \ (t , s) →
 	          second (first (S-is-segal-II x y z f g)) (t , s))
 
-```
-
-### Isomorphisms in S
-
-```rzk
-
-#def equiv-S-retraction-law-II-to-underlying uses (funext weakfunext extext)
-  ( x y : S)
-  ( f : hom-II S x y)
-  ( g : hom-II S y x)
-  : Equiv
-      ( comp-is-segal-II S S-is-segal-II x y x f g = id-hom-II S x)
-      ( homotopy
-        ( first x)
-        ( first x)
-        ( comp
-          ( first x)
-          ( first y)
-          ( first x)
-          ( hom-II-in-S y x g)
-          ( hom-II-in-S x y f))
-        ( identity (first x)))
-  :=
-    equiv-comp
-      ( comp-is-segal-II S S-is-segal-II x y x f g = id-hom-II S x)
-      ( hom-II-in-S x x (comp-is-segal-II S S-is-segal-II x y x f g)
-        = hom-II-in-S x x (id-hom-II S x))
-      ( homotopy
-        ( first x)
-        ( first x)
-        ( comp
-          ( first x)
-          ( first y)
-          ( first x)
-          ( hom-II-in-S y x g)
-          ( hom-II-in-S x y f))
-        ( identity (first x)))
-      ( equiv-ap-is-equiv
-        ( hom-II S x x)
-        ( first x → first x)
-        ( hom-II-in-S x x)
-        ( is-equiv-hom-II-in-S x x)
-        ( comp-is-segal-II S S-is-segal-II x y x f g)
-        ( id-hom-II S x))
-      ( equiv-comp
-        ( hom-II-in-S x x (comp-is-segal-II S S-is-segal-II x y x f g)
-          = hom-II-in-S x x (id-hom-II S x))
-        ( comp
-          ( first x)
-          ( first y)
-          ( first x)
-          ( hom-II-in-S y x g)
-          ( hom-II-in-S x y f)
-          = hom-II-in-S x x (id-hom-II S x))
-        ( homotopy
-          ( first x)
-          ( first x)
-          ( comp
-            ( first x)
-            ( first y)
-            ( first x)
-            ( hom-II-in-S y x g)
-            ( hom-II-in-S x y f))
-          ( identity (first x)))
-        ( equiv-preconcat
-          ( first x → first x)
-          ( comp
-            ( first x)
-            ( first y)
-            ( first x)
-            ( hom-II-in-S y x g)
-            ( hom-II-in-S x y f))
-          ( hom-II-in-S x x (comp-is-segal-II S S-is-segal-II x y x f g))
-          ( hom-II-in-S x x (id-hom-II S x))
-          ( rev
-            ( first x → first x)
-            ( hom-II-in-S x x (comp-is-segal-II S S-is-segal-II x y x f g))
-            ( comp
-              ( first x)
-              ( first y)
-              ( first x)
-              ( hom-II-in-S y x g)
-              ( hom-II-in-S x y f))
-            ( hom-II-in-S-comp x y x f g)))
-        ( equiv-comp
-          ( comp
-            ( first x)
-            ( first y)
-            ( first x)
-            ( hom-II-in-S y x g)
-            ( hom-II-in-S x y f)
-            = hom-II-in-S x x (id-hom-II S x))
-          ( comp
-            ( first x)
-            ( first y)
-            ( first x)
-            ( hom-II-in-S y x g)
-            ( hom-II-in-S x y f)
-            = identity (first x))
-          ( homotopy
-            ( first x)
-            ( first x)
-            ( comp
-              ( first x)
-              ( first y)
-              ( first x)
-              ( hom-II-in-S y x g)
-              ( hom-II-in-S x y f))
-            ( identity (first x)))
-          ( equiv-postconcat
-            ( first x → first x)
-            ( comp
-              ( first x)
-              ( first y)
-              ( first x)
-              ( hom-II-in-S y x g)
-              ( hom-II-in-S x y f))
-            ( hom-II-in-S x x (id-hom-II S x))
-            ( identity (first x))
-            ( hom-II-in-S-id x))
-          ( equiv-FunExt funext
-            ( first x)
-            ( \ _ → first x)
-            ( comp
-              ( first x)
-              ( first y)
-              ( first x)
-              ( hom-II-in-S y x g)
-              ( hom-II-in-S x y f))
-            ( identity (first x)))))
-
-#def equiv-S-section-law-II-to-underlying uses (funext weakfunext extext)
-  ( x y : S)
-  ( f : hom-II S x y)
-  ( g : hom-II S y x)
-  : Equiv
-      ( comp-is-segal-II S S-is-segal-II y x y g f = id-hom-II S y)
-      ( homotopy
-        ( first y)
-        ( first y)
-        ( comp
-          ( first y)
-          ( first x)
-          ( first y)
-          ( hom-II-in-S x y f)
-          ( hom-II-in-S y x g))
-        ( identity (first y)))
-  :=
-    equiv-comp
-      ( comp-is-segal-II S S-is-segal-II y x y g f = id-hom-II S y)
-      ( hom-II-in-S y y (comp-is-segal-II S S-is-segal-II y x y g f)
-        = hom-II-in-S y y (id-hom-II S y))
-      ( homotopy
-        ( first y)
-        ( first y)
-        ( comp
-          ( first y)
-          ( first x)
-          ( first y)
-          ( hom-II-in-S x y f)
-          ( hom-II-in-S y x g))
-        ( identity (first y)))
-      ( equiv-ap-is-equiv
-        ( hom-II S y y)
-        ( first y → first y)
-        ( hom-II-in-S y y)
-        ( is-equiv-hom-II-in-S y y)
-        ( comp-is-segal-II S S-is-segal-II y x y g f)
-        ( id-hom-II S y))
-      ( equiv-comp
-        ( hom-II-in-S y y (comp-is-segal-II S S-is-segal-II y x y g f)
-          = hom-II-in-S y y (id-hom-II S y))
-        ( comp
-          ( first y)
-          ( first x)
-          ( first y)
-          ( hom-II-in-S x y f)
-          ( hom-II-in-S y x g)
-          = hom-II-in-S y y (id-hom-II S y))
-        ( homotopy
-          ( first y)
-          ( first y)
-          ( comp
-            ( first y)
-            ( first x)
-            ( first y)
-            ( hom-II-in-S x y f)
-            ( hom-II-in-S y x g))
-          ( identity (first y)))
-        ( equiv-preconcat
-          ( first y → first y)
-          ( comp
-            ( first y)
-            ( first x)
-            ( first y)
-            ( hom-II-in-S x y f)
-            ( hom-II-in-S y x g))
-          ( hom-II-in-S y y (comp-is-segal-II S S-is-segal-II y x y g f))
-          ( hom-II-in-S y y (id-hom-II S y))
-          ( rev
-            ( first y → first y)
-            ( hom-II-in-S y y (comp-is-segal-II S S-is-segal-II y x y g f))
-            ( comp
-              ( first y)
-              ( first x)
-              ( first y)
-              ( hom-II-in-S x y f)
-              ( hom-II-in-S y x g))
-            ( hom-II-in-S-comp y x y g f)))
-        ( equiv-comp
-          ( comp
-            ( first y)
-            ( first x)
-            ( first y)
-            ( hom-II-in-S x y f)
-            ( hom-II-in-S y x g)
-            = hom-II-in-S y y (id-hom-II S y))
-          ( comp
-            ( first y)
-            ( first x)
-            ( first y)
-            ( hom-II-in-S x y f)
-            ( hom-II-in-S y x g)
-            = identity (first y))
-          ( homotopy
-            ( first y)
-            ( first y)
-            ( comp
-              ( first y)
-              ( first x)
-              ( first y)
-              ( hom-II-in-S x y f)
-              ( hom-II-in-S y x g))
-            ( identity (first y)))
-          ( equiv-postconcat
-            ( first y → first y)
-            ( comp
-              ( first y)
-              ( first x)
-              ( first y)
-              ( hom-II-in-S x y f)
-              ( hom-II-in-S y x g))
-            ( hom-II-in-S y y (id-hom-II S y))
-            ( identity (first y))
-            ( hom-II-in-S-id y))
-          ( equiv-FunExt funext
-            ( first y)
-            ( \ _ → first y)
-            ( comp
-              ( first y)
-              ( first x)
-              ( first y)
-              ( hom-II-in-S x y f)
-              ( hom-II-in-S y x g))
-            ( identity (first y)))))
-
-#def equiv-S-retraction-arrow-II-to-underlying uses (funext weakfunext extext)
-  ( x y : S)
-  ( f : hom-II S x y)
-  : Equiv
-      ( Retraction-arrow-II S S-is-segal-II x y f)
-      ( has-retraction (first x) (first y) (hom-II-in-S x y f))
-  :=
-    equiv-comp
-      ( Retraction-arrow-II S S-is-segal-II x y f)
-      ( Σ ( g : hom-II S y x)
-        , homotopy
-          ( first x)
-          ( first x)
-          ( comp
-            ( first x)
-            ( first y)
-            ( first x)
-            ( hom-II-in-S y x g)
-            ( hom-II-in-S x y f))
-          ( identity (first x)))
-      ( has-retraction (first x) (first y) (hom-II-in-S x y f))
-      ( total-equiv-family-of-equiv
-        ( hom-II S y x)
-        ( \ g → comp-is-segal-II S S-is-segal-II x y x f g = id-hom-II S x)
-        ( \ g →
-          homotopy
-            ( first x)
-            ( first x)
-            ( comp
-              ( first x)
-              ( first y)
-              ( first x)
-              ( hom-II-in-S y x g)
-              ( hom-II-in-S x y f))
-            ( identity (first x)))
-        ( \ g → equiv-S-retraction-law-II-to-underlying x y f g))
-      ( equiv-total-pullback-is-equiv
-        ( hom-II S y x)
-        ( first y → first x)
-        ( hom-II-in-S y x)
-        ( is-equiv-hom-II-in-S y x)
-        ( \ g →
-          homotopy
-            ( first x)
-            ( first x)
-            ( comp
-              ( first x)
-              ( first y)
-              ( first x)
-              ( g)
-              ( hom-II-in-S x y f))
-            ( identity (first x))))
-
-#def equiv-S-section-arrow-II-to-underlying uses (funext weakfunext extext)
-  ( x y : S)
-  ( f : hom-II S x y)
-  : Equiv
-      ( Section-arrow-II S S-is-segal-II x y f)
-      ( has-section (first x) (first y) (hom-II-in-S x y f))
-  :=
-    equiv-comp
-      ( Section-arrow-II S S-is-segal-II x y f)
-      ( Σ ( g : hom-II S y x)
-        , homotopy
-          ( first y)
-          ( first y)
-          ( comp
-            ( first y)
-            ( first x)
-            ( first y)
-            ( hom-II-in-S x y f)
-            ( hom-II-in-S y x g))
-          ( identity (first y)))
-      ( has-section (first x) (first y) (hom-II-in-S x y f))
-      ( total-equiv-family-of-equiv
-        ( hom-II S y x)
-        ( \ g → comp-is-segal-II S S-is-segal-II y x y g f = id-hom-II S y)
-        ( \ g →
-          homotopy
-            ( first y)
-            ( first y)
-            ( comp
-              ( first y)
-              ( first x)
-              ( first y)
-              ( hom-II-in-S x y f)
-              ( hom-II-in-S y x g))
-            ( identity (first y)))
-        ( \ g → equiv-S-section-law-II-to-underlying x y f g))
-      ( equiv-total-pullback-is-equiv
-        ( hom-II S y x)
-        ( first y → first x)
-        ( hom-II-in-S y x)
-        ( is-equiv-hom-II-in-S y x)
-        ( \ g →
-          homotopy
-            ( first y)
-            ( first y)
-            ( comp
-              ( first y)
-              ( first x)
-              ( first y)
-              ( hom-II-in-S x y f)
-              ( g))
-            ( identity (first y))))
-
-#def equiv-S-is-iso-arrow-II-to-underlying uses (funext weakfunext extext)
+#def S-is-iso-arrow-is-equiv uses (funext weakfunext extext)
   ( x y : S)
   ( f : hom-II S x y)
   : Equiv
       ( is-iso-arrow-II S S-is-segal-II x y f)
       ( is-equiv (first x) (first y) (hom-II-in-S x y f))
-	:=
-	  equiv-product-equivs
-	    ( Retraction-arrow-II S S-is-segal-II x y f)
-	    ( has-retraction (first x) (first y) (hom-II-in-S x y f))
-	    ( equiv-S-retraction-arrow-II-to-underlying x y f)
-	    ( Section-arrow-II S S-is-segal-II x y f)
-	    ( has-section (first x) (first y) (hom-II-in-S x y f))
-	    ( equiv-S-section-arrow-II-to-underlying x y f)
+  :=
+    let retraction-law-equiv
+      : ( g : hom-II S y x) →
+        Equiv
+          ( comp-is-segal-II S S-is-segal-II x y x f g = id-hom-II S x)
+          ( homotopy
+            ( first x)
+            ( first x)
+            ( comp
+              ( first x)
+              ( first y)
+              ( first x)
+              ( hom-II-in-S y x g)
+              ( hom-II-in-S x y f))
+            ( identity (first x)))
+      := \ g →
+        equiv-comp
+          ( comp-is-segal-II S S-is-segal-II x y x f g = id-hom-II S x)
+          ( hom-II-in-S x x (comp-is-segal-II S S-is-segal-II x y x f g)
+            = hom-II-in-S x x (id-hom-II S x))
+          ( homotopy
+            ( first x)
+            ( first x)
+            ( comp
+              ( first x)
+              ( first y)
+              ( first x)
+              ( hom-II-in-S y x g)
+              ( hom-II-in-S x y f))
+            ( identity (first x)))
+          ( equiv-ap-is-equiv
+            ( hom-II S x x)
+            ( first x → first x)
+            ( hom-II-in-S x x)
+            ( is-equiv-hom-II-in-S x x)
+            ( comp-is-segal-II S S-is-segal-II x y x f g)
+            ( id-hom-II S x))
+          ( equiv-comp
+            ( hom-II-in-S x x (comp-is-segal-II S S-is-segal-II x y x f g)
+              = hom-II-in-S x x (id-hom-II S x))
+            ( comp
+              ( first x)
+              ( first y)
+              ( first x)
+              ( hom-II-in-S y x g)
+              ( hom-II-in-S x y f)
+              = hom-II-in-S x x (id-hom-II S x))
+            ( homotopy
+              ( first x)
+              ( first x)
+              ( comp
+                ( first x)
+                ( first y)
+                ( first x)
+                ( hom-II-in-S y x g)
+                ( hom-II-in-S x y f))
+              ( identity (first x)))
+            ( equiv-preconcat
+              ( first x → first x)
+              ( comp
+                ( first x)
+                ( first y)
+                ( first x)
+                ( hom-II-in-S y x g)
+                ( hom-II-in-S x y f))
+              ( hom-II-in-S x x (comp-is-segal-II S S-is-segal-II x y x f g))
+              ( hom-II-in-S x x (id-hom-II S x))
+              ( rev
+                ( first x → first x)
+                ( hom-II-in-S x x (comp-is-segal-II S S-is-segal-II x y x f g))
+                ( comp
+                  ( first x)
+                  ( first y)
+                  ( first x)
+                  ( hom-II-in-S y x g)
+                  ( hom-II-in-S x y f))
+                ( hom-II-in-S-comp x y x f g)))
+            ( equiv-comp
+              ( comp
+                ( first x)
+                ( first y)
+                ( first x)
+                ( hom-II-in-S y x g)
+                ( hom-II-in-S x y f)
+                = hom-II-in-S x x (id-hom-II S x))
+              ( comp
+                ( first x)
+                ( first y)
+                ( first x)
+                ( hom-II-in-S y x g)
+                ( hom-II-in-S x y f)
+                = identity (first x))
+              ( homotopy
+                ( first x)
+                ( first x)
+                ( comp
+                  ( first x)
+                  ( first y)
+                  ( first x)
+                  ( hom-II-in-S y x g)
+                  ( hom-II-in-S x y f))
+                ( identity (first x)))
+              ( equiv-postconcat
+                ( first x → first x)
+                ( comp
+                  ( first x)
+                  ( first y)
+                  ( first x)
+                  ( hom-II-in-S y x g)
+                  ( hom-II-in-S x y f))
+                ( hom-II-in-S x x (id-hom-II S x))
+                ( identity (first x))
+                ( hom-II-in-S-id x))
+              ( equiv-FunExt funext
+                ( first x)
+                ( \ _ → first x)
+                ( comp
+                  ( first x)
+                  ( first y)
+                  ( first x)
+                  ( hom-II-in-S y x g)
+                  ( hom-II-in-S x y f))
+                ( identity (first x)))))
+    in
+    let section-law-equiv
+      : ( g : hom-II S y x) →
+        Equiv
+          ( comp-is-segal-II S S-is-segal-II y x y g f = id-hom-II S y)
+          ( homotopy
+            ( first y)
+            ( first y)
+            ( comp
+              ( first y)
+              ( first x)
+              ( first y)
+              ( hom-II-in-S x y f)
+              ( hom-II-in-S y x g))
+            ( identity (first y)))
+      := \ g →
+        equiv-comp
+          ( comp-is-segal-II S S-is-segal-II y x y g f = id-hom-II S y)
+          ( hom-II-in-S y y (comp-is-segal-II S S-is-segal-II y x y g f)
+            = hom-II-in-S y y (id-hom-II S y))
+          ( homotopy
+            ( first y)
+            ( first y)
+            ( comp
+              ( first y)
+              ( first x)
+              ( first y)
+              ( hom-II-in-S x y f)
+              ( hom-II-in-S y x g))
+            ( identity (first y)))
+          ( equiv-ap-is-equiv
+            ( hom-II S y y)
+            ( first y → first y)
+            ( hom-II-in-S y y)
+            ( is-equiv-hom-II-in-S y y)
+            ( comp-is-segal-II S S-is-segal-II y x y g f)
+            ( id-hom-II S y))
+          ( equiv-comp
+            ( hom-II-in-S y y (comp-is-segal-II S S-is-segal-II y x y g f)
+              = hom-II-in-S y y (id-hom-II S y))
+            ( comp
+              ( first y)
+              ( first x)
+              ( first y)
+              ( hom-II-in-S x y f)
+              ( hom-II-in-S y x g)
+              = hom-II-in-S y y (id-hom-II S y))
+            ( homotopy
+              ( first y)
+              ( first y)
+              ( comp
+                ( first y)
+                ( first x)
+                ( first y)
+                ( hom-II-in-S x y f)
+                ( hom-II-in-S y x g))
+              ( identity (first y)))
+            ( equiv-preconcat
+              ( first y → first y)
+              ( comp
+                ( first y)
+                ( first x)
+                ( first y)
+                ( hom-II-in-S x y f)
+                ( hom-II-in-S y x g))
+              ( hom-II-in-S y y (comp-is-segal-II S S-is-segal-II y x y g f))
+              ( hom-II-in-S y y (id-hom-II S y))
+              ( rev
+                ( first y → first y)
+                ( hom-II-in-S y y (comp-is-segal-II S S-is-segal-II y x y g f))
+                ( comp
+                  ( first y)
+                  ( first x)
+                  ( first y)
+                  ( hom-II-in-S x y f)
+                  ( hom-II-in-S y x g))
+                ( hom-II-in-S-comp y x y g f)))
+            ( equiv-comp
+              ( comp
+                ( first y)
+                ( first x)
+                ( first y)
+                ( hom-II-in-S x y f)
+                ( hom-II-in-S y x g)
+                = hom-II-in-S y y (id-hom-II S y))
+              ( comp
+                ( first y)
+                ( first x)
+                ( first y)
+                ( hom-II-in-S x y f)
+                ( hom-II-in-S y x g)
+                = identity (first y))
+              ( homotopy
+                ( first y)
+                ( first y)
+                ( comp
+                  ( first y)
+                  ( first x)
+                  ( first y)
+                  ( hom-II-in-S x y f)
+                  ( hom-II-in-S y x g))
+                ( identity (first y)))
+              ( equiv-postconcat
+                ( first y → first y)
+                ( comp
+                  ( first y)
+                  ( first x)
+                  ( first y)
+                  ( hom-II-in-S x y f)
+                  ( hom-II-in-S y x g))
+                ( hom-II-in-S y y (id-hom-II S y))
+                ( identity (first y))
+                ( hom-II-in-S-id y))
+              ( equiv-FunExt funext
+                ( first y)
+                ( \ _ → first y)
+                ( comp
+                  ( first y)
+                  ( first x)
+                  ( first y)
+                  ( hom-II-in-S x y f)
+                  ( hom-II-in-S y x g))
+                ( identity (first y)))))
+    in
+    let retraction-arrow-equiv
+      : Equiv
+          ( Retraction-arrow-II S S-is-segal-II x y f)
+          ( has-retraction (first x) (first y) (hom-II-in-S x y f))
+      :=
+        equiv-comp
+          ( Retraction-arrow-II S S-is-segal-II x y f)
+          ( Σ ( g : hom-II S y x)
+            , homotopy
+              ( first x)
+              ( first x)
+              ( comp
+                ( first x)
+                ( first y)
+                ( first x)
+                ( hom-II-in-S y x g)
+                ( hom-II-in-S x y f))
+              ( identity (first x)))
+          ( has-retraction (first x) (first y) (hom-II-in-S x y f))
+          ( total-equiv-family-of-equiv
+            ( hom-II S y x)
+            ( \ g → comp-is-segal-II S S-is-segal-II x y x f g = id-hom-II S x)
+            ( \ g →
+              homotopy
+                ( first x)
+                ( first x)
+                ( comp
+                  ( first x)
+                  ( first y)
+                  ( first x)
+                  ( hom-II-in-S y x g)
+                  ( hom-II-in-S x y f))
+                ( identity (first x)))
+            ( \ g → retraction-law-equiv g))
+          ( equiv-total-pullback-is-equiv
+            ( hom-II S y x)
+            ( first y → first x)
+            ( hom-II-in-S y x)
+            ( is-equiv-hom-II-in-S y x)
+            ( \ g →
+              homotopy
+                ( first x)
+                ( first x)
+                ( comp
+                  ( first x)
+                  ( first y)
+                  ( first x)
+                  ( g)
+                  ( hom-II-in-S x y f))
+                ( identity (first x))))
+    in
+    let section-arrow-equiv
+      : Equiv
+          ( Section-arrow-II S S-is-segal-II x y f)
+          ( has-section (first x) (first y) (hom-II-in-S x y f))
+      :=
+        equiv-comp
+          ( Section-arrow-II S S-is-segal-II x y f)
+          ( Σ ( g : hom-II S y x)
+            , homotopy
+              ( first y)
+              ( first y)
+              ( comp
+                ( first y)
+                ( first x)
+                ( first y)
+                ( hom-II-in-S x y f)
+                ( hom-II-in-S y x g))
+              ( identity (first y)))
+          ( has-section (first x) (first y) (hom-II-in-S x y f))
+          ( total-equiv-family-of-equiv
+            ( hom-II S y x)
+            ( \ g → comp-is-segal-II S S-is-segal-II y x y g f = id-hom-II S y)
+            ( \ g →
+              homotopy
+                ( first y)
+                ( first y)
+                ( comp
+                  ( first y)
+                  ( first x)
+                  ( first y)
+                  ( hom-II-in-S x y f)
+                  ( hom-II-in-S y x g))
+                ( identity (first y)))
+            ( \ g → section-law-equiv g))
+          ( equiv-total-pullback-is-equiv
+            ( hom-II S y x)
+            ( first y → first x)
+            ( hom-II-in-S y x)
+            ( is-equiv-hom-II-in-S y x)
+            ( \ g →
+              homotopy
+                ( first y)
+                ( first y)
+                ( comp
+                  ( first y)
+                  ( first x)
+                  ( first y)
+                  ( hom-II-in-S x y f)
+                  ( g))
+                ( identity (first y))))
+    in
+    equiv-product-equivs
+      ( Retraction-arrow-II S S-is-segal-II x y f)
+      ( has-retraction (first x) (first y) (hom-II-in-S x y f))
+      ( retraction-arrow-equiv)
+      ( Section-arrow-II S S-is-segal-II x y f)
+      ( has-section (first x) (first y) (hom-II-in-S x y f))
+      ( section-arrow-equiv)
 
 #def S-Iso-is-Equiv uses (funext weakfunext extext)
   ( x y : S)
@@ -2335,59 +2321,13 @@ maps.
         ( hom-II S x y)
         ( \ f → is-iso-arrow-II S S-is-segal-II x y f)
         ( \ f → is-equiv (first x) (first y) (hom-II-in-S x y f))
-        ( \ f → equiv-S-is-iso-arrow-II-to-underlying x y f))
+        ( \ f → S-is-iso-arrow-is-equiv x y f))
       ( equiv-total-pullback-is-equiv
         ( hom-II S x y)
         ( first x → first y)
         ( hom-II-in-S x y)
         ( is-equiv-hom-II-in-S x y)
         ( \ f → is-equiv (first x) (first y) f))
-
-```
-
-### The path-to-iso comparison
-
-```rzk
-
-#def is-prop-is-iso-arrow-II-S uses (funext weakfunext extext)
-  ( x y : S)
-  ( f : hom-II S x y)
-  : is-prop (is-iso-arrow-II S S-is-segal-II x y f)
-  :=
-    is-prop-is-retract-of-is-prop
-      ( is-iso-arrow-II S S-is-segal-II x y f)
-      ( is-equiv (first x) (first y) (hom-II-in-S x y f))
-      ( first (equiv-S-is-iso-arrow-II-to-underlying x y f)
-      , first (second (equiv-S-is-iso-arrow-II-to-underlying x y f)))
-      ( is-prop-is-equiv funext
-        ( first x)
-        ( first y)
-        ( hom-II-in-S x y f))
-
-#def eq-S-Iso-II-eq-first uses (funext weakfunext extext)
-  ( x y : S)
-  ( iso iso' : Iso-II S S-is-segal-II x y)
-  ( p : first iso = first iso')
-  : iso = iso'
-  :=
-    path-of-pairs-pair-of-paths
-      ( hom-II S x y)
-      ( \ f → is-iso-arrow-II S S-is-segal-II x y f)
-      ( first iso)
-      ( first iso')
-      ( p)
-      ( second iso)
-      ( second iso')
-      ( first
-        ( ( is-prop-is-iso-arrow-II-S x y (first iso'))
-          ( transport
-            ( hom-II S x y)
-            ( \ f → is-iso-arrow-II S S-is-segal-II x y f)
-            ( first iso)
-            ( first iso')
-            ( p)
-            ( second iso))
-          ( second iso')))
 
 #def hom-II-in-S-iso-eq-II-is-path-map uses (funext weakfunext extext)
   ( x y : S)
@@ -2422,6 +2362,43 @@ maps.
             ( S-Iso-is-Equiv x y)))
         ( first (path-in-S-is-equiv x y)))
   :=
+    let is-prop-is-iso-arrow
+      : ( f : hom-II S x y) →
+        is-prop (is-iso-arrow-II S S-is-segal-II x y f)
+      := \ f →
+        is-prop-is-retract-of-is-prop
+          ( is-iso-arrow-II S S-is-segal-II x y f)
+          ( is-equiv (first x) (first y) (hom-II-in-S x y f))
+          ( first (S-is-iso-arrow-is-equiv x y f)
+          , first (second (S-is-iso-arrow-is-equiv x y f)))
+          ( is-prop-is-equiv funext
+            ( first x)
+            ( first y)
+            ( hom-II-in-S x y f))
+    in
+    let eq-S-Iso-eq-first
+      : ( iso iso' : Iso-II S S-is-segal-II x y) →
+        ( first iso = first iso') → iso = iso'
+      := \ iso iso' p →
+        path-of-pairs-pair-of-paths
+          ( hom-II S x y)
+          ( \ f → is-iso-arrow-II S S-is-segal-II x y f)
+          ( first iso)
+          ( first iso')
+          ( p)
+          ( second iso)
+          ( second iso')
+          ( first
+            ( ( is-prop-is-iso-arrow (first iso'))
+              ( transport
+                ( hom-II S x y)
+                ( \ f → is-iso-arrow-II S S-is-segal-II x y f)
+                ( first iso)
+                ( first iso')
+                ( p)
+                ( second iso))
+              ( second iso')))
+    in
     \ p →
       let iso : Iso-II S S-is-segal-II x y
         := first
@@ -2430,8 +2407,7 @@ maps.
             ( Equiv (first x) (first y))
             ( S-Iso-is-Equiv x y))
           ( first (path-in-S-is-equiv x y) p) in
-      eq-S-Iso-II-eq-first
-        x y
+      eq-S-Iso-eq-first
         ( iso-eq-II S S-is-segal-II x y p)
         ( iso)
         ( ap-cancel-has-retraction
@@ -2461,12 +2437,6 @@ maps.
                   ( Equiv (first x) (first y))
                   ( S-Iso-is-Equiv x y)
                   ( first (path-in-S-is-equiv x y) p))))))
-
-```
-
-### Rezkness of S
-
-```rzk
 
 #def S-is-rezk-II uses (funext weakfunext extext)
   : is-rezk-II S

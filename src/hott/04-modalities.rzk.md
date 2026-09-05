@@ -138,8 +138,18 @@ GWB, axiom 4
 #postulate b-path-commute-fwd (A :♭ U) (x y :♭ A)
   : ( ♭ ( x = y)) → (mod ♭ x) = (mod ♭ y)
 
-#postulate b-path-commute-bwd (A :♭ U) (x y :♭ A)
+#def b-path-commute-bwd (A :♭ U) (x y :♭ A)
   : ( ( mod ♭ x) = (mod ♭ y)) → (♭ (x = y))
+  := \ p →
+    ind-path
+      ( ♭ A)
+      ( mod ♭ x)
+      ( \ z _ →
+        let mod ♭ y' := z in
+        ♭ (x = y'))
+      ( mod ♭ refl)
+      ( mod ♭ y)
+      ( p)
 
 #postulate b-path-commute-section (A :♭ U) (x y :♭ A)
   ( p : (♭ (x = y)))
@@ -149,10 +159,12 @@ GWB, axiom 4
   ( p : (mod ♭ x) = (mod ♭ y))
   : b-path-commute-fwd A x y (b-path-commute-bwd A x y p) = p
 
-#postulate b-path-commute-fwd-refl
+#def b-path-commute-fwd-refl
   ( A :♭ U)
   ( x :♭ A)
   : b-path-commute-fwd A x x (mod ♭ refl) = refl
+  :=
+    b-path-commute-retraction A x x refl
 
 #def b-path-commute-equiv (A :♭ U) (x y :♭ A)
   : is-equiv
