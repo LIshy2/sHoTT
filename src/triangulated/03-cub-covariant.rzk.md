@@ -8,121 +8,6 @@
 #assume extext : ExtExt
 ```
 
-## Pullback along the cubical base point
-
-```rzk
-#def orthogonality-pullback-fiber uses (funext weakfunext)
-  ( n m : nat)
-  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
-  : U
-  :=
-    Σ ( c : I^n m → product (I^n n) ⌈𝕀⌉)
-    , F0 (c (zero-vec-I^n m))
-
-#def orthogonality-pullback-fwd uses (funext weakfunext)
-  ( n m : nat)
-  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
-  : ( I^n m
-      → Σ ( t : product (I^n n) ⌈𝕀⌉)
-        , F0 t)
-    → orthogonality-pullback-fiber n m F0
-  :=
-    \ f →
-      ( \ t → first (f t)
-      , second (f (zero-vec-I^n m)))
-
-#def orthogonality-pullback uses (funext weakfunext)
-  ( n m : nat)
-  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
-  : Equiv
-      ( I^n m
-        → Σ ( t : product (I^n n) ⌈𝕀⌉)
-          , F0 t)
-      ( orthogonality-pullback-fiber n m F0)
-  :=
-    ( orthogonality-pullback-fwd n m F0
-    , ?orthogonality-pullback)
-
-#def orthogonality-pullback-split uses (funext weakfunext)
-  ( n m : nat)
-  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
-  : U
-  :=
-    Σ ( v : I^n m → I^n n)
-    , Σ ( theta : I^n m → ⌈𝕀⌉)
-    , F0
-        ( v (zero-vec-I^n m)
-        , theta (zero-vec-I^n m))
-
-#def equiv-orthogonality-pullback-split uses (funext weakfunext)
-  ( n m : nat)
-  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
-  : Equiv (orthogonality-pullback-fiber n m F0) (orthogonality-pullback-split n m F0)
-  :=
-    equiv-has-inverse
-      ( orthogonality-pullback-fiber n m F0)
-      ( orthogonality-pullback-split n m F0)
-      ( \ (c , p) →
-          ( \ t → first (c t)
-          , ( \ t → second (c t)
-            , p)))
-      ( \ (v , (theta , p)) →
-          ( \ t → (v t , theta t)
-          , p))
-      ( \ _ → refl)
-      ( \ _ → refl)
-
-#def orthogonality-pullback-flat-commute uses (funext weakfunext)
-  ( n m :♭ nat)
-  ( F0 :♭ product (I^n n) ⌈𝕀⌉ → U)
-  : Equiv
-      ( ♭ ( orthogonality-pullback-split n m F0))
-      ( Σ ( v : ♭ (I^n m → I^n n))
-      , ( let mod ♭ v' := v in
-          Σ ( theta : ♭ (I^n m → ⌈𝕀⌉))
-          , ( let mod ♭ theta' := theta in
-              ♭
-                ( F0
-                    ( v' (zero-vec-I^n m)
-                    , theta' (zero-vec-I^n m))))))
-  :=
-    b-sigma2-commute-equiv
-      ( I^n m → I^n n)
-      ( I^n m → ⌈𝕀⌉)
-      ( \ v theta →
-          F0
-            ( v (zero-vec-I^n m)
-            , theta (zero-vec-I^n m)))
-
-#def equiv-orthogonality-to-flat uses (funext weakfunext)
-  ( n m :♭ nat)
-  ( F0 :♭ product (I^n n) ⌈𝕀⌉ → U)
-  : Equiv
-      ( ♭
-          ( I^n m
-            → Σ ( t : product (I^n n) ⌈𝕀⌉)
-              , F0 t))
-      ( ♭ ( orthogonality-pullback-split n m F0))
-  :=
-    let mod ♭ F-uncurried :=
-      mod ♭ (orthogonality-pullback-fiber n m F0) in
-    let mod ♭ curry-F :=
-      mod ♭ (equiv-orthogonality-pullback-split n m F0) in
-    b-equiv
-      ( I^n m
-        → Σ ( t : product (I^n n) ⌈𝕀⌉)
-          , F0 t)
-      ( orthogonality-pullback-split n m F0)
-      ( equiv-comp
-          ( I^n m
-            → Σ ( t : product (I^n n) ⌈𝕀⌉)
-              , F0 t)
-          ( F-uncurried)
-          ( orthogonality-pullback-split n m F0)
-          ( orthogonality-pullback n m F0)
-          ( curry-F))
-```
-
 ## Ordinary covariance over 𝕀
 
 ```rzk title="RS17 Def 8.2, cubical"
@@ -216,6 +101,267 @@
   ( g : B → A)
   : is-covariant-II B (\ b → C (g b))
   := \ x y f u → cov (g x) (g y) (\ t → g (f t)) u
+```
+
+## Evaluation of covariant sections
+
+A pointed directed contraction extends a value at its initial point to a
+section by covariant transport. Uniqueness of lifts gives the inverse laws.
+
+```rzk
+#def sections-over-map
+  ( Q X : U)
+  ( F : X → U)
+  ( c : Q → X)
+  : U
+  := (q : Q) → F (c q)
+
+#def covariant-section-from-point
+  ( Q : U)
+  ( z : Q)
+  ( H : (q : Q) → hom-II Q z q)
+  ( X : U)
+  ( F : X → U)
+  ( cov : is-covariant-II X F)
+  ( c : Q → X)
+  ( u : F (c z))
+  : sections-over-map Q X F c
+  := \ q → covariant-transport-II X (c z) (c q) (\ t → c (H q t)) F cov u
+
+#def covariant-section-from-point-evaluation
+  ( funext : FunExt)
+  ( Q : U)
+  ( z : Q)
+  ( H : (q : Q) → hom-II Q z q)
+  ( X : U)
+  ( F : X → U)
+  ( cov : is-covariant-II X F)
+  ( c : Q → X)
+  ( s : sections-over-map Q X F c)
+  : covariant-section-from-point Q z H X F cov c (s z) = s
+  := eq-htpy funext Q
+       ( \ q → F (c q))
+       ( covariant-section-from-point Q z H X F cov c (s z)) s
+       ( \ q →
+           covariant-uniqueness-II X (c z) (c q)
+             ( \ t → c (H q t)) F cov (s z)
+             ( s q , \ t → s (H q t)))
+
+#def evaluation-covariant-section-from-point
+  ( Q : U)
+  ( z : Q)
+  ( H : (q : Q) → hom-II Q z q)
+  ( H0 : H z = (\ t → z))
+  ( X : U)
+  ( F : X → U)
+  ( cov : is-covariant-II X F)
+  ( c : Q → X)
+  ( u : F (c z))
+  : covariant-section-from-point Q z H X F cov c u z = u
+  := concat (F (c z))
+       ( covariant-section-from-point Q z H X F cov c u z)
+       ( covariant-transport-II X (c z) (c z) (\ t → c z) F cov u) u
+       ( ap (hom-II Q z z) (F (c z))
+           ( H z) (\ t → z)
+           ( \ h →
+               covariant-transport-II X (c z) (c z)
+                 ( \ t → c (h t)) F cov u)
+           H0)
+       ( id-arr-covariant-transport-II X (c z) F cov u)
+
+#def equiv-evaluation-covariant-sections
+  ( funext : FunExt)
+  ( Q : U)
+  ( z : Q)
+  ( H : (q : Q) → hom-II Q z q)
+  ( H0 : H z = (\ t → z))
+  ( X : U)
+  ( F : X → U)
+  ( cov : is-covariant-II X F)
+  ( c : Q → X)
+  : Equiv (sections-over-map Q X F c) (F (c z))
+  := ((\ s → s z)
+     , ( ( covariant-section-from-point Q z H X F cov c
+         , covariant-section-from-point-evaluation funext Q z H X F cov c)
+       , ( covariant-section-from-point Q z H X F cov c
+         , evaluation-covariant-section-from-point Q z H H0 X F cov c)))
+
+#def orthogonality-pullback-pointed
+  ( funext : FunExt)
+  ( Q : U)
+  ( z : Q)
+  ( H : (q : Q) → hom-II Q z q)
+  ( H0 : H z = (\ _ → z))
+  ( X : U)
+  ( F : X → U)
+  ( cov : is-covariant-II X F)
+  : Equiv (Q → Σ (x : X) , F x) (Σ (c : Q → X) , F (c z))
+  := equiv-comp
+      ( Q → Σ (x : X) , F x)
+      ( Σ ( c : Q → X) , sections-over-map Q X F c)
+      ( Σ ( c : Q → X) , F (c z))
+      ( equiv-choice Q (\ _ → X) (\ _ x → F x))
+      ( total-equiv-family-of-equiv (Q → X)
+        ( sections-over-map Q X F) (\ c → F (c z))
+        ( equiv-evaluation-covariant-sections funext Q z H H0 X F cov))
+
+#def interval-radial
+  ( q : ⌈𝕀⌉)
+  : hom-II ⌈𝕀⌉ (pt-⌈𝕀⌉ 0₂) q
+  := match q (point i ⇒ \ t → pt-⌈𝕀⌉ (inf t i))
+
+#def cube-radial
+  ( m : nat)
+  : ( q : I^n m) → hom-II (I^n m) (zero-vec-I^n m) q
+  := match m
+      ( zero ⇒ \ q → match q (point u ⇒ \ _ → point 1 (\ _ → TOP) u)
+      | suc k ih ⇒ \ q t → (interval-radial (first q) t , ih (second q) t))
+
+#def cube-radial-zero
+  ( m : nat)
+  : cube-radial m (zero-vec-I^n m) = (\ _ → zero-vec-I^n m)
+  := match m
+      ( zero ⇒ refl
+      | suc k ih ⇒
+          ap
+            ( hom-II (I^n k) (zero-vec-I^n k) (zero-vec-I^n k))
+            ( hom-II (I^n (suc k)) (zero-vec-I^n (suc k)) (zero-vec-I^n (suc k)))
+            ( cube-radial k (zero-vec-I^n k))
+            ( \ _ → zero-vec-I^n k)
+            ( \ h t → (pt-⌈𝕀⌉ 0₂ , h t)) ih)
+
+```
+
+## Pullback along the cubical base point
+
+```rzk
+#def orthogonality-pullback-fiber
+  ( n m : nat)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
+  : U
+  :=
+    Σ ( c : I^n m → product (I^n n) ⌈𝕀⌉)
+    , F0 (c (zero-vec-I^n m))
+
+#def orthogonality-pullback-fwd
+  ( n m : nat)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
+  : ( I^n m
+      → Σ ( t : product (I^n n) ⌈𝕀⌉)
+        , F0 t)
+    → orthogonality-pullback-fiber n m F0
+  :=
+    \ f →
+      ( \ t → first (f t)
+      , second (f (zero-vec-I^n m)))
+
+#def orthogonality-pullback uses (funext)
+  ( n m : nat)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
+  ( cov-F0 : is-covariant-II (product (I^n n) ⌈𝕀⌉) F0)
+  : Equiv
+      ( I^n m
+        → Σ ( t : product (I^n n) ⌈𝕀⌉)
+          , F0 t)
+      ( orthogonality-pullback-fiber n m F0)
+  :=
+    ( orthogonality-pullback-fwd n m F0
+    , second (orthogonality-pullback-pointed funext
+        ( I^n m) (zero-vec-I^n m) (cube-radial m) (cube-radial-zero m)
+        ( product (I^n n) ⌈𝕀⌉) F0 cov-F0))
+
+-- Evaluation commutes definitionally with a map of families.
+#def orthogonality-pullback-naturality
+  ( n m : nat)
+  ( F G : product (I^n n) ⌈𝕀⌉ → U)
+  ( a : (x : product (I^n n) ⌈𝕀⌉) → F x → G x)
+  ( f : I^n m → Σ (x : product (I^n n) ⌈𝕀⌉) , F x)
+  : orthogonality-pullback-fwd n m G
+      ( \ q → (first (f q) , a (first (f q)) (second (f q))))
+    = ( first (orthogonality-pullback-fwd n m F f)
+      , a (first (f (zero-vec-I^n m)))
+          ( second (orthogonality-pullback-fwd n m F f)))
+  := refl
+
+#def orthogonality-pullback-split
+  ( n m : nat)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
+  : U
+  :=
+    Σ ( v : I^n m → I^n n)
+    , Σ ( theta : I^n m → ⌈𝕀⌉)
+    , F0
+        ( v (zero-vec-I^n m)
+        , theta (zero-vec-I^n m))
+
+#def equiv-orthogonality-pullback-split
+  ( n m : nat)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
+  : Equiv (orthogonality-pullback-fiber n m F0) (orthogonality-pullback-split n m F0)
+  :=
+    equiv-has-inverse
+      ( orthogonality-pullback-fiber n m F0)
+      ( orthogonality-pullback-split n m F0)
+      ( \ (c , p) →
+          ( \ t → first (c t)
+          , ( \ t → second (c t)
+            , p)))
+      ( \ (v , (theta , p)) →
+          ( \ t → (v t , theta t)
+          , p))
+      ( \ _ → refl)
+      ( \ _ → refl)
+
+#def orthogonality-pullback-flat-commute
+  ( n m :♭ nat)
+  ( F0 :♭ product (I^n n) ⌈𝕀⌉ → U)
+  : Equiv
+      ( ♭ ( orthogonality-pullback-split n m F0))
+      ( Σ ( v : ♭ (I^n m → I^n n))
+      , ( let mod ♭ v' := v in
+          Σ ( theta : ♭ (I^n m → ⌈𝕀⌉))
+          , ( let mod ♭ theta' := theta in
+              ♭
+                ( F0
+                    ( v' (zero-vec-I^n m)
+                    , theta' (zero-vec-I^n m))))))
+  :=
+    b-sigma2-commute-equiv
+      ( I^n m → I^n n)
+      ( I^n m → ⌈𝕀⌉)
+      ( \ v theta →
+          F0
+            ( v (zero-vec-I^n m)
+            , theta (zero-vec-I^n m)))
+
+#def equiv-orthogonality-to-flat uses (funext)
+  ( n m :♭ nat)
+  ( F0 :♭ product (I^n n) ⌈𝕀⌉ → U)
+  ( cov-F0 :♭ is-covariant-II (product (I^n n) ⌈𝕀⌉) F0)
+  : Equiv
+      ( ♭
+          ( I^n m
+            → Σ ( t : product (I^n n) ⌈𝕀⌉)
+              , F0 t))
+      ( ♭ ( orthogonality-pullback-split n m F0))
+  :=
+    let mod ♭ F-uncurried :=
+      mod ♭ (orthogonality-pullback-fiber n m F0) in
+    let mod ♭ curry-F :=
+      mod ♭ (equiv-orthogonality-pullback-split n m F0) in
+    b-equiv
+      ( I^n m
+        → Σ ( t : product (I^n n) ⌈𝕀⌉)
+          , F0 t)
+      ( orthogonality-pullback-split n m F0)
+      ( equiv-comp
+          ( I^n m
+            → Σ ( t : product (I^n n) ⌈𝕀⌉)
+              , F0 t)
+          ( F-uncurried)
+          ( orthogonality-pullback-split n m F0)
+          ( orthogonality-pullback n m F0 cov-F0)
+          ( curry-F))
 ```
 
 ## Covariance is a proposition

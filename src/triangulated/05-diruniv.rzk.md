@@ -46,6 +46,23 @@ This is a literate `rzk` file:
     f
 
 -- Lemma 6.12
+#def s-is-covariant-II uses (funext weakfunext)
+  ( X : U)
+  ( F : X → S)
+  : is-covariant-II X (\ x → first (F x))
+  := \ x y f u →
+      s-is-covariant-arrow-II (\ t → F (f t))
+        ( pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t) u
+
+#def equiv-orthogonality-s-to-flat uses (funext weakfunext)
+  ( n m :♭ nat)
+  ( F :♭ product (I^n n) ⌈𝕀⌉ → S)
+  : Equiv
+      ( ♭ ( I^n m → Σ (t : product (I^n n) ⌈𝕀⌉) , first (F t)))
+      ( ♭ ( orthogonality-pullback-split n m (\ t → first (F t))))
+  := equiv-orthogonality-to-flat funext n m (\ t → first (F t))
+      ( s-is-covariant-II (product (I^n n) ⌈𝕀⌉) F)
+
 #def mor2fun uses (funext weakfunext) (f : 𝕀 → S)
   : Σ ( A : S) , (Σ (B : S) , (first A) → (first B))
   :=
@@ -331,8 +348,8 @@ First part of equivalence mor2fun (dirglue f) is f.
           let mod ♭ TX :=
             mod ♭ (Σ (A : S) , Σ (B : S) , first A → first B) in
           let mod ♭ E-packed-X :=
-            mod ♭ (\ (p : Gamma' → TX) → (v : I^n n) →
-              let p0 : TX := p (v , pt-⌈𝕀⌉ 0₂) in
+            mod ♭ (\ (p : Gamma' → TX) → (v : I^n n)
+            → let p0 : TX := p (v , pt-⌈𝕀⌉ 0₂) in
               let p1 : TX := p (v , pt-⌈𝕀⌉ 1₂) in
               product
                 ( is-equiv
@@ -356,7 +373,7 @@ First part of equivalence mor2fun (dirglue f) is f.
               ( \ q → (F q , (G q , alpha q))
               , e)) in
           let mod ♭ E-packed-X-is-prop
-            : (p : Gamma' → TX) → is-prop (E-packed-X p)
+ : ( p : Gamma' → TX) → is-prop (E-packed-X p)
             := mod ♭ (\ p →
               E-X-is-prop
                 ( \ q → first (p q))
@@ -387,7 +404,7 @@ First part of equivalence mor2fun (dirglue f) is f.
                       ( \ i → p (v , pt-⌈𝕀⌉ i)) t in
                 let pη=p : pη = p :=
                   ap
-                    ( (v : I^n n) → ⌈𝕀⌉ → TX)
+                    ( ( v : I^n n) → ⌈𝕀⌉ → TX)
                     ( Gamma' → TX)
                     ( \ v t → pη (v , t))
                     ( \ v t → p (v , t))
@@ -431,8 +448,8 @@ First part of equivalence mor2fun (dirglue f) is f.
           let mod ♭ TY :=
             mod ♭ (Σ (A : S) , Σ (B : S) , first A → first B) in
           let mod ♭ E-packed-Y :=
-            mod ♭ (\ (p : Gamma' → TY) → ((v , t) : Gamma') →
-              is-equiv
+            mod ♭ (\ (p : Gamma' → TY) → ((v , t) : Gamma')
+            → is-equiv
                 ( first (first (p (v , t))))
                 ( first (first (second (p (v , t)))))
                 ( second (second (p (v , t))))) in
@@ -449,7 +466,7 @@ First part of equivalence mor2fun (dirglue f) is f.
               ( \ q → (F q , (G q , alpha q))
               , e)) in
           let mod ♭ E-packed-Y-is-prop
-            : (p : Gamma' → TY) → is-prop (E-packed-Y p)
+ : ( p : Gamma' → TY) → is-prop (E-packed-Y p)
             := mod ♭ (\ p →
               E-Y-is-prop
                 ( \ q → first (p q))
@@ -498,7 +515,7 @@ First part of equivalence mor2fun (dirglue f) is f.
                     ( point i ⇒ e (v , pt-⌈𝕀⌉ i)) in
                 let pη=p : pη = p :=
                   ap
-                    ( (v : I^n n) → ⌈𝕀⌉ → TY)
+                    ( ( v : I^n n) → ⌈𝕀⌉ → TY)
                     ( Gamma' → TY)
                     ( \ v t → pη (v , t))
                     ( \ v t → p (v , t))
@@ -628,46 +645,22 @@ First part of equivalence mor2fun (dirglue f) is f.
                                       ( ♭ ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (F0 t)))
                                       ( Σ ( v : ♭ (I^n m → I^n n)) , fixed-F v)
                                   :=
-                                    let mod ♭ F-uncurried :=
-                                      mod ♭ (orthogonality-pullback-fiber n m (\ t → first (F0 t))) in
-                                    let mod ♭ curry-F :=
-                                      mod ♭ (equiv-orthogonality-pullback-split n m (\ t → first (F0 t))) in
                                     equiv-comp
                                       ( ♭ ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (F0 t)))
                                       ( ♭ ( orthogonality-pullback-split n m (\ t → first (F0 t))))
                                       ( Σ ( v : ♭ (I^n m → I^n n)) , fixed-F v)
-                                      ( b-equiv
-                                          ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (F0 t))
-                                          ( orthogonality-pullback-split n m (\ t → first (F0 t)))
-                                          ( equiv-comp
-                                              ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (F0 t))
-                                              ( F-uncurried)
-                                              ( orthogonality-pullback-split n m (\ t → first (F0 t)))
-                                              ( orthogonality-pullback n m (\ t → first (F0 t)))
-                                              ( curry-F)))
+                                      ( equiv-orthogonality-s-to-flat n m F0)
                                       ( orthogonality-pullback-flat-commute n m (\ t → first (F0 t))) in
                                 let to-G-split
  : Equiv
                                       ( ♭ ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (G0 t)))
                                       ( Σ ( v : ♭ (I^n m → I^n n)) , fixed-G v)
                                   :=
-                                    let mod ♭ G-uncurried :=
-                                      mod ♭ (orthogonality-pullback-fiber n m (\ t → first (G0 t))) in
-                                    let mod ♭ curry-G :=
-                                      mod ♭ (equiv-orthogonality-pullback-split n m (\ t → first (G0 t))) in
                                     equiv-comp
                                       ( ♭ ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (G0 t)))
                                       ( ♭ ( orthogonality-pullback-split n m (\ t → first (G0 t))))
                                       ( Σ ( v : ♭ (I^n m → I^n n)) , fixed-G v)
-                                      ( b-equiv
-                                          ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (G0 t))
-                                          ( orthogonality-pullback-split n m (\ t → first (G0 t)))
-                                          ( equiv-comp
-                                              ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (G0 t))
-                                              ( G-uncurried)
-                                              ( orthogonality-pullback-split n m (\ t → first (G0 t)))
-                                              ( orthogonality-pullback n m (\ t → first (G0 t)))
-                                              ( curry-G)))
+                                      ( equiv-orthogonality-s-to-flat n m G0)
                                       ( orthogonality-pullback-flat-commute n m (\ t → first (G0 t))) in
                                 let fixed-equiv
  : Equiv
@@ -700,7 +693,7 @@ First part of equivalence mor2fun (dirglue f) is f.
                                               ( \ s → first (F0 (vc , s)))
                                               ( \ s → first (G0 (vc , s)))
                                               ( \ s → a0 (vc , s))
-                                              ( \ (i :_b 𝕀) →
+                                              ( \ (i :♭ 𝕀) →
                                                   is-equiv-discrete-interval-elim i
                                                     ( \ j → first (F0 (vc , pt-⌈𝕀⌉ j)))
                                                     ( \ j → first (G0 (vc , pt-⌈𝕀⌉ j)))
@@ -708,7 +701,7 @@ First part of equivalence mor2fun (dirglue f) is f.
                                                     ( first (e0 vc))
                                                     ( second (e0 vc)))
                                               ( mod ♭
-                                                  (theta' (zero-vec-I^n m)))) in
+                                                  ( theta' (zero-vec-I^n m)))) in
                                 is-equiv-b-map-via-splits
                                   ( I^n m → F̃) (I^n m → G̃)
                                   ( \ p t → ã (p t))
@@ -732,8 +725,8 @@ First part of equivalence mor2fun (dirglue f) is f.
         ( second (second (second (first (second Y-to-X-is-equiv) (f , (g , (a , (e0 , e1))))))))
 
 #def is-equiv-amazing-covariant-from-vertices uses (funext weakfunext)
-  ( f g : ( ( t , s) : Δ²-II) → S)
-  ( a : ( ( t , s) : Δ²-II) → first (f (t , s)) → first (g (t , s)))
+  ( f g : ((t , s) : Δ²-II) → S)
+  ( a : ((t , s) : Δ²-II) → first (f (t , s)) → first (g (t , s)))
   : is-equiv (first (f (0₂ , 0₂))) (first (g (0₂ , 0₂))) (a (0₂ , 0₂))
     → is-equiv (first (f (1₂ , 0₂))) (first (g (1₂ , 0₂))) (a (1₂ , 0₂))
     → is-equiv (first (f (1₂ , 1₂))) (first (g (1₂ , 1₂))) (a (1₂ , 1₂))
@@ -993,7 +986,7 @@ maps.
           ( \ c → (u : 1 | 0₂ ≡ 0₂)
             → Σ ( bf : fib (first B) (first C) g c)
               , ( ( w : 1 | 0₂ ≡ 0₂) → fib (first A) (first B) f (first bf)))
-          ( \ c → Σ ( bf : fib (first B) (first C) g c)
+          ( \ c → Σ (bf : fib (first B) (first C) g c)
               , fib (first A) (first B) f (first bf))
           ( \ c →
               equiv-comp
@@ -1023,19 +1016,19 @@ maps.
               ind-path (first B) (f a)
                 ( \ b' q' →
                     ( p' : g b' = c)
-                    → ( (g (f a) , ((f a , refl) , (a , refl)))
-                        =_{ Σ ( c'' : first C)
+                    → ( ( g (f a) , ((f a , refl) , (a , refl)))
+                        =_{ Σ (c'' : first C)
                           , Σ ( bf'' : fib (first B) (first C) g c'')
                             , fib (first A) (first B) f (first bf'') }
-                        ( c , ((b' , p') , (a , q')))))
+  ( c , ((b' , p') , (a , q')))))
                 ( \ p' →
                     ind-path (first C) (g (f a))
                       ( \ c' p'' →
-                          ( (g (f a) , ((f a , refl) , (a , refl)))
-                            =_{ Σ ( c'' : first C)
+                          ( ( g (f a) , ((f a , refl) , (a , refl)))
+                            =_{ Σ (c'' : first C)
                               , Σ ( bf'' : fib (first B) (first C) g c'')
                                 , fib (first A) (first B) f (first bf'') }
-                            ( c' , ((f a , p'') , (a , refl)))))
+  ( c' , ((f a , p'') , (a , refl)))))
                       ( refl)
                       ( c) (p'))
                 ( b) (q) (p))
@@ -1046,7 +1039,7 @@ maps.
   ( f : first A → first B)
   ( g : first B → first C)
   : Eq-Σ U (is-a-cov funext weakfunext) (dirglue2 A B C f g (0₂ , 0₂)) A
-  := ( first (ua (first (dirglue2 A B C f g (0₂ , 0₂))) (first A)) (dirglue2-equiv-00 A B C f g)
+  := (first (ua (first (dirglue2 A B C f g (0₂ , 0₂))) (first A)) (dirglue2-equiv-00 A B C f g)
      , first
          ( is-prop-is-a-cov funext weakfunext (first A)
            ( transport U (is-a-cov funext weakfunext)
@@ -1067,7 +1060,7 @@ maps.
   ( f : first A → first B)
   ( g : first B → first C)
   : Eq-Σ U (is-a-cov funext weakfunext) (dirglue2 A B C f g (1₂ , 0₂)) B
-  := ( first (ua (first (dirglue2 A B C f g (1₂ , 0₂))) (first B)) (dirglue2-equiv-10 A B C f g)
+  := (first (ua (first (dirglue2 A B C f g (1₂ , 0₂))) (first B)) (dirglue2-equiv-10 A B C f g)
      , first
          ( is-prop-is-a-cov funext weakfunext (first B)
            ( transport U (is-a-cov funext weakfunext)
@@ -1088,7 +1081,7 @@ maps.
   ( f : first A → first B)
   ( g : first B → first C)
   : Eq-Σ U (is-a-cov funext weakfunext) (dirglue2 A B C f g (1₂ , 1₂)) C
-  := ( first (ua (first (dirglue2 A B C f g (1₂ , 1₂))) (first C)) (dirglue2-equiv-11 A B C f g)
+  := (first (ua (first (dirglue2 A B C f g (1₂ , 1₂))) (first C)) (dirglue2-equiv-11 A B C f g)
      , first
          ( is-prop-is-a-cov funext weakfunext (first C)
            ( transport U (is-a-cov funext weakfunext)
@@ -1105,12 +1098,12 @@ maps.
   := eq-pair U (is-a-cov funext weakfunext) (dirglue2 A B C f g (1₂ , 1₂)) C (dirglue2-11=C-EqΣ A B C f g)
 
 #def mor2fun2 uses (funext weakfunext)
-  ( F : ( ( t , s) : Δ²-II) → S)
+  ( F : ((t , s) : Δ²-II) → S)
   : Σ ( A : S)
-    , (Σ ( B : S)
-      , (Σ ( C : S)
-        , (Σ ( f : first A → first B)
-          , (first B → first C))))
+    , ( Σ ( B : S)
+      , ( Σ ( C : S)
+        , ( Σ ( f : first A → first B)
+          , ( first B → first C))))
   :=
     ( first (mor2fun (\ t → F (t , 0₂)))
     , ( first (second (mor2fun (\ t → F (t , 0₂))))
@@ -1122,31 +1115,31 @@ maps.
   ( a b c : S)
   ( d : first a → first b)
   ( e : first b → first c)
-  ( a' : S) ( pa : a = a')
-  : ( b' : S) → ( pb : b = b')
-  → ( c' : S) → ( pc : c = c')
+  ( a' : S) (pa : a = a')
+  : ( b' : S) → (pb : b = b')
+  → ( c' : S) → (pc : c = c')
   → ( d' : first a' → first b')
   → ( pd : product-transport S S (\ X Y → first X → first Y) a a' b b' pa pb d = d')
   → ( e' : first b' → first c')
   → ( pe : product-transport S S (\ X Y → first X → first Y) b b' c c' pb pc e = e')
   → ( ( a , (b , (c , (d , e))))
-    =_{ Σ ( A : S)
-       , (Σ ( B : S)
-         , (Σ ( C : S)
-           , (Σ ( f : first A → first B)
-             , (first B → first C)))) }
-      (a' , (b' , (c' , (d' , e')))))
+    =_{ Σ (A : S)
+       , ( Σ ( B : S)
+         , ( Σ ( C : S)
+           , ( Σ ( f : first A → first B)
+             , ( first B → first C)))) }
+  ( a' , (b' , (c' , (d' , e')))))
   :=
     let composable : U :=
       Σ ( A : S)
-      , (Σ ( B : S)
-        , (Σ ( C : S)
-          , (Σ ( f : first A → first B)
-            , (first B → first C)))) in
+      , ( Σ ( B : S)
+        , ( Σ ( C : S)
+          , ( Σ ( f : first A → first B)
+            , ( first B → first C)))) in
     ind-path S a
       ( \ a'' pa'' →
-          ( b' : S) → ( pb : b = b')
-        → ( c' : S) → ( pc : c = c')
+          ( b' : S) → (pb : b = b')
+        → ( c' : S) → (pc : c = c')
         → ( d' : first a'' → first b')
         → ( pd : product-transport S S (\ X Y → first X → first Y) a a'' b b' pa'' pb d = d')
         → ( e' : first b' → first c')
@@ -1155,7 +1148,7 @@ maps.
       ( \ b' pb →
           ind-path S b
             ( \ b'' pb'' →
-                ( c' : S) → ( pc : c = c')
+                ( c' : S) → (pc : c = c')
               → ( d' : first a → first b'')
               → ( pd : product-transport S S (\ X Y → first X → first Y) a a b b'' refl pb'' d = d')
               → ( e' : first b'' → first c')
@@ -1178,9 +1171,9 @@ maps.
                             ( \ dd → (a , (b , (c , (dd , e))))) pd)
                         ( ap (first b → first c) composable e e'
                             ( \ ee → (a , (b , (c , (d' , ee))))) pe))
-                  ( c') ( pc))
-            ( b') ( pb))
-      ( a') ( pa)
+                  ( c') (pc))
+            ( b') (pb))
+      ( a') (pa)
 
 #def coe-dirglue2-bottom-is-f-pointwise uses (funext weakfunext extext)
   ( A B C : S)
@@ -1425,10 +1418,10 @@ maps.
           ( ap (first (dirglue2 A B C f g (1₂ , 1₂))) (first C)
               ( coe-DE a-in-0) (first a-in-0 , second a-in-0)
               ( \ z → first (dirglue2-equiv-11 A B C f g) z)
-	              ( amazing-covariant-uniqueness-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
-	                  ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t)))
-	                  ( a-in-0) (first a-in-0 , second a-in-0)
-	                  ( \ t → (first a-in-0 , second a-in-0))))
+               ( amazing-covariant-uniqueness-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
+                   ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t)))
+                   ( a-in-0) (first a-in-0 , second a-in-0)
+                   ( \ t → (first a-in-0 , second a-in-0))))
           ( concat (first C)
               ( first a-in-0)
               ( g (first bf))
@@ -1513,7 +1506,7 @@ maps.
           ( mor2fun (\ t → F (t , t)))
           ( mor2fun (\ t → G (t , t)))
           ( ap
-            ( ((t , s) : Δ²-II) → S)
+            ( ( ( t , s) : Δ²-II) → S)
             ( Σ ( X : S) , (Σ (Y : S) , first X → first Y))
             F G
             ( \ H → mor2fun (\ t → H (t , t)))
@@ -1527,8 +1520,8 @@ maps.
       ( first e)
       ( first (second e))
       ( second (second (mor2fun (\ t → F (t , t)))))
-    =
-      second (second (mor2fun (\ t → G (t , t))))
+
+    = second (second (mor2fun (\ t → G (t , t))))
   :=
     let e : Eq-Σ-over-product
         ( S)
@@ -1544,7 +1537,7 @@ maps.
           ( mor2fun (\ t → F (t , t)))
           ( mor2fun (\ t → G (t , t)))
           ( ap
-            ( ((t , s) : Δ²-II) → S)
+            ( ( ( t , s) : Δ²-II) → S)
             ( Σ ( X : S) , (Σ (Y : S) , first X → first Y))
             F G
             ( \ H → mor2fun (\ t → H (t , t)))
@@ -1560,8 +1553,8 @@ maps.
       ( dirglue2 a b c f g (0₂ , 0₂))
       ( dirglue2 a b c f g (1₂ , 1₂))
       ( \ t → dirglue2 a b c f g (t , t))
-    =
-    comp
+
+  = comp
       ( first (dirglue2 a b c f g (0₂ , 0₂)))
       ( first (dirglue2 a b c f g (1₂ , 0₂)))
       ( first (dirglue2 a b c f g (1₂ , 1₂)))
@@ -1729,7 +1722,7 @@ maps.
       ( g) (coe-dirglue2-right-is-g A B C f g)
 
 #def dirglue2-mor2fun2=F uses (funext weakfunext extext)
-  ( F : ( ( t , s) : Δ²-II) → S)
+  ( F : ((t , s) : Δ²-II) → S)
   : F = dirglue2 (F (0₂ , 0₂)) (F (1₂ , 0₂)) (F (1₂ , 1₂))
           ( second (second (mor2fun (\ t → F (t , 0₂)))))
           ( second (second (mor2fun (\ s → F (1₂ , s)))))
@@ -1738,9 +1731,9 @@ maps.
       := second (second (mor2fun (\ t → F (t , 0₂)))) in
     let g' : first (F (1₂ , 0₂)) → first (F (1₂ , 1₂))
       := second (second (mor2fun (\ s → F (1₂ , s)))) in
-    let G : ( ( t , s) : Δ²-II) → S
+    let G : ((t , s) : Δ²-II) → S
       := dirglue2 (F (0₂ , 0₂)) (F (1₂ , 0₂)) (F (1₂ , 1₂)) f' g' in
-    let a : ( ( t , s) : Δ²-II) → first (F (t , s)) → first (G (t , s))
+    let a : ((t , s) : Δ²-II) → first (F (t , s)) → first (G (t , s))
       := \ (t , s) → \ x →
           ( covariant-transport-line-II (\ (r' : 𝕀 | TOP) → first (F (1₂ , sup s r')))
               ( s-is-covariant-arrow-II (\ r' → F (1₂ , sup s r'))) (\ k → pt-⌈𝕀⌉ k)
@@ -1749,7 +1742,7 @@ maps.
           , \ (u : 1 | s ≡ 0₂) →
               ( ( covariant-transport-line-II (\ (r : 𝕀 | TOP) → first (F (sup t r , 0₂)))
                     ( s-is-covariant-arrow-II (\ r → F (sup t r , 0₂))) (\ k → pt-⌈𝕀⌉ k) x
-                , refl )
+                , refl)
               , \ (w : 1 | t ≡ 0₂) → (x , refl))) in
     let equiv-00 : is-equiv (first (F (0₂ , 0₂))) (first (G (0₂ , 0₂))) (a (0₂ , 0₂))
       := is-equiv-right-factor
@@ -1813,14 +1806,14 @@ maps.
                       ( first (ua (first (F (t , s))) (first (G (t , s))))
                           ( a (t , s) , is-equiv-amazing-covariant-from-vertices F G a equiv-00 equiv-10 equiv-11 (t , s)))
                       ( second (F (t , s))))
-	                  ( second (G (t , s))))))
+                   ( second (G (t , s))))))
 
 
 #def hom-II-in-S-diagonal uses (funext weakfunext extext)
   ( F : ((t , s) : Δ²-II) → S)
   : hom-II-in-S (F (0₂ , 0₂)) (F (1₂ , 1₂)) (\ t → F (t , t))
-    =
-    comp
+
+  = comp
       ( first (F (0₂ , 0₂)))
       ( first (F (1₂ , 0₂)))
       ( first (F (1₂ , 1₂)))
@@ -1834,11 +1827,11 @@ maps.
     let d : ((t , s) : Δ²-II) → S
       := dirglue2 (F (0₂ , 0₂)) (F (1₂ , 0₂)) (F (1₂ , 1₂)) f g in
     transport
-      ( ((t , s) : Δ²-II) → S)
+      ( ( ( t , s) : Δ²-II) → S)
       ( \ H →
         hom-II-in-S (H (0₂ , 0₂)) (H (1₂ , 1₂)) (\ t → H (t , t))
-        =
-        comp
+
+      = comp
           ( first (H (0₂ , 0₂)))
           ( first (H (1₂ , 0₂)))
           ( first (H (1₂ , 1₂)))
@@ -1847,7 +1840,7 @@ maps.
       ( d)
       ( F)
       ( rev
-        ( ((t , s) : Δ²-II) → S)
+        ( ( ( t , s) : Δ²-II) → S)
         ( F)
         ( d)
         ( dirglue2-mor2fun2=F F))
@@ -1863,16 +1856,16 @@ maps.
 #def equiv-dirglue2-mor2fun2 uses (funext weakfunext extext)
   : Equiv
       ( Σ ( A : S)
-      , (Σ ( B : S)
-        , (Σ ( C : S)
-          , (Σ ( f : first A → first B)
-            , (first B → first C)))))
-      (( ( t , s) : Δ²-II) → S)
+      , ( Σ ( B : S)
+        , ( Σ ( C : S)
+          , ( Σ ( f : first A → first B)
+            , ( first B → first C)))))
+      ( ( ( t , s) : Δ²-II) → S)
   :=
     ( \ (A , (B , (C , (f , g)))) → dirglue2 A B C f g
     , ( ( mor2fun2 , \ (A , (B , (C , (f , g)))) → mor2fun2-dirglue2=f A B C f g)
       , ( mor2fun2 , \ F →
-            rev (( ( t , s) : Δ²-II) → S) F
+            rev (((t , s) : Δ²-II) → S) F
               ( dirglue2 (F (0₂ , 0₂)) (F (1₂ , 0₂)) (F (1₂ , 1₂))
                   ( second (second (mor2fun (\ t → F (t , 0₂)))))
                   ( second (second (mor2fun (\ s → F (1₂ , s))))))
@@ -1885,7 +1878,7 @@ maps.
   ( t : 𝕀)
   : dirglue2 A B C f g (t , 0₂)
   = dirglue (dirglue2 A B C f g (0₂ , 0₂)) (dirglue2 A B C f g (1₂ , 0₂))
-      ( second (second (mor2fun ( \ u → dirglue2 A B C f g (u , 0₂)))))
+      ( second (second (mor2fun (\ u → dirglue2 A B C f g (u , 0₂)))))
       t
   :=
     let F : 𝕀 → S := \ u → dirglue2 A B C f g (u , 0₂) in
@@ -1898,14 +1891,14 @@ maps.
   ( s : 𝕀)
   : dirglue2 A B C f g (1₂ , s)
   = dirglue (dirglue2 A B C f g (1₂ , 0₂)) (dirglue2 A B C f g (1₂ , 1₂))
-      ( second (second (mor2fun ( \ u → dirglue2 A B C f g (1₂ , u)))))
+      ( second (second (mor2fun (\ u → dirglue2 A B C f g (1₂ , u)))))
       s
   :=
     let F : 𝕀 → S := \ u → dirglue2 A B C f g (1₂ , u) in
     ap (𝕀 → S) S F (dirglue (F 0₂) (F 1₂) (second (second (mor2fun F)))) (\ h → h s) (dirglue-mor2fun=f F)
 
 #def dirglue2-from-horn-II uses (funext weakfunext extext)
-  ( k : ( ( t₁ , t₂) : 𝕀 × 𝕀 | Δ²-II (t₁ , t₂) ∧ Λ-II (t₁ , t₂)) → S)
+  ( k : ((t₁ , t₂) : 𝕀 × 𝕀 | Δ²-II (t₁ , t₂) ∧ Λ-II (t₁ , t₂)) → S)
   : ( ( t , s) : Δ²-II) → S
   :=
     dirglue2
@@ -1923,19 +1916,19 @@ maps.
   : Equiv
       ( ( ( t , s) : Δ²-II) → S)
       ( Σ ( A : S)
-      , (Σ ( B : S)
-        , (Σ ( C : S)
-          , (Σ ( f : first A → first B)
-            , (first B → first C)))))
+      , ( Σ ( B : S)
+        , ( Σ ( C : S)
+          , ( Σ ( f : first A → first B)
+            , ( first B → first C)))))
   :=
     ( mor2fun2
     , second
         ( inv-equiv
           ( Σ ( A : S)
-          , (Σ ( B : S)
-            , (Σ ( C : S)
-              , (Σ ( f : first A → first B)
-                , (first B → first C)))))
+          , ( Σ ( B : S)
+            , ( Σ ( C : S)
+              , ( Σ ( f : first A → first B)
+                , ( first B → first C)))))
           ( ( ( t , s) : Δ²-II) → S)
           ( equiv-dirglue2-mor2fun2)))
 
@@ -1943,25 +1936,25 @@ maps.
   : Equiv
       ( ( ( t₁ , t₂) : 𝕀 × 𝕀 | Δ²-II (t₁ , t₂) ∧ Λ-II (t₁ , t₂)) → S)
       ( Σ ( A : S)
-      , (Σ ( B : S)
-        , (Σ ( C : S)
-          , (Σ ( f : first A → first B)
-            , (first B → first C)))))
+      , ( Σ ( B : S)
+        , ( Σ ( C : S)
+          , ( Σ ( f : first A → first B)
+            , ( first B → first C)))))
   :=
     let horn : U
-      := ( ( t₁ , t₂) : 𝕀 × 𝕀 | Δ²-II (t₁ , t₂) ∧ Λ-II (t₁ , t₂)) → S in
+      := ((t₁ , t₂) : 𝕀 × 𝕀 | Δ²-II (t₁ , t₂) ∧ Λ-II (t₁ , t₂)) → S in
     let composable-hom : U
-      := Σ ( A : S)
-        , (Σ ( B : S)
-          , (Σ ( C : S)
-            , (Σ ( f : hom-II S A B)
-              , (hom-II S B C)))) in
+      := Σ (A : S)
+        , ( Σ ( B : S)
+          , ( Σ ( C : S)
+            , ( Σ ( f : hom-II S A B)
+              , ( hom-II S B C)))) in
     let composable-map : U
-      := Σ ( A : S)
-        , (Σ ( B : S)
-          , (Σ ( C : S)
-            , (Σ ( f : first A → first B)
-              , (first B → first C)))) in
+      := Σ (A : S)
+        , ( Σ ( B : S)
+          , ( Σ ( C : S)
+            , ( Σ ( f : first A → first B)
+              , ( first B → first C)))) in
     let horn-to-composable-hom : horn → composable-hom
       := \ k →
         ( k (0₂ , 0₂)
@@ -1972,7 +1965,7 @@ maps.
     let composable-hom-to-horn : composable-hom → horn
       := \ (A , (B , (C , (f , g)))) → horn-II S A B C f g in
     let equiv-horn-to-composable-hom : Equiv horn composable-hom
-      := ( horn-to-composable-hom
+      := (horn-to-composable-hom
         , ( ( composable-hom-to-horn , \ _ → refl)
           , ( composable-hom-to-horn , \ _ → refl))) in
     let equiv-composable-hom-to-map : Equiv composable-hom composable-map
@@ -1984,9 +1977,9 @@ maps.
         ( \ A B C → Σ (f : first A → first B) , first B → first C)
         ( \ A B C →
             equiv-comp
-              ( Σ (f : hom-II S A B) , hom-II S B C)
-              ( Σ (f : first A → first B) , hom-II S B C)
-              ( Σ (f : first A → first B) , first B → first C)
+              ( Σ ( f : hom-II S A B) , hom-II S B C)
+              ( Σ ( f : first A → first B) , hom-II S B C)
+              ( Σ ( f : first A → first B) , first B → first C)
               ( equiv-total-pullback-is-equiv
                   ( hom-II S A B)
                   ( first A → first B)
@@ -2005,15 +1998,15 @@ maps.
 #def S-is-segal-II uses (funext weakfunext extext)
   : is-segal-II S
   :=
-    let simplex : U := ( ( t , s) : Δ²-II) → S in
+    let simplex : U := ((t , s) : Δ²-II) → S in
     let horn : U
-      := ( ( t₁ , t₂) : 𝕀 × 𝕀 | Δ²-II (t₁ , t₂) ∧ Λ-II (t₁ , t₂)) → S in
+      := ((t₁ , t₂) : 𝕀 × 𝕀 | Δ²-II (t₁ , t₂) ∧ Λ-II (t₁ , t₂)) → S in
     let composable-map : U
-      := Σ ( A : S)
-        , (Σ ( B : S)
-          , (Σ ( C : S)
-            , (Σ ( f : first A → first B)
-              , (first B → first C)))) in
+      := Σ (A : S)
+        , ( Σ ( B : S)
+          , ( Σ ( C : S)
+            , ( Σ ( f : first A → first B)
+              , ( first B → first C)))) in
     let equiv-simplex-to-horn : Equiv simplex horn
       := equiv-comp
         simplex
@@ -2094,10 +2087,10 @@ maps.
         ( first z)
         ( hom-II-in-S y z g)
         ( hom-II-in-S x y f)
-	  :=
-	    hom-II-in-S-diagonal
-	      ( \ (t , s) →
-	          second (first (S-is-segal-II x y z f g)) (t , s))
+  :=
+     hom-II-in-S-diagonal
+       ( \ (t , s) →
+           second (first (S-is-segal-II x y z f g)) (t , s))
 
 #def S-is-iso-arrow-is-equiv uses (funext weakfunext extext)
   ( x y : S)
@@ -2107,8 +2100,8 @@ maps.
       ( is-equiv (first x) (first y) (hom-II-in-S x y f))
   :=
     let retraction-law-equiv
-      : ( g : hom-II S y x) →
-        Equiv
+      : ( g : hom-II S y x)
+      → Equiv
           ( comp-is-segal-II S S-is-segal-II x y x f g = id-hom-II S x)
           ( homotopy
             ( first x)
@@ -2230,8 +2223,8 @@ maps.
                 ( identity (first x)))))
     in
     let section-law-equiv
-      : ( g : hom-II S y x) →
-        Equiv
+      : ( g : hom-II S y x)
+      → Equiv
           ( comp-is-segal-II S S-is-segal-II y x y g f = id-hom-II S y)
           ( homotopy
             ( first y)
@@ -2517,8 +2510,8 @@ maps.
         ( first (path-in-S-is-equiv x y)))
   :=
     let is-prop-is-iso-arrow
-      : ( f : hom-II S x y) →
-        is-prop (is-iso-arrow-II S S-is-segal-II x y f)
+      : ( f : hom-II S x y)
+      → is-prop (is-iso-arrow-II S S-is-segal-II x y f)
       := \ f →
         is-prop-is-retract-of-is-prop
           ( is-iso-arrow-II S S-is-segal-II x y f)
@@ -2531,8 +2524,8 @@ maps.
             ( hom-II-in-S x y f))
     in
     let eq-S-Iso-eq-first
-      : ( iso iso' : Iso-II S S-is-segal-II x y) →
-        ( first iso = first iso') → iso = iso'
+      : ( iso iso' : Iso-II S S-is-segal-II x y)
+      → ( first iso = first iso') → iso = iso'
       := \ iso iso' p →
         path-of-pairs-pair-of-paths
           ( hom-II S x y)
