@@ -439,115 +439,145 @@ GWB, Lemma 5.14
                         ( a1 , h)))))
       ( i)
 ```
-Lemma 5.18
+## Amazing covariance of function types
+
+We first work with a proposition in the opposite modality. The parameter
+package contains only types and terms; it does not quantify over topes.
 
 ```rzk
+#def is-a-cov-equiv uses (funext weakfunext)
+  ( A B : U)
+  ( e : Equiv A B)
+  ( cov-B : is-a-cov B)
+  : is-a-cov A
+  := transport U is-a-cov B A
+      (rev U A B (first (ua A B) e)) cov-B
+
+#def is-covariant-arrow-is-a-cov uses (funext weakfunext)
+  ( A : 𝕀 → U)
+  ( cov-A : (i : 𝕀) → is-a-cov (A i))
+  : is-covariant-arrow-II A
+  := b-extract
+      ((g : 𝕀 → Σ (X : U) , is-a-cov X)
+        → is-covariant-arrow-II (\ i → first (g i)))
+      (is-a-cov-transpose
+        (Σ (X : U) , is-a-cov X)
+        (\ (X , _) → X) (\ (_ , c) → c))
+      (\ i → (A i , cov-A i))
+
+#def op-realize-type-family
+  ( P : 𝕀 → ᵒᵖ U)
+  : ᵒᵖ (⌈𝕀⌉ → U)
+  := let mod ᵒᵖ P0 := op-ext-commute-bwd (\ _ → U) P in
+      mod ᵒᵖ (equiv-ext-shape-family-fwd 𝕀 □¹ P0)
+
+#def is-covariant-op-realize-is-a-cov uses (funext weakfunext)
+  ( P : 𝕀 → ᵒᵖ U)
+  ( cov-P : (i : 𝕀) → let mod ᵒᵖ P0 := P i in ᵒᵖ (is-a-cov P0))
+  : let mod ᵒᵖ C := op-realize-type-family P in
+      ᵒᵖ (is-covariant-II ⌈𝕀⌉ C)
+  := let mod ᵒᵖ g :=
+      op-ext-commute-bwd (\ _ → Σ (X : U) , is-a-cov X)
+        (\ i → let mod ᵒᵖ X := P i in
+          let mod ᵒᵖ c := cov-P i in mod ᵒᵖ (X , c)) in
+      mod ᵒᵖ (is-covariant-arrow-is-a-cov
+        (\ i → first (g i)) (\ i → second (g i)))
+
+#def is-covariant-op-prop-function uses (funext weakfunext extext)
+  ( P : 𝕀 → ᵒᵖ U)
+  ( prop-P : (i : 𝕀) → is-prop (let mod ᵒᵖ X := P i in ᵒᵖ X))
+  ( cov-P : (i : 𝕀) → let mod ᵒᵖ X := P i in ᵒᵖ (is-a-cov X))
+  ( A : 𝕀 → U)
+  ( cov-A : (i : 𝕀) → is-a-cov (A i))
+  : is-covariant-arrow-II (\ i → (let mod ᵒᵖ X := P i in ᵒᵖ X) → A i)
+  := is-covariant-op-function funext extext
+      (op-realize-type-family P)
+      (is-covariant-op-realize-is-a-cov P cov-P)
+      (\ s → match s (point i ⇒ prop-P i))
+      A (is-covariant-arrow-is-a-cov A cov-A)
+      (\ i → is-discrete-is-a-cov (A i) (cov-A i))
+
+#def op-prop-function-data uses (funext weakfunext)
+  : U
+  := Σ (P : ᵒᵖ U)
+    , Σ (_ : is-prop (let mod ᵒᵖ X := P in ᵒᵖ X))
+    , Σ (_ : let mod ᵒᵖ X := P in ᵒᵖ (is-a-cov X))
+    , Σ (A : U) , is-a-cov A
+
+#def op-prop-function-family uses (funext weakfunext)
+  ( w : op-prop-function-data)
+  : U
+  := (let mod ᵒᵖ X := first w in ᵒᵖ X)
+    → first (second (second (second w)))
+
+#def is-a-cov-op-prop-function uses (funext weakfunext extext)
+  ( P : ᵒᵖ U)
+  ( prop-P : is-prop (let mod ᵒᵖ X := P in ᵒᵖ X))
+  ( cov-P : let mod ᵒᵖ X := P in ᵒᵖ (is-a-cov X))
+  ( A : U)
+  ( cov-A : is-a-cov A)
+  : is-a-cov ((let mod ᵒᵖ X := P in ᵒᵖ X) → A)
+  := b-extract
+      ((w : op-prop-function-data) → is-a-cov (op-prop-function-family w))
+      (is-a-cov-untranspose op-prop-function-data op-prop-function-family
+        (\ g → is-covariant-op-prop-function
+          (\ i → first (g i))
+          (\ i → first (second (g i)))
+          (\ i → first (second (second (g i))))
+          (\ i → first (second (second (second (g i)))))
+          (\ i → second (second (second (second (g i)))))))
+      (P , (prop-P , (cov-P , (A , cov-A))))
+```
+
+## Extensions over a tope
+
+Lemma 5.18 follows by replacing the extension with functions out of the
+opposite shape realisation. The tope remains a schematic parameter.
+
+```rzk
+#def is-prop-unit-shape
+  ( phi : 1 → TOPE)
+  : is-prop (Shape 1 phi)
+  := \ x y → match x (point u ⇒
+      is-prop-is-contr (Shape 1 phi)
+        (point 1 phi u , \ z → match z (point v ⇒ refl))
+        (point 1 phi u) y)
+
+#def equiv-ext-op-shape-function uses (funext)
+  ( phi : ᵒᵖ TOPE)
+  ( A : U)
+  : Equiv
+      ((t : 1 | uninvᵒᵖ phi) → A)
+      ((let mod ᵒᵖ p := phi in ᵒᵖ (Shape 1 (\ _ → p))) → A)
+  := equiv-comp
+      ((t : 1 | uninvᵒᵖ phi) → A)
+      (Shape 1 (\ _ → uninvᵒᵖ phi) → A)
+      ((let mod ᵒᵖ p := phi in ᵒᵖ (Shape 1 (\ _ → p))) → A)
+      (equiv-ext-shape-fun funext 1 (\ _ → uninvᵒᵖ phi) (\ _ → A))
+      ((\ h c → h (first (equiv-shape-1-op-uninv phi) c))
+      , is-equiv-precomp-is-equiv funext
+          (let mod ᵒᵖ p := phi in ᵒᵖ (Shape 1 (\ _ → p)))
+          (Shape 1 (\ _ → uninvᵒᵖ phi)) A
+          (first (equiv-shape-1-op-uninv phi))
+          (second (equiv-shape-1-op-uninv phi)))
 
 #def is-a-cov-ext uses (funext weakfunext extext)
   ( phi : ᵒᵖ TOPE)
-  ( shape-is-a-cov :
-      let mod ᵒᵖ phi_op := phi in
-        ᵒᵖ (is-a-cov (shape (_ : 1 | phi_op))))
+  ( shape-is-a-cov : let mod ᵒᵖ p := phi in
+      ᵒᵖ (is-a-cov (Shape 1 (\ _ → p))))
   ( A : U)
   ( is-a-cov-A : is-a-cov A)
   : is-a-cov ((t : 1 | uninvᵒᵖ phi) → A)
-  :=
-    b-extract
-      ( ( w
-        : Σ ( phi' : ᵒᵖ TOPE)
-        , ( Σ ( _ : let mod ᵒᵖ p := phi' in ᵒᵖ (is-a-cov (shape (_ : 1 | p))))
-        , ( Σ ( B' : U)
-        , is-a-cov B')))
-        → is-a-cov ((t : 1 | uninvᵒᵖ (first w)) → first (second (second w))))
-      ( is-a-cov-untranspose
-          ( Σ ( phi' : ᵒᵖ TOPE)
-          , ( Σ ( _ : let mod ᵒᵖ p := phi' in ᵒᵖ (is-a-cov (shape (_ : 1 | p))))
-          , ( Σ ( B' : U)
-          , is-a-cov B')))
-          ( \ (phi' , (_ , (B' , _))) → (t : 1 | uninvᵒᵖ phi') → B')
-          ( \ g →
-            let phi-i : 𝕀 → ᵒᵖ TOPE
-              := \ i → first (g i)
-            in
-            let phi-shape-i-is-acov
-              : ( i : 𝕀)
-                  → ( let mod ᵒᵖ p := phi-i i in
-                        ᵒᵖ (is-a-cov (shape (_ : 1 | p))))
-              := \ i → first (second (g i))
-            in
-            let D : 𝕀 → U
-              := \ i → first (second (second (g i)))
-            in
-            let is-a-cov-D : (i : 𝕀) → is-a-cov (D i)
-              := \ i → second (second (second (g i)))
-            in
-            let C : ᵒᵖ (𝕀 → U)
-              :=
-                op-ext-commute-bwd
-                  (\ (_ : 𝕀) → U)
-                  ( \ i →
-                      let mod ᵒᵖ p := phi-i i in
-                        mod ᵒᵖ (shape (_ : 1 | p)))
-            in
-            let is-a-cov-C
-              : ( i : 𝕀)
-                  → ( let mod ᵒᵖ X := op-ext-commute-fwd (\ (_ : 𝕀) → U) C i in
-                        ᵒᵖ (is-a-cov X))
-              :=
-                \ i →
-                  transport
-                    ( ᵒᵖ U)
-                    ( \ Z → let mod ᵒᵖ X := Z in ᵒᵖ (is-a-cov X))
-                    ( let mod ᵒᵖ p := phi-i i in
-                        mod ᵒᵖ (shape (_ : 1 | p)))
-                    ( op-ext-commute-fwd (\ (_ : 𝕀) → U) C i)
-                    refl
-                    ( phi-shape-i-is-acov i)
-            in
-            let packed-S : ᵒᵖ (𝕀 → Σ (X : U) , is-a-cov X)
-              :=
-                op-ext-commute-bwd
-                  (\ (_ : 𝕀) → Σ (X : U) , is-a-cov X)
-                  ( \ i →
-                      let mod ᵒᵖ X := op-ext-commute-fwd (\ (_ : 𝕀) → U) C i in
-                      let mod ᵒᵖ c := is-a-cov-C i in
-                        mod ᵒᵖ (X , c))
-            in
-            let is-cov-C
-              : let mod ᵒᵖ C0 := C in ᵒᵖ (is-covariant-arrow-II C0)
-              :=
-                let mod ᵒᵖ packed := packed-S in
-                  mod ᵒᵖ (
-                    b-extract
-                      ( ( g' : 𝕀 → Σ (X : U) , is-a-cov X)
-                          → is-covariant-arrow-II (\ b → first (g' b)))
-                      ( is-a-cov-transpose
-                          ( Σ ( X : U) , is-a-cov X)
-                          ( \ (X , _) → X)
-                          ( \ (_ , cX) → cX))
-                      packed)
-            in
-            let is-cov-D : is-covariant-arrow-II D
-              :=
-                b-extract
-                  ( ( g' : 𝕀 →
-                    (Σ (phi' : ᵒᵖ TOPE) ,
-                    (Σ (_ : let mod ᵒᵖ p := phi' in ᵒᵖ (is-a-cov (shape (_ : 1 | p)))) ,
-                    (Σ (B' : U) , is-a-cov B'))))
-                    → is-covariant-arrow-II (\ b → first (second (second (g' b)))))
-                  ( is-a-cov-transpose
-                      ( Σ ( phi' : ᵒᵖ TOPE) , (Σ (_ : let mod ᵒᵖ p := phi' in ᵒᵖ (is-a-cov (shape (_ : 1 | p)))) , (Σ (B' : U) , is-a-cov B')))
-                      ( \ (_ , (_ , (B' , _))) → B')
-                      ( \ (_ , (_ , (_ , cB'))) → cB'))
-                  g
-            in
-              is-covariant-ext
-                funext
-                extext
-                ( phi-i)
-                ( is-cov-C)
-                ( D)
-                ( is-cov-D)
-                ( \ i → is-discrete-is-a-cov (D i) (is-a-cov-D i))))
-      ( phi , (shape-is-a-cov , (A , is-a-cov-A)))
+  := is-a-cov-equiv
+      ((t : 1 | uninvᵒᵖ phi) → A)
+      ((let mod ᵒᵖ p := phi in ᵒᵖ (Shape 1 (\ _ → p))) → A)
+      (equiv-ext-op-shape-function phi A)
+      (is-a-cov-op-prop-function
+        (let mod ᵒᵖ p := phi in mod ᵒᵖ (Shape 1 (\ _ → p)))
+        (is-prop-Equiv-is-prop
+          (let mod ᵒᵖ p := phi in ᵒᵖ (Shape 1 (\ _ → p)))
+          (Shape 1 (\ _ → uninvᵒᵖ phi))
+          (equiv-shape-1-op-uninv phi)
+          (is-prop-unit-shape (\ _ → uninvᵒᵖ phi)))
+        shape-is-a-cov A is-a-cov-A)
 ```
