@@ -8,6 +8,7 @@ This is a literate `rzk` file: it mirrors the `Δ¹`-based discreteness theory o
 ```rzk
 #lang rzk-1
 
+#assume funext : FunExt
 #assume extext : ExtExt
 ```
 
@@ -106,6 +107,40 @@ This is a literate `rzk` file: it mirrors the `Δ¹`-based discreteness theory o
         ( equiv-of-maps-total-map-hom-eq-const-𝕀 A)
         ( is-𝕀-local-A)))
     ( a , b)
+```
+
+## Function types of discrete families
+
+```rzk
+#def is-discrete-function-type-II uses (funext)
+  ( X : U)
+  ( A : X → U)
+  ( is-discrete-A : (x : X) → is-discrete-II (A x))
+  : is-discrete-II ((x : X) → A x)
+  :=
+    is-discrete-is-𝕀-local-II
+      ( (x : X) → A x)
+      ( is-equiv-comp
+          ( (x : X) → A x)
+          ( (x : X) → 𝕀 → A x)
+          ( 𝕀 → (x : X) → A x)
+          ( \ f x _ → f x)
+          ( is-equiv-function-is-equiv-family
+              funext
+              X
+              A
+              ( \ x → 𝕀 → A x)
+              ( \ _ a _ → a)
+              ( \ x → is-𝕀-local-is-discrete-II (A x) (is-discrete-A x)))
+          ( \ h i x → h x i)
+          ( second
+              ( flip-ext-fun-inv
+                  𝕀
+                  ( \ _ → TOP)
+                  ( \ _ → BOT)
+                  X
+                  ( \ _ x → A x)
+                  ( \ _ → recBOT))))
 ```
 
 ## The boundary of the `𝕀`-arrow

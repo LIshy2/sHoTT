@@ -52,7 +52,7 @@ This is a literate `rzk` file:
   ( f 0₂ , (f 1₂ , covariant-transport-line-II
       ( \ (t : 𝕀 | TOP) → first (f t))
       ( s-is-covariant-arrow-II f)
-      ( \ k → form k)))
+      ( \ k → pt-⌈𝕀⌉ k)))
 ```
 
 ## dirglue
@@ -151,12 +151,12 @@ First part of equivalence mor2fun (dirglue f) is f.
   ( A B : S) (f : (first A) → (first B))
   ( a : first A)
   : transport S (\ s → first s) (dirglue A B f 1₂) B (dirglue_1=B A B f)
-      ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue A B f t)) (s-is-covariant-arrow-II (dirglue A B f)) (\ k → form k)
+      ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue A B f t)) (s-is-covariant-arrow-II (dirglue A B f)) (\ k → pt-⌈𝕀⌉ k)
           ( transport-rev S (\ s → first s) (dirglue A B f 0₂) A (dirglue_0=A A B f) a))
     = f a
   :=
     let coe-dirglue : first (dirglue A B f 0₂) → first (dirglue A B f 1₂)
-      := covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue A B f t)) (s-is-covariant-arrow-II (dirglue A B f)) (\ k → form k) in
+      := covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue A B f t)) (s-is-covariant-arrow-II (dirglue A B f)) (\ k → pt-⌈𝕀⌉ k) in
     let a-in-dirglue-0 : first (dirglue A B f 0₂)
       := transport-rev S (\ s → first s) (dirglue A B f 0₂) A (dirglue_0=A A B f) a in
     let base-is-f-a : first a-in-dirglue-0 = f a
@@ -231,11 +231,11 @@ First part of equivalence mor2fun (dirglue f) is f.
       ( dirglue A B f 0₂) A
       ( dirglue A B f 1₂) B
       ( dirglue_0=A A B f) (dirglue_1=B A B f)
-      ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue A B f t)) (s-is-covariant-arrow-II (dirglue A B f)) (\ k → form k))
+      ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue A B f t)) (s-is-covariant-arrow-II (dirglue A B f)) (\ k → pt-⌈𝕀⌉ k))
     = f
   :=
     let coe-dirglue : first (dirglue A B f 0₂) → first (dirglue A B f 1₂)
-      := covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue A B f t)) (s-is-covariant-arrow-II (dirglue A B f)) (\ k → form k) in
+      := covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue A B f t)) (s-is-covariant-arrow-II (dirglue A B f)) (\ k → pt-⌈𝕀⌉ k) in
     let coe-dirglue-transported : (first A) → (first B)
       := \ (a : first A) →
          transport S (\ s → first s) (dirglue A B f 1₂) B (dirglue_1=B A B f)
@@ -264,7 +264,7 @@ First part of equivalence mor2fun (dirglue f) is f.
       ( dirglue_0=A A B f , (dirglue_1=B A B f , (coe-dirglue-is-f A B f)))
 
 -- Lemma 6.8
-#def is-equiv-amazing-covariant-from-endpoints uses (funext weakfunext extext) (f g : 𝕀 → S) (a : (i : 𝕀) → first (f i) → first (g i))
+#def is-equiv-amazing-covariant-from-endpoints uses (funext weakfunext) (f g : 𝕀 → S) (a : (i : 𝕀) → first (f i) → first (g i))
   : ( is-equiv (first (f 0₂)) (first (g 0₂)) (a 0₂)) → (is-equiv (first (f 1₂)) (first (g 1₂)) (a 1₂))
     → ( ( i : 𝕀) → (is-equiv (first (f i)) (first (g i)) (a i)))
   :=
@@ -274,14 +274,14 @@ First part of equivalence mor2fun (dirglue f) is f.
     let Y-to-X-is-equiv : is-equiv Y X Y-to-X :=
       second (cubes-separate Y X Y-to-X) (\ n →
         let mod ♭ Gamma := mod ♭ ((I^n n)) in
-        let mod ♭ Gamma' := mod ♭ (product (I^n n) (shape (_ : 𝕀 | TOP))) in
+        let mod ♭ Gamma' := mod ♭ (product (I^n n) (⌈𝕀⌉)) in
         let mod ♭ Hom-in-S := mod ♭ (\ (F : Gamma' → S) → \ (G : Gamma' → S) → (((v , i) : Gamma') → first (F (v , i)) → first (G (v , i)))) in
         let mod ♭ E-X := mod ♭ (\ (F : Gamma' → S) → \ (G : Gamma' → S) → \ (alpha : Hom-in-S F G) →
           ( ( v : I^n n) → product
-              ( is-equiv (first (F (v , form 0₂))) (first (G (v , form 0₂))) (alpha (v , form 0₂)))
-              ( is-equiv (first (F (v , form 1₂))) (first (G (v , form 1₂))) (alpha (v , form 1₂))))) in
+              ( is-equiv (first (F (v , pt-⌈𝕀⌉ 0₂))) (first (G (v , pt-⌈𝕀⌉ 0₂))) (alpha (v , pt-⌈𝕀⌉ 0₂)))
+              ( is-equiv (first (F (v , pt-⌈𝕀⌉ 1₂))) (first (G (v , pt-⌈𝕀⌉ 1₂))) (alpha (v , pt-⌈𝕀⌉ 1₂))))) in
         let mod ♭ E-Y := mod ♭ (\ (F : Gamma' → S) → \ (G : Gamma' → S) → \ (alpha : Hom-in-S F G) →
-          ( ( ( v , i) : product (I^n n) (shape (_ : 𝕀 | TOP))) → is-equiv (first (F (v , i))) (first (G (v , i))) (alpha (v , i)))) in
+          ( ( ( v , i) : product (I^n n) (⌈𝕀⌉)) → is-equiv (first (F (v , i))) (first (G (v , i))) (alpha (v , i)))) in
         let mod ♭ X-cube :=
           mod ♭ (Σ (F : Gamma' → S) , Σ (G : Gamma' → S) , Σ (alpha : Hom-in-S F G) , E-X F G alpha) in
         let mod ♭ Y-cube :=
@@ -313,13 +313,13 @@ First part of equivalence mor2fun (dirglue f) is f.
             mod ♭ (\ F G alpha →
               is-prop-fiberwise-prop funext (I^n n)
                 ( \ v → product
-                    ( is-equiv (first (F (v , form 0₂))) (first (G (v , form 0₂))) (alpha (v , form 0₂)))
-                    ( is-equiv (first (F (v , form 1₂))) (first (G (v , form 1₂))) (alpha (v , form 1₂))))
+                    ( is-equiv (first (F (v , pt-⌈𝕀⌉ 0₂))) (first (G (v , pt-⌈𝕀⌉ 0₂))) (alpha (v , pt-⌈𝕀⌉ 0₂)))
+                    ( is-equiv (first (F (v , pt-⌈𝕀⌉ 1₂))) (first (G (v , pt-⌈𝕀⌉ 1₂))) (alpha (v , pt-⌈𝕀⌉ 1₂))))
                 ( \ v → is-prop-total-type-is-fiberwise-prop-is-prop-base
-                    ( is-equiv (first (F (v , form 0₂))) (first (G (v , form 0₂))) (alpha (v , form 0₂)))
-                    ( is-prop-is-equiv funext (first (F (v , form 0₂))) (first (G (v , form 0₂))) (alpha (v , form 0₂)))
-                    ( \ _ → is-equiv (first (F (v , form 1₂))) (first (G (v , form 1₂))) (alpha (v , form 1₂)))
-                    ( \ _ → is-prop-is-equiv funext (first (F (v , form 1₂))) (first (G (v , form 1₂))) (alpha (v , form 1₂))))) in
+                    ( is-equiv (first (F (v , pt-⌈𝕀⌉ 0₂))) (first (G (v , pt-⌈𝕀⌉ 0₂))) (alpha (v , pt-⌈𝕀⌉ 0₂)))
+                    ( is-prop-is-equiv funext (first (F (v , pt-⌈𝕀⌉ 0₂))) (first (G (v , pt-⌈𝕀⌉ 0₂))) (alpha (v , pt-⌈𝕀⌉ 0₂)))
+                    ( \ _ → is-equiv (first (F (v , pt-⌈𝕀⌉ 1₂))) (first (G (v , pt-⌈𝕀⌉ 1₂))) (alpha (v , pt-⌈𝕀⌉ 1₂)))
+                    ( \ _ → is-prop-is-equiv funext (first (F (v , pt-⌈𝕀⌉ 1₂))) (first (G (v , pt-⌈𝕀⌉ 1₂))) (alpha (v , pt-⌈𝕀⌉ 1₂))))) in
         let to-X-split : Equiv (♭ (I^n n → X)) X-split :=
           let mod ♭ X-uncurried :=
             mod ♭ (Σ (fa : (v : I^n n) → 𝕀 → S)
@@ -328,20 +328,90 @@ First part of equivalence mor2fun (dirglue f) is f.
             , ( ( v : I^n n) → product
                   ( is-equiv (first (fa v 0₂)) (first (fb v 0₂)) (fc v 0₂))
                   ( is-equiv (first (fa v 1₂)) (first (fb v 1₂)) (fc v 1₂)))) in
+          let mod ♭ TX :=
+            mod ♭ (Σ (A : S) , Σ (B : S) , first A → first B) in
+          let mod ♭ E-packed-X :=
+            mod ♭ (\ (p : Gamma' → TX) → (v : I^n n) →
+              let p0 : TX := p (v , pt-⌈𝕀⌉ 0₂) in
+              let p1 : TX := p (v , pt-⌈𝕀⌉ 1₂) in
+              product
+                ( is-equiv
+                    ( first (first p0))
+                    ( first (first (second p0)))
+                    ( second (second p0)))
+                ( is-equiv
+                    ( first (first p1))
+                    ( first (first (second p1)))
+                    ( second (second p1)))) in
+          let mod ♭ Packed-X :=
+            mod ♭ (Σ (p : Gamma' → TX) , E-packed-X p) in
+          let mod ♭ unpack-X : Packed-X → X-cube :=
+            mod ♭ (\ (p , e) →
+              ( \ q → first (p q)
+              , ( \ q → first (second (p q))
+                , ( \ q → second (second (p q))
+                  , e)))) in
+          let mod ♭ pack-X : X-cube → Packed-X :=
+            mod ♭ (\ (F , (G , (alpha , e))) →
+              ( \ q → (F q , (G q , alpha q))
+              , e)) in
+          let mod ♭ E-packed-X-is-prop
+            : (p : Gamma' → TX) → is-prop (E-packed-X p)
+            := mod ♭ (\ p →
+              E-X-is-prop
+                ( \ q → first (p q))
+                ( \ q → first (second (p q)))
+                ( \ q → second (second (p q)))) in
           let mod ♭ curry-X :=
             mod ♭ (equiv-has-inverse
               ( X-uncurried) (X-cube)
               ( \ (fa , (fb , (fc , last))) →
-                ( \ (v , t) → fa v (unform t)
-                , ( \ (v , t) → fb v (unform t)
-                  , ( \ (v , t) → fc v (unform t)
-                    , last))))
+                let packed : Gamma' → TX
+                  := \ (v , t) →
+                    equiv-ext-shape-fun-fwd 𝕀 (\ _ → TOP) (\ _ → TX)
+                      ( \ i → (fa v i , (fb v i , fc v i))) t in
+                unpack-X (packed , last))
               ( \ (F , (G , (alpha , e))) →
-                ( \ v j → F (v , form j)
-                , ( \ v j → G (v , form j)
-                  , ( \ v j → alpha (v , form j)
+                ( \ v j → F (v , pt-⌈𝕀⌉ j)
+                , ( \ v j → G (v , pt-⌈𝕀⌉ j)
+                  , ( \ v j → alpha (v , pt-⌈𝕀⌉ j)
                     , e))))
-              ( \ _ → refl) (\ _ → refl)) in
+              ( \ _ → refl)
+              ( \ x →
+                let px : Packed-X := pack-X x in
+                let p : Gamma' → TX := first px in
+                let e : E-packed-X p := second px in
+                let pη : Gamma' → TX :=
+                  \ (v , t) →
+                    equiv-ext-shape-fun-fwd 𝕀 (\ _ → TOP) (\ _ → TX)
+                      ( \ i → p (v , pt-⌈𝕀⌉ i)) t in
+                let pη=p : pη = p :=
+                  ap
+                    ( (v : I^n n) → ⌈𝕀⌉ → TX)
+                    ( Gamma' → TX)
+                    ( \ v t → pη (v , t))
+                    ( \ v t → p (v , t))
+                    ( \ h (v , t) → h v t)
+                    ( eq-htpy funext
+                        ( I^n n) (\ _ → ⌈𝕀⌉ → TX)
+                        ( \ v t → pη (v , t))
+                        ( \ v t → p (v , t))
+                        ( \ v →
+                          second (second (second
+                            ( equiv-ext-shape-fun
+                                funext 𝕀 (\ _ → TOP) (\ _ → TX))))
+                            ( \ s → p (v , s)))) in
+                ap Packed-X X-cube
+                  ( pη , e) (p , e)
+                  ( unpack-X)
+                  ( eq-pair
+                      ( Gamma' → TX) (E-packed-X)
+                      ( pη , e) (p , e)
+                      ( pη=p
+                      , first
+                          ( E-packed-X-is-prop p
+                            ( transport (Gamma' → TX) E-packed-X pη p pη=p e)
+                            e))))) in
           equiv-comp (♭ (I^n n → X)) (♭ X-cube) X-split
             ( b-equiv (I^n n → X) X-cube
                 ( equiv-comp (I^n n → X) X-uncurried X-cube
@@ -358,20 +428,102 @@ First part of equivalence mor2fun (dirglue f) is f.
             , Σ ( fb : (v : I^n n) → 𝕀 → S)
             , Σ ( fc : (v : I^n n) → ((i : 𝕀) → first (fa v i) → first (fb v i)))
             , ( ( v : I^n n) → (i : 𝕀) → is-equiv (first (fa v i)) (first (fb v i)) (fc v i))) in
+          let mod ♭ TY :=
+            mod ♭ (Σ (A : S) , Σ (B : S) , first A → first B) in
+          let mod ♭ E-packed-Y :=
+            mod ♭ (\ (p : Gamma' → TY) → ((v , t) : Gamma') →
+              is-equiv
+                ( first (first (p (v , t))))
+                ( first (first (second (p (v , t)))))
+                ( second (second (p (v , t))))) in
+          let mod ♭ Packed-Y :=
+            mod ♭ (Σ (p : Gamma' → TY) , E-packed-Y p) in
+          let mod ♭ unpack-Y : Packed-Y → Y-cube :=
+            mod ♭ (\ (p , e) →
+              ( \ q → first (p q)
+              , ( \ q → first (second (p q))
+                , ( \ q → second (second (p q))
+                  , e)))) in
+          let mod ♭ pack-Y : Y-cube → Packed-Y :=
+            mod ♭ (\ (F , (G , (alpha , e))) →
+              ( \ q → (F q , (G q , alpha q))
+              , e)) in
+          let mod ♭ E-packed-Y-is-prop
+            : (p : Gamma' → TY) → is-prop (E-packed-Y p)
+            := mod ♭ (\ p →
+              E-Y-is-prop
+                ( \ q → first (p q))
+                ( \ q → first (second (p q)))
+                ( \ q → second (second (p q)))) in
           let mod ♭ curry-Y :=
             mod ♭ (equiv-has-inverse
               ( Y-uncurried) (Y-cube)
               ( \ (fa , (fb , (fc , nlast))) →
-                ( \ (v , t) → fa v (unform t)
-                , ( \ (v , t) → fb v (unform t)
-                  , ( \ (v , t) → fc v (unform t)
-                    , \ (v , i) → nlast v (unform i)))))
+                let packed : Gamma' → TY
+                  := \ (v , t) →
+                    equiv-ext-shape-fun-fwd 𝕀 (\ _ → TOP) (\ _ → TY)
+                      ( \ i → (fa v i , (fb v i , fc v i))) t in
+                let packed-equiv : E-packed-Y packed :=
+                  \ (v , t) →
+                    match t into
+                      ( \ t' →
+                        is-equiv
+                          ( first (first (packed (v , t'))))
+                          ( first (first (second (packed (v , t')))))
+                          ( second (second (packed (v , t')))))
+                    ( point i ⇒ nlast v i) in
+                unpack-Y (packed , packed-equiv))
               ( \ (F , (G , (alpha , e))) →
-                ( \ v j → F (v , form j)
-                , ( \ v j → G (v , form j)
-                  , ( \ v j → alpha (v , form j)
-                    , \ v j → e (v , form j)))))
-              ( \ _ → refl) (\ _ → refl)) in
+                ( \ v j → F (v , pt-⌈𝕀⌉ j)
+                , ( \ v j → G (v , pt-⌈𝕀⌉ j)
+                  , ( \ v j → alpha (v , pt-⌈𝕀⌉ j)
+                    , \ v j → e (v , pt-⌈𝕀⌉ j)))))
+              ( \ _ → refl)
+              ( \ x →
+                let px : Packed-Y := pack-Y x in
+                let p : Gamma' → TY := first px in
+                let e : E-packed-Y p := second px in
+                let pη : Gamma' → TY :=
+                  \ (v , t) →
+                    equiv-ext-shape-fun-fwd 𝕀 (\ _ → TOP) (\ _ → TY)
+                      ( \ i → p (v , pt-⌈𝕀⌉ i)) t in
+                let eη : E-packed-Y pη :=
+                  \ (v , t) →
+                    match t into
+                      ( \ t' →
+                        is-equiv
+                          ( first (first (pη (v , t'))))
+                          ( first (first (second (pη (v , t')))))
+                          ( second (second (pη (v , t')))))
+                    ( point i ⇒ e (v , pt-⌈𝕀⌉ i)) in
+                let pη=p : pη = p :=
+                  ap
+                    ( (v : I^n n) → ⌈𝕀⌉ → TY)
+                    ( Gamma' → TY)
+                    ( \ v t → pη (v , t))
+                    ( \ v t → p (v , t))
+                    ( \ h (v , t) → h v t)
+                    ( eq-htpy funext
+                        ( I^n n) (\ _ → ⌈𝕀⌉ → TY)
+                        ( \ v t → pη (v , t))
+                        ( \ v t → p (v , t))
+                        ( \ v →
+                          second (second (second
+                            ( equiv-ext-shape-fun
+                                funext 𝕀 (\ _ → TOP) (\ _ → TY))))
+                            ( \ s → p (v , s)))) in
+                ap Packed-Y Y-cube
+                  ( pη , eη) (p , e)
+                  ( unpack-Y)
+                  ( eq-pair
+                      ( Gamma' → TY) (E-packed-Y)
+                      ( pη , eη) (p , e)
+                      ( pη=p
+                      , first
+                          ( E-packed-Y-is-prop p
+                            ( transport (Gamma' → TY) E-packed-Y
+                                pη p pη=p eη)
+                            e))))) in
           equiv-comp (♭ (I^n n → Y)) (♭ Y-cube) Y-split
             ( b-equiv (I^n n → Y) Y-cube
                 ( equiv-comp (I^n n → Y) Y-uncurried Y-cube
@@ -394,7 +546,7 @@ First part of equivalence mor2fun (dirglue f) is f.
                   ( is-prop-flat (E-Y F0 G0 a0) (mod ♭ (E-Y-is-prop F0 G0 a0)))
                   ( is-prop-flat (E-X F0 G0 a0) (mod ♭ (E-X-is-prop F0 G0 a0)))
                   ( ( b-map (E-Y F0 G0 a0) (E-X F0 G0 a0)
-                        ( \ e v → (e (v , form 0₂) , e (v , form 1₂))))
+                        ( \ e v → (e (v , pt-⌈𝕀⌉ 0₂) , e (v , pt-⌈𝕀⌉ 1₂))))
                   , ( \ e →
                         let mod ♭ e0 := e in
                         let mod ♭ F̃ :=
@@ -452,28 +604,28 @@ First part of equivalence mor2fun (dirglue f) is f.
                                   :=
                                     \ v →
                                       let mod ♭ v' := v in
-                                      Σ ( theta : ♭ (I^n m → shape (_ : 𝕀 | TOP)))
+                                      Σ ( theta : ♭ (I^n m → ⌈𝕀⌉))
                                       , ( let mod ♭ theta' := theta in
                                           let mod ♭ vc :=
                                             mod ♭ (v' (zero-vec-I^n m)) in
-                                          let mod ♭ i :=
-                                            mod ♭ (unform (theta' (zero-vec-I^n m))) in
-                                          ♭ ( first (F0 (vc , form i)))) in
+                                          ♭ ( first (F0
+                                                ( vc
+                                                , theta' (zero-vec-I^n m))))) in
                                 let fixed-G
  : ( v : ♭ (I^n m → I^n n)) → U
                                   :=
                                     \ v →
                                       let mod ♭ v' := v in
-                                      Σ ( theta : ♭ (I^n m → shape (_ : 𝕀 | TOP)))
+                                      Σ ( theta : ♭ (I^n m → ⌈𝕀⌉))
                                       , ( let mod ♭ theta' := theta in
                                           let mod ♭ vc :=
                                             mod ♭ (v' (zero-vec-I^n m)) in
-                                          let mod ♭ i :=
-                                            mod ♭ (unform (theta' (zero-vec-I^n m))) in
-                                          ♭ ( first (G0 (vc , form i)))) in
+                                          ♭ ( first (G0
+                                                ( vc
+                                                , theta' (zero-vec-I^n m))))) in
                                 let to-F-split
  : Equiv
-                                      ( ♭ ( I^n m → Σ (t : product (I^n n) (shape (_ : 𝕀 | TOP))) , first (F0 t)))
+                                      ( ♭ ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (F0 t)))
                                       ( Σ ( v : ♭ (I^n m → I^n n)) , fixed-F v)
                                   :=
                                     let mod ♭ F-uncurried :=
@@ -481,14 +633,14 @@ First part of equivalence mor2fun (dirglue f) is f.
                                     let mod ♭ curry-F :=
                                       mod ♭ (equiv-orthogonality-pullback-split n m (\ t → first (F0 t))) in
                                     equiv-comp
-                                      ( ♭ ( I^n m → Σ (t : product (I^n n) (shape (_ : 𝕀 | TOP))) , first (F0 t)))
+                                      ( ♭ ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (F0 t)))
                                       ( ♭ ( orthogonality-pullback-split n m (\ t → first (F0 t))))
                                       ( Σ ( v : ♭ (I^n m → I^n n)) , fixed-F v)
                                       ( b-equiv
-                                          ( I^n m → Σ (t : product (I^n n) (shape (_ : 𝕀 | TOP))) , first (F0 t))
+                                          ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (F0 t))
                                           ( orthogonality-pullback-split n m (\ t → first (F0 t)))
                                           ( equiv-comp
-                                              ( I^n m → Σ (t : product (I^n n) (shape (_ : 𝕀 | TOP))) , first (F0 t))
+                                              ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (F0 t))
                                               ( F-uncurried)
                                               ( orthogonality-pullback-split n m (\ t → first (F0 t)))
                                               ( orthogonality-pullback n m (\ t → first (F0 t)))
@@ -496,7 +648,7 @@ First part of equivalence mor2fun (dirglue f) is f.
                                       ( orthogonality-pullback-flat-commute n m (\ t → first (F0 t))) in
                                 let to-G-split
  : Equiv
-                                      ( ♭ ( I^n m → Σ (t : product (I^n n) (shape (_ : 𝕀 | TOP))) , first (G0 t)))
+                                      ( ♭ ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (G0 t)))
                                       ( Σ ( v : ♭ (I^n m → I^n n)) , fixed-G v)
                                   :=
                                     let mod ♭ G-uncurried :=
@@ -504,14 +656,14 @@ First part of equivalence mor2fun (dirglue f) is f.
                                     let mod ♭ curry-G :=
                                       mod ♭ (equiv-orthogonality-pullback-split n m (\ t → first (G0 t))) in
                                     equiv-comp
-                                      ( ♭ ( I^n m → Σ (t : product (I^n n) (shape (_ : 𝕀 | TOP))) , first (G0 t)))
+                                      ( ♭ ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (G0 t)))
                                       ( ♭ ( orthogonality-pullback-split n m (\ t → first (G0 t))))
                                       ( Σ ( v : ♭ (I^n m → I^n n)) , fixed-G v)
                                       ( b-equiv
-                                          ( I^n m → Σ (t : product (I^n n) (shape (_ : 𝕀 | TOP))) , first (G0 t))
+                                          ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (G0 t))
                                           ( orthogonality-pullback-split n m (\ t → first (G0 t)))
                                           ( equiv-comp
-                                              ( I^n m → Σ (t : product (I^n n) (shape (_ : 𝕀 | TOP))) , first (G0 t))
+                                              ( I^n m → Σ (t : product (I^n n) (⌈𝕀⌉)) , first (G0 t))
                                               ( G-uncurried)
                                               ( orthogonality-pullback-split n m (\ t → first (G0 t)))
                                               ( orthogonality-pullback n m (\ t → first (G0 t)))
@@ -524,37 +676,39 @@ First part of equivalence mor2fun (dirglue f) is f.
                                   :=
                                     total-b-equiv-family2
                                       ( I^n m → I^n n)
-                                      ( \ _ → I^n m → shape (_ : 𝕀 | TOP))
+                                      ( \ _ → I^n m → ⌈𝕀⌉)
                                       ( \ (v' :♭ (I^n m → I^n n))
-                                        → \ (theta' :♭ (I^n m → shape (_ : 𝕀 | TOP)))
+                                        → \ (theta' :♭ (I^n m → ⌈𝕀⌉))
                                           → let mod ♭ vc :=
                                               mod ♭ (v' (zero-vec-I^n m)) in
-                                            let mod ♭ i :=
-                                              mod ♭ (unform (theta' (zero-vec-I^n m))) in
-                                            ♭ ( first (F0 (vc , form i))))
+                                            ♭ ( first (F0
+                                                ( vc
+                                                , theta' (zero-vec-I^n m)))))
                                       ( \ (v' :♭ (I^n m → I^n n))
-                                        → \ (theta' :♭ (I^n m → shape (_ : 𝕀 | TOP)))
+                                        → \ (theta' :♭ (I^n m → ⌈𝕀⌉))
                                           → let mod ♭ vc :=
                                               mod ♭ (v' (zero-vec-I^n m)) in
-                                            let mod ♭ i :=
-                                              mod ♭ (unform (theta' (zero-vec-I^n m))) in
-                                            ♭ ( first (G0 (vc , form i))))
+                                            ♭ ( first (G0
+                                                ( vc
+                                                , theta' (zero-vec-I^n m)))))
                                       ( \ (v' :♭ (I^n m → I^n n))
-                                        → \ (theta' :♭ (I^n m → shape (_ : 𝕀 | TOP)))
+                                        → \ (theta' :♭ (I^n m → ⌈𝕀⌉))
                                           → let mod ♭ vc :=
                                               mod ♭ (v' (zero-vec-I^n m)) in
-                                            let mod ♭ i :=
-                                              mod ♭ (unform (theta' (zero-vec-I^n m))) in
-                                            b-equiv
-                                              ( first (F0 (vc , form i)))
-                                              ( first (G0 (vc , form i)))
-                                              ( a0 (vc , form i)
-                                              , is-equiv-discrete-interval-elim i
-                                                  ( \ j → first (F0 (vc , form j)))
-                                                  ( \ j → first (G0 (vc , form j)))
-                                                  ( \ j → a0 (vc , form j))
-                                                  ( first (e0 vc))
-                                                  ( second (e0 vc)))) in
+                                            b-equiv-total-shape
+                                              ( 𝕀)
+                                              ( \ s → first (F0 (vc , s)))
+                                              ( \ s → first (G0 (vc , s)))
+                                              ( \ s → a0 (vc , s))
+                                              ( \ (i :_b 𝕀) →
+                                                  is-equiv-discrete-interval-elim i
+                                                    ( \ j → first (F0 (vc , pt-⌈𝕀⌉ j)))
+                                                    ( \ j → first (G0 (vc , pt-⌈𝕀⌉ j)))
+                                                    ( \ j → a0 (vc , pt-⌈𝕀⌉ j))
+                                                    ( first (e0 vc))
+                                                    ( second (e0 vc)))
+                                              ( mod ♭
+                                                  (theta' (zero-vec-I^n m)))) in
                                 is-equiv-b-map-via-splits
                                   ( I^n m → F̃) (I^n m → G̃)
                                   ( \ p t → ã (p t))
@@ -577,7 +731,7 @@ First part of equivalence mor2fun (dirglue f) is f.
         ( second (second Y-to-X-is-equiv) (f , (g , (a , (e0 , e1)))))
         ( second (second (second (first (second Y-to-X-is-equiv) (f , (g , (a , (e0 , e1))))))))
 
-#def is-equiv-amazing-covariant-from-vertices uses (funext weakfunext extext)
+#def is-equiv-amazing-covariant-from-vertices uses (funext weakfunext)
   ( f g : ( ( t , s) : Δ²-II) → S)
   ( a : ( ( t , s) : Δ²-II) → first (f (t , s)) → first (g (t , s)))
   : is-equiv (first (f (0₂ , 0₂))) (first (g (0₂ , 0₂))) (a (0₂ , 0₂))
@@ -608,7 +762,7 @@ First part of equivalence mor2fun (dirglue f) is f.
          ( covariant-transport-line-II
             ( \ (t : 𝕀 | TOP) → first (F (sup i t)))
             ( s-is-covariant-arrow-II (\ j → F (sup i j)))
-            ( \ k → form k)
+            ( \ k → pt-⌈𝕀⌉ k)
             x
          , \ (t : 1 | i ≡ 0₂) → (x , refl)) in
     let equiv-0 : is-equiv (first (F 0₂)) (first (G 0₂)) (a 0₂)
@@ -628,7 +782,7 @@ First part of equivalence mor2fun (dirglue f) is f.
                ( \ x → covariant-transport-line-II
                     ( \ (t : 𝕀 | TOP) → first (F 1₂))
                     ( s-is-covariant-arrow-II (\ j → F 1₂))
-                    ( \ k → form k)
+                    ( \ k → pt-⌈𝕀⌉ k)
                     x)
                ( \ a → a)
                ( \ x → amazing-covariant-uniqueness-line-II
@@ -1035,13 +1189,13 @@ maps.
   ( a : first A)
   : transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2_10=B A B C f g)
       ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , 0₂)))
-          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → form k)
+          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → pt-⌈𝕀⌉ k)
           ( transport-rev S (\ s → first s) (dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2_00=A A B C f g) a))
     = f a
   :=
     let coe-BE : first (dirglue2 A B C f g (0₂ , 0₂)) → first (dirglue2 A B C f g (1₂ , 0₂))
       := covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , 0₂)))
-           ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → form k) in
+           ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → pt-⌈𝕀⌉ k) in
     let a-in-0 : first (dirglue2 A B C f g (0₂ , 0₂))
       := transport-rev S (\ s → first s) (dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2_00=A A B C f g) a in
     let bf : fib (first B) (first C) g (first a-in-0)
@@ -1102,7 +1256,7 @@ maps.
       ( dirglue2 A B C f g (1₂ , 0₂)) B
       ( dirglue2_00=A A B C f g) (dirglue2_10=B A B C f g)
       ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , 0₂)))
-          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → form k))
+          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → pt-⌈𝕀⌉ k))
     = f
   :=
     concat (first A → first B)
@@ -1110,23 +1264,23 @@ maps.
           ( dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2 A B C f g (1₂ , 0₂)) B
           ( dirglue2_00=A A B C f g) (dirglue2_10=B A B C f g)
           ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , 0₂)))
-              ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → form k)))
+              ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → pt-⌈𝕀⌉ k)))
       ( \ (a : first A) →
           transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2_10=B A B C f g)
             ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , 0₂)))
-                ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → form k)
+                ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → pt-⌈𝕀⌉ k)
                 ( transport-rev S (\ s → first s) (dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2_00=A A B C f g) a)))
       ( f)
       ( product-transport-fun S (\ s → first s)
           ( dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2 A B C f g (1₂ , 0₂)) B
           ( dirglue2_00=A A B C f g) (dirglue2_10=B A B C f g)
           ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , 0₂)))
-              ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → form k)))
+              ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → pt-⌈𝕀⌉ k)))
       ( eq-htpy funext (first A) (\ _ → first B)
           ( \ (a : first A) →
               transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2_10=B A B C f g)
                 ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , 0₂)))
-                    ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → form k)
+                    ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → pt-⌈𝕀⌉ k)
                     ( transport-rev S (\ s → first s) (dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2_00=A A B C f g) a)))
           ( f)
           ( coe-dirglue2-bottom-is-f-pointwise A B C f g))
@@ -1138,13 +1292,13 @@ maps.
   ( b : first B)
   : transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 1₂)) C (dirglue2_11=C A B C f g)
       ( covariant-transport-line-II (\ (s : 𝕀 | TOP) → first (dirglue2 A B C f g (1₂ , s)))
-          ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → form k)
+          ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → pt-⌈𝕀⌉ k)
           ( transport-rev S (\ s → first s) (dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2_10=B A B C f g) b))
     = g b
   :=
     let coe-RE : first (dirglue2 A B C f g (1₂ , 0₂)) → first (dirglue2 A B C f g (1₂ , 1₂))
       := covariant-transport-line-II (\ (s : 𝕀 | TOP) → first (dirglue2 A B C f g (1₂ , s)))
-           ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → form k) in
+           ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → pt-⌈𝕀⌉ k) in
     let b-in-0 : first (dirglue2 A B C f g (1₂ , 0₂))
       := transport-rev S (\ s → first s) (dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2_10=B A B C f g) b in
     let bf : fib (first B) (first C) g (first b-in-0)
@@ -1203,7 +1357,7 @@ maps.
       ( dirglue2 A B C f g (1₂ , 1₂)) C
       ( dirglue2_10=B A B C f g) (dirglue2_11=C A B C f g)
       ( covariant-transport-line-II (\ (s : 𝕀 | TOP) → first (dirglue2 A B C f g (1₂ , s)))
-          ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → form k))
+          ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → pt-⌈𝕀⌉ k))
     = g
   :=
     concat (first B → first C)
@@ -1211,23 +1365,23 @@ maps.
           ( dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2 A B C f g (1₂ , 1₂)) C
           ( dirglue2_10=B A B C f g) (dirglue2_11=C A B C f g)
           ( covariant-transport-line-II (\ (s : 𝕀 | TOP) → first (dirglue2 A B C f g (1₂ , s)))
-              ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → form k)))
+              ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → pt-⌈𝕀⌉ k)))
       ( \ (b : first B) →
           transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 1₂)) C (dirglue2_11=C A B C f g)
             ( covariant-transport-line-II (\ (s : 𝕀 | TOP) → first (dirglue2 A B C f g (1₂ , s)))
-                ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → form k)
+                ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → pt-⌈𝕀⌉ k)
                 ( transport-rev S (\ s → first s) (dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2_10=B A B C f g) b)))
       ( g)
       ( product-transport-fun S (\ s → first s)
           ( dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2 A B C f g (1₂ , 1₂)) C
           ( dirglue2_10=B A B C f g) (dirglue2_11=C A B C f g)
           ( covariant-transport-line-II (\ (s : 𝕀 | TOP) → first (dirglue2 A B C f g (1₂ , s)))
-              ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → form k)))
+              ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → pt-⌈𝕀⌉ k)))
       ( eq-htpy funext (first B) (\ _ → first C)
           ( \ (b : first B) →
               transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 1₂)) C (dirglue2_11=C A B C f g)
                 ( covariant-transport-line-II (\ (s : 𝕀 | TOP) → first (dirglue2 A B C f g (1₂ , s)))
-                    ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → form k)
+                    ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → pt-⌈𝕀⌉ k)
                     ( transport-rev S (\ s → first s) (dirglue2 A B C f g (1₂ , 0₂)) B (dirglue2_10=B A B C f g) b)))
           ( g)
           ( coe-dirglue2-right-is-g-pointwise A B C f g))
@@ -1239,13 +1393,13 @@ maps.
   ( a : first A)
   : transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 1₂)) C (dirglue2_11=C A B C f g)
       ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
-          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → form k)
+          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → pt-⌈𝕀⌉ k)
           ( transport-rev S (\ s → first s) (dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2_00=A A B C f g) a))
     = g (f a)
   :=
     let coe-DE : first (dirglue2 A B C f g (0₂ , 0₂)) → first (dirglue2 A B C f g (1₂ , 1₂))
       := covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
-           ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → form k) in
+           ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → pt-⌈𝕀⌉ k) in
     let a-in-0 : first (dirglue2 A B C f g (0₂ , 0₂))
       := transport-rev S (\ s → first s) (dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2_00=A A B C f g) a in
     let bf : fib (first B) (first C) g (first a-in-0)
@@ -1313,7 +1467,7 @@ maps.
       ( dirglue2 A B C f g (1₂ , 1₂)) C
       ( dirglue2_00=A A B C f g) (dirglue2_11=C A B C f g)
       ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
-          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → form k))
+          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → pt-⌈𝕀⌉ k))
     = comp (first A) (first B) (first C) g f
   :=
     concat (first A → first C)
@@ -1321,23 +1475,23 @@ maps.
           ( dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2 A B C f g (1₂ , 1₂)) C
           ( dirglue2_00=A A B C f g) (dirglue2_11=C A B C f g)
           ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
-              ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → form k)))
+              ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → pt-⌈𝕀⌉ k)))
       ( \ (a : first A) →
           transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 1₂)) C (dirglue2_11=C A B C f g)
             ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
-                ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → form k)
+                ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → pt-⌈𝕀⌉ k)
                 ( transport-rev S (\ s → first s) (dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2_00=A A B C f g) a)))
       ( comp (first A) (first B) (first C) g f)
       ( product-transport-fun S (\ s → first s)
           ( dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2 A B C f g (1₂ , 1₂)) C
           ( dirglue2_00=A A B C f g) (dirglue2_11=C A B C f g)
           ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
-              ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → form k)))
+              ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → pt-⌈𝕀⌉ k)))
       ( eq-htpy funext (first A) (\ _ → first C)
           ( \ (a : first A) →
               transport S (\ s → first s) (dirglue2 A B C f g (1₂ , 1₂)) C (dirglue2_11=C A B C f g)
                 ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , t)))
-                    ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → form k)
+                    ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , t))) (\ k → pt-⌈𝕀⌉ k)
                     ( transport-rev S (\ s → first s) (dirglue2 A B C f g (0₂ , 0₂)) A (dirglue2_00=A A B C f g) a)))
           ( comp (first A) (first B) (first C) g f)
           ( coe-dirglue2-diagonal-is-comp-pointwise A B C f g))
@@ -1565,9 +1719,9 @@ maps.
       ( dirglue2 A B C f g (1₂ , 0₂))
       ( dirglue2 A B C f g (1₂ , 1₂))
       ( covariant-transport-line-II (\ (t : 𝕀 | TOP) → first (dirglue2 A B C f g (t , 0₂)))
-          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → form k))
+          ( s-is-covariant-arrow-II (\ t → dirglue2 A B C f g (t , 0₂))) (\ k → pt-⌈𝕀⌉ k))
       ( covariant-transport-line-II (\ (s : 𝕀 | TOP) → first (dirglue2 A B C f g (1₂ , s)))
-          ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → form k))
+          ( s-is-covariant-arrow-II (\ s → dirglue2 A B C f g (1₂ , s))) (\ k → pt-⌈𝕀⌉ k))
       ( A) (dirglue2_00=A A B C f g)
       ( B) (dirglue2_10=B A B C f g)
       ( C) (dirglue2_11=C A B C f g)
@@ -1589,12 +1743,12 @@ maps.
     let a : ( ( t , s) : Δ²-II) → first (F (t , s)) → first (G (t , s))
       := \ (t , s) → \ x →
           ( covariant-transport-line-II (\ (r' : 𝕀 | TOP) → first (F (1₂ , sup s r')))
-              ( s-is-covariant-arrow-II (\ r' → F (1₂ , sup s r'))) (\ k → form k)
+              ( s-is-covariant-arrow-II (\ r' → F (1₂ , sup s r'))) (\ k → pt-⌈𝕀⌉ k)
               ( covariant-transport-line-II (\ (r : 𝕀 | TOP) → first (F (sup t r , s)))
-                  ( s-is-covariant-arrow-II (\ r → F (sup t r , s))) (\ k → form k) x)
+                  ( s-is-covariant-arrow-II (\ r → F (sup t r , s))) (\ k → pt-⌈𝕀⌉ k) x)
           , \ (u : 1 | s ≡ 0₂) →
               ( ( covariant-transport-line-II (\ (r : 𝕀 | TOP) → first (F (sup t r , 0₂)))
-                    ( s-is-covariant-arrow-II (\ r → F (sup t r , 0₂))) (\ k → form k) x
+                    ( s-is-covariant-arrow-II (\ r → F (sup t r , 0₂))) (\ k → pt-⌈𝕀⌉ k) x
                 , refl )
               , \ (w : 1 | t ≡ 0₂) → (x , refl))) in
     let equiv-00 : is-equiv (first (F (0₂ , 0₂))) (first (G (0₂ , 0₂))) (a (0₂ , 0₂))
@@ -1628,20 +1782,20 @@ maps.
                ( \ x →
                    concat (first (F (1₂ , 1₂)))
                      ( covariant-transport-line-II (\ (r' : 𝕀 | TOP) → first (F (1₂ , sup 1₂ r')))
-                         ( s-is-covariant-arrow-II (\ r' → F (1₂ , sup 1₂ r'))) (\ k → form k)
+                         ( s-is-covariant-arrow-II (\ r' → F (1₂ , sup 1₂ r'))) (\ k → pt-⌈𝕀⌉ k)
                          ( covariant-transport-line-II (\ (r : 𝕀 | TOP) → first (F (sup 1₂ r , 1₂)))
-                             ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → form k) x))
+                             ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → pt-⌈𝕀⌉ k) x))
                      ( covariant-transport-line-II (\ (r : 𝕀 | TOP) → first (F (sup 1₂ r , 1₂)))
-                         ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → form k) x)
+                         ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → pt-⌈𝕀⌉ k) x)
                      ( x)
                      ( amazing-covariant-uniqueness-line-II (\ (r' : 𝕀 | TOP) → first (F (1₂ , sup 1₂ r')))
                          ( s-is-covariant-arrow-II (\ r' → F (1₂ , sup 1₂ r')))
                          ( covariant-transport-line-II (\ (r : 𝕀 | TOP) → first (F (sup 1₂ r , 1₂)))
-                             ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → form k) x)
+                             ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → pt-⌈𝕀⌉ k) x)
                          ( covariant-transport-line-II (\ (r : 𝕀 | TOP) → first (F (sup 1₂ r , 1₂)))
-                             ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → form k) x)
+                             ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → pt-⌈𝕀⌉ k) x)
                          ( \ (r' : 𝕀) → covariant-transport-line-II (\ (r : 𝕀 | TOP) → first (F (sup 1₂ r , 1₂)))
-                             ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → form k) x))
+                             ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) (\ k → pt-⌈𝕀⌉ k) x))
                      ( amazing-covariant-uniqueness-line-II (\ (r : 𝕀 | TOP) → first (F (sup 1₂ r , 1₂)))
                          ( s-is-covariant-arrow-II (\ r → F (sup 1₂ r , 1₂))) x x (\ (r : 𝕀) → x)))
                ( is-equiv-identity (first (F (1₂ , 1₂))))) in

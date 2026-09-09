@@ -42,7 +42,8 @@ This is a literate `rzk` file: `is-covariant-arrow-II`, amazing covariance
 #def is-prop-is-covariant-arrow-II uses (weakfunext funext)
   ( A : (t : 𝕀 | TOP) → U)
   : is-prop (is-covariant-arrow-II A)
-  := is-prop-is-covariant-II funext weakfunext (shape (_ : 𝕀 | TOP)) (\ (s : shape (_ : 𝕀 | TOP)) → A (unform s))
+  := is-prop-is-covariant-II
+      funext weakfunext ⌈𝕀⌉ (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → A t))
 
 #def is-covariant-arrow-II-Prop uses (weakfunext funext) (A : (t : 𝕀 | TOP) → U)
   : Prop
@@ -104,14 +105,16 @@ Lemma 5.11
   ( cov : is-covariant-arrow-II A)
   ( a0 : A 0₂)
   ( a1 : A 1₂)
-  ( h : dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → A (unform s)) a0 a1)
-  : covariant-transport-line-II A cov (\ k → form k) a0 = a1
+  ( h : dhom-II ⌈𝕀⌉
+      (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+      (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → A t)) a0 a1)
+  : covariant-transport-line-II A cov (\ k → pt-⌈𝕀⌉ k) a0 = a1
   :=
     covariant-uniqueness-II
-      ( shape (_ : 𝕀 | TOP))
-      ( form 0₂) ( form 1₂)
-      ( \ (t : 𝕀) → form t)
-      ( \ (t : shape (_ : 𝕀 | TOP)) → A (unform t))
+      ( ⌈𝕀⌉)
+      ( pt-⌈𝕀⌉ 0₂) ( pt-⌈𝕀⌉ 1₂)
+      ( \ (t : 𝕀) → pt-⌈𝕀⌉ t)
+      ( equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → A t))
       ( cov)
       ( a0)
       ( a1 , h)
@@ -119,8 +122,8 @@ Lemma 5.11
 #def amazing-covariant-transport-line-II uses (funext weakfunext)
   ( A : 𝕀 → U)
   ( is-a-cov-A : (i : 𝕀) → is-a-cov (A i))
-  ( l : 𝕀 → shape (_ : 𝕀 | TOP))
-  : A (unform (l 0₂)) → A (unform (l 1₂))
+  ( l : 𝕀 → ⌈𝕀⌉)
+  : equiv-ext-shape-family-fwd 𝕀 □¹ A (l 0₂) → equiv-ext-shape-family-fwd 𝕀 □¹ A (l 1₂)
   :=
     covariant-transport-line-II
       ( \ (t : 𝕀 | TOP) → A t)
@@ -139,7 +142,8 @@ Lemma 5.11
   ( is-a-cov-A : (i : 𝕀) → is-a-cov (A i))
   ( j : 𝕀)
   ( x : A j)
-  : amazing-covariant-transport-line-II A is-a-cov-A (\ k → form j) x = x
+  : amazing-covariant-transport-line-II A is-a-cov-A
+      (\ k → pt-⌈𝕀⌉ j) x = x
   :=
     covariant-transport-line-const-II
       ( \ (t : 𝕀 | TOP) → A t)
@@ -151,14 +155,15 @@ Lemma 5.11
               ( \ (X , _) → X)
               ( \ (_ , cX) → cX))
           ( \ k → (A k , is-a-cov-A k)))
-      ( form j)
+      ( pt-⌈𝕀⌉ j)
       ( x)
 
 #def amazing-covariant-transport-line-const-at-0-II uses (funext weakfunext)
   ( A : 𝕀 → U)
   ( is-a-cov-A : (i : 𝕀) → is-a-cov (A i))
   ( x : A 0₂)
-  : amazing-covariant-transport-line-II A is-a-cov-A (\ k → form (inf 0₂ k)) x = x
+  : amazing-covariant-transport-line-II A is-a-cov-A
+      (\ k → pt-⌈𝕀⌉ (inf 0₂ k)) x = x
   :=
     covariant-transport-line-const-at-0-II
       ( \ (t : 𝕀 | TOP) → A t)
@@ -177,7 +182,8 @@ Lemma 5.11
   ( is-a-cov-A : (i : 𝕀) → is-a-cov (A i))
   ( j : 𝕀)
   ( x : A 0₂)
-  : amazing-covariant-transport-line-II A is-a-cov-A (\ k → form (inf 0₂ (sup j k))) x = x
+  : amazing-covariant-transport-line-II A is-a-cov-A
+      (\ k → pt-⌈𝕀⌉ (inf 0₂ (sup j k))) x = x
   :=
     covariant-transport-line-const-0-sup-II
       ( \ (t : 𝕀 | TOP) → A t)
@@ -197,7 +203,8 @@ Lemma 5.11
   ( is-a-cov-A : (i : 𝕀) → is-a-cov (A i))
   ( i : 𝕀)
   ( x : A i)
-  : amazing-covariant-transport-line-II A is-a-cov-A (\ k → form (inf i (sup 1₂ k))) x = x
+  : amazing-covariant-transport-line-II A is-a-cov-A
+      (\ k → pt-⌈𝕀⌉ (inf i (sup 1₂ k))) x = x
   := amazing-covariant-transport-line-const-II A is-a-cov-A i x
 
 #def amazing-covariant-transport-line-const-0-sup-1-II uses (funext weakfunext)
@@ -210,31 +217,38 @@ Lemma 5.11
 
 #def amazing-covariant-transport-line-inv-II uses (funext weakfunext)
   ( packed : ᵒᵖ (𝕀 → Σ (X : U) , is-a-cov X))
-  ( l : 𝕀 → shape (_ : 𝕀 | TOP))
+  ( l : 𝕀 → ⌈𝕀⌉)
   : ( let mod ᵒᵖ p := packed in
-      let mod ᵒᵖ j₁ := flip_op (unform (l 1₂)) in
-      let mod ᵒᵖ j₀ := flip_op (unform (l 0₂)) in
-      ᵒᵖ (first (p j₁)) → ᵒᵖ (first (p j₀)))
+      let mod ᵒᵖ lam0 := op-shape-line-flip l in
+        ᵒᵖ (equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → first (p i)) (lam0 0₂))
+          → ᵒᵖ (equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → first (p i)) (lam0 1₂)))
   :=
-    \ x →
-      let F-acov
-        : (k : 𝕀) → ᵒᵖ (Σ (X : U) , is-a-cov X)
-        :=
-          \ (k : 𝕀) →
-            let mod ᵒᵖ p0 := packed in
-            let mod ᵒᵖ j : 𝕀 := flip_op (unform (l k)) in
-              mod ᵒᵖ (p0 j)
-      in
-      let mod ᵒᵖ pA :=
-        op-ext-commute-bwd (\ (_ : 𝕀) → Σ (X : U) , is-a-cov X) F-acov
-      in
-      let mod ᵒᵖ x0 := x in
-        mod ᵒᵖ (
-          amazing-covariant-transport-line-II
-            ( \ i → first (pA i))
-            ( \ i → second (pA i))
-            ( \ k → form k)
-            x0)
+    let packed-A : ᵒᵖ (𝕀 → U)
+      :=
+        let mod ᵒᵖ p := packed in
+          mod ᵒᵖ (\ i → first (p i))
+    in
+    let cov-A
+      : let mod ᵒᵖ A := packed-A in
+          ᵒᵖ (is-covariant-arrow-II (\ (t : 𝕀 | TOP) → A t))
+      :=
+        let mod ᵒᵖ p := packed in
+          mod ᵒᵖ (
+            b-extract
+              ( ( g' : 𝕀 → Σ (X : U) , is-a-cov X)
+                  → is-covariant-arrow-II (\ b → first (g' b)))
+              ( is-a-cov-transpose
+                  ( Σ ( X : U) , is-a-cov X)
+                  ( \ (X , _) → X)
+                  ( \ (_ , cX) → cX))
+              ( p))
+    in
+    let packed-A-shape : ᵒᵖ (⌈𝕀⌉ → U)
+      :=
+        let mod ᵒᵖ A := packed-A in
+          mod ᵒᵖ (equiv-ext-shape-family-fwd 𝕀 □¹ A)
+    in
+      covariant-transport-line-inv-II packed-A-shape cov-A l
 ```
 
 ## Amazing covariance closure properties
@@ -260,10 +274,10 @@ Lemma 5.11
   : is-discrete-II A
   :=
     is-discrete-is-covariant-II
-      ( shape (_ : 𝕀 | TOP))
-      ( \ _ → A)
+      ( ⌈𝕀⌉)
+      ( equiv-ext-shape-family-fwd 𝕀 □¹ (\ _ → A))
       ( is-a-cov-const-cov A is-a-cov-A)
-      ( form 0₂)
+      ( pt-⌈𝕀⌉ 0₂)
 ```
 
 GWB, Lemma 5.14
@@ -348,40 +362,58 @@ GWB, Lemma 5.14
       is-a-cov-A
       ( \ a → is-a-cov-id-closed B is-a-cov-B (f a) b)
 
+#def equiv-realize-shape-at-1-map
+  ( f : 𝕀 → ⌈𝕀⌉)
+  ( x : ⌈𝕀⌉)
+  : Equiv
+      ( match x ( point i ⇒ shape-at-1 (f i)))
+      ( shape-at-1 (match x ( point i ⇒ f i)))
+  := match x
+      ( point i ⇒ equiv-identity (shape-at-1 (f i)))
+
 -- Lemma 5.16
 #def is-a-cov-i===0 uses (funext weakfunext extext) (i : 𝕀)
-  : is-a-cov (shape (_ : 1 | i ≡ 1₂))
+  : is-a-cov (Shape 1 (\ _ → i ≡ 1₂))
   :=
     b-extract
-      ( ( i' : 𝕀) → is-a-cov (shape (_ : 1 | i' ≡ 1₂)))
+      ( ( i' : 𝕀) → is-a-cov (Shape 1 (\ _ → i' ≡ 1₂)))
       ( first
           ( b-equiv
-              ( ( t : shape (_ : 𝕀 | TOP))
-                → is-a-cov (shape (_ : 1 | unform t ≡ 1₂)))
-              ( ( i' : 𝕀) → is-a-cov (shape (_ : 1 | i' ≡ 1₂)))
+              ( ( t : ⌈𝕀⌉) → is-a-cov (shape-at-1 t))
+              ( ( i' : 𝕀) → is-a-cov (Shape 1 (\ _ → i' ≡ 1₂)))
               ( inv-equiv
-                  ( ( i' : 𝕀) → is-a-cov (shape (_ : 1 | i' ≡ 1₂)))
-                  ( ( t : shape (_ : 𝕀 | TOP))
-                    → is-a-cov (shape (_ : 1 | unform t ≡ 1₂)))
+                  ( ( i' : 𝕀) → is-a-cov (Shape 1 (\ _ → i' ≡ 1₂)))
+                  ( ( t : ⌈𝕀⌉) → is-a-cov (shape-at-1 t))
                   ( equiv-ext-shape-fun
+                      funext
                       𝕀
                       ( \ _ → TOP)
-                      ( \ i' → is-a-cov (shape (_ : 1 | i' ≡ 1₂))))))
+                      ( \ t → is-a-cov (shape-at-1 t)))))
           ( is-a-cov-untranspose
-              ( shape (_ : 𝕀 | TOP))
-              ( \ t → shape (_ : 1 | unform t ≡ 1₂))
-              ( \ (f : 𝕀 → shape (_ : 𝕀 | TOP)) →
-                  \ (x : shape (_ : 𝕀 | TOP)) (y : shape (_ : 𝕀 | TOP))
-                    (arr : hom-II (shape (_ : 𝕀 | TOP)) x y)
-                    (a0 : shape-at-1 (f (unform x))) →
-                    let larr : 𝕀 → shape (_ : 𝕀 | TOP) := \ j → arr j in
-                    let f : 𝕀 → shape (_ : 𝕀 | TOP) := \ j → f (unform (larr j)) in
+              ( ⌈𝕀⌉)
+              ( shape-at-1)
+              ( \ (f0 : 𝕀 → ⌈𝕀⌉) →
+                equiv-is-covariant-II
+                  ( funext)
+                  ( ⌈𝕀⌉)
+                  ( equiv-ext-shape-family-fwd 𝕀 □¹ (\ i' → shape-at-1 (f0 i')))
+                  ( \ s → shape-at-1
+                      (match s ( point i' ⇒ f0 i')))
+                  ( \ s → equiv-realize-shape-at-1-map f0 s)
+                  ( \ (x : ⌈𝕀⌉) (y : ⌈𝕀⌉)
+                    (arr : hom-II ⌈𝕀⌉ x y)
+                    (a0 : shape-at-1
+                            (match x ( point i' ⇒ f0 i'))) →
+                    let larr : 𝕀 → ⌈𝕀⌉ := \ j → arr j in
+                    let f : 𝕀 → ⌈𝕀⌉
+                      := \ j → match (larr j) ( point i' ⇒ f0 i')
+                    in
                     let e0
-                      : (f 0₂) = form (1₂)
+                      : (f 0₂) = pt-⌈𝕀⌉ (1₂)
                       := eq-form-1-of-shape-at-1 (f 0₂) a0
                     in
                     let e1
-                      : (f 1₂) = form (1₂)
+                      : (f 1₂) = pt-⌈𝕀⌉ (1₂)
                       := fun-monotonicity f e0
                     in
                     let a1
@@ -389,14 +421,22 @@ GWB, Lemma 5.14
                       := shape-at-1-of-eq-form-1 (f 1₂) e1
                     in
                     let h
-                      : dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → shape-at-1 (f (unform s))) a0 a1
+                      : dhom-II ⌈𝕀⌉
+                          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂)
+                          (\ t → pt-⌈𝕀⌉ t)
+                          (\ s → match s ( point j ⇒ shape-at-1 (f j)))
+                          a0 a1
                       := dhom-II-form-line-shape-at-1 f a0 a1 e0
                     in
                       is-contr-is-inhabited-is-prop
                         ( Σ ( a1' : shape-at-1 (f 1₂))
-                        , dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → shape-at-1 (f (unform s))) a0 a1')
+                        , dhom-II ⌈𝕀⌉
+                            (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂)
+                            (\ t → pt-⌈𝕀⌉ t)
+                            (\ s → match s ( point j ⇒ shape-at-1 (f j)))
+                            a0 a1')
                         ( is-prop-Σ-dhom-II-form-line-shape-at-1 extext f a0)
-                        ( a1 , h))))
+                        ( a1 , h)))))
       ( i)
 ```
 Lemma 5.18

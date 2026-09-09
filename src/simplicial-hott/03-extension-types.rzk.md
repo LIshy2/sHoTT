@@ -1906,44 +1906,6 @@ equivalent to extending the fiber.
     ( \ t → (a t , refl)))
 ```
 
-## Extension types and shapes domain
-
-Functions on a subshape are equivalent to functions on the corresponding `shape` type.
-
-```rzk
-#def equiv-ext-shape-fun-fwd
-  ( I : CUBE)
-  ( ϕ : I → TOPE)
-  ( A : I → U)
-  : ( ( x : I | ϕ x) → A x)
-  → ( ( t : shape (x : I | ϕ x)) → A (unform t))
-  := \ f t → f (unform t)
-
-#def equiv-ext-shape-fun-bwd
-  ( I : CUBE)
-  ( ϕ : I → TOPE)
-  ( A : I → U)
-  : ( ( t : shape (x : I | ϕ x)) → A (unform t))
-  → ( ( x : I | ϕ x) → A x)
-  := \ g x → g (form x)
-
-#def equiv-ext-shape-fun
-  ( I : CUBE)
-  ( ϕ : I → TOPE)
-  ( A : I → U)
-  : Equiv
-      ( ( x : I | ϕ x) → A x)
-      ( ( t : shape (x : I | ϕ x)) → A (unform t))
-  :=
-    equiv-has-inverse
-      ( ( x : I | ϕ x) → A x)
-      ( ( t : shape (x : I | ϕ x)) → A (unform t))
-      ( equiv-ext-shape-fun-fwd I ϕ A)
-      ( equiv-ext-shape-fun-bwd I ϕ A)
-      ( \ _ → refl)
-      ( \ _ → refl)
-```
-
 ## Extension types opposition
 
 ```rzk

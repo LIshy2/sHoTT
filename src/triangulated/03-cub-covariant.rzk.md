@@ -13,17 +13,17 @@
 ```rzk
 #def orthogonality-pullback-fiber uses (funext weakfunext)
   ( n m : nat)
-  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
   : U
   :=
-    Σ ( c : I^n m → product (I^n n) (shape (_ : 𝕀 | TOP)))
+    Σ ( c : I^n m → product (I^n n) ⌈𝕀⌉)
     , F0 (c (zero-vec-I^n m))
 
 #def orthogonality-pullback-fwd uses (funext weakfunext)
   ( n m : nat)
-  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
   : ( I^n m
-      → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+      → Σ ( t : product (I^n n) ⌈𝕀⌉)
         , F0 t)
     → orthogonality-pullback-fiber n m F0
   :=
@@ -33,10 +33,10 @@
 
 #def orthogonality-pullback uses (funext weakfunext)
   ( n m : nat)
-  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
   : Equiv
       ( I^n m
-        → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+        → Σ ( t : product (I^n n) ⌈𝕀⌉)
           , F0 t)
       ( orthogonality-pullback-fiber n m F0)
   :=
@@ -45,18 +45,18 @@
 
 #def orthogonality-pullback-split uses (funext weakfunext)
   ( n m : nat)
-  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
   : U
   :=
     Σ ( v : I^n m → I^n n)
-    , Σ ( theta : I^n m → shape (_ : 𝕀 | TOP))
+    , Σ ( theta : I^n m → ⌈𝕀⌉)
     , F0
         ( v (zero-vec-I^n m)
         , theta (zero-vec-I^n m))
 
 #def equiv-orthogonality-pullback-split uses (funext weakfunext)
   ( n m : nat)
-  ( F0 : product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  ( F0 : product (I^n n) ⌈𝕀⌉ → U)
   : Equiv (orthogonality-pullback-fiber n m F0) (orthogonality-pullback-split n m F0)
   :=
     equiv-has-inverse
@@ -74,12 +74,12 @@
 
 #def orthogonality-pullback-flat-commute uses (funext weakfunext)
   ( n m :♭ nat)
-  ( F0 :♭ product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  ( F0 :♭ product (I^n n) ⌈𝕀⌉ → U)
   : Equiv
       ( ♭ ( orthogonality-pullback-split n m F0))
       ( Σ ( v : ♭ (I^n m → I^n n))
       , ( let mod ♭ v' := v in
-          Σ ( theta : ♭ (I^n m → shape (_ : 𝕀 | TOP)))
+          Σ ( theta : ♭ (I^n m → ⌈𝕀⌉))
           , ( let mod ♭ theta' := theta in
               ♭
                 ( F0
@@ -88,7 +88,7 @@
   :=
     b-sigma2-commute-equiv
       ( I^n m → I^n n)
-      ( I^n m → shape (_ : 𝕀 | TOP))
+      ( I^n m → ⌈𝕀⌉)
       ( \ v theta →
           F0
             ( v (zero-vec-I^n m)
@@ -96,11 +96,11 @@
 
 #def equiv-orthogonality-to-flat uses (funext weakfunext)
   ( n m :♭ nat)
-  ( F0 :♭ product (I^n n) (shape (_ : 𝕀 | TOP)) → U)
+  ( F0 :♭ product (I^n n) ⌈𝕀⌉ → U)
   : Equiv
       ( ♭
           ( I^n m
-            → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+            → Σ ( t : product (I^n n) ⌈𝕀⌉)
               , F0 t))
       ( ♭ ( orthogonality-pullback-split n m F0))
   :=
@@ -110,12 +110,12 @@
       mod ♭ (equiv-orthogonality-pullback-split n m F0) in
     b-equiv
       ( I^n m
-        → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+        → Σ ( t : product (I^n n) ⌈𝕀⌉)
           , F0 t)
       ( orthogonality-pullback-split n m F0)
       ( equiv-comp
           ( I^n m
-            → Σ ( t : product (I^n n) (shape (_ : 𝕀 | TOP)))
+            → Σ ( t : product (I^n n) ⌈𝕀⌉)
               , F0 t)
           ( F-uncurried)
           ( orthogonality-pullback-split n m F0)
@@ -246,112 +246,131 @@
 #def is-covariant-arrow-II
   ( C : (t : 𝕀 | TOP) → U)
   : U
-  := is-covariant-II (shape (_ : 𝕀 | TOP)) (\ (s : shape (_ : 𝕀 | TOP)) → C (unform s))
+  := is-covariant-II ⌈𝕀⌉ (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t))
 
 #def covariant-transport-line-II
   ( C : (t : 𝕀 | TOP) → U)
   ( cov : is-covariant-arrow-II C)
-  ( l : 𝕀 → shape (_ : 𝕀 | TOP))
-  : C (unform (l 0₂)) → C (unform (l 1₂))
+  ( l : 𝕀 → ⌈𝕀⌉)
+  : equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t) (l 0₂)
+    → equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t) (l 1₂)
   :=
     \ u →
       covariant-transport-II
-        ( shape (_ : 𝕀 | TOP))
-        ( l 0₂) ( l 1₂)
-        ( \ (t : 𝕀) → l t)
-        ( \ (s : shape (_ : 𝕀 | TOP)) → C (unform s))
+        ⌈𝕀⌉ (l 0₂) (l 1₂) (\ t → l t)
+        ( equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t))
         cov u
 
 #def covariant-transport-line-const-II
   ( C : (t : 𝕀 | TOP) → U)
   ( cov : is-covariant-arrow-II C)
-  ( j : shape (_ : 𝕀 | TOP))
-  ( u : C (unform j))
+  ( j : ⌈𝕀⌉)
+  ( u : equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t) j)
   : covariant-transport-line-II C cov (\ _ → j) u = u
-  := id-arr-covariant-transport-II (shape (_ : 𝕀 | TOP)) j (\ s → C (unform s)) cov u
+  := id-arr-covariant-transport-II
+      ⌈𝕀⌉ j (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t)) cov u
 
 #def covariant-transport-line-const-at-0-II
   ( C : (t : 𝕀 | TOP) → U)
   ( cov : is-covariant-arrow-II C)
   ( u : C 0₂)
-  : covariant-transport-line-II C cov (\ k → form (inf 0₂ k)) u = u
-  := id-arr-covariant-transport-II (shape (_ : 𝕀 | TOP)) (form 0₂) (\ s → C (unform s)) cov u
+  : covariant-transport-line-II C cov (\ k → pt-⌈𝕀⌉ (inf 0₂ k)) u = u
+  := id-arr-covariant-transport-II
+      ⌈𝕀⌉ (pt-⌈𝕀⌉ 0₂) (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t)) cov u
 
 #def covariant-transport-line-const-0-sup-II
   ( C : (t : 𝕀 | TOP) → U)
   ( cov : is-covariant-arrow-II C)
   ( j : 𝕀)
   ( u : C 0₂)
-  : covariant-transport-line-II C cov (\ k → form (inf 0₂ (sup j k))) u = u
-  := id-arr-covariant-transport-II (shape (_ : 𝕀 | TOP)) (form 0₂) (\ s → C (unform s)) cov u
+  : covariant-transport-line-II C cov
+      (\ k → pt-⌈𝕀⌉ (inf 0₂ (sup j k))) u = u
+  := id-arr-covariant-transport-II
+      ⌈𝕀⌉ (pt-⌈𝕀⌉ 0₂) (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t)) cov u
 
 #def covariant-transport-line-const-1-sup-II
   ( C : (t : 𝕀 | TOP) → U)
   ( cov : is-covariant-arrow-II C)
   ( i : 𝕀)
   ( u : C i)
-  : covariant-transport-line-II C cov (\ k → form (inf i (sup 1₂ k))) u = u
-  := id-arr-covariant-transport-II (shape (_ : 𝕀 | TOP)) (form i) (\ s → C (unform s)) cov u
+  : covariant-transport-line-II C cov
+      (\ k → pt-⌈𝕀⌉ (inf i (sup 1₂ k))) u = u
+  := id-arr-covariant-transport-II
+      ⌈𝕀⌉ (pt-⌈𝕀⌉ i) (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t)) cov u
 ```
 
 ## The extension theorem
 
 ```rzk
+#def op-shape-line-flip
+  ( l : 𝕀 → ⌈𝕀⌉)
+  : ᵒᵖ (𝕀 → ⌈𝕀⌉)
+  :=
+    op-ext-commute-bwd (\ (_ : 𝕀) → ⌈𝕀⌉)
+      ( \ i →
+          match (l i)
+            ( point j ⇒
+                let mod ᵒᵖ j0 : 𝕀 := flip_op j in
+                  mod ᵒᵖ (pt-⌈𝕀⌉ j0)))
+
+#def op-shape-point-flip
+  ( s : ⌈𝕀⌉)
+  : ᵒᵖ ⌈𝕀⌉
+  :=
+    match s
+      ( point i ⇒
+          let mod ᵒᵖ j : 𝕀 := flip_op i in
+            mod ᵒᵖ (pt-⌈𝕀⌉ j))
+
+#def op-family-at
+  ( C : ᵒᵖ (⌈𝕀⌉ → U))
+  ( s : ᵒᵖ ⌈𝕀⌉)
+  : U
+  :=
+    let mod ᵒᵖ C0 := C in
+    let mod ᵒᵖ s0 := s in
+      ᵒᵖ (C0 s0)
+
 #def covariant-transport-line-inv-II
-  ( packed : ᵒᵖ (𝕀 → U))
+  ( packed : ᵒᵖ (⌈𝕀⌉ → U))
   ( cov
     : let mod ᵒᵖ C0 := packed in
-        ᵒᵖ (is-covariant-arrow-II (\ (t : 𝕀 | TOP) → C0 t)))
-  ( l : 𝕀 → shape (_ : 𝕀 | TOP))
-  : ( let mod ᵒᵖ p := packed in
-      let mod ᵒᵖ j₁ := flip_op (unform (l 1₂)) in
-      let mod ᵒᵖ j₀ := flip_op (unform (l 0₂)) in
-      ᵒᵖ (p j₁) → ᵒᵖ (p j₀))
+        ᵒᵖ (is-covariant-II ⌈𝕀⌉ C0))
+  ( l : 𝕀 → ⌈𝕀⌉)
+  : ( let mod ᵒᵖ C0 := packed in
+      let mod ᵒᵖ lam0 := op-shape-line-flip l in
+        ᵒᵖ (C0 (lam0 0₂)) → ᵒᵖ (C0 (lam0 1₂)))
   :=
     \ x →
-      let F : (k : 𝕀) → ᵒᵖ U
-        :=
-          \ (k : 𝕀) →
-            let mod ᵒᵖ p0 := packed in
-            let mod ᵒᵖ j : 𝕀 := flip_op (unform (l k)) in
-              mod ᵒᵖ (p0 j)
-      in
-      let lamM : ᵒᵖ (𝕀 → shape (_ : 𝕀 | TOP))
-        := op-ext-commute-bwd (\ (_ : 𝕀) → shape (_ : 𝕀 | TOP))
-             ( \ (i : 𝕀) →
-                 let mod ᵒᵖ j : 𝕀 := flip_op (unform (l i)) in
-                   mod ᵒᵖ (form j))
-      in
-      let mod ᵒᵖ pA := op-ext-commute-bwd (\ (_ : 𝕀) → U) F in
-      let mod ᵒᵖ p0 := packed in
+      let mod ᵒᵖ C0 := packed in
       let mod ᵒᵖ cov0 := cov in
-      let mod ᵒᵖ lam0 := lamM in
+      let mod ᵒᵖ lam0 := op-shape-line-flip l in
       let mod ᵒᵖ x0 := x in
         mod ᵒᵖ (
-          covariant-transport-line-II
-            ( \ (t : 𝕀 | TOP) → pA t)
-            ( is-covariant-II-substitution
-                ( shape (_ : 𝕀 | TOP)) ( shape (_ : 𝕀 | TOP))
-                ( \ (s : shape (_ : 𝕀 | TOP)) → p0 (unform s))
-                ( cov0)
-                ( \ (s : shape (_ : 𝕀 | TOP)) → lam0 (unform s)))
-            ( \ k → form k)
-            x0)
+          covariant-transport-II
+            ⌈𝕀⌉ (lam0 0₂) (lam0 1₂) (\ t → lam0 t)
+            C0 cov0 x0)
 #def equiv-is-cov-i-coslice
   ( A : 𝕀 → U)
   ( a0 : A 0₂)
   : Equiv
-      ( Σ (a1 : A 1₂) , dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → A (unform s)) a0 a1)
+      ( Σ (a1 : A 1₂) , dhom-II ⌈𝕀⌉
+          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+          (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
       ( Σ (φ : (i : 𝕀) → A i) , φ 0₂ = a0)
   :=
     equiv-has-inverse
-      ( Σ (a1 : A 1₂) , dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → A (unform s)) a0 a1)
+      ( Σ (a1 : A 1₂) , dhom-II ⌈𝕀⌉
+          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+          (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
       ( Σ (φ : (i : 𝕀) → A i) , φ 0₂ = a0)
       ( \ (a1 , h) → (\ t → h t , refl))
       ( \ (φ , p) →
           ( φ 1₂
           , ind-path (A 0₂) (φ 0₂)
-              ( \ a0' _ → dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → A (unform s)) a0' (φ 1₂))
+              ( \ a0' _ → dhom-II ⌈𝕀⌉
+                  (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+                  (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0' (φ 1₂))
               ( \ t → φ t)
               a0 p))
       ( \ (a1 , h) → refl)
@@ -360,7 +379,9 @@
             ( \ a0' p' →
                 ( \ t →
                     ind-path (A 0₂) (φ 0₂)
-                      ( \ a0'' _ → dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → A (unform s)) a0'' (φ 1₂))
+                      ( \ a0'' _ → dhom-II ⌈𝕀⌉
+                          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+                          (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0'' (φ 1₂))
                       ( \ t' → φ t')
                       a0' p' t
                 , refl)
@@ -378,16 +399,38 @@
   : is-contr (Σ (φ : (i : 𝕀) → A i) , φ 0₂ = a0)
   :=
     is-contr-equiv-is-contr
-      ( Σ (a1 : A 1₂) , dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → A (unform s)) a0 a1)
+      ( Σ (a1 : A 1₂) , dhom-II ⌈𝕀⌉
+          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+          (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
       ( Σ (φ : (i : 𝕀) → A i) , φ 0₂ = a0)
       ( equiv-is-cov-i-coslice A a0)
-      ( cov (form 0₂) (form 1₂) (\ (t : 𝕀) → form t) a0)
+      ( cov (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t) a0)
 
 ```
 
 ## Closure properties
 
 ```rzk
+#def equiv-is-covariant-II uses (funext)
+  ( A : U)
+  ( B C : A → U)
+  ( equiv-BC : (a : A) → Equiv (B a) (C a))
+  ( is-covariant-C : is-covariant-II A C)
+  : is-covariant-II A B
+  :=
+    let family-eq
+      : B = C
+      :=
+        eq-htpy funext A (\ _ → U) B C
+          ( \ a → first (ua (B a) (C a)) (equiv-BC a))
+    in
+      transport
+        ( A → U)
+        ( is-covariant-II A)
+        ( C) (B)
+        ( rev (A → U) B C family-eq)
+        ( is-covariant-C)
+
 #def is-covariant-II-Σ
   ( A : U)
   ( C : A → U)
@@ -420,386 +463,446 @@
   : is-covariant-arrow-II (\ t → u t = v t)
   := ?is-covariant-II-Id
 
+
 #def is-covariant-ext uses (funext extext)
   ( phi-i : 𝕀 → ᵒᵖ TOPE)
   ( shape-cov
-    : let mod ᵒᵖ C0 :=
-        op-ext-commute-bwd (\ (_ : 𝕀) → U)
-          ( \ i → let mod ᵒᵖ p := phi-i i in mod ᵒᵖ (shape (_ : 1 | p)))
-      in ᵒᵖ (is-covariant-arrow-II (\ (t : 𝕀 | TOP) → C0 t)))
+    : let mod ᵒᵖ phi0 :=
+        op-ext-commute-bwd (\ (_ : 𝕀) → TOPE) phi-i
+      in
+        ᵒᵖ
+          ( is-covariant-II ⌈𝕀⌉
+              (equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → Shape 1 (\ _ → phi0 i)))))
   ( D : 𝕀 → U)
   ( cov-D : is-covariant-arrow-II (\ (t : 𝕀 | TOP) → D t))
   ( disc-D : (i : 𝕀) → is-discrete-II (D i))
   : is-covariant-II
-      ( shape (_ : 𝕀 | TOP))
-      ( \ (t : shape (_ : 𝕀 | TOP)) → (s : 1 | uninvᵒᵖ (phi-i (unform t))) → D (unform t))
+      ( ⌈𝕀⌉)
+      ( equiv-ext-shape-family-fwd 𝕀 □¹
+          ( \ i → (s : 1 | uninvᵒᵖ (phi-i i)) → D i))
   :=
-    \ (x : shape (_ : 𝕀 | TOP)) (y : shape (_ : 𝕀 | TOP))
-      (f : hom-II (shape (_ : 𝕀 | TOP)) x y)
-      (u : (s : 1 | uninvᵒᵖ (phi-i (unform x))) → D (unform x)) →
-    let l : 𝕀 → shape (_ : 𝕀 | TOP) := \ k → f k in
-    let cov-D-r
-      := is-covariant-II-substitution
-           ( shape (_ : 𝕀 | TOP)) ( shape (_ : 𝕀 | TOP))
-           ( \ (t : shape (_ : 𝕀 | TOP)) → D (unform t))
-           ( cov-D)
-           ( \ (t : shape (_ : 𝕀 | TOP)) → l (unform t))
-    in
-    let disc-D-r := \ (k : 𝕀) → disc-D (unform (l k)) in
-    let shape-cov-r
-      : let mod ᵒᵖ C0 :=
-          op-ext-commute-bwd (\ (_ : 𝕀) → U)
-            ( \ i → let mod ᵒᵖ p := phi-i (unform (l i)) in mod ᵒᵖ (shape (_ : 1 | p)))
-        in ᵒᵖ (is-covariant-arrow-II (\ (t : 𝕀 | TOP) → C0 t))
+    let C : ᵒᵖ (⌈𝕀⌉ → U)
       :=
-        let lamM : ᵒᵖ (𝕀 → shape (_ : 𝕀 | TOP))
-          := op-ext-commute-bwd (\ (_ : 𝕀) → shape (_ : 𝕀 | TOP))
-               ( \ (i : 𝕀) → let mod ᵒᵖ j := flip_op (unform (l i)) in mod ᵒᵖ (form j))
+        let mod ᵒᵖ phi0 :=
+          op-ext-commute-bwd (\ (_ : 𝕀) → TOPE) phi-i
         in
-        let mod ᵒᵖ C0v :=
-          op-ext-commute-bwd (\ (_ : 𝕀) → U)
-            ( \ i → let mod ᵒᵖ p := phi-i i in mod ᵒᵖ (shape (_ : 1 | p)))
-        in
-        let mod ᵒᵖ cov0 := shape-cov in
-        let mod ᵒᵖ lam0 := lamM in
-          mod ᵒᵖ (is-covariant-II-substitution
-                    ( shape (_ : 𝕀 | TOP)) ( shape (_ : 𝕀 | TOP))
-                    ( \ (t : shape (_ : 𝕀 | TOP)) → C0v (unform t))
-                    ( cov0)
-                    ( \ (t : shape (_ : 𝕀 | TOP)) → lam0 (unform t)))
+          mod ᵒᵖ
+            (equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → Shape 1 (\ _ → phi0 i)))
     in
-    let phi-i : 𝕀 → ᵒᵖ TOPE := \ k → phi-i (unform (l k)) in
-    let D : 𝕀 → U := \ k → D (unform (l k)) in
-    let cov-D
-      : is-covariant-arrow-II (\ (t : 𝕀 | TOP) → D t)
-      := cov-D-r in
-    let disc-D : (i : 𝕀) → is-discrete-II (D i) := disc-D-r in
-    let shape-cov
-      : let mod ᵒᵖ C0 :=
-          op-ext-commute-bwd (\ (_ : 𝕀) → U)
-            ( \ i → let mod ᵒᵖ p := phi-i i in mod ᵒᵖ (shape (_ : 1 | p)))
-        in ᵒᵖ (is-covariant-arrow-II (\ (t : 𝕀 | TOP) → C0 t))
-      := shape-cov-r in
-    let C : ᵒᵖ (𝕀 → U)
+    let extension-family : ⌈𝕀⌉ → U
+      := equiv-ext-shape-family-fwd 𝕀 □¹
+          ( \ i → (s : 1 | uninvᵒᵖ (phi-i i)) → D i)
+    in
+    let function-family : ⌈𝕀⌉ → U
+      := equiv-ext-shape-family-fwd 𝕀 □¹
+          ( \ i →
+              op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ i)) → D i)
+    in
+    let is-prop-C
+      : (s : ⌈𝕀⌉)
+        → is-prop (op-family-at C (op-shape-point-flip s))
       :=
-        op-ext-commute-bwd (\ (_ : 𝕀) → U)
-          ( \ i → let mod ᵒᵖ p := phi-i i in mod ᵒᵖ (shape (_ : 1 | p)))
+        \ s →
+          match s
+            into (\ s' →
+              is-prop (op-family-at C (op-shape-point-flip s')))
+            ( point a ⇒
+                is-prop-Equiv-is-prop
+                  ( let mod ᵒᵖ p := phi-i a in
+                      ᵒᵖ (Shape 1 (\ _ → p)))
+                  ( Shape 1 (\ _ → uninvᵒᵖ (phi-i a)))
+                  ( equiv-shape-1-op-uninv (phi-i a))
+                  ( \ x y →
+                      match x
+                        ( point u ⇒
+                            is-prop-is-contr
+                              ( Shape 1 (\ _ → uninvᵒᵖ (phi-i a)))
+                              ( point 1 (\ _ → uninvᵒᵖ (phi-i a)) *₁
+                              , \ z → match z ( point _ ⇒ refl))
+                              ( point 1 (\ _ → uninvᵒᵖ (phi-i a)) u)
+                              ( y))))
     in
-    let is-cov-C
-      : let mod ᵒᵖ C0 := C in
-          ᵒᵖ (is-covariant-arrow-II (\ (t : 𝕀 | TOP) → C0 t))
-      := shape-cov
-    in
-    let DS : (t : 𝕀 | TOP) → U
-      := \ t → D t
-    in
-    let E : 𝕀 → U
-      := \ i → (t : 1 | uninvᵒᵖ (phi-i i)) → D i
-    in
-      let f0 : E 0₂ := u in
-        let phi
-          : (i : 𝕀) → E i
-          :=
-            \ i _ →
-              let l : 𝕀 → shape (_ : 𝕀 | TOP)
-                := \ k → form (inf i k)
-              in
-              let s-op
-                : let mod ᵒᵖ p := phi-i 0₂ in
-                    ᵒᵖ (shape (_ : 1 | p))
-                :=
-                  covariant-transport-line-inv-II C is-cov-C l (mod ᵒᵖ (form *₁))
-              in
-              let s0
-                := first (equiv-shape-1-op-uninv (phi-i 0₂)) s-op
-              in
-                covariant-transport-line-II DS cov-D l
-                  ( f0 (unform s0))
+    let cov-functions
+      : is-covariant-II ⌈𝕀⌉ function-family
+      :=
+        let is-cov-C := shape-cov
         in
-        let phi0-eq-f0 : phi 0₂ = f0
-          :=
-            ap
-              ( (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) → D 0₂)
-              ( (t : 1 | uninvᵒᵖ (phi-i 0₂)) → D 0₂)
-              ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) → phi 0₂ (unform s))
-              ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) → f0 (unform s))
-              ( \ pre t → pre (form t))
-              ( eq-htpy funext
-                  ( shape (_ : 1 | uninvᵒᵖ (phi-i 0₂)))
-                  ( \ _ → D 0₂)
-                  ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) → phi 0₂ (unform s))
-                  ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) → f0 (unform s))
-                  ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                      covariant-transport-line-const-at-0-II DS cov-D
-                        ( f0
-                            ( unform
-                                ( first
-                                    ( equiv-shape-1-op-uninv (phi-i 0₂))
-                                    ( covariant-transport-line-inv-II C is-cov-C
-                                        ( \ k → form (inf 0₂ k))
-                                        ( mod ᵒᵖ (form *₁))))))))
+        let function-family : ⌈𝕀⌉ → U
+          := equiv-ext-shape-family-fwd 𝕀 □¹
+              ( \ i →
+                  op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ i)) → D i)
         in
-        let contr-center
-          : Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0
-          := (phi , phi0-eq-f0)
-        in
-        let contr-hom
-          : ( y : Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-              → contr-center = y
+        let transport-line-inv-endpoints
+          : (l : 𝕀 → ⌈𝕀⌉)
+            → op-family-at C (op-shape-point-flip (l 1₂))
+            → op-family-at C (op-shape-point-flip (l 0₂))
           :=
-            \ (p , q) →
-              let H
-                : ( i j : 𝕀)
-                  → ( let mod ᵒᵖ C' := C in
-                      let mod ᵒᵖ fi := flipᵒᵖ i in
-                        ᵒᵖ (C' fi))
-                  → D i
+            \ l x → covariant-transport-line-inv-II C is-cov-C l x
+        in
+        let transport-line-inv-specified
+          : (l : 𝕀 → ⌈𝕀⌉)
+          → (s1 : ⌈𝕀⌉)
+          → (l 1₂ = s1)
+          → (s0 : ⌈𝕀⌉)
+          → (l 0₂ = s0)
+          → op-family-at C (op-shape-point-flip s1)
+            → op-family-at C (op-shape-point-flip s0)
+          :=
+            \ l s1 e1 s0 e0 x →
+              let start
+                : op-family-at C (op-shape-point-flip (l 1₂))
                 :=
-                  \ i j c →
-                    let l : 𝕀 → shape (_ : 𝕀 | TOP)
-                      := \ k → form (inf i (sup j k))
-                    in
-                    let s-op
-                      : let mod ᵒᵖ p := phi-i (inf i j) in
-                          ᵒᵖ (shape (_ : 1 | p))
-                      :=
-                        covariant-transport-line-inv-II C is-cov-C l c
-                    in
-                    let s-mid
-                      := first (equiv-shape-1-op-uninv (phi-i (inf i j))) s-op
-                    in
-                      covariant-transport-line-II DS cov-D l
-                        ( p (inf i j) (unform s-mid))
+                  transport
+                    ( ⌈𝕀⌉)
+                    ( \ s → op-family-at C (op-shape-point-flip s))
+                    ( s1) (l 1₂)
+                    ( rev ⌈𝕀⌉ (l 1₂) s1 e1)
+                    ( x)
               in
-              let H-sec
-                : (j : 𝕀) → (i : 𝕀) → E i
-                :=
-                  \ j i t →
-                    H i j
-                      ( let c
-                          : let mod ᵒᵖ C' := C in
-                            let mod ᵒᵖ fi := flipᵒᵖ i in
-                              ᵒᵖ (C' fi)
-                        := mod ᵒᵖ (form *₁)
+              let finish := transport-line-inv-endpoints l start
+              in
+                transport
+                  ( ⌈𝕀⌉)
+                  ( \ s → op-family-at C (op-shape-point-flip s))
+                  ( l 0₂) (s0) (e0) (finish)
+        in
+        \ (x : ⌈𝕀⌉) →
+        match x
+          into (\ x' →
+            (y : ⌈𝕀⌉)
+            → (f : hom-II ⌈𝕀⌉ x' y)
+            → (u : function-family x')
+            → is-contr
+                ( dhom-from-II
+                    ⌈𝕀⌉ x' y f (function-family) u))
+          ( point x0 ⇒
+            \ (y : ⌈𝕀⌉)
+              (f : hom-II ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) y)
+              (u : op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ x0)) → D x0) →
+        let l : 𝕀 → ⌈𝕀⌉ := \ k → f k in
+        let DS : ⌈𝕀⌉ → U := equiv-ext-shape-family-fwd 𝕀 □¹ D
+        in
+        let eval-op-function
+          : (s : ⌈𝕀⌉)
+            → function-family s
+            → op-family-at C (op-shape-point-flip s)
+            → DS s
+          :=
+            \ s →
+              match s
+                into (\ s' →
+                  function-family s'
+                  → op-family-at C (op-shape-point-flip s')
+                  → DS s')
+                ( point _ ⇒ \ h c → h c)
+        in
+        let extend-along
+          : (r s : ⌈𝕀⌉)
+            → hom-II ⌈𝕀⌉ r s
+            → function-family r
+            → function-family s
+          :=
+            \ r s →
+              match s
+                into (\ s' →
+                  hom-II ⌈𝕀⌉ r s'
+                  → function-family r
+                  → function-family s')
+                ( point a ⇒
+                    \ line pr ca →
+                      let ca0
+                        := transport-line-inv-endpoints line ca
                       in
-                        c)
-              in
-              let d
-                : (j : 𝕀) → H-sec j 0₂ = p 0₂
-                :=
-                  \ j →
-                    ap
-                      ( (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) → D 0₂)
-                      ( (t : 1 | uninvᵒᵖ (phi-i 0₂)) → D 0₂)
-                      ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                          H-sec j 0₂ (unform s))
-                      ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                          p 0₂ (unform s))
-                      ( \ pre t → pre (form t))
-                      ( eq-htpy funext
-                          ( shape (_ : 1 | uninvᵒᵖ (phi-i 0₂)))
-                          ( \ _ → D 0₂)
-                          ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                              H-sec j 0₂ (unform s))
-                          ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                              p 0₂ (unform s))
-                          ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                              covariant-transport-line-const-0-sup-II
-                                DS cov-D j
-                                ( p 0₂ (unform s))))
-              in
-              let r
-                : (j : 𝕀) → H-sec j 0₂ = f0
-                :=
-                  \ j →
-                    concat (E 0₂) (H-sec j 0₂) (p 0₂) f0 (d j) q
-              in
-              let pack
-                : (j : 𝕀)
-                  → Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0
-                := \ j → (H-sec j , r j)
-              in
-              let is-discrete-E-i
-                : (i : 𝕀) → is-discrete-II (E i)
-                :=
-                  \ i →
-                    is-discrete-extension-type-II
-                      extext
-                      ( 1)
-                      ( \ _ → uninvᵒᵖ (phi-i i))
-                      ( \ _ → D i)
-                      ( \ _ → disc-D i)
-              in
-              let is-discrete-E-I
-                : is-discrete-II ((i : 𝕀) → E i)
-                :=
-                  is-discrete-extension-type-II
-                    extext
-                    ( 𝕀)
-                    ( \ _ → TOP)
-                    ( \ i → E i)
-                    ( is-discrete-E-i)
-              in
-              let is-discrete-fib
-                : ( φ : (i : 𝕀) → E i)
-                  → is-discrete-II (φ 0₂ = f0)
-                :=
-                  \ φ →
-                    is-discrete-Id-II extext
-                      ( E 0₂)
-                      ( is-discrete-E-i 0₂)
-                      ( φ 0₂)
-                      f0
-              in
-              let is-discrete-total
-                : is-discrete-II
-                    ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-                :=
-                  is-discrete-Σ-II
-                    ( (i : 𝕀) → E i)
-                    ( \ φ → φ 0₂ = f0)
-                    ( is-discrete-E-I)
-                    ( is-discrete-fib)
-              in
-              let pack0-eq
-                : pack 0₂ = contr-center
-                :=
-                  ind-path
-                    ( E 0₂)
-                    ( p 0₂)
-                    ( \ f0' q' →
-                        let phi'
-                          : (i : 𝕀) → E i
-                          :=
-                            \ i _ →
-                              let l : 𝕀 → shape (_ : 𝕀 | TOP)
-                                := \ k → form (inf i k)
+                      let initial := eval-op-function r pr ca0
+                      in
+                        covariant-transport-II
+                          ⌈𝕀⌉ (line 0₂) (line 1₂) (\ t → line t)
+                          DS cov-D initial)
+        in
+        let E : 𝕀 → U
+          := \ i → function-family (f i)
+        in
+          let f0 : E 0₂ := u in
+            let phi
+              : (i : 𝕀) → E i
+              :=
+                \ i →
+                  extend-along
+                    ( f 0₂) (f i) (\ k → f (inf i k)) f0
+            in
+            let phi0-eq-f0 : phi 0₂ = f0
+              :=
+                eq-htpy funext
+                  ( op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                  ( \ _ → D x0)
+                  ( phi 0₂)
+                  ( f0)
+                  ( \ c →
+                      let c0'
+                        := transport-line-inv-specified
+                            ( \ k → f (inf 0₂ k))
+                            ( pt-⌈𝕀⌉ x0) (refl)
+                            ( pt-⌈𝕀⌉ x0) (refl)
+                            c
+                      in
+                        concat (D x0)
+                          ( phi 0₂ c)
+                          ( f0 c0')
+                          ( f0 c)
+                          ( id-arr-covariant-transport-II
+                              ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) DS cov-D (f0 c0'))
+                          ( ap
+                              ( op-family-at C
+                                  (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                              ( D x0)
+                              ( c0') (c) (f0)
+                              ( first (is-prop-C (pt-⌈𝕀⌉ x0) c0' c))))
+            in
+            let contr-center
+              : Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0
+              := (phi , phi0-eq-f0)
+            in
+            let contr-hom
+              : ( y : Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                  → contr-center = y
+              :=
+                \ (p , q) →
+                  let H-sec
+                    : (j : 𝕀) → (i : 𝕀) → E i
+                    :=
+                      \ j i →
+                        extend-along
+                          ( f (inf i j)) (f i)
+                          ( \ k → f (inf i (sup j k)))
+                          ( p (inf i j))
+                  in
+                  let d
+                    : (j : 𝕀) → H-sec j 0₂ = p 0₂
+                    :=
+                      \ j →
+                        eq-htpy funext
+                          ( op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                          ( \ _ → D x0)
+                          ( H-sec j 0₂)
+                          ( p 0₂)
+                          ( \ c →
+                              let c-mid
+                                := transport-line-inv-specified
+                                    ( \ k → f (inf 0₂ (sup j k)))
+                                    ( f 0₂) (refl)
+                                    ( pt-⌈𝕀⌉ x0)
+                                    ( rev ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) (f 0₂) refl)
+                                    c
                               in
-                              let s-op
-                                : let mod ᵒᵖ p' := phi-i 0₂ in
-                                    ᵒᵖ (shape (_ : 1 | p'))
-                                :=
-                                  covariant-transport-line-inv-II C is-cov-C l (mod ᵒᵖ (form *₁))
-                              in
-                              let s0
-                                := first (equiv-shape-1-op-uninv (phi-i 0₂)) s-op
-                              in
-                                covariant-transport-line-II DS cov-D l
-                                  ( f0' (unform s0))
-                        in
-                        let phi0'
-                          : phi' 0₂ = f0'
-                          :=
-                            ap
-                              ( (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) → D 0₂)
-                              ( (t : 1 | uninvᵒᵖ (phi-i 0₂)) → D 0₂)
-                              ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                                  phi' 0₂ (unform s))
-                              ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                                  f0' (unform s))
-                              ( \ pre t → pre (form t))
-                              ( eq-htpy funext
-                                  ( shape (_ : 1 | uninvᵒᵖ (phi-i 0₂)))
-                                  ( \ _ → D 0₂)
-                                  ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                                      phi' 0₂ (unform s))
-                                  ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                                      f0' (unform s))
-                                  ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i 0₂))) →
-                                      covariant-transport-line-const-at-0-II DS cov-D
-                                        ( f0'
-                                            ( unform
-                                                ( first
-                                                    ( equiv-shape-1-op-uninv (phi-i 0₂))
-                                                    ( covariant-transport-line-inv-II C is-cov-C
-                                                        ( \ k → form (inf 0₂ k))
-                                                        ( mod ᵒᵖ (form *₁))))))))
-                        in
-                        let r'
-                          : (j : 𝕀) → H-sec j 0₂ = f0'
-                          :=
-                            \ j →
-                              concat
-                                ( E 0₂)
-                                ( H-sec j 0₂)
-                                ( p 0₂)
-                                ( f0')
-                                ( d j)
-                                ( q')
-                        in
-                          ( H-sec 0₂ , r' 0₂)
-                          =_{Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0'}
-                            ( phi' , phi0'))
-                    ( refl)
-                    ( f0)
-                    ( q)
-              in
-              let pack1-eq
-                : pack 1₂ = (p , q)
-                :=
-                  let ptwise
-                    : (i : 𝕀) → H-sec 1₂ i = p i
+                                concat (D x0)
+                                  ( H-sec j 0₂ c)
+                                  ( p 0₂ c-mid)
+                                  ( p 0₂ c)
+                                  ( id-arr-covariant-transport-II
+                                      ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) DS cov-D (p 0₂ c-mid))
+                                  ( ap
+                                      ( op-family-at C
+                                          (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                                      ( D x0)
+                                      ( c-mid) (c) (p 0₂)
+                                      ( first (is-prop-C (pt-⌈𝕀⌉ x0) c-mid c))))
+                  in
+                  let r
+                    : (j : 𝕀) → H-sec j 0₂ = f0
+                    :=
+                      \ j →
+                        concat (E 0₂) (H-sec j 0₂) (p 0₂) f0 (d j) q
+                  in
+                  let pack
+                    : (j : 𝕀)
+                      → Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0
+                    := \ j → (H-sec j , r j)
+                  in
+                  let is-discrete-E-i
+                    : (i : 𝕀) → is-discrete-II (E i)
                     :=
                       \ i →
-                        ap
-                          ( (s : shape (_ : 1 | uninvᵒᵖ (phi-i i))) → D i)
-                          ( (t : 1 | uninvᵒᵖ (phi-i i)) → D i)
-                          ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i i))) →
-                              H-sec 1₂ i (unform s))
-                          ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i i))) →
-                              p i (unform s))
-                          ( \ pre t → pre (form t))
-                          ( eq-htpy funext
-                              ( shape (_ : 1 | uninvᵒᵖ (phi-i i)))
-                              ( \ _ → D i)
-                              ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i i))) →
-                                  H-sec 1₂ i (unform s))
-                              ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i i))) →
-                                  p i (unform s))
-                              ( \ (s : shape (_ : 1 | uninvᵒᵖ (phi-i i))) →
-                                  covariant-transport-line-const-1-sup-II
-                                    DS cov-D i
-                                    ( p i (unform s))))
+                        match (f i)
+                          into (\ s →
+                            is-discrete-II
+                              (function-family s))
+                          ( point a ⇒
+                              is-discrete-function-type-II
+                                funext
+                                ( op-family-at C
+                                    (op-shape-point-flip (pt-⌈𝕀⌉ a)))
+                                ( \ _ → D a)
+                                ( \ _ → disc-D a))
                   in
-                  let H-sec1=p
-                    : H-sec 1₂ = p
+                  let is-discrete-E-I
+                    : is-discrete-II ((i : 𝕀) → E i)
                     :=
-                      first
-                        ( second
-                            ( extext
-                                ( 𝕀)
-                                ( \ _ → TOP)
-                                ( \ _ → BOT)
-                                ( \ i → E i)
-                                ( \ _ → recBOT)
-                                ( H-sec 1₂)
-                                ( p)))
-                        ( ptwise)
+                      is-discrete-extension-type-II
+                        extext
+                        ( 𝕀)
+                        ( \ _ → TOP)
+                        ( \ i → E i)
+                        ( is-discrete-E-i)
                   in
-                  let d1=ap-eval
-                    : d 1₂
-                      = ap
-                          ( (i : 𝕀) → E i)
+                  let is-discrete-fib
+                    : ( φ : (i : 𝕀) → E i)
+                      → is-discrete-II (φ 0₂ = f0)
+                    :=
+                      \ φ →
+                        is-discrete-Id-II extext
                           ( E 0₂)
-                          ( H-sec 1₂)
-                          ( p)
-                          ( \ φ → φ 0₂)
-                          ( H-sec1=p)
+                          ( is-discrete-E-i 0₂)
+                          ( φ 0₂)
+                          f0
+                  in
+                  let is-discrete-total
+                    : is-discrete-II
+                        ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                     :=
-                      concat
-                        ( H-sec 1₂ 0₂ = p 0₂)
-                        ( d 1₂)
-                        ( ptwise 0₂)
-                        ( ap
-                            ( (i : 𝕀) → E i)
-                            ( E 0₂)
-                            ( H-sec 1₂)
-                            ( p)
-                            ( \ φ → φ 0₂)
-                            ( H-sec1=p))
+                      is-discrete-Σ-II
+                        ( (i : 𝕀) → E i)
+                        ( \ φ → φ 0₂ = f0)
+                        ( is-discrete-E-I)
+                        ( is-discrete-fib)
+                  in
+                  let pack0-eq
+                    : pack 0₂ = contr-center
+                    :=
+                      ind-path
+                        ( E 0₂)
+                        ( p 0₂)
+                        ( \ f0' q' →
+                            let phi'
+                              : (i : 𝕀) → E i
+                              :=
+                                \ i →
+                                  extend-along
+                                    ( f 0₂) (f i) (\ k → f (inf i k)) f0'
+                            in
+                            let phi0'
+                              : phi' 0₂ = f0'
+                              :=
+                                eq-htpy funext
+                                  ( op-family-at C
+                                      (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                                  ( \ _ → D x0)
+                                  ( phi' 0₂)
+                                  ( f0')
+                                  ( \ c →
+                                      let c0'
+                                        := transport-line-inv-specified
+                                            ( \ k → f (inf 0₂ k))
+                                            ( pt-⌈𝕀⌉ x0) (refl)
+                                            ( pt-⌈𝕀⌉ x0) (refl)
+                                            c
+                                      in
+                                        concat (D x0)
+                                          ( phi' 0₂ c)
+                                          ( f0' c0')
+                                          ( f0' c)
+                                          ( id-arr-covariant-transport-II
+                                              ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) DS cov-D (f0' c0'))
+                                          ( ap
+                                              ( op-family-at C
+                                                  (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                                              ( D x0)
+                                              ( c0') (c) (f0')
+                                              ( first
+                                                  (is-prop-C
+                                                    (pt-⌈𝕀⌉ x0) c0' c))))
+                            in
+                            let r'
+                              : (j : 𝕀) → H-sec j 0₂ = f0'
+                              :=
+                                \ j →
+                                  concat
+                                    ( E 0₂)
+                                    ( H-sec j 0₂)
+                                    ( p 0₂)
+                                    ( f0')
+                                    ( d j)
+                                    ( q')
+                            in
+                              ( H-sec 0₂ , r' 0₂)
+                              =_{Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0'}
+                                ( phi' , phi0'))
                         ( refl)
-                        ( rev
+                        ( f0)
+                        ( q)
+                  in
+                  let pack1-eq
+                    : pack 1₂ = (p , q)
+                    :=
+                      let ptwise
+                        : (i : 𝕀) → H-sec 1₂ i = p i
+                        :=
+                          \ i →
+                            ( match (f i)
+                                into (\ s →
+                                  (pa : function-family s)
+                                  → extend-along s s (\ _ → s) pa = pa)
+                                ( point a ⇒
+                                    \ pa →
+                                        eq-htpy funext
+                                          ( op-family-at C
+                                              (op-shape-point-flip (pt-⌈𝕀⌉ a)))
+                                          ( \ _ → D a)
+                                          ( extend-along
+                                              (pt-⌈𝕀⌉ a) (pt-⌈𝕀⌉ a)
+                                              (\ _ → pt-⌈𝕀⌉ a) pa)
+                                          ( pa)
+                                          ( \ c →
+                                              let c-mid
+                                                := transport-line-inv-endpoints
+                                                    (\ _ → pt-⌈𝕀⌉ a) c
+                                              in
+                                                concat (D a)
+                                                  ( extend-along
+                                                      (pt-⌈𝕀⌉ a) (pt-⌈𝕀⌉ a)
+                                                      (\ _ → pt-⌈𝕀⌉ a) pa c)
+                                                  ( pa c-mid)
+                                                  ( pa c)
+                                                  ( id-arr-covariant-transport-II
+                                                      ⌈𝕀⌉ (pt-⌈𝕀⌉ a) DS cov-D (pa c-mid))
+                                                  ( ap
+                                                      ( op-family-at C
+                                                          (op-shape-point-flip (pt-⌈𝕀⌉ a)))
+                                                      ( D a)
+                                                      ( c-mid) (c) (pa)
+                                                      ( first
+                                                          (is-prop-C
+                                                            (pt-⌈𝕀⌉ a) c-mid c))))))
+                                ( p i)
+                      in
+                      let H-sec1=p
+                        : H-sec 1₂ = p
+                        :=
+                          first
+                            ( second
+                                ( extext
+                                    ( 𝕀)
+                                    ( \ _ → TOP)
+                                    ( \ _ → BOT)
+                                    ( \ i → E i)
+                                    ( \ _ → recBOT)
+                                    ( H-sec 1₂)
+                                    ( p)))
+                            ( ptwise)
+                      in
+                      let d1=ap-eval
+                        : d 1₂
+                          = ap
+                              ( (i : 𝕀) → E i)
+                              ( E 0₂)
+                              ( H-sec 1₂)
+                              ( p)
+                              ( \ φ → φ 0₂)
+                              ( H-sec1=p)
+                        :=
+                          concat
                             ( H-sec 1₂ 0₂ = p 0₂)
+                            ( d 1₂)
+                            ( ptwise 0₂)
                             ( ap
                                 ( (i : 𝕀) → E i)
                                 ( E 0₂)
@@ -807,101 +910,150 @@
                                 ( p)
                                 ( \ φ → φ 0₂)
                                 ( H-sec1=p))
-                            ( ptwise 0₂)
-                            ( ap-ext-eq-htpy-at
-                                extext
-                                𝕀
-                                ( \ _ → TOP)
-                                ( \ _ → BOT)
-                                ( \ i → E i)
-                                ( \ _ → recBOT)
-                                0₂
-                                ( H-sec 1₂)
-                                ( p)
-                                ( ptwise)))
+                            ( refl)
+                            ( rev
+                                ( H-sec 1₂ 0₂ = p 0₂)
+                                ( ap
+                                    ( (i : 𝕀) → E i)
+                                    ( E 0₂)
+                                    ( H-sec 1₂)
+                                    ( p)
+                                    ( \ φ → φ 0₂)
+                                    ( H-sec1=p))
+                                ( ptwise 0₂)
+                                ( ap-ext-eq-htpy-at
+                                    extext
+                                    𝕀
+                                    ( \ _ → TOP)
+                                    ( \ _ → BOT)
+                                    ( \ i → E i)
+                                    ( \ _ → recBOT)
+                                    0₂
+                                    ( H-sec 1₂)
+                                    ( p)
+                                    ( ptwise)))
+                      in
+                      let pack1-eq-second
+                        : transport
+                            ( (i : 𝕀) → E i)
+                            ( \ φ → φ 0₂ = f0)
+                            ( H-sec 1₂)
+                            ( p)
+                            ( H-sec1=p)
+                            ( r 1₂)
+                          = q
+                        :=
+                          transport-section-eq-at-cancel-cube
+                            𝕀
+                            E
+                            0₂
+                            f0
+                            ( H-sec 1₂)
+                            p
+                            ( H-sec1=p)
+                            ( d 1₂)
+                            q
+                            ( d1=ap-eval)
+                      in
+                        eq-pair
+                          ( (i : 𝕀) → E i)
+                          ( \ φ → φ 0₂ = f0)
+                          ( pack 1₂)
+                          ( p , q)
+                          ( H-sec1=p
+                          , pack1-eq-second)
                   in
-                  let pack1-eq-second
-                    : transport
-                        ( (i : 𝕀) → E i)
-                        ( \ φ → φ 0₂ = f0)
-                        ( H-sec 1₂)
-                        ( p)
-                        ( H-sec1=p)
-                        ( r 1₂)
-                      = q
+                  let arrow-pack
+                    : hom-II
+                        ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                        ( pack 0₂)
+                        ( pack 1₂)
+                    := \ t → pack t
+                  in
+                  let arrow
+                    : hom-II
+                        ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                        ( contr-center)
+                        ( p , q)
                     :=
-                      transport-section-eq-at-cancel-cube
-                        𝕀
-                        E
-                        0₂
-                        f0
-                        ( H-sec 1₂)
-                        p
-                        ( H-sec1=p)
-                        ( d 1₂)
-                        q
-                        ( d1=ap-eval)
-                  in
-                    eq-pair
-                      ( (i : 𝕀) → E i)
-                      ( \ φ → φ 0₂ = f0)
-                      ( pack 1₂)
-                      ( p , q)
-                      ( H-sec1=p
-                      , pack1-eq-second)
-              in
-              let arrow-pack
-                : hom-II
-                    ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-                    ( pack 0₂)
-                    ( pack 1₂)
-                := \ t → pack t
-              in
-              let arrow
-                : hom-II
-                    ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-                    ( contr-center)
-                    ( p , q)
-                :=
-                  transport
-                    ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-                    ( \ z →
-                        hom-II
-                          ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-                          ( z)
-                          ( p , q))
-                    ( pack 0₂)
-                    ( contr-center)
-                    ( pack0-eq)
-                    ( transport
+                      transport
                         ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                         ( \ z →
                             hom-II
                               ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-                              ( pack 0₂)
-                              ( z))
-                        ( pack 1₂)
-                        ( p , q)
-                        ( pack1-eq)
-                        ( arrow-pack))
-              in
-                first
-                  ( has-inverse-is-equiv
-                      ( contr-center = (p , q))
-                      ( hom-II
-                          ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-                          ( contr-center)
-                          ( p , q))
-                      ( hom-eq-II
-                          ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-                          ( contr-center)
-                          ( p , q))
-                      ( is-discrete-total contr-center (p , q)))
-                  ( arrow)
-        in
-          is-contr-equiv-is-contr'
-            ( Σ (f1 : E 1₂) , dhom-II (shape (_ : 𝕀 | TOP)) (form 0₂) (form 1₂) (\ t → form t) (\ s → E (unform s)) f0 f1)
-            ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
-            ( equiv-is-cov-i-coslice E f0)
-            ( contr-center , contr-hom)
+                              ( z)
+                              ( p , q))
+                        ( pack 0₂)
+                        ( contr-center)
+                        ( pack0-eq)
+                        ( transport
+                            ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                            ( \ z →
+                                hom-II
+                                  ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                                  ( pack 0₂)
+                                  ( z))
+                            ( pack 1₂)
+                            ( p , q)
+                            ( pack1-eq)
+                            ( arrow-pack))
+                  in
+                    first
+                      ( has-inverse-is-equiv
+                          ( contr-center = (p , q))
+                          ( hom-II
+                              ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                              ( contr-center)
+                              ( p , q))
+                          ( hom-eq-II
+                              ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                              ( contr-center)
+                              ( p , q))
+                          ( is-discrete-total contr-center (p , q)))
+                      ( arrow)
+            in
+              is-contr-equiv-is-contr'
+                ( Σ (f1 : E 1₂) , dhom-II (⌈𝕀⌉) (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t) (equiv-ext-shape-family-fwd 𝕀 □¹ E) f0 f1)
+                ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                ( equiv-is-cov-i-coslice E f0)
+                ( contr-center , contr-hom))
+    in
+    let family-equiv
+      : (s : ⌈𝕀⌉)
+        → Equiv (extension-family s) (function-family s)
+      :=
+        \ s →
+          match s
+            into (\ s' → Equiv (extension-family s') (function-family s'))
+            ( point a ⇒
+                equiv-comp
+                  ( (t : 1 | uninvᵒᵖ (phi-i a)) → D a)
+                  ( Shape 1 (\ _ → uninvᵒᵖ (phi-i a)) → D a)
+                  ( (let mod ᵒᵖ p := phi-i a in
+                        ᵒᵖ (Shape 1 (\ _ → p))) → D a)
+                  ( equiv-ext-shape-fun
+                      funext 1 (\ _ → uninvᵒᵖ (phi-i a)) (\ _ → D a))
+                  ( ( \ h c →
+                        h (first (equiv-shape-1-op-uninv (phi-i a)) c))
+                    , is-equiv-precomp-is-equiv
+                        funext
+                        ( let mod ᵒᵖ p := phi-i a in
+                            ᵒᵖ (Shape 1 (\ _ → p)))
+                        ( Shape 1 (\ _ → uninvᵒᵖ (phi-i a)))
+                        ( D a)
+                        ( first (equiv-shape-1-op-uninv (phi-i a)))
+                        ( second (equiv-shape-1-op-uninv (phi-i a)))))
+    in
+    let family-eq : extension-family = function-family
+      := eq-htpy funext ⌈𝕀⌉ (\ _ → U) extension-family function-family
+          ( \ s → first (ua
+              (extension-family s) (function-family s)) (family-equiv s))
+    in
+      transport
+        ( ⌈𝕀⌉ → U)
+        ( is-covariant-II ⌈𝕀⌉)
+        ( function-family) (extension-family)
+        ( rev (⌈𝕀⌉ → U) extension-family function-family family-eq)
+        cov-functions
+
 ```

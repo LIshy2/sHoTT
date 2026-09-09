@@ -88,7 +88,11 @@ This is a literate `rzk` file:
 
 GWB 24, axiom 7
 ```rzk
-#def discrete-interval-elim (i :♭ 𝕀) (A : 𝕀 → U) (x : A 0ᵢ) (y : A 1ᵢ)
+#def discrete-interval-elim
+  ( i :♭ 𝕀)
+  ( A : (j :♭ 𝕀) → U)
+  ( x : A 0ᵢ)
+  ( y : A 1ᵢ)
   : A i
   :=
   recOR(
@@ -108,27 +112,6 @@ GWB 24, axiom 7
     ( e0)
     ( e1)
 
-#def equiv-shape-I-bool
-  : Equiv (shape (_ : (_b 𝕀) | TOP)) Bool
-  :=
-    equiv-has-inverse
-      ( shape (_ : (_b 𝕀) | TOP))
-      Bool
-      ( \ p → let mod _b i := unform p in discrete-interval-elim i (\ _ → Bool) false true)
-      ( \ b → match b (false ⇒ form (mod _b 0ᵢ) | true ⇒ form (mod _b 1ᵢ)))
-      ( \ p →
-          let mod _b i := unform p
-            into
-              ( \ (z : (_b 𝕀)) →
-                  match (let mod _b j := z in discrete-interval-elim j (\ _ → Bool) false true)
-                    ( false ⇒ form (mod _b 0ᵢ)
-                    | true ⇒ form (mod _b 1ᵢ))
-                  =_{shape (_ : (_b 𝕀) | TOP)} form z)
-          in
-            recOR(
-              ( i ≡ 0ᵢ) ↦ refl
-            , ( i ≡ 1ᵢ) ↦ refl))
-      ( \ b → match b (false ⇒ refl | true ⇒ refl))
 ```
 
 ### Path

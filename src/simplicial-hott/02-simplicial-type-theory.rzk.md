@@ -568,99 +568,372 @@ For completeness we verify that the intesection `Δ² ∧ {0}×Δ¹` is indeed `
   := \ t → (t ≡ 0₂ ∨ t ≡ 1₂)
 ```
 
+## Shape realizations
+
+```rzk
+#data Shape ( I : CUBE) ( φ : I → TOPE) := point ( t : φ)
+
+#def ⌈1⌉ : U := Shape 1 ( \ _ → TOP)
+
+#def ⌈𝕀⌉ : U := Shape 𝕀 □¹
+
+#def ⌈♭𝕀⌉ : U := Shape (♭ 𝕀) ( \ _ → TOP)
+
+#def pt-⌈1⌉ : ⌈1⌉ := point 1 ( \ _ → TOP) *₁
+
+#def pt-⌈𝕀⌉ ( i : 𝕀) : ⌈𝕀⌉ := point 𝕀 □¹ i
+
+#def pt-♭𝕀 ( i :♭ 𝕀) : ⌈♭𝕀⌉ :=
+  point (♭ 𝕀) ( \ _ → TOP) (mod ♭ i)
+
+#def equiv-shape-I-bool
+  : Equiv ⌈♭𝕀⌉ Bool
+  :=
+    let f : ⌈♭𝕀⌉ → Bool :=
+      \ p →
+        match p
+          ( point i ⇒
+              let mod ♭ j := i in
+              discrete-interval-elim j (\ _ → Bool) false true) in
+    let g : Bool → ⌈♭𝕀⌉ :=
+      \ b → match b (false ⇒ pt-♭𝕀 0ᵢ | true ⇒ pt-♭𝕀 1ᵢ) in
+    equiv-has-inverse
+      ( ⌈♭𝕀⌉)
+      Bool
+      ( f)
+      ( g)
+      ( \ p →
+          match p
+            ( point i ⇒
+                let mod ♭ j := i into
+                  ( \ k →
+                      g (f (point (♭ 𝕀) (\ _ → TOP) k))
+                        = point (♭ 𝕀) (\ _ → TOP) k) in
+                discrete-interval-elim j
+                  ( \ l →
+                      g (f (point (♭ 𝕀) (\ _ → TOP) (mod ♭ l)))
+                        = point (♭ 𝕀) (\ _ → TOP) (mod ♭ l))
+                  ( refl)
+                  ( refl)))
+      ( \ b → match b (false ⇒ refl | true ⇒ refl))
+```
+
+### Dependent functions on shape realizations
+
+```rzk
+#def shape-ind
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  ( B : Shape I ϕ → U)
+  ( d : (x : I | ϕ x) → B (point I ϕ x))
+  ( t : Shape I ϕ)
+  : B t
+  := match t ( point x ⇒ d x)
+
+#def b-total-shape-ind
+  ( I :♭ CUBE)
+  ( B : ♭ (Shape I (\ _ → TOP)) → U)
+  ( d : (x :_b I) → B (mod ♭ (point I (\ _ → TOP) x)))
+  ( t : ♭ (Shape I (\ _ → TOP)))
+  : B t
+  := let mod ♭ q := t into B in
+    match ♭ q ( point x ⇒ d x)
+
+#def b-equiv-total-shape
+  ( I :♭ CUBE)
+  ( F G :♭ Shape I (\ _ → TOP) → U)
+  ( f :♭ (s : Shape I (\ _ → TOP)) → F s → G s)
+  ( e :♭ (x :_b I) →
+      is-equiv
+        ( F (point I (\ _ → TOP) x))
+        ( G (point I (\ _ → TOP) x))
+        ( f (point I (\ _ → TOP) x)))
+  ( t : ♭ (Shape I (\ _ → TOP)))
+  : let mod ♭ q := t in Equiv (♭ (F q)) (♭ (G q))
+  :=
+    let C : ♭ (Shape I (\ _ → TOP)) → U :=
+      \ z →
+        let mod ♭ q := z in
+        Equiv (♭ (F q)) (♭ (G q)) in
+    let mod ♭ q := t into C in
+    ( b-map (F q) (G q) (f q)
+    , b-total-shape-ind I
+        ( \ z →
+            let mod ♭ s := z in
+            is-equiv
+              ( ♭ (F s)) (♭ (G s))
+              ( b-map (F s) (G s) (f s)))
+        ( \ (x :_b I) →
+            second (b-equiv
+              ( F (point I (\ _ → TOP) x))
+              ( G (point I (\ _ → TOP) x))
+              ( f (point I (\ _ → TOP) x) , e x)))
+        ( mod ♭ q))
+
+#def shape-ind-η
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  ( B : Shape I ϕ → U)
+  ( g : (t : Shape I ϕ) → B t)
+  ( t : Shape I ϕ)
+  : shape-ind I ϕ B (\ x → g (point I ϕ x)) t = g t
+  := match t ( point x ⇒ refl)
+
+#def shape-convoy
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  ( P : Shape I ϕ → U)
+  ( Q : (t : Shape I ϕ) → P t → U)
+  ( d : (x : I | ϕ x)
+      → (p : P (point I ϕ x))
+      → Q (point I ϕ x) p)
+  ( t : Shape I ϕ)
+  ( p : P t)
+  : Q t p
+  := shape-ind I ϕ (\ t' → (p' : P t') → Q t' p') d t p
+
+#def shape-convoy-path
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  ( P : Shape I ϕ → U)
+  ( a : Shape I ϕ)
+  ( d : (x : I | ϕ x)
+      → (p : P (point I ϕ x))
+      → point I ϕ x = a)
+  ( t : Shape I ϕ)
+  ( p : P t)
+  : t = a
+  := shape-convoy I ϕ P (\ t' _ → t' =_{Shape I ϕ} a) d t p
+
+#def equiv-ext-shape-fun-fwd
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  ( B : Shape I ϕ → U)
+  : ( ( x : I | ϕ x) → B (point I ϕ x))
+  → ( ( t : Shape I ϕ) → B t)
+  := shape-ind I ϕ B
+
+#def equiv-ext-shape-fun-bwd
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  ( B : Shape I ϕ → U)
+  : ( ( t : Shape I ϕ) → B t)
+  → ( ( x : I | ϕ x) → B (point I ϕ x))
+  := \ g x → g (point I ϕ x)
+
+#def equiv-ext-shape-fun
+  ( funext : FunExt)
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  ( B : Shape I ϕ → U)
+  : Equiv
+      ( ( x : I | ϕ x) → B (point I ϕ x))
+      ( ( t : Shape I ϕ) → B t)
+  :=
+    equiv-has-inverse
+      ( ( x : I | ϕ x) → B (point I ϕ x))
+      ( ( t : Shape I ϕ) → B t)
+      ( equiv-ext-shape-fun-fwd I ϕ B)
+      ( equiv-ext-shape-fun-bwd I ϕ B)
+      ( \ f → refl)
+      ( \ g →
+          eq-htpy funext
+            ( Shape I ϕ)
+            ( B)
+            ( equiv-ext-shape-fun-fwd I ϕ B
+                (equiv-ext-shape-fun-bwd I ϕ B g))
+            ( g)
+            ( shape-ind-η I ϕ B g))
+
+#def equiv-ext-shape-family-fwd
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  : ( (x : I | ϕ x) → U)
+  → ( Shape I ϕ → U)
+  := \ C t → match t ( point x ⇒ C x)
+
+#def equiv-ext-shape-family-bwd
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  : ( Shape I ϕ → U)
+  → ( (x : I | ϕ x) → U)
+  := \ C x → C (point I ϕ x)
+
+#def equiv-ext-shape-family
+  ( funext : FunExt)
+  ( I : CUBE)
+  ( ϕ : I → TOPE)
+  : Equiv
+      ( (x : I | ϕ x) → U)
+      ( Shape I ϕ → U)
+  :=
+    equiv-has-inverse
+      ( (x : I | ϕ x) → U)
+      ( Shape I ϕ → U)
+      ( \ C → equiv-ext-shape-family-fwd I ϕ C)
+      ( \ C → equiv-ext-shape-family-bwd I ϕ C)
+      ( \ C → refl)
+      ( \ C →
+          eq-htpy funext
+            ( Shape I ϕ)
+            ( \ _ → U)
+            ( equiv-ext-shape-family-fwd I ϕ
+                (equiv-ext-shape-family-bwd I ϕ C))
+            ( C)
+            ( \ t → match t ( point x ⇒ refl)))
+
+```
+
 ## n-shapes
 
 ```rzk
 #def I^n (n : nat)
   : U
   := match n
-      (zero ⇒ shape (_ : 1 | TOP)
-      | suc k ih ⇒ product (shape (_ : 𝕀 | TOP)) ih)
+      (zero ⇒ ⌈1⌉
+      | suc k ih ⇒ product ⌈𝕀⌉ ih)
 
 #def zero-vec-I^n
   ( m : nat)
   : I^n m
-  := match m (zero ⇒ form *₁ | suc k ih ⇒ (form 0₂ , ih))
+  := match m (zero ⇒ pt-⌈1⌉ | suc k ih ⇒ (pt-⌈𝕀⌉ 0₂ , ih))
 ```
 
 ## Shapes at endpoint 1
 
 ```rzk
 #def shape-at-1
-  ( t : shape (_ : 𝕀 | TOP))
+  ( t : ⌈𝕀⌉)
   : U
-  := shape (_ : 1 | unform t ≡ 1₂)
+  := match t ( point i ⇒ Shape 1 ( \ _ → i ≡ 1₂))
+
+#def is-contr-op-shape-helper
+  ( A :ᵒᵖ U)
+  ( ic : ᵒᵖ (is-contr A))
+  : is-contr (ᵒᵖ A)
+  :=
+    let mod ᵒᵖ (center , contr) := ic in
+      ( mod ᵒᵖ center
+      , \ y →
+          let mod ᵒᵖ y0 := y in
+            op-path-commute-fwd A center y0 (mod ᵒᵖ (contr y0)))
 
 #def equiv-shape-1-op-uninv
   ( psi : ᵒᵖ TOPE)
   : Equiv
-      ( let mod ᵒᵖ p := psi in ᵒᵖ (shape (_ : 1 | p)))
-      ( shape (_ : 1 | uninvᵒᵖ psi))
+      ( let mod ᵒᵖ p := psi in ᵒᵖ (Shape 1 ( \ _ → p)))
+      ( Shape 1 ( \ _ → uninvᵒᵖ psi))
   :=
-    equiv-has-inverse
-      ( let mod ᵒᵖ p := psi in ᵒᵖ (shape (_ : 1 | p)))
-      ( shape (_ : 1 | uninvᵒᵖ psi))
-      ( \ s →
-          let mod ᵒᵖ s0 := s in
-            form *₁)
-      ( \ t → mod ᵒᵖ (form *₁))
-      ( \ _ → refl)
-      ( \ _ → refl)
+    equiv-iff-is-prop-is-prop
+      ( let mod ᵒᵖ p := psi in ᵒᵖ (Shape 1 ( \ _ → p)))
+      ( Shape 1 ( \ _ → uninvᵒᵖ psi))
+      ( let mod ᵒᵖ p := psi in
+          \ x y →
+            let mod ᵒᵖ x0 := x in
+            let mod ᵒᵖ y0 := y in
+            is-contr-equiv-is-contr
+              ( ᵒᵖ (x0 = y0))
+              ( (mod ᵒᵖ x0) = (mod ᵒᵖ y0))
+              ( op-path-commute-fwd (Shape 1 (\ _ → p)) x0 y0
+              , op-path-commute-equiv (Shape 1 (\ _ → p)) x0 y0)
+              ( is-contr-op-shape-helper
+                  ( x0 = y0)
+                  ( mod ᵒᵖ (
+                      let is-prop-shape
+                        : is-prop (Shape 1 (\ _ → p))
+                        :=
+                          \ a b →
+                            match a
+                              ( point u ⇒
+                                  is-prop-is-contr
+                                    ( Shape 1 (\ _ → p))
+                                    ( point 1 (\ _ → p) *₁
+                                    , \ z → match z ( point v ⇒ refl))
+                                    ( point 1 (\ _ → p) u)
+                                    ( b))
+                      in
+                        is-prop-shape x0 y0))))
+      ( \ (x : Shape 1 (\ _ → uninvᵒᵖ psi))
+          (y : Shape 1 (\ _ → uninvᵒᵖ psi)) →
+          match x
+            ( point u ⇒
+                is-prop-is-contr
+                  ( Shape 1 (\ _ → uninvᵒᵖ psi))
+                  ( point 1 (\ _ → uninvᵒᵖ psi) *₁
+                  , \ z → match z ( point v ⇒ refl))
+                  ( point 1 (\ _ → uninvᵒᵖ psi) u)
+                  ( y)))
+      ( ( \ s →
+            let mod ᵒᵖ s0 := s in
+              double-op
+                ( Shape 1 (\ _ → uninvᵒᵖ psi))
+                ( mod ᵒᵖ (
+                    match s0
+                      ( point u ⇒
+                          mod ᵒᵖ
+                            ( point 1 (\ _ → uninvᵒᵖ psi) *₁)))))
+        , \ t →
+            match t
+              ( point u ⇒
+                  let mod ᵒᵖ p := psi in
+                    mod ᵒᵖ (point 1 (\ _ → p) *₁)))
 
 #def shape-at-1-of-eq-form-1
-  ( t : shape (_ : 𝕀 | TOP))
-  ( e : t = form (1₂))
+  ( t : ⌈𝕀⌉)
+  ( e : t = pt-⌈𝕀⌉ 1₂)
   : shape-at-1 t
   :=
     transport
-      ( shape (_ : 𝕀 | TOP))
+      ( ⌈𝕀⌉)
       ( shape-at-1)
-      ( form (1₂))
+      ( pt-⌈𝕀⌉ 1₂)
       ( t)
-      ( rev (shape (_ : 𝕀 | TOP)) t (form (1₂)) e)
-      ( form (*₁))
+      ( rev (⌈𝕀⌉) t (pt-⌈𝕀⌉ 1₂) e)
+      ( point 1 ( \ _ → 1₂ ≡ 1₂) *₁)
 
 #def eq-form-1-of-shape-at-1
-  ( t : shape (_ : 𝕀 | TOP))
-  (_ : shape-at-1 t)
-  : t = form (1₂)
-  := refl
+  ( t : ⌈𝕀⌉)
+  ( s : shape-at-1 t)
+  : t = pt-⌈𝕀⌉ 1₂
+  :=
+    shape-convoy-path
+      𝕀 (□¹)
+      ( shape-at-1)
+      ( pt-⌈𝕀⌉ 1₂)
+      ( \ i s' → match s' ( point u ⇒ refl))
+      ( t) (s)
 
 #def is-prop-shape-at-1
-  ( t : shape (_ : 𝕀 | TOP))
+  ( t : ⌈𝕀⌉)
   : is-prop (shape-at-1 t)
   :=
-    \ a b →
-      is-prop-is-contr
-        ( shape-at-1 t)
-        ( form (*₁)
-        , \ x →
-            rev
-              ( shape-at-1 t)
-              ( x)
-              ( form (*₁))
-              ( refl))
-        ( a)
-        ( b)
+    match t
+      ( point i ⇒
+          \ a b →
+            match a
+              ( point u ⇒
+                  is-prop-is-contr
+                    ( Shape 1 ( \ _ → i ≡ 1₂))
+                    ( point 1 ( \ _ → i ≡ 1₂) *₁
+                    , \ x → match x ( point v ⇒ refl))
+                    ( point 1 ( \ _ → i ≡ 1₂) u)
+                    ( b)))
 ```
 
 ## Monotonicity of maps out of 𝕀
 
-Maps `𝕀 → shape (_ : 𝕀 | TOP)` are monotone: if the shape at `0` is `form 1₂`, then every shape on the line is `form 1₂`.
-
-
 GWB24, axiom 10 weakened
 ```rzk
 #postulate fun-monotonicity-at
-  ( f : 𝕀 → shape (_ : 𝕀 | TOP))
-  ( e : (f 0₂) = (form 1₂))
+  ( f : 𝕀 → ⌈𝕀⌉)
+  ( e : (f 0₂) = (pt-⌈𝕀⌉ 1₂))
   ( t : 𝕀)
-  : (f t) = form (1₂)
+  : (f t) = pt-⌈𝕀⌉ (1₂)
 
 #def fun-monotonicity
-  ( f : 𝕀 → shape (_ : 𝕀 | TOP))
-  ( e : (f 0₂) = (form 1₂))
-  : (f 1₂) = form (1₂)
+  ( f : 𝕀 → ⌈𝕀⌉)
+  ( e : (f 0₂) = (pt-⌈𝕀⌉ 1₂))
+  : (f 1₂) = pt-⌈𝕀⌉ (1₂)
   := fun-monotonicity-at f e 1₂
 ```
 
@@ -668,8 +941,8 @@ GWB24, axiom 10 weakened
 
 ```rzk
 #def sec-shape-at-1-along-form
-  ( f : 𝕀 → shape (_ : 𝕀 | TOP))
-  ( e0 : (f 0₂) = form (1₂))
+  ( f : 𝕀 → ⌈𝕀⌉)
+  ( e0 : (f 0₂) = pt-⌈𝕀⌉ (1₂))
   : ( j : 𝕀) → shape-at-1 (f j)
   := \ j → shape-at-1-of-eq-form-1 (f j) (fun-monotonicity-at f e0 j)
 ```
