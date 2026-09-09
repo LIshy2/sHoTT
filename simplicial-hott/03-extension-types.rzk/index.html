@@ -1017,15 +1017,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#extension-types-and-shapes-domain" class="md-nav__link">
-    <span class="md-ellipsis">
-      Extension types and shapes domain
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#extension-types-opposition" class="md-nav__link">
     <span class="md-ellipsis">
       Extension types opposition
@@ -1658,15 +1649,6 @@
   <a href="#more-equivalences-of-relative-extension-types" class="md-nav__link">
     <span class="md-ellipsis">
       More equivalences of relative extension types
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#extension-types-and-shapes-domain" class="md-nav__link">
-    <span class="md-ellipsis">
-      Extension types and shapes domain
     </span>
   </a>
   
@@ -3425,104 +3407,70 @@ equivalent to extending the fiber.</p>
 </span><span id="__span-56-58"><a id="__codelineno-56-58" name="__codelineno-56-58" href="#__codelineno-56-58"></a>      ( equiv-based-paths-family (A t) (B t) (τ t)))
 </span><span id="__span-56-59"><a id="__codelineno-56-59" name="__codelineno-56-59" href="#__codelineno-56-59"></a>    ( <span class="p">\ </span>t → (a t , <span class="s">refl</span>)))
 </span></code></pre></div>
-<h2 id="extension-types-and-shapes-domain">Extension types and shapes domain<a class="headerlink" href="#extension-types-and-shapes-domain" title="Permanent link">&para;</a></h2>
-<p>Functions on a subshape are equivalent to functions on the corresponding <code>shape</code> type.</p>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-ext-shape-fun-fwd" id="define:equiv-ext-shape-fun-fwd" style="visibility: visible; position: relative; color: inherit">equiv-ext-shape-fun-fwd</a></span>
-</span><span id="__span-57-2"><a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>  <span class="p">( </span>I <span class="p">:</span> <span class="kt">CUBE</span>)
-</span><span id="__span-57-3"><a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a>  <span class="p">( </span>ϕ <span class="p">:</span> I → <span class="kt">TOPE</span>)
-</span><span id="__span-57-4"><a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>  <span class="p">( </span>A <span class="p">:</span> I → <span class="kt">U</span>)
-</span><span id="__span-57-5"><a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a>  : <span class="p">( </span>( x <span class="p">:</span> I | ϕ x) → A x)
-</span><span id="__span-57-6"><a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a>  → <span class="p">( </span>( t <span class="p">:</span> shape <span class="p">(</span>x <span class="p">:</span> I | ϕ x)) → A (unform t))
-</span><span id="__span-57-7"><a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a>  := <span class="p">\ </span>f t → f (unform t)
-</span><span id="__span-57-8"><a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a>
-</span><span id="__span-57-9"><a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-ext-shape-fun-bwd" id="define:equiv-ext-shape-fun-bwd" style="visibility: visible; position: relative; color: inherit">equiv-ext-shape-fun-bwd</a></span>
-</span><span id="__span-57-10"><a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a>  <span class="p">( </span>I <span class="p">:</span> <span class="kt">CUBE</span>)
-</span><span id="__span-57-11"><a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a>  <span class="p">( </span>ϕ <span class="p">:</span> I → <span class="kt">TOPE</span>)
-</span><span id="__span-57-12"><a id="__codelineno-57-12" name="__codelineno-57-12" href="#__codelineno-57-12"></a>  <span class="p">( </span>A <span class="p">:</span> I → <span class="kt">U</span>)
-</span><span id="__span-57-13"><a id="__codelineno-57-13" name="__codelineno-57-13" href="#__codelineno-57-13"></a>  : <span class="p">( </span>( t <span class="p">:</span> shape <span class="p">(</span>x <span class="p">:</span> I | ϕ x)) → A (unform t))
-</span><span id="__span-57-14"><a id="__codelineno-57-14" name="__codelineno-57-14" href="#__codelineno-57-14"></a>  → <span class="p">( </span>( x <span class="p">:</span> I | ϕ x) → A x)
-</span><span id="__span-57-15"><a id="__codelineno-57-15" name="__codelineno-57-15" href="#__codelineno-57-15"></a>  := <span class="p">\ </span>g x → g (form x)
-</span><span id="__span-57-16"><a id="__codelineno-57-16" name="__codelineno-57-16" href="#__codelineno-57-16"></a>
-</span><span id="__span-57-17"><a id="__codelineno-57-17" name="__codelineno-57-17" href="#__codelineno-57-17"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:equiv-ext-shape-fun" id="define:equiv-ext-shape-fun" style="visibility: visible; position: relative; color: inherit">equiv-ext-shape-fun</a></span>
-</span><span id="__span-57-18"><a id="__codelineno-57-18" name="__codelineno-57-18" href="#__codelineno-57-18"></a>  <span class="p">( </span>I <span class="p">:</span> <span class="kt">CUBE</span>)
-</span><span id="__span-57-19"><a id="__codelineno-57-19" name="__codelineno-57-19" href="#__codelineno-57-19"></a>  <span class="p">( </span>ϕ <span class="p">:</span> I → <span class="kt">TOPE</span>)
-</span><span id="__span-57-20"><a id="__codelineno-57-20" name="__codelineno-57-20" href="#__codelineno-57-20"></a>  <span class="p">( </span>A <span class="p">:</span> I → <span class="kt">U</span>)
-</span><span id="__span-57-21"><a id="__codelineno-57-21" name="__codelineno-57-21" href="#__codelineno-57-21"></a>  : Equiv
-</span><span id="__span-57-22"><a id="__codelineno-57-22" name="__codelineno-57-22" href="#__codelineno-57-22"></a>      <span class="p">( </span>( x <span class="p">:</span> I | ϕ x) → A x)
-</span><span id="__span-57-23"><a id="__codelineno-57-23" name="__codelineno-57-23" href="#__codelineno-57-23"></a>      <span class="p">( </span>( t <span class="p">:</span> shape <span class="p">(</span>x <span class="p">:</span> I | ϕ x)) → A (unform t))
-</span><span id="__span-57-24"><a id="__codelineno-57-24" name="__codelineno-57-24" href="#__codelineno-57-24"></a>  :=
-</span><span id="__span-57-25"><a id="__codelineno-57-25" name="__codelineno-57-25" href="#__codelineno-57-25"></a>    equiv-has-inverse
-</span><span id="__span-57-26"><a id="__codelineno-57-26" name="__codelineno-57-26" href="#__codelineno-57-26"></a>      <span class="p">( </span>( x <span class="p">:</span> I | ϕ x) → A x)
-</span><span id="__span-57-27"><a id="__codelineno-57-27" name="__codelineno-57-27" href="#__codelineno-57-27"></a>      <span class="p">( </span>( t <span class="p">:</span> shape <span class="p">(</span>x <span class="p">:</span> I | ϕ x)) → A (unform t))
-</span><span id="__span-57-28"><a id="__codelineno-57-28" name="__codelineno-57-28" href="#__codelineno-57-28"></a>      ( equiv-ext-shape-fun-fwd I ϕ A)
-</span><span id="__span-57-29"><a id="__codelineno-57-29" name="__codelineno-57-29" href="#__codelineno-57-29"></a>      ( equiv-ext-shape-fun-bwd I ϕ A)
-</span><span id="__span-57-30"><a id="__codelineno-57-30" name="__codelineno-57-30" href="#__codelineno-57-30"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
-</span><span id="__span-57-31"><a id="__codelineno-57-31" name="__codelineno-57-31" href="#__codelineno-57-31"></a>      ( <span class="p">\ </span>_ → <span class="s">refl</span>)
-</span></code></pre></div>
 <h2 id="extension-types-opposition">Extension types opposition<a class="headerlink" href="#extension-types-opposition" title="Permanent link">&para;</a></h2>
-<div class="language-rzk highlight"><pre><span></span><code><span id="__span-58-1"><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-flip-fwd" id="define:op-ext-flip-fwd" style="visibility: visible; position: relative; color: inherit">op-ext-flip-fwd</a></span>
-</span><span id="__span-58-2"><a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>  ( ψ :_op (𝕀 → <span class="kt">TOPE</span>))
-</span><span id="__span-58-3"><a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>  ( ϕ :_op <span class="p">(</span>(t <span class="p">:</span> 𝕀 | ψ t) → <span class="kt">TOPE</span>))
-</span><span id="__span-58-4"><a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>  ( A :_op <span class="p">(</span>t <span class="p">:</span> 𝕀 | ψ t) → <span class="kt">U</span>)
-</span><span id="__span-58-5"><a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a>  ( x :_op <span class="p">(</span>t <span class="p">:</span> ϕ) → A t)
-</span><span id="__span-58-6"><a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a>  ( h :_op <span class="p">(</span>(t <span class="p">:</span> 𝕀 | ψ t) → A t [ ϕ t ↦ x t ]))
-</span><span id="__span-58-7"><a id="__codelineno-58-7" name="__codelineno-58-7" href="#__codelineno-58-7"></a>  : <span class="p">( </span>t <span class="p">:</span> 𝕀 |
-</span><span id="__span-58-8"><a id="__codelineno-58-8" name="__codelineno-58-8" href="#__codelineno-58-8"></a>      <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-9"><a id="__codelineno-58-9" name="__codelineno-58-9" href="#__codelineno-58-9"></a>      <span class="nd">_op</span> (ψ ft)) →
-</span><span id="__span-58-10"><a id="__codelineno-58-10" name="__codelineno-58-10" href="#__codelineno-58-10"></a>    <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-11"><a id="__codelineno-58-11" name="__codelineno-58-11" href="#__codelineno-58-11"></a>    (<span class="nd">_op</span> (A ft)) [ <span class="s">uninv_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (ϕ ft)) ↦ <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (x ft) ]
-</span><span id="__span-58-12"><a id="__codelineno-58-12" name="__codelineno-58-12" href="#__codelineno-58-12"></a>  := <span class="p">\ </span>t →
-</span><span id="__span-58-13"><a id="__codelineno-58-13" name="__codelineno-58-13" href="#__codelineno-58-13"></a>    <span class="k">let mod</span> <span class="nd">_op</span> s := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-14"><a id="__codelineno-58-14" name="__codelineno-58-14" href="#__codelineno-58-14"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (h s)
-</span><span id="__span-58-15"><a id="__codelineno-58-15" name="__codelineno-58-15" href="#__codelineno-58-15"></a>
-</span><span id="__span-58-16"><a id="__codelineno-58-16" name="__codelineno-58-16" href="#__codelineno-58-16"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-flip-bwd" id="define:op-ext-flip-bwd" style="visibility: visible; position: relative; color: inherit">op-ext-flip-bwd</a></span>
-</span><span id="__span-58-17"><a id="__codelineno-58-17" name="__codelineno-58-17" href="#__codelineno-58-17"></a>  ( ψ :_op (𝕀 → <span class="kt">TOPE</span>))
-</span><span id="__span-58-18"><a id="__codelineno-58-18" name="__codelineno-58-18" href="#__codelineno-58-18"></a>  ( ϕ :_op <span class="p">(</span>(t <span class="p">:</span> 𝕀 | ψ t) → <span class="kt">TOPE</span>))
-</span><span id="__span-58-19"><a id="__codelineno-58-19" name="__codelineno-58-19" href="#__codelineno-58-19"></a>  ( A :_op <span class="p">(</span>t <span class="p">:</span> 𝕀 | ψ t) → <span class="kt">U</span>)
-</span><span id="__span-58-20"><a id="__codelineno-58-20" name="__codelineno-58-20" href="#__codelineno-58-20"></a>  ( x :_op <span class="p">(</span>t <span class="p">:</span> ϕ) → A t)
-</span><span id="__span-58-21"><a id="__codelineno-58-21" name="__codelineno-58-21" href="#__codelineno-58-21"></a>  <span class="p">( </span>k
-</span><span id="__span-58-22"><a id="__codelineno-58-22" name="__codelineno-58-22" href="#__codelineno-58-22"></a>    <span class="p">:</span> <span class="p">( </span>t <span class="p">:</span> 𝕀 |
-</span><span id="__span-58-23"><a id="__codelineno-58-23" name="__codelineno-58-23" href="#__codelineno-58-23"></a>        <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-24"><a id="__codelineno-58-24" name="__codelineno-58-24" href="#__codelineno-58-24"></a>        <span class="nd">_op</span> (ψ ft)) →
-</span><span id="__span-58-25"><a id="__codelineno-58-25" name="__codelineno-58-25" href="#__codelineno-58-25"></a>        <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-26"><a id="__codelineno-58-26" name="__codelineno-58-26" href="#__codelineno-58-26"></a>        (<span class="nd">_op</span> (A ft)) [ <span class="s">uninv_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (ϕ ft)) ↦ <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (x ft) ])
-</span><span id="__span-58-27"><a id="__codelineno-58-27" name="__codelineno-58-27" href="#__codelineno-58-27"></a>  : <span class="nd">_op</span> <span class="p">(</span>(t <span class="p">:</span> 𝕀 | ψ t) → A t [ ϕ t ↦ x t ])
-</span><span id="__span-58-28"><a id="__codelineno-58-28" name="__codelineno-58-28" href="#__codelineno-58-28"></a>  :=
-</span><span id="__span-58-29"><a id="__codelineno-58-29" name="__codelineno-58-29" href="#__codelineno-58-29"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (<span class="p">\ </span>t →
-</span><span id="__span-58-30"><a id="__codelineno-58-30" name="__codelineno-58-30" href="#__codelineno-58-30"></a>      <span class="k">let</span> <span class="nd">ᵒᵖ</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> b := k (<span class="s">unflip_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> t)) <span class="k">in</span>
-</span><span id="__span-58-31"><a id="__codelineno-58-31" name="__codelineno-58-31" href="#__codelineno-58-31"></a>        b)
-</span><span id="__span-58-32"><a id="__codelineno-58-32" name="__codelineno-58-32" href="#__codelineno-58-32"></a>
-</span><span id="__span-58-33"><a id="__codelineno-58-33" name="__codelineno-58-33" href="#__codelineno-58-33"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-flip-2-fwd" id="define:op-ext-flip-2-fwd" style="visibility: visible; position: relative; color: inherit">op-ext-flip-2-fwd</a></span>
-</span><span id="__span-58-34"><a id="__codelineno-58-34" name="__codelineno-58-34" href="#__codelineno-58-34"></a>  ( ψ :_op (<span class="kt">2</span> → <span class="kt">TOPE</span>))
-</span><span id="__span-58-35"><a id="__codelineno-58-35" name="__codelineno-58-35" href="#__codelineno-58-35"></a>  ( ϕ :_op <span class="p">(</span>(t <span class="p">:</span> <span class="kt">2</span> | ψ t) → <span class="kt">TOPE</span>))
-</span><span id="__span-58-36"><a id="__codelineno-58-36" name="__codelineno-58-36" href="#__codelineno-58-36"></a>  ( A :_op <span class="p">(</span>t <span class="p">:</span> <span class="kt">2</span> | ψ t) → <span class="kt">U</span>)
-</span><span id="__span-58-37"><a id="__codelineno-58-37" name="__codelineno-58-37" href="#__codelineno-58-37"></a>  ( x :_op <span class="p">(</span>t <span class="p">:</span> ϕ) → A t)
-</span><span id="__span-58-38"><a id="__codelineno-58-38" name="__codelineno-58-38" href="#__codelineno-58-38"></a>  ( h :_op <span class="p">(</span>(t <span class="p">:</span> <span class="kt">2</span> | ψ t) → A t [ ϕ t ↦ x t ]))
-</span><span id="__span-58-39"><a id="__codelineno-58-39" name="__codelineno-58-39" href="#__codelineno-58-39"></a>  : <span class="p">( </span>t <span class="p">:</span> <span class="kt">2</span> |
-</span><span id="__span-58-40"><a id="__codelineno-58-40" name="__codelineno-58-40" href="#__codelineno-58-40"></a>      <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-41"><a id="__codelineno-58-41" name="__codelineno-58-41" href="#__codelineno-58-41"></a>      <span class="nd">_op</span> (ψ ft)) →
-</span><span id="__span-58-42"><a id="__codelineno-58-42" name="__codelineno-58-42" href="#__codelineno-58-42"></a>    <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-43"><a id="__codelineno-58-43" name="__codelineno-58-43" href="#__codelineno-58-43"></a>    (<span class="nd">_op</span> (A ft)) [ <span class="s">uninv_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (ϕ ft)) ↦ <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (x ft) ]
-</span><span id="__span-58-44"><a id="__codelineno-58-44" name="__codelineno-58-44" href="#__codelineno-58-44"></a>  := <span class="p">\ </span>t →
-</span><span id="__span-58-45"><a id="__codelineno-58-45" name="__codelineno-58-45" href="#__codelineno-58-45"></a>    <span class="k">let mod</span> <span class="nd">_op</span> s := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-46"><a id="__codelineno-58-46" name="__codelineno-58-46" href="#__codelineno-58-46"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (h s)
-</span><span id="__span-58-47"><a id="__codelineno-58-47" name="__codelineno-58-47" href="#__codelineno-58-47"></a>
-</span><span id="__span-58-48"><a id="__codelineno-58-48" name="__codelineno-58-48" href="#__codelineno-58-48"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-flip-2-bwd" id="define:op-ext-flip-2-bwd" style="visibility: visible; position: relative; color: inherit">op-ext-flip-2-bwd</a></span>
-</span><span id="__span-58-49"><a id="__codelineno-58-49" name="__codelineno-58-49" href="#__codelineno-58-49"></a>  ( ψ :_op (<span class="kt">2</span> → <span class="kt">TOPE</span>))
-</span><span id="__span-58-50"><a id="__codelineno-58-50" name="__codelineno-58-50" href="#__codelineno-58-50"></a>  ( ϕ :_op <span class="p">(</span>(t <span class="p">:</span> <span class="kt">2</span> | ψ t) → <span class="kt">TOPE</span>))
-</span><span id="__span-58-51"><a id="__codelineno-58-51" name="__codelineno-58-51" href="#__codelineno-58-51"></a>  ( A :_op <span class="p">(</span>t <span class="p">:</span> <span class="kt">2</span> | ψ t) → <span class="kt">U</span>)
-</span><span id="__span-58-52"><a id="__codelineno-58-52" name="__codelineno-58-52" href="#__codelineno-58-52"></a>  ( x :_op <span class="p">(</span>t <span class="p">:</span> ϕ) → A t)
-</span><span id="__span-58-53"><a id="__codelineno-58-53" name="__codelineno-58-53" href="#__codelineno-58-53"></a>  <span class="p">( </span>k
-</span><span id="__span-58-54"><a id="__codelineno-58-54" name="__codelineno-58-54" href="#__codelineno-58-54"></a>    <span class="p">:</span> <span class="p">( </span>t <span class="p">:</span> <span class="kt">2</span> |
-</span><span id="__span-58-55"><a id="__codelineno-58-55" name="__codelineno-58-55" href="#__codelineno-58-55"></a>        <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-56"><a id="__codelineno-58-56" name="__codelineno-58-56" href="#__codelineno-58-56"></a>        <span class="nd">_op</span> (ψ ft)) →
-</span><span id="__span-58-57"><a id="__codelineno-58-57" name="__codelineno-58-57" href="#__codelineno-58-57"></a>        <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
-</span><span id="__span-58-58"><a id="__codelineno-58-58" name="__codelineno-58-58" href="#__codelineno-58-58"></a>        (<span class="nd">_op</span> (A ft)) [ <span class="s">uninv_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (ϕ ft)) ↦ <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (x ft) ])
-</span><span id="__span-58-59"><a id="__codelineno-58-59" name="__codelineno-58-59" href="#__codelineno-58-59"></a>  : <span class="nd">_op</span> <span class="p">(</span>(t <span class="p">:</span> <span class="kt">2</span> | ψ t) → A t [ ϕ t ↦ x t ])
-</span><span id="__span-58-60"><a id="__codelineno-58-60" name="__codelineno-58-60" href="#__codelineno-58-60"></a>  :=
-</span><span id="__span-58-61"><a id="__codelineno-58-61" name="__codelineno-58-61" href="#__codelineno-58-61"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (<span class="p">\ </span>t →
-</span><span id="__span-58-62"><a id="__codelineno-58-62" name="__codelineno-58-62" href="#__codelineno-58-62"></a>      <span class="k">let</span> <span class="nd">ᵒᵖ</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> b := k (<span class="s">unflip_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> t)) <span class="k">in</span>
-</span><span id="__span-58-63"><a id="__codelineno-58-63" name="__codelineno-58-63" href="#__codelineno-58-63"></a>        b)
+<div class="language-rzk highlight"><pre><span></span><code><span id="__span-57-1"><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-flip-fwd" id="define:op-ext-flip-fwd" style="visibility: visible; position: relative; color: inherit">op-ext-flip-fwd</a></span>
+</span><span id="__span-57-2"><a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>  ( ψ :_op (𝕀 → <span class="kt">TOPE</span>))
+</span><span id="__span-57-3"><a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a>  ( ϕ :_op <span class="p">(</span>(t <span class="p">:</span> 𝕀 | ψ t) → <span class="kt">TOPE</span>))
+</span><span id="__span-57-4"><a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>  ( A :_op <span class="p">(</span>t <span class="p">:</span> 𝕀 | ψ t) → <span class="kt">U</span>)
+</span><span id="__span-57-5"><a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a>  ( x :_op <span class="p">(</span>t <span class="p">:</span> ϕ) → A t)
+</span><span id="__span-57-6"><a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a>  ( h :_op <span class="p">(</span>(t <span class="p">:</span> 𝕀 | ψ t) → A t [ ϕ t ↦ x t ]))
+</span><span id="__span-57-7"><a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a>  : <span class="p">( </span>t <span class="p">:</span> 𝕀 |
+</span><span id="__span-57-8"><a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a>      <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-9"><a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a>      <span class="nd">_op</span> (ψ ft)) →
+</span><span id="__span-57-10"><a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a>    <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-11"><a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a>    (<span class="nd">_op</span> (A ft)) [ <span class="s">uninv_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (ϕ ft)) ↦ <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (x ft) ]
+</span><span id="__span-57-12"><a id="__codelineno-57-12" name="__codelineno-57-12" href="#__codelineno-57-12"></a>  := <span class="p">\ </span>t →
+</span><span id="__span-57-13"><a id="__codelineno-57-13" name="__codelineno-57-13" href="#__codelineno-57-13"></a>    <span class="k">let mod</span> <span class="nd">_op</span> s := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-14"><a id="__codelineno-57-14" name="__codelineno-57-14" href="#__codelineno-57-14"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (h s)
+</span><span id="__span-57-15"><a id="__codelineno-57-15" name="__codelineno-57-15" href="#__codelineno-57-15"></a>
+</span><span id="__span-57-16"><a id="__codelineno-57-16" name="__codelineno-57-16" href="#__codelineno-57-16"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-flip-bwd" id="define:op-ext-flip-bwd" style="visibility: visible; position: relative; color: inherit">op-ext-flip-bwd</a></span>
+</span><span id="__span-57-17"><a id="__codelineno-57-17" name="__codelineno-57-17" href="#__codelineno-57-17"></a>  ( ψ :_op (𝕀 → <span class="kt">TOPE</span>))
+</span><span id="__span-57-18"><a id="__codelineno-57-18" name="__codelineno-57-18" href="#__codelineno-57-18"></a>  ( ϕ :_op <span class="p">(</span>(t <span class="p">:</span> 𝕀 | ψ t) → <span class="kt">TOPE</span>))
+</span><span id="__span-57-19"><a id="__codelineno-57-19" name="__codelineno-57-19" href="#__codelineno-57-19"></a>  ( A :_op <span class="p">(</span>t <span class="p">:</span> 𝕀 | ψ t) → <span class="kt">U</span>)
+</span><span id="__span-57-20"><a id="__codelineno-57-20" name="__codelineno-57-20" href="#__codelineno-57-20"></a>  ( x :_op <span class="p">(</span>t <span class="p">:</span> ϕ) → A t)
+</span><span id="__span-57-21"><a id="__codelineno-57-21" name="__codelineno-57-21" href="#__codelineno-57-21"></a>  <span class="p">( </span>k
+</span><span id="__span-57-22"><a id="__codelineno-57-22" name="__codelineno-57-22" href="#__codelineno-57-22"></a>    <span class="p">:</span> <span class="p">( </span>t <span class="p">:</span> 𝕀 |
+</span><span id="__span-57-23"><a id="__codelineno-57-23" name="__codelineno-57-23" href="#__codelineno-57-23"></a>        <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-24"><a id="__codelineno-57-24" name="__codelineno-57-24" href="#__codelineno-57-24"></a>        <span class="nd">_op</span> (ψ ft)) →
+</span><span id="__span-57-25"><a id="__codelineno-57-25" name="__codelineno-57-25" href="#__codelineno-57-25"></a>        <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-26"><a id="__codelineno-57-26" name="__codelineno-57-26" href="#__codelineno-57-26"></a>        (<span class="nd">_op</span> (A ft)) [ <span class="s">uninv_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (ϕ ft)) ↦ <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (x ft) ])
+</span><span id="__span-57-27"><a id="__codelineno-57-27" name="__codelineno-57-27" href="#__codelineno-57-27"></a>  : <span class="nd">_op</span> <span class="p">(</span>(t <span class="p">:</span> 𝕀 | ψ t) → A t [ ϕ t ↦ x t ])
+</span><span id="__span-57-28"><a id="__codelineno-57-28" name="__codelineno-57-28" href="#__codelineno-57-28"></a>  :=
+</span><span id="__span-57-29"><a id="__codelineno-57-29" name="__codelineno-57-29" href="#__codelineno-57-29"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (<span class="p">\ </span>t →
+</span><span id="__span-57-30"><a id="__codelineno-57-30" name="__codelineno-57-30" href="#__codelineno-57-30"></a>      <span class="k">let</span> <span class="nd">ᵒᵖ</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> b := k (<span class="s">unflip_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> t)) <span class="k">in</span>
+</span><span id="__span-57-31"><a id="__codelineno-57-31" name="__codelineno-57-31" href="#__codelineno-57-31"></a>        b)
+</span><span id="__span-57-32"><a id="__codelineno-57-32" name="__codelineno-57-32" href="#__codelineno-57-32"></a>
+</span><span id="__span-57-33"><a id="__codelineno-57-33" name="__codelineno-57-33" href="#__codelineno-57-33"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-flip-2-fwd" id="define:op-ext-flip-2-fwd" style="visibility: visible; position: relative; color: inherit">op-ext-flip-2-fwd</a></span>
+</span><span id="__span-57-34"><a id="__codelineno-57-34" name="__codelineno-57-34" href="#__codelineno-57-34"></a>  ( ψ :_op (<span class="kt">2</span> → <span class="kt">TOPE</span>))
+</span><span id="__span-57-35"><a id="__codelineno-57-35" name="__codelineno-57-35" href="#__codelineno-57-35"></a>  ( ϕ :_op <span class="p">(</span>(t <span class="p">:</span> <span class="kt">2</span> | ψ t) → <span class="kt">TOPE</span>))
+</span><span id="__span-57-36"><a id="__codelineno-57-36" name="__codelineno-57-36" href="#__codelineno-57-36"></a>  ( A :_op <span class="p">(</span>t <span class="p">:</span> <span class="kt">2</span> | ψ t) → <span class="kt">U</span>)
+</span><span id="__span-57-37"><a id="__codelineno-57-37" name="__codelineno-57-37" href="#__codelineno-57-37"></a>  ( x :_op <span class="p">(</span>t <span class="p">:</span> ϕ) → A t)
+</span><span id="__span-57-38"><a id="__codelineno-57-38" name="__codelineno-57-38" href="#__codelineno-57-38"></a>  ( h :_op <span class="p">(</span>(t <span class="p">:</span> <span class="kt">2</span> | ψ t) → A t [ ϕ t ↦ x t ]))
+</span><span id="__span-57-39"><a id="__codelineno-57-39" name="__codelineno-57-39" href="#__codelineno-57-39"></a>  : <span class="p">( </span>t <span class="p">:</span> <span class="kt">2</span> |
+</span><span id="__span-57-40"><a id="__codelineno-57-40" name="__codelineno-57-40" href="#__codelineno-57-40"></a>      <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-41"><a id="__codelineno-57-41" name="__codelineno-57-41" href="#__codelineno-57-41"></a>      <span class="nd">_op</span> (ψ ft)) →
+</span><span id="__span-57-42"><a id="__codelineno-57-42" name="__codelineno-57-42" href="#__codelineno-57-42"></a>    <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-43"><a id="__codelineno-57-43" name="__codelineno-57-43" href="#__codelineno-57-43"></a>    (<span class="nd">_op</span> (A ft)) [ <span class="s">uninv_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (ϕ ft)) ↦ <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (x ft) ]
+</span><span id="__span-57-44"><a id="__codelineno-57-44" name="__codelineno-57-44" href="#__codelineno-57-44"></a>  := <span class="p">\ </span>t →
+</span><span id="__span-57-45"><a id="__codelineno-57-45" name="__codelineno-57-45" href="#__codelineno-57-45"></a>    <span class="k">let mod</span> <span class="nd">_op</span> s := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-46"><a id="__codelineno-57-46" name="__codelineno-57-46" href="#__codelineno-57-46"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (h s)
+</span><span id="__span-57-47"><a id="__codelineno-57-47" name="__codelineno-57-47" href="#__codelineno-57-47"></a>
+</span><span id="__span-57-48"><a id="__codelineno-57-48" name="__codelineno-57-48" href="#__codelineno-57-48"></a><span class="kr">#def</span><span class="p"> </span><span class="nf"><a href="#define:op-ext-flip-2-bwd" id="define:op-ext-flip-2-bwd" style="visibility: visible; position: relative; color: inherit">op-ext-flip-2-bwd</a></span>
+</span><span id="__span-57-49"><a id="__codelineno-57-49" name="__codelineno-57-49" href="#__codelineno-57-49"></a>  ( ψ :_op (<span class="kt">2</span> → <span class="kt">TOPE</span>))
+</span><span id="__span-57-50"><a id="__codelineno-57-50" name="__codelineno-57-50" href="#__codelineno-57-50"></a>  ( ϕ :_op <span class="p">(</span>(t <span class="p">:</span> <span class="kt">2</span> | ψ t) → <span class="kt">TOPE</span>))
+</span><span id="__span-57-51"><a id="__codelineno-57-51" name="__codelineno-57-51" href="#__codelineno-57-51"></a>  ( A :_op <span class="p">(</span>t <span class="p">:</span> <span class="kt">2</span> | ψ t) → <span class="kt">U</span>)
+</span><span id="__span-57-52"><a id="__codelineno-57-52" name="__codelineno-57-52" href="#__codelineno-57-52"></a>  ( x :_op <span class="p">(</span>t <span class="p">:</span> ϕ) → A t)
+</span><span id="__span-57-53"><a id="__codelineno-57-53" name="__codelineno-57-53" href="#__codelineno-57-53"></a>  <span class="p">( </span>k
+</span><span id="__span-57-54"><a id="__codelineno-57-54" name="__codelineno-57-54" href="#__codelineno-57-54"></a>    <span class="p">:</span> <span class="p">( </span>t <span class="p">:</span> <span class="kt">2</span> |
+</span><span id="__span-57-55"><a id="__codelineno-57-55" name="__codelineno-57-55" href="#__codelineno-57-55"></a>        <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-56"><a id="__codelineno-57-56" name="__codelineno-57-56" href="#__codelineno-57-56"></a>        <span class="nd">_op</span> (ψ ft)) →
+</span><span id="__span-57-57"><a id="__codelineno-57-57" name="__codelineno-57-57" href="#__codelineno-57-57"></a>        <span class="k">let mod</span> <span class="nd">_op</span> ft := <span class="s">flip_op</span> t <span class="k">in</span>
+</span><span id="__span-57-58"><a id="__codelineno-57-58" name="__codelineno-57-58" href="#__codelineno-57-58"></a>        (<span class="nd">_op</span> (A ft)) [ <span class="s">uninv_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (ϕ ft)) ↦ <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (x ft) ])
+</span><span id="__span-57-59"><a id="__codelineno-57-59" name="__codelineno-57-59" href="#__codelineno-57-59"></a>  : <span class="nd">_op</span> <span class="p">(</span>(t <span class="p">:</span> <span class="kt">2</span> | ψ t) → A t [ ϕ t ↦ x t ])
+</span><span id="__span-57-60"><a id="__codelineno-57-60" name="__codelineno-57-60" href="#__codelineno-57-60"></a>  :=
+</span><span id="__span-57-61"><a id="__codelineno-57-61" name="__codelineno-57-61" href="#__codelineno-57-61"></a>    <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> (<span class="p">\ </span>t →
+</span><span id="__span-57-62"><a id="__codelineno-57-62" name="__codelineno-57-62" href="#__codelineno-57-62"></a>      <span class="k">let</span> <span class="nd">ᵒᵖ</span> <span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">ᵒᵖ</span> b := k (<span class="s">unflip_op</span> (<span class="nf"><a href="#define:mod" id="define:mod" style="visibility: visible; position: relative; color: inherit">mod</a></span> <span class="nd">_op</span> t)) <span class="k">in</span>
+</span><span id="__span-57-63"><a id="__codelineno-57-63" name="__codelineno-57-63" href="#__codelineno-57-63"></a>        b)
 </span></code></pre></div>
 
 
