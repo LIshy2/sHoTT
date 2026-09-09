@@ -284,7 +284,7 @@
   ( j : 𝕀)
   ( u : C 0₂)
   : covariant-transport-line-II C cov
-      (\ k → pt-⌈𝕀⌉ (inf 0₂ (sup j k))) u = u
+      ( \ k → pt-⌈𝕀⌉ (inf 0₂ (sup j k))) u = u
   := id-arr-covariant-transport-II
       ⌈𝕀⌉ (pt-⌈𝕀⌉ 0₂) (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t)) cov u
 
@@ -294,7 +294,7 @@
   ( i : 𝕀)
   ( u : C i)
   : covariant-transport-line-II C cov
-      (\ k → pt-⌈𝕀⌉ (inf i (sup 1₂ k))) u = u
+      ( \ k → pt-⌈𝕀⌉ (inf i (sup 1₂ k))) u = u
   := id-arr-covariant-transport-II
       ⌈𝕀⌉ (pt-⌈𝕀⌉ i) (equiv-ext-shape-family-fwd 𝕀 □¹ (\ t → C t)) cov u
 ```
@@ -310,7 +310,7 @@
       ( \ i →
           match (l i)
             ( point j ⇒
-                let mod ᵒᵖ j0 : 𝕀 := flip_op j in
+                let mod ᵒᵖ j0 : 𝕀 := flipᵒᵖ j in
                   mod ᵒᵖ (pt-⌈𝕀⌉ j0)))
 
 #def op-shape-point-flip
@@ -319,7 +319,7 @@
   :=
     match s
       ( point i ⇒
-          let mod ᵒᵖ j : 𝕀 := flip_op i in
+          let mod ᵒᵖ j : 𝕀 := flipᵒᵖ i in
             mod ᵒᵖ (pt-⌈𝕀⌉ j))
 
 #def op-family-at
@@ -354,23 +354,23 @@
   ( A : 𝕀 → U)
   ( a0 : A 0₂)
   : Equiv
-      ( Σ (a1 : A 1₂) , dhom-II ⌈𝕀⌉
-          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
-          (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
-      ( Σ (φ : (i : 𝕀) → A i) , φ 0₂ = a0)
+      ( Σ ( a1 : A 1₂) , dhom-II ⌈𝕀⌉
+          ( pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+          ( equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
+      ( Σ ( φ : (i : 𝕀) → A i) , φ 0₂ = a0)
   :=
     equiv-has-inverse
-      ( Σ (a1 : A 1₂) , dhom-II ⌈𝕀⌉
-          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
-          (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
-      ( Σ (φ : (i : 𝕀) → A i) , φ 0₂ = a0)
+      ( Σ ( a1 : A 1₂) , dhom-II ⌈𝕀⌉
+          ( pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+          ( equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
+      ( Σ ( φ : (i : 𝕀) → A i) , φ 0₂ = a0)
       ( \ (a1 , h) → (\ t → h t , refl))
       ( \ (φ , p) →
           ( φ 1₂
           , ind-path (A 0₂) (φ 0₂)
               ( \ a0' _ → dhom-II ⌈𝕀⌉
-                  (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
-                  (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0' (φ 1₂))
+                  ( pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+                  ( equiv-ext-shape-family-fwd 𝕀 □¹ A) a0' (φ 1₂))
               ( \ t → φ t)
               a0 p))
       ( \ (a1 , h) → refl)
@@ -380,13 +380,13 @@
                 ( \ t →
                     ind-path (A 0₂) (φ 0₂)
                       ( \ a0'' _ → dhom-II ⌈𝕀⌉
-                          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
-                          (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0'' (φ 1₂))
+                          ( pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+                          ( equiv-ext-shape-family-fwd 𝕀 □¹ A) a0'' (φ 1₂))
                       ( \ t' → φ t')
                       a0' p' t
                 , refl)
                 =_{Σ (ψ : (i : 𝕀) → A i) , ψ 0₂ = a0'}
-                  (φ , p'))
+  ( φ , p'))
             ( refl)
             a0 p)
 
@@ -399,10 +399,10 @@
   : is-contr (Σ (φ : (i : 𝕀) → A i) , φ 0₂ = a0)
   :=
     is-contr-equiv-is-contr
-      ( Σ (a1 : A 1₂) , dhom-II ⌈𝕀⌉
-          (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
-          (equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
-      ( Σ (φ : (i : 𝕀) → A i) , φ 0₂ = a0)
+      ( Σ ( a1 : A 1₂) , dhom-II ⌈𝕀⌉
+          ( pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t)
+          ( equiv-ext-shape-family-fwd 𝕀 □¹ A) a0 a1)
+      ( Σ ( φ : (i : 𝕀) → A i) , φ 0₂ = a0)
       ( equiv-is-cov-i-coslice A a0)
       ( cov (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t) a0)
 
@@ -464,17 +464,34 @@
   := ?is-covariant-II-Id
 
 
--- Functions from an opposite proposition-valued covariant family.
+-- Transport on a constant opposite line is the identity.
 -- This is the function-space argument used by the extension theorem.
+#def covariant-transport-line-inv-const-II
+  ( C : ᵒᵖ (⌈𝕀⌉ → U))
+  ( cov : let mod ᵒᵖ C0 := C in ᵒᵖ (is-covariant-II ⌈𝕀⌉ C0))
+  ( i : 𝕀)
+  ( c : op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ i)))
+  : covariant-transport-line-inv-II C cov (\ _ → pt-⌈𝕀⌉ i) c = c
+  := let mod ᵒᵖ C0 := C in
+      let mod ᵒᵖ cov0 := cov in
+      let mod ᵒᵖ j := flipᵒᵖ i in
+      let mod ᵒᵖ c0 := c in
+        op-path-commute-fwd (C0 (pt-⌈𝕀⌉ j))
+          ( covariant-transport-II ⌈𝕀⌉ (pt-⌈𝕀⌉ j) (pt-⌈𝕀⌉ j)
+            ( \ _ → pt-⌈𝕀⌉ j) C0 cov0 c0)
+          c0
+          ( mod ᵒᵖ (id-arr-covariant-transport-II
+            ⌈𝕀⌉ (pt-⌈𝕀⌉ j) C0 cov0 c0))
+
+-- Functions from an opposite covariant family into a discrete covariant family.
 #def is-covariant-op-function uses (funext extext)
   ( C : ᵒᵖ (⌈𝕀⌉ → U))
   ( is-cov-C : let mod ᵒᵖ C0 := C in ᵒᵖ (is-covariant-II ⌈𝕀⌉ C0))
-  ( is-prop-C : (s : ⌈𝕀⌉) → is-prop (op-family-at C (op-shape-point-flip s)))
   ( D : 𝕀 → U)
   ( cov-D : is-covariant-arrow-II D)
   ( disc-D : (i : 𝕀) → is-discrete-II (D i))
   : is-covariant-arrow-II
-      (\ i → op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ i)) → D i)
+      ( \ i → op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ i)) → D i)
   :=
     let function-family : ⌈𝕀⌉ → U
       := equiv-ext-shape-family-fwd 𝕀 □¹
@@ -482,18 +499,18 @@
               op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ i)) → D i)
     in
     let transport-line-inv-endpoints
-      : (l : 𝕀 → ⌈𝕀⌉)
+      : ( l : 𝕀 → ⌈𝕀⌉)
         → op-family-at C (op-shape-point-flip (l 1₂))
         → op-family-at C (op-shape-point-flip (l 0₂))
       :=
         \ l x → covariant-transport-line-inv-II C is-cov-C l x
     in
     let transport-line-inv-specified
-      : (l : 𝕀 → ⌈𝕀⌉)
-      → (s1 : ⌈𝕀⌉)
-      → (l 1₂ = s1)
-      → (s0 : ⌈𝕀⌉)
-      → (l 0₂ = s0)
+      : ( l : 𝕀 → ⌈𝕀⌉)
+      → ( s1 : ⌈𝕀⌉)
+      → ( l 1₂ = s1)
+      → ( s0 : ⌈𝕀⌉)
+      → ( l 0₂ = s0)
       → op-family-at C (op-shape-point-flip s1)
         → op-family-at C (op-shape-point-flip s0)
       :=
@@ -518,21 +535,21 @@
     \ (x : ⌈𝕀⌉) →
     match x
       into (\ x' →
-        (y : ⌈𝕀⌉)
-        → (f : hom-II ⌈𝕀⌉ x' y)
-        → (u : function-family x')
+        ( y : ⌈𝕀⌉)
+        → ( f : hom-II ⌈𝕀⌉ x' y)
+        → ( u : function-family x')
         → is-contr
             ( dhom-from-II
                 ⌈𝕀⌉ x' y f (function-family) u))
       ( point x0 ⇒
         \ (y : ⌈𝕀⌉)
-          (f : hom-II ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) y)
-          (u : op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ x0)) → D x0) →
-    let l : 𝕀 → ⌈𝕀⌉ := \ k → f k in
+          ( f : hom-II ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) y)
+          ( u : op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ x0)) → D x0)
+  → let l : 𝕀 → ⌈𝕀⌉ := \ k → f k in
     let DS : ⌈𝕀⌉ → U := equiv-ext-shape-family-fwd 𝕀 □¹ D
     in
     let eval-op-function
-      : (s : ⌈𝕀⌉)
+ : ( s : ⌈𝕀⌉)
         → function-family s
         → op-family-at C (op-shape-point-flip s)
         → DS s
@@ -546,7 +563,7 @@
             ( point _ ⇒ \ h c → h c)
     in
     let extend-along
-      : (r s : ⌈𝕀⌉)
+ : ( r s : ⌈𝕀⌉)
         → hom-II ⌈𝕀⌉ r s
         → function-family r
         → function-family s
@@ -573,7 +590,7 @@
     in
       let f0 : E 0₂ := u in
         let phi
-          : (i : 𝕀) → E i
+ : ( i : 𝕀) → E i
           :=
             \ i →
               extend-along
@@ -602,22 +619,22 @@
                           ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) DS cov-D (f0 c0'))
                       ( ap
                           ( op-family-at C
-                              (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                              ( op-shape-point-flip (pt-⌈𝕀⌉ x0)))
                           ( D x0)
                           ( c0') (c) (f0)
-                          ( first (is-prop-C (pt-⌈𝕀⌉ x0) c0' c))))
+                          ( covariant-transport-line-inv-const-II C is-cov-C x0 c)))
         in
         let contr-center
-          : Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0
+ : Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0
           := (phi , phi0-eq-f0)
         in
         let contr-hom
-          : ( y : Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+ : ( y : Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
               → contr-center = y
           :=
             \ (p , q) →
               let H-sec
-                : (j : 𝕀) → (i : 𝕀) → E i
+ : ( j : 𝕀) → (i : 𝕀) → E i
                 :=
                   \ j i →
                     extend-along
@@ -626,7 +643,7 @@
                       ( p (inf i j))
               in
               let d
-                : (j : 𝕀) → H-sec j 0₂ = p 0₂
+ : ( j : 𝕀) → H-sec j 0₂ = p 0₂
                 :=
                   \ j →
                     eq-htpy funext
@@ -651,40 +668,40 @@
                                   ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) DS cov-D (p 0₂ c-mid))
                               ( ap
                                   ( op-family-at C
-                                      (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                                      ( op-shape-point-flip (pt-⌈𝕀⌉ x0)))
                                   ( D x0)
                                   ( c-mid) (c) (p 0₂)
-                                  ( first (is-prop-C (pt-⌈𝕀⌉ x0) c-mid c))))
+                                  ( covariant-transport-line-inv-const-II C is-cov-C x0 c)))
               in
               let r
-                : (j : 𝕀) → H-sec j 0₂ = f0
+ : ( j : 𝕀) → H-sec j 0₂ = f0
                 :=
                   \ j →
                     concat (E 0₂) (H-sec j 0₂) (p 0₂) f0 (d j) q
               in
               let pack
-                : (j : 𝕀)
-                  → Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0
+ : ( j : 𝕀)
+                  → Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0
                 := \ j → (H-sec j , r j)
               in
               let is-discrete-E-i
-                : (i : 𝕀) → is-discrete-II (E i)
+ : ( i : 𝕀) → is-discrete-II (E i)
                 :=
                   \ i →
                     match (f i)
                       into (\ s →
                         is-discrete-II
-                          (function-family s))
+                          ( function-family s))
                       ( point a ⇒
                           is-discrete-function-type-II
                             funext
                             ( op-family-at C
-                                (op-shape-point-flip (pt-⌈𝕀⌉ a)))
+                                ( op-shape-point-flip (pt-⌈𝕀⌉ a)))
                             ( \ _ → D a)
                             ( \ _ → disc-D a))
               in
               let is-discrete-E-I
-                : is-discrete-II ((i : 𝕀) → E i)
+ : is-discrete-II ((i : 𝕀) → E i)
                 :=
                   is-discrete-extension-type-II
                     extext
@@ -694,7 +711,7 @@
                     ( is-discrete-E-i)
               in
               let is-discrete-fib
-                : ( φ : (i : 𝕀) → E i)
+ : ( φ : (i : 𝕀) → E i)
                   → is-discrete-II (φ 0₂ = f0)
                 :=
                   \ φ →
@@ -705,35 +722,35 @@
                       f0
               in
               let is-discrete-total
-                : is-discrete-II
-                    ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+ : is-discrete-II
+                    ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                 :=
                   is-discrete-Σ-II
-                    ( (i : 𝕀) → E i)
+                    ( ( i : 𝕀) → E i)
                     ( \ φ → φ 0₂ = f0)
                     ( is-discrete-E-I)
                     ( is-discrete-fib)
               in
               let pack0-eq
-                : pack 0₂ = contr-center
+ : pack 0₂ = contr-center
                 :=
                   ind-path
                     ( E 0₂)
                     ( p 0₂)
                     ( \ f0' q' →
                         let phi'
-                          : (i : 𝕀) → E i
+ : ( i : 𝕀) → E i
                           :=
                             \ i →
                               extend-along
                                 ( f 0₂) (f i) (\ k → f (inf i k)) f0'
                         in
                         let phi0'
-                          : phi' 0₂ = f0'
+ : phi' 0₂ = f0'
                           :=
                             eq-htpy funext
                               ( op-family-at C
-                                  (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                                  ( op-shape-point-flip (pt-⌈𝕀⌉ x0)))
                               ( \ _ → D x0)
                               ( phi' 0₂)
                               ( f0')
@@ -753,15 +770,13 @@
                                           ⌈𝕀⌉ (pt-⌈𝕀⌉ x0) DS cov-D (f0' c0'))
                                       ( ap
                                           ( op-family-at C
-                                              (op-shape-point-flip (pt-⌈𝕀⌉ x0)))
+                                              ( op-shape-point-flip (pt-⌈𝕀⌉ x0)))
                                           ( D x0)
                                           ( c0') (c) (f0')
-                                          ( first
-                                              (is-prop-C
-                                                (pt-⌈𝕀⌉ x0) c0' c))))
+                                          ( covariant-transport-line-inv-const-II C is-cov-C x0 c)))
                         in
                         let r'
-                          : (j : 𝕀) → H-sec j 0₂ = f0'
+ : ( j : 𝕀) → H-sec j 0₂ = f0'
                           :=
                             \ j →
                               concat
@@ -774,57 +789,55 @@
                         in
                           ( H-sec 0₂ , r' 0₂)
                           =_{Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0'}
-                            ( phi' , phi0'))
+  ( phi' , phi0'))
                     ( refl)
                     ( f0)
                     ( q)
               in
               let pack1-eq
-                : pack 1₂ = (p , q)
+ : pack 1₂ = (p , q)
                 :=
                   let ptwise
-                    : (i : 𝕀) → H-sec 1₂ i = p i
+ : ( i : 𝕀) → H-sec 1₂ i = p i
                     :=
                       \ i →
                         ( match (f i)
                             into (\ s →
-                              (pa : function-family s)
+                              ( pa : function-family s)
                               → extend-along s s (\ _ → s) pa = pa)
                             ( point a ⇒
                                 \ pa →
                                     eq-htpy funext
                                       ( op-family-at C
-                                          (op-shape-point-flip (pt-⌈𝕀⌉ a)))
+                                          ( op-shape-point-flip (pt-⌈𝕀⌉ a)))
                                       ( \ _ → D a)
                                       ( extend-along
-                                          (pt-⌈𝕀⌉ a) (pt-⌈𝕀⌉ a)
-                                          (\ _ → pt-⌈𝕀⌉ a) pa)
+                                          ( pt-⌈𝕀⌉ a) (pt-⌈𝕀⌉ a)
+                                          ( \ _ → pt-⌈𝕀⌉ a) pa)
                                       ( pa)
                                       ( \ c →
                                           let c-mid
                                             := transport-line-inv-endpoints
-                                                (\ _ → pt-⌈𝕀⌉ a) c
+                                                ( \ _ → pt-⌈𝕀⌉ a) c
                                           in
                                             concat (D a)
                                               ( extend-along
-                                                  (pt-⌈𝕀⌉ a) (pt-⌈𝕀⌉ a)
-                                                  (\ _ → pt-⌈𝕀⌉ a) pa c)
+                                                  ( pt-⌈𝕀⌉ a) (pt-⌈𝕀⌉ a)
+                                                  ( \ _ → pt-⌈𝕀⌉ a) pa c)
                                               ( pa c-mid)
                                               ( pa c)
                                               ( id-arr-covariant-transport-II
                                                   ⌈𝕀⌉ (pt-⌈𝕀⌉ a) DS cov-D (pa c-mid))
                                               ( ap
                                                   ( op-family-at C
-                                                      (op-shape-point-flip (pt-⌈𝕀⌉ a)))
+                                                      ( op-shape-point-flip (pt-⌈𝕀⌉ a)))
                                                   ( D a)
                                                   ( c-mid) (c) (pa)
-                                                  ( first
-                                                      (is-prop-C
-                                                        (pt-⌈𝕀⌉ a) c-mid c))))))
+                                                  ( covariant-transport-line-inv-const-II C is-cov-C a c)))))
                             ( p i)
                   in
                   let H-sec1=p
-                    : H-sec 1₂ = p
+ : H-sec 1₂ = p
                     :=
                       first
                         ( second
@@ -839,9 +852,9 @@
                         ( ptwise)
                   in
                   let d1=ap-eval
-                    : d 1₂
+ : d 1₂
                       = ap
-                          ( (i : 𝕀) → E i)
+                          ( ( i : 𝕀) → E i)
                           ( E 0₂)
                           ( H-sec 1₂)
                           ( p)
@@ -853,7 +866,7 @@
                         ( d 1₂)
                         ( ptwise 0₂)
                         ( ap
-                            ( (i : 𝕀) → E i)
+                            ( ( i : 𝕀) → E i)
                             ( E 0₂)
                             ( H-sec 1₂)
                             ( p)
@@ -863,7 +876,7 @@
                         ( rev
                             ( H-sec 1₂ 0₂ = p 0₂)
                             ( ap
-                                ( (i : 𝕀) → E i)
+                                ( ( i : 𝕀) → E i)
                                 ( E 0₂)
                                 ( H-sec 1₂)
                                 ( p)
@@ -883,8 +896,8 @@
                                 ( ptwise)))
                   in
                   let pack1-eq-second
-                    : transport
-                        ( (i : 𝕀) → E i)
+ : transport
+                        ( ( i : 𝕀) → E i)
                         ( \ φ → φ 0₂ = f0)
                         ( H-sec 1₂)
                         ( p)
@@ -905,7 +918,7 @@
                         ( d1=ap-eval)
                   in
                     eq-pair
-                      ( (i : 𝕀) → E i)
+                      ( ( i : 𝕀) → E i)
                       ( \ φ → φ 0₂ = f0)
                       ( pack 1₂)
                       ( p , q)
@@ -913,33 +926,33 @@
                       , pack1-eq-second)
               in
               let arrow-pack
-                : hom-II
-                    ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+ : hom-II
+                    ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                     ( pack 0₂)
                     ( pack 1₂)
                 := \ t → pack t
               in
               let arrow
-                : hom-II
-                    ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+ : hom-II
+                    ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                     ( contr-center)
                     ( p , q)
                 :=
                   transport
-                    ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                    ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                     ( \ z →
                         hom-II
-                          ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                          ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                           ( z)
                           ( p , q))
                     ( pack 0₂)
                     ( contr-center)
                     ( pack0-eq)
                     ( transport
-                        ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                        ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                         ( \ z →
                             hom-II
-                              ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                              ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                               ( pack 0₂)
                               ( z))
                         ( pack 1₂)
@@ -951,19 +964,19 @@
                   ( has-inverse-is-equiv
                       ( contr-center = (p , q))
                       ( hom-II
-                          ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                          ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                           ( contr-center)
                           ( p , q))
                       ( hom-eq-II
-                          ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+                          ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
                           ( contr-center)
                           ( p , q))
                       ( is-discrete-total contr-center (p , q)))
                   ( arrow)
         in
           is-contr-equiv-is-contr'
-            ( Σ (f1 : E 1₂) , dhom-II (⌈𝕀⌉) (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t) (equiv-ext-shape-family-fwd 𝕀 □¹ E) f0 f1)
-            ( Σ (φ : (i : 𝕀) → E i) , φ 0₂ = f0)
+            ( Σ ( f1 : E 1₂) , dhom-II (⌈𝕀⌉) (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t) (equiv-ext-shape-family-fwd 𝕀 □¹ E) f0 f1)
+            ( Σ ( φ : (i : 𝕀) → E i) , φ 0₂ = f0)
             ( equiv-is-cov-i-coslice E f0)
             ( contr-center , contr-hom))
 
@@ -975,7 +988,7 @@
       in
         ᵒᵖ
           ( is-covariant-II ⌈𝕀⌉
-              (equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → Shape 1 (\ _ → phi0 i)))))
+              ( equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → Shape 1 (\ _ → phi0 i)))))
   ( D : 𝕀 → U)
   ( cov-D : is-covariant-arrow-II (\ (t : 𝕀 | TOP) → D t))
   ( disc-D : (i : 𝕀) → is-discrete-II (D i))
@@ -990,7 +1003,7 @@
           op-ext-commute-bwd (\ (_ : 𝕀) → TOPE) phi-i
         in
           mod ᵒᵖ
-            (equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → Shape 1 (\ _ → phi0 i)))
+            ( equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → Shape 1 (\ _ → phi0 i)))
     in
     let extension-family : ⌈𝕀⌉ → U
       := equiv-ext-shape-family-fwd 𝕀 □¹
@@ -1001,36 +1014,12 @@
           ( \ i →
               op-family-at C (op-shape-point-flip (pt-⌈𝕀⌉ i)) → D i)
     in
-    let is-prop-C
-      : (s : ⌈𝕀⌉)
-        → is-prop (op-family-at C (op-shape-point-flip s))
-      :=
-        \ s →
-          match s
-            into (\ s' →
-              is-prop (op-family-at C (op-shape-point-flip s')))
-            ( point a ⇒
-                is-prop-Equiv-is-prop
-                  ( let mod ᵒᵖ p := phi-i a in
-                      ᵒᵖ (Shape 1 (\ _ → p)))
-                  ( Shape 1 (\ _ → uninvᵒᵖ (phi-i a)))
-                  ( equiv-shape-1-op-uninv (phi-i a))
-                  ( \ x y →
-                      match x
-                        ( point u ⇒
-                            is-prop-is-contr
-                              ( Shape 1 (\ _ → uninvᵒᵖ (phi-i a)))
-                              ( point 1 (\ _ → uninvᵒᵖ (phi-i a)) *₁
-                              , \ z → match z ( point _ ⇒ refl))
-                              ( point 1 (\ _ → uninvᵒᵖ (phi-i a)) u)
-                              ( y))))
-    in
     let cov-functions
       : is-covariant-II ⌈𝕀⌉ function-family
-      := is-covariant-op-function C shape-cov is-prop-C D cov-D disc-D
+      := is-covariant-op-function C shape-cov D cov-D disc-D
     in
     let family-equiv
-      : (s : ⌈𝕀⌉)
+      : ( s : ⌈𝕀⌉)
         → Equiv (extension-family s) (function-family s)
       :=
         \ s →
@@ -1038,9 +1027,9 @@
             into (\ s' → Equiv (extension-family s') (function-family s'))
             ( point a ⇒
                 equiv-comp
-                  ( (t : 1 | uninvᵒᵖ (phi-i a)) → D a)
+                  ( ( t : 1 | uninvᵒᵖ (phi-i a)) → D a)
                   ( Shape 1 (\ _ → uninvᵒᵖ (phi-i a)) → D a)
-                  ( (let mod ᵒᵖ p := phi-i a in
+                  ( ( let mod ᵒᵖ p := phi-i a in
                         ᵒᵖ (Shape 1 (\ _ → p))) → D a)
                   ( equiv-ext-shape-fun
                       funext 1 (\ _ → uninvᵒᵖ (phi-i a)) (\ _ → D a))
@@ -1058,7 +1047,7 @@
     let family-eq : extension-family = function-family
       := eq-htpy funext ⌈𝕀⌉ (\ _ → U) extension-family function-family
           ( \ s → first (ua
-              (extension-family s) (function-family s)) (family-equiv s))
+              ( extension-family s) (function-family s)) (family-equiv s))
     in
       transport
         ( ⌈𝕀⌉ → U)
