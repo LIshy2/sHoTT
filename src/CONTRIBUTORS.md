@@ -9,6 +9,7 @@ Formalizations were contributed by the following people (listed alphabetically):
 - [Robin Carlier](https://github.com/robin-carlier),
 - [Theofanis Chatzidiamantis-Christoforidis](https://github.com/thchatzidiamantis),
 - [Aras Ergus](https://www.aergus.net/),
+- [Ryoji Hirayama](https://orcid.org/0009-0000-0567-5793),
 - [Matthias Hutzler](https://github.com/MatthiasHu),
 - [Nikolai Kudasov](https://fizruk.github.io/),
 - [Kenji Maillard](https://github.com/kyoDralliam),
