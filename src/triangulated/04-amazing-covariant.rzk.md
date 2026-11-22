@@ -284,6 +284,27 @@ GWB, Lemma 5.14
 
 ```rzk
 
+#def is-covariant-arrow-is-a-cov uses (funext weakfunext)
+  ( A : 𝕀 → U)
+  ( cov-A : (i : 𝕀) → is-a-cov (A i))
+  : is-covariant-arrow-II A
+  := b-extract
+      ( ( g : 𝕀 → Σ (X : U) , is-a-cov X)
+        → is-covariant-arrow-II (\ i → first (g i)))
+      ( is-a-cov-transpose
+        ( Σ ( X : U) , is-a-cov X)
+        ( \ (X , _) → X) (\ (_ , c) → c))
+      ( \ i → (A i , cov-A i))
+
+#def is-covariant-II-is-a-cov uses (funext weakfunext)
+  ( X : U)
+  ( F : X → U)
+  ( cov-F : (x : X) → is-a-cov (F x))
+  : is-covariant-II X F
+  := \ x y f u →
+    is-covariant-arrow-is-a-cov (\ t → F (f t)) (\ t → cov-F (f t))
+      (pt-⌈𝕀⌉ 0₂) (pt-⌈𝕀⌉ 1₂) (\ t → pt-⌈𝕀⌉ t) u
+
 -- GWB, Lemma 5.17
 #def is-a-cov-sigma-closed uses (funext weakfunext)
   ( A : U) (B : A → U)
@@ -305,31 +326,21 @@ GWB, Lemma 5.14
           , ( ( a : A') → is-a-cov (B' a)))))
           ( \ (A' , (_ , (B' , _))) → Σ (a : A') , B' a)
           ( \ g →
-            is-covariant-arrow-II-Σ
-              ( \ c → first (g c))
-              ( \ c a → (first (second (second (g c)))) a)
-              ( b-extract
-                  ( ( g' : 𝕀 → (Σ (A' : U) , (Σ (_ : is-a-cov A') , (Σ (B' : A' → U) , ((a : A') → is-a-cov (B' a))))))
-                    → is-covariant-arrow-II (\ b → first (g' b)))
-                  ( is-a-cov-transpose
-                      ( Σ ( A' : U) , (Σ (_ : is-a-cov A') , (Σ (B' : A' → U) , ((a : A') → is-a-cov (B' a)))))
-                      ( \ (A' , _) → A')
-                      ( \ (_ , (cA' , _)) → cA'))
-                  ( g))
-              ( \ s →
-                b-extract
-                  ( ( G : 𝕀 → (Σ (w : Σ (A' : U) , (Σ (_ : is-a-cov A') , (Σ (B' : A' → U) , ((a : A') → is-a-cov (B' a))))) , first w))
-                    → is-covariant-arrow-II (\ b → (first (second (second (first (G b))))) (second (G b))))
-                  ( is-a-cov-transpose
-                      ( Σ ( w : Σ (A' : U) , (Σ (_ : is-a-cov A') , (Σ (B' : A' → U) , ((a : A') → is-a-cov (B' a))))) , first w)
-                      ( \ ((_ , (_ , (B' , _))) , a) → B' a)
-                      ( \ ((_ , (_ , (_ , cB'))) , a) → cB' a))
-                  ( \ c → (g c , s c)))))
+            let A' : 𝕀 → U := \ i → first (g i) in
+            let B' : (i : 𝕀) → A' i → U := \ i → first (second (second (g i))) in
+            let C := equiv-ext-shape-family-fwd 𝕀 □¹ A' in
+            let cov-B' : (s : ⌈𝕀⌉) → (a : C s) → is-a-cov (realize-dependent-family A' B' s a)
+              := \ s → match s (point i ⇒ second (second (second (g i)))) in
+            is-covariant-arrow-II-Σ funext A' B'
+              (is-covariant-arrow-is-a-cov A' (\ i → first (second (g i))))
+              (is-covariant-II-is-a-cov (Σ (s : ⌈𝕀⌉) , C s)
+                (\ (s , a) → realize-dependent-family A' B' s a)
+                (\ (s , a) → cov-B' s a))))
       ( A , (is-a-cov-A , (B , is-a-cov-B)))
 
 
 -- Lemma 5.14(3)
-#def is-a-cov-id-closed uses (funext weakfunext) (A : U) (is-a-cov-A : is-a-cov A) (x y : A)
+#def is-a-cov-id-closed uses (funext weakfunext extext) (A : U) (is-a-cov-A : is-a-cov A) (x y : A)
   : is-a-cov (x = y)
   :=
     b-extract
@@ -339,7 +350,7 @@ GWB, Lemma 5.14
           ( Σ ( A' : U) , (Σ (_ : is-a-cov A') , (Σ (_ : A') , A')))
           ( \ (_ , (_ , (x' , y'))) → x' = y')
           ( \ g →
-            is-covariant-arrow-II-Id
+            is-covariant-arrow-II-Id funext extext
               ( \ c → first (g c))
               ( b-extract
                   ( ( g' : 𝕀 → (Σ (A' : U) , (Σ (_ : is-a-cov A') , (Σ (_ : A') , A'))))
@@ -353,7 +364,7 @@ GWB, Lemma 5.14
               ( \ c → second (second (second (g c))))))
       ( A , (is-a-cov-A , (x , y)))
 
-#def is-a-cov-fib uses (funext weakfunext) (A B : U) (is-a-cov-A : is-a-cov A) (is-a-cov-B : is-a-cov B) (f : A → B) (b : B)
+#def is-a-cov-fib uses (funext weakfunext extext) (A B : U) (is-a-cov-A : is-a-cov A) (is-a-cov-B : is-a-cov B) (f : A → B) (b : B)
   : is-a-cov (fib A B f b)
   :=
     is-a-cov-sigma-closed
@@ -452,18 +463,6 @@ package contains only types and terms; it does not quantify over topes.
   : is-a-cov A
   := transport U is-a-cov B A
       ( rev U A B (first (ua A B) e)) cov-B
-
-#def is-covariant-arrow-is-a-cov uses (funext weakfunext)
-  ( A : 𝕀 → U)
-  ( cov-A : (i : 𝕀) → is-a-cov (A i))
-  : is-covariant-arrow-II A
-  := b-extract
-      ( ( g : 𝕀 → Σ (X : U) , is-a-cov X)
-        → is-covariant-arrow-II (\ i → first (g i)))
-      ( is-a-cov-transpose
-        ( Σ ( X : U) , is-a-cov X)
-        ( \ (X , _) → X) (\ (_ , c) → c))
-      ( \ i → (A i , cov-A i))
 
 #def op-realize-type-family
   ( P : 𝕀 → ᵒᵖ U)

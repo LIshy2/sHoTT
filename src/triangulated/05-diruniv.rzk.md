@@ -92,7 +92,7 @@ This is a literate `rzk` file:
               ( mod ᵒᵖ (flip_i ≡ 1₂))
               ( mod ᵒᵖ (is-a-cov-i===0 funext weakfunext extext flip_i))
               ( fib (first A) (first B) f b)
-              ( is-a-cov-fib funext weakfunext
+              ( is-a-cov-fib funext weakfunext extext
                   ( first A) (first B)
                   ( second A) (second B)
                   ( f) (b)))
@@ -892,7 +892,7 @@ maps.
               ( is-a-cov-sigma-closed funext weakfunext
                   ( fib (first B) (first C) g c)
                   ( \ bf → (w : 1 | t ≡ 0₂) → fib (first A) (first B) f (first bf))
-                  ( is-a-cov-fib funext weakfunext
+                  ( is-a-cov-fib funext weakfunext extext
                       ( first B) (first C)
                       ( second B) (second C)
                       ( g) (c))
@@ -902,7 +902,7 @@ maps.
                           ( mod ᵒᵖ (flip_t ≡ 1₂))
                           ( mod ᵒᵖ (is-a-cov-i===0 funext weakfunext extext flip_t))
                           ( fib (first A) (first B) f (first bf))
-                          ( is-a-cov-fib funext weakfunext
+                          ( is-a-cov-fib funext weakfunext extext
                               ( first A) (first B)
                               ( second A) (second B)
                               ( f) (first bf)))))
@@ -2088,9 +2088,13 @@ maps.
         ( hom-II-in-S y z g)
         ( hom-II-in-S x y f)
   :=
-     hom-II-in-S-diagonal
-       ( \ (t , s) →
-           second (first (S-is-segal-II x y z f g)) (t , s))
+    -- Check the boundary equations before instantiating the Segal witness.
+    let comp-law : (segal : is-segal-II S) →
+        hom-II-in-S x z (comp-is-segal-II S segal x y z f g)
+        = comp (first x) (first y) (first z) (hom-II-in-S y z g) (hom-II-in-S x y f)
+      := \ segal → hom-II-in-S-diagonal
+          (\ (t , s) → second (first (segal x y z f g)) (t , s)) in
+    comp-law S-is-segal-II
 
 #def S-is-iso-arrow-is-equiv uses (funext weakfunext extext)
   ( x y : S)

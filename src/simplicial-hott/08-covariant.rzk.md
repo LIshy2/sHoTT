@@ -2421,9 +2421,7 @@ preservation of local types by equivalences.
             ( x0))
 ```
 
-Lemmas still missing for `is-covariant` in general (the three holes of `is-cov-i`).
-Stated over an arbitrary base so `is-covariant-𝕀-arrow` gets them by instantiation.
-To be proved on the next iteration, then migrate `05-diruniv` onto these.
+Covariance is a proposition and is closed under dependent sums and identity types.
 
 ```rzk
 -- covariance is a proposition: a Π into `is-contr`, which is itself a prop
@@ -2453,14 +2451,86 @@ To be proved on the next iteration, then migrate `05-diruniv` onto these.
   ( cov-C : is-covariant A C)
   ( cov-D : is-covariant (Σ (a : A) , C a) D)
   : is-covariant A (\ a → Σ (c : C a) , D (a , c))
-  := ?is-covariant-Σ
+  := \ x y f (c , d) →
+    let L := dhom-from A x y f C c in
+    let M : L → U := \ (c' , h) →
+      dhom-from (Σ (a : A) , C a) (x , c) (y , c') (\ t → (f t , h t)) D d in
+    let T := dhom-from A x y f (\ a → Σ (c : C a) , D (a , c)) (c , d) in
+    let split : Equiv T (Σ (l : L) , M l) :=
+      equiv-has-inverse T (Σ (l : L) , M l)
+        (\ ((c' , d') , h) → ((c' , \ t → first (h t)) , (d' , \ t → second (h t))))
+        (\ ((c' , h) , (d' , k)) → ((c' , d') , \ t → (h t , k t)))
+        (\ _ → refl) (\ _ → refl) in
+    is-contr-equiv-is-contr' T (Σ (l : L) , M l) split
+      (is-contr-equiv-is-contr' (Σ (l : L) , M l) L
+        (equiv-total-type-is-contr-fiber L M
+          (\ (c' , h) → cov-D (x , c) (y , c') (\ t → (f t , h t)) d))
+        (cov-C x y f c))
+
+#def restriction-Id-is-equiv uses (extext)
+  ( I : CUBE)
+  ( ψ : I → TOPE)
+  ( ϕ : ψ → TOPE)
+  ( C : ψ → U)
+  ( r-equiv : is-equiv ((t : ψ) → C t) ((t : ϕ) → C t) (\ s t → s t))
+  ( u v : (t : ψ) → C t)
+  : is-equiv
+      ((t : ψ) → u t = v t)
+      ((t : ϕ) → u t = v t)
+      (\ p t → p t)
+  :=
+    let E : U := (t : ψ) → C t in
+    let E0 : U := (t : ϕ) → C t in
+    let r : E → E0 := \ s t → s t in
+    let P : U := (t : ψ) → u t = v t in
+    let P0 : U := (t : ϕ) → u t = v t in
+    is-equiv-Equiv-is-equiv'
+      (u = v) (r u = r v) (ap E E0 u v r)
+      P P0 (\ p t → p t)
+      ( ( ( ext-htpy-eq I ψ (\ _ → BOT) C (\ _ → recBOT) u v
+          , ext-htpy-eq I (\ t → ϕ t) (\ _ → BOT) (\ t → C t) (\ _ → recBOT) (r u) (r v))
+        , \ p → ind-path E u
+            (\ v' p' →
+              (\ (t : ϕ) → ext-htpy-eq I ψ (\ _ → BOT) C (\ _ → recBOT) u v' p' t)
+              = ext-htpy-eq I (\ t → ϕ t) (\ _ → BOT) (\ t → C t) (\ _ → recBOT)
+                  (r u) (r v') (ap E E0 u v' r p'))
+            refl v p)
+      , ( extext I ψ (\ _ → BOT) C (\ _ → recBOT) u v
+        , extext I (\ t → ϕ t) (\ _ → BOT) (\ t → C t) (\ _ → recBOT) (r u) (r v)))
+      (second (equiv-ap-is-equiv E E0 r r-equiv u v))
+
+#def is-contr-extensions-Id uses (extext)
+  ( I : CUBE)
+  ( ψ : I → TOPE)
+  ( ϕ : ψ → TOPE)
+  ( C : ψ → U)
+  ( extend : (s : (t : ϕ) → C t) → is-contr (extension-type I ψ ϕ C s))
+  ( u v : (t : ψ) → C t)
+  ( p : (t : ϕ) → u t = v t)
+  : is-contr (extension-type I ψ ϕ (\ t → u t = v t) p)
+  :=
+    let E := (t : ψ) → C t in
+    let E0 := (t : ϕ) → C t in
+    let r : E → E0 := \ s t → s t in
+    let r-equiv := is-equiv-is-contr-map E E0 r
+      (\ s → is-contr-equiv-is-contr (extension-type I ψ ϕ C s) (fib E E0 r s)
+        (extension-type-weakening I ψ ϕ C s) (extend s)) in
+    let P := (t : ψ) → u t = v t in
+    let P0 := (t : ϕ) → u t = v t in
+    let rP : P → P0 := \ s t → s t in
+    is-contr-equiv-is-contr' (extension-type I ψ ϕ (\ t → u t = v t) p)
+      (fib P P0 rP p) (extension-type-weakening I ψ ϕ (\ t → u t = v t) p)
+      (is-contr-map-is-equiv P P0 rP (restriction-Id-is-equiv I ψ ϕ C r-equiv u v) p)
 
 -- Id-closure: paths between sections of a covariant family are covariant
-#def is-covariant-Id
+#def is-covariant-Id uses (extext)
   ( A : U)
   ( C : A → U)
   ( cov-C : is-covariant A C)
   ( u v : (a : A) → C a)
   : is-covariant A (\ a → u a = v a)
-  := ?is-covariant-Id
+  := is-covariant-has-unique-fixed-domain-lifts A (\ a → u a = v a)
+      (\ x y f p → is-contr-extensions-Id 2 Δ¹ (\ t → t ≡ 0₂) (\ t → C (f t))
+        (\ s → has-unique-fixed-domain-lifts-is-covariant A C cov-C x y f (s 0₂))
+        (\ t → u (f t)) (\ t → v (f t)) (\ _ → p))
 ```
