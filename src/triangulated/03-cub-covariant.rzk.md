@@ -584,30 +584,92 @@ section by covariant transport. Uniqueness of lifts gives the inverse laws.
   ( cov-C : is-covariant-II A C)
   ( cov-D : is-covariant-II (Σ (a : A) , C a) D)
   : is-covariant-II A (\ a → Σ (c : C a) , D (a , c))
-  := ?is-covariant-II-Σ
+  := \ x y f (c , d) →
+    let L := dhom-from-II A x y f C c in
+    let M : L → U := \ (c' , h) →
+      dhom-from-II (Σ (a : A) , C a) (x , c) (y , c') (\ t → (f t , h t)) D d in
+    let T := dhom-from-II A x y f (\ a → Σ (c : C a) , D (a , c)) (c , d) in
+    let split : Equiv T (Σ (l : L) , M l) :=
+      equiv-has-inverse T (Σ (l : L) , M l)
+        (\ ((c' , d') , h) → ((c' , \ t → first (h t)) , (d' , \ t → second (h t))))
+        (\ ((c' , h) , (d' , k)) → ((c' , d') , \ t → (h t , k t)))
+        (\ _ → refl) (\ _ → refl) in
+    is-contr-equiv-is-contr' T (Σ (l : L) , M l) split
+      (is-contr-equiv-is-contr' (Σ (l : L) , M l) L
+        (equiv-total-type-is-contr-fiber L M
+          (\ (c' , h) → cov-D (x , c) (y , c') (\ t → (f t , h t)) d))
+        (cov-C x y f c))
 
-#def is-covariant-II-Id
+#def equiv-lifts-with-fixed-domain-II
+  ( A : U)
+  ( C : A → U)
+  ( x y : A)
+  ( f : hom-II A x y)
+  ( u : C x)
+  : Equiv
+      ((t : 𝕀) → C (f t) [t ≡ 0₂ ↦ u])
+      (dhom-from-II A x y f C u)
+  :=
+    ( \ h → (h 1₂ , \ t → h t)
+    , ( ( \ fg t → second fg t , \ _ → refl)
+      , ( \ fg t → second fg t , \ _ → refl)))
+
+#def is-covariant-II-Id uses (extext)
   ( A : U)
   ( C : A → U)
   ( cov-C : is-covariant-II A C)
   ( u v : (a : A) → C a)
   : is-covariant-II A (\ a → u a = v a)
-  := ?is-covariant-II-Id
+  := \ x y f p →
+    let D : A → U := \ a → u a = v a in
+    is-contr-equiv-is-contr
+      ((t : 𝕀) → D (f t) [t ≡ 0₂ ↦ p]) (dhom-from-II A x y f D p)
+      (equiv-lifts-with-fixed-domain-II A D x y f p)
+      (is-contr-extensions-Id extext 𝕀 □¹ (\ t → t ≡ 0₂) (\ t → C (f t))
+        (\ s → is-contr-equiv-is-contr'
+          ((t : 𝕀) → C (f t) [t ≡ 0₂ ↦ s 0₂]) (dhom-from-II A x y f C (s 0₂))
+          (equiv-lifts-with-fixed-domain-II A C x y f (s 0₂)) (cov-C x y f (s 0₂)))
+        (\ t → u (f t)) (\ t → v (f t)) (\ _ → p))
 
-#def is-covariant-arrow-II-Σ
+#def realize-dependent-family
+  ( A : 𝕀 → U)
+  ( B : (i : 𝕀) → A i → U)
+  : (s : ⌈𝕀⌉) → equiv-ext-shape-family-fwd 𝕀 □¹ A s → U
+  := \ s → match s (point i ⇒ B i)
+
+#def is-covariant-arrow-II-Σ uses (funext)
   ( A : 𝕀 → U)
   ( B : (i : 𝕀) → A i → U)
   ( cov-a : is-covariant-arrow-II A)
-  ( is-cov-B : (s : (t : 𝕀) → A t) → is-covariant-arrow-II (\ t → B t (s t)))
+  ( cov-B : is-covariant-II
+      (Σ (s : ⌈𝕀⌉) , equiv-ext-shape-family-fwd 𝕀 □¹ A s)
+      (\ (s , a) → realize-dependent-family A B s a))
   : is-covariant-arrow-II (\ i → Σ (a : A i) , B i a)
-  := ?is-covariant-II-Σ
+  :=
+    let C : ⌈𝕀⌉ → U := equiv-ext-shape-family-fwd 𝕀 □¹ A in
+    let D : (Σ (s : ⌈𝕀⌉) , C s) → U
+      := \ (s , a) → realize-dependent-family A B s a
+    in
+    equiv-is-covariant-II ⌈𝕀⌉
+      (equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → Σ (a : A i) , B i a))
+      (\ s → Σ (a : C s) , D (s , a))
+      (\ s → match s (point i ⇒ equiv-identity (Σ (a : A i) , B i a)))
+      (is-covariant-II-Σ ⌈𝕀⌉ C D cov-a cov-B)
 
-#def is-covariant-arrow-II-Id
+#def is-covariant-arrow-II-Id uses (funext extext)
   ( A : 𝕀 → U)
   ( is-cov-A : is-covariant-arrow-II A)
   ( u v : (i : 𝕀) → A i)
   : is-covariant-arrow-II (\ t → u t = v t)
-  := ?is-covariant-II-Id
+  :=
+    let C : ⌈𝕀⌉ → U := equiv-ext-shape-family-fwd 𝕀 □¹ A in
+    let u' : (s : ⌈𝕀⌉) → C s := \ s → match s (point i ⇒ u i) in
+    let v' : (s : ⌈𝕀⌉) → C s := \ s → match s (point i ⇒ v i) in
+    equiv-is-covariant-II ⌈𝕀⌉
+      (equiv-ext-shape-family-fwd 𝕀 □¹ (\ i → u i = v i))
+      (\ s → u' s = v' s)
+      (\ s → match s (point i ⇒ equiv-identity (u i = v i)))
+      (is-covariant-II-Id ⌈𝕀⌉ C is-cov-A u' v')
 
 
 -- Transport on a constant opposite line is the identity.
